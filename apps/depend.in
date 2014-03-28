@@ -1,0 +1,350 @@
+cnf2zbdd2bdd/CnfToZtdd.o: cnf2zbdd2bdd/CnfToZtdd.hpp \
+ ../include/tdzdd/DdSpec.hpp ../include/tdzdd/dd/DdBuilder.hpp \
+ ../include/tdzdd/dd/Node.hpp ../include/tdzdd/dd/NodeTable.hpp \
+ ../include/tdzdd/dd/DataTable.hpp \
+ ../include/tdzdd/dd/../util/MyVector.hpp \
+ ../include/tdzdd/dd/../util/MemoryPool.hpp \
+ ../include/tdzdd/dd/../util/MessageHandler.hpp \
+ ../include/tdzdd/dd/../util/ResourceUsage.hpp \
+ ../include/tdzdd/dd/../util/MyHashTable.hpp \
+ ../include/tdzdd/dd/../util/MyList.hpp \
+ ../include/tdzdd/util/demangle.hpp cnf2zbdd2bdd/../cnfbdd/Cudd.hpp
+cnf2zbdd2bdd/CnfToZtdd-debug.o: cnf2zbdd2bdd/CnfToZtdd.hpp \
+ ../include/tdzdd/DdSpec.hpp ../include/tdzdd/dd/DdBuilder.hpp \
+ ../include/tdzdd/dd/Node.hpp ../include/tdzdd/dd/NodeTable.hpp \
+ ../include/tdzdd/dd/DataTable.hpp \
+ ../include/tdzdd/dd/../util/MyVector.hpp \
+ ../include/tdzdd/dd/../util/MemoryPool.hpp \
+ ../include/tdzdd/dd/../util/MessageHandler.hpp \
+ ../include/tdzdd/dd/../util/ResourceUsage.hpp \
+ ../include/tdzdd/dd/../util/MyHashTable.hpp \
+ ../include/tdzdd/dd/../util/MyList.hpp \
+ ../include/tdzdd/util/demangle.hpp cnf2zbdd2bdd/../cnfbdd/Cudd.hpp
+cnf2zbdd2bdd/cnf2ztdd2bdd.o: \
+ ../include/tdzdd/DdStructure.hpp ../include/tdzdd/DdEval.hpp \
+ ../include/tdzdd/util/MessageHandler.hpp \
+ ../include/tdzdd/util/ResourceUsage.hpp ../include/tdzdd/DdSpec.hpp \
+ ../include/tdzdd/dd/DdBuilder.hpp ../include/tdzdd/dd/Node.hpp \
+ ../include/tdzdd/dd/NodeTable.hpp ../include/tdzdd/dd/DataTable.hpp \
+ ../include/tdzdd/dd/../util/MyVector.hpp \
+ ../include/tdzdd/dd/../util/MemoryPool.hpp \
+ ../include/tdzdd/dd/../util/MyHashTable.hpp \
+ ../include/tdzdd/dd/../util/MyList.hpp \
+ ../include/tdzdd/util/demangle.hpp ../include/tdzdd/dd/DdReducer.hpp \
+ ../include/tdzdd/eval/Cardinality.hpp \
+ ../include/tdzdd/eval/../util/BigNumber.hpp \
+ ../include/tdzdd/op/BinaryOperation.hpp \
+ ../include/tdzdd/op/Lookahead.hpp ../include/tdzdd/op/Unreduction.hpp \
+ cnf2zbdd2bdd/CnfToZtdd.hpp cnf2zbdd2bdd/../cnfbdd/Cudd.hpp \
+ cnf2zbdd2bdd/ZtddToCudd.hpp
+cnf2zbdd2bdd/cnf2ztdd2bdd-debug.o: \
+ ../include/tdzdd/DdStructure.hpp ../include/tdzdd/DdEval.hpp \
+ ../include/tdzdd/util/MessageHandler.hpp \
+ ../include/tdzdd/util/ResourceUsage.hpp ../include/tdzdd/DdSpec.hpp \
+ ../include/tdzdd/dd/DdBuilder.hpp ../include/tdzdd/dd/Node.hpp \
+ ../include/tdzdd/dd/NodeTable.hpp ../include/tdzdd/dd/DataTable.hpp \
+ ../include/tdzdd/dd/../util/MyVector.hpp \
+ ../include/tdzdd/dd/../util/MemoryPool.hpp \
+ ../include/tdzdd/dd/../util/MyHashTable.hpp \
+ ../include/tdzdd/dd/../util/MyList.hpp \
+ ../include/tdzdd/util/demangle.hpp ../include/tdzdd/dd/DdReducer.hpp \
+ ../include/tdzdd/eval/Cardinality.hpp \
+ ../include/tdzdd/eval/../util/BigNumber.hpp \
+ ../include/tdzdd/op/BinaryOperation.hpp \
+ ../include/tdzdd/op/Lookahead.hpp ../include/tdzdd/op/Unreduction.hpp \
+ cnf2zbdd2bdd/CnfToZtdd.hpp cnf2zbdd2bdd/../cnfbdd/Cudd.hpp \
+ cnf2zbdd2bdd/ZtddToCudd.hpp
+cnfbdd/CnfToBdd.o: cnfbdd/CnfToBdd.hpp \
+ ../include/tdzdd/DdSpec.hpp ../include/tdzdd/dd/DdBuilder.hpp \
+ ../include/tdzdd/dd/Node.hpp ../include/tdzdd/dd/NodeTable.hpp \
+ ../include/tdzdd/dd/DataTable.hpp \
+ ../include/tdzdd/dd/../util/MyVector.hpp \
+ ../include/tdzdd/dd/../util/MemoryPool.hpp \
+ ../include/tdzdd/dd/../util/MessageHandler.hpp \
+ ../include/tdzdd/dd/../util/ResourceUsage.hpp \
+ ../include/tdzdd/dd/../util/MyHashTable.hpp \
+ ../include/tdzdd/dd/../util/MyList.hpp \
+ ../include/tdzdd/util/demangle.hpp ../include/tdzdd/util/MySet.hpp \
+ cnfbdd/Cudd.hpp
+cnfbdd/CnfToBdd-debug.o: cnfbdd/CnfToBdd.hpp \
+ ../include/tdzdd/DdSpec.hpp ../include/tdzdd/dd/DdBuilder.hpp \
+ ../include/tdzdd/dd/Node.hpp ../include/tdzdd/dd/NodeTable.hpp \
+ ../include/tdzdd/dd/DataTable.hpp \
+ ../include/tdzdd/dd/../util/MyVector.hpp \
+ ../include/tdzdd/dd/../util/MemoryPool.hpp \
+ ../include/tdzdd/dd/../util/MessageHandler.hpp \
+ ../include/tdzdd/dd/../util/ResourceUsage.hpp \
+ ../include/tdzdd/dd/../util/MyHashTable.hpp \
+ ../include/tdzdd/dd/../util/MyList.hpp \
+ ../include/tdzdd/util/demangle.hpp ../include/tdzdd/util/MySet.hpp \
+ cnfbdd/Cudd.hpp
+cnfbdd/cnfbdd.o: ../include/tdzdd/DdStructure.hpp \
+ ../include/tdzdd/DdEval.hpp ../include/tdzdd/util/MessageHandler.hpp \
+ ../include/tdzdd/util/ResourceUsage.hpp ../include/tdzdd/DdSpec.hpp \
+ ../include/tdzdd/dd/DdBuilder.hpp ../include/tdzdd/dd/Node.hpp \
+ ../include/tdzdd/dd/NodeTable.hpp ../include/tdzdd/dd/DataTable.hpp \
+ ../include/tdzdd/dd/../util/MyVector.hpp \
+ ../include/tdzdd/dd/../util/MemoryPool.hpp \
+ ../include/tdzdd/dd/../util/MyHashTable.hpp \
+ ../include/tdzdd/dd/../util/MyList.hpp \
+ ../include/tdzdd/util/demangle.hpp ../include/tdzdd/dd/DdReducer.hpp \
+ ../include/tdzdd/eval/Cardinality.hpp \
+ ../include/tdzdd/eval/../util/BigNumber.hpp \
+ ../include/tdzdd/op/BinaryOperation.hpp \
+ ../include/tdzdd/op/Lookahead.hpp ../include/tdzdd/op/Unreduction.hpp \
+ cnfbdd/CnfToBdd.hpp ../include/tdzdd/util/MySet.hpp cnfbdd/Cudd.hpp
+cnfbdd/cnfbdd-debug.o: ../include/tdzdd/DdStructure.hpp \
+ ../include/tdzdd/DdEval.hpp ../include/tdzdd/util/MessageHandler.hpp \
+ ../include/tdzdd/util/ResourceUsage.hpp ../include/tdzdd/DdSpec.hpp \
+ ../include/tdzdd/dd/DdBuilder.hpp ../include/tdzdd/dd/Node.hpp \
+ ../include/tdzdd/dd/NodeTable.hpp ../include/tdzdd/dd/DataTable.hpp \
+ ../include/tdzdd/dd/../util/MyVector.hpp \
+ ../include/tdzdd/dd/../util/MemoryPool.hpp \
+ ../include/tdzdd/dd/../util/MyHashTable.hpp \
+ ../include/tdzdd/dd/../util/MyList.hpp \
+ ../include/tdzdd/util/demangle.hpp ../include/tdzdd/dd/DdReducer.hpp \
+ ../include/tdzdd/eval/Cardinality.hpp \
+ ../include/tdzdd/eval/../util/BigNumber.hpp \
+ ../include/tdzdd/op/BinaryOperation.hpp \
+ ../include/tdzdd/op/Lookahead.hpp ../include/tdzdd/op/Unreduction.hpp \
+ cnfbdd/CnfToBdd.hpp ../include/tdzdd/util/MySet.hpp cnfbdd/Cudd.hpp
+ddpaths/ddpaths.o: ../include/tdzdd/DdStructure.hpp \
+ ../include/tdzdd/DdEval.hpp ../include/tdzdd/util/MessageHandler.hpp \
+ ../include/tdzdd/util/ResourceUsage.hpp ../include/tdzdd/DdSpec.hpp \
+ ../include/tdzdd/dd/DdBuilder.hpp ../include/tdzdd/dd/Node.hpp \
+ ../include/tdzdd/dd/NodeTable.hpp ../include/tdzdd/dd/DataTable.hpp \
+ ../include/tdzdd/dd/../util/MyVector.hpp \
+ ../include/tdzdd/dd/../util/MemoryPool.hpp \
+ ../include/tdzdd/dd/../util/MyHashTable.hpp \
+ ../include/tdzdd/dd/../util/MyList.hpp \
+ ../include/tdzdd/util/demangle.hpp ../include/tdzdd/dd/DdReducer.hpp \
+ ../include/tdzdd/eval/Cardinality.hpp \
+ ../include/tdzdd/eval/../util/BigNumber.hpp \
+ ../include/tdzdd/op/BinaryOperation.hpp \
+ ../include/tdzdd/op/Lookahead.hpp ../include/tdzdd/op/Unreduction.hpp \
+ ddpaths/PathZdd.hpp ddpaths/../graphillion/Graph.hpp \
+ ddpaths/PathZddByStdMap.hpp ddpaths/../graphillion/DegreeConstraint.hpp \
+ ddpaths/../graphillion/IntSubset.hpp \
+ ddpaths/../graphillion/FrontierBasedSearch.hpp \
+ ddpaths/../graphillion/SizeConstraint.hpp
+ddpaths/ddpaths-debug.o: ../include/tdzdd/DdStructure.hpp \
+ ../include/tdzdd/DdEval.hpp ../include/tdzdd/util/MessageHandler.hpp \
+ ../include/tdzdd/util/ResourceUsage.hpp ../include/tdzdd/DdSpec.hpp \
+ ../include/tdzdd/dd/DdBuilder.hpp ../include/tdzdd/dd/Node.hpp \
+ ../include/tdzdd/dd/NodeTable.hpp ../include/tdzdd/dd/DataTable.hpp \
+ ../include/tdzdd/dd/../util/MyVector.hpp \
+ ../include/tdzdd/dd/../util/MemoryPool.hpp \
+ ../include/tdzdd/dd/../util/MyHashTable.hpp \
+ ../include/tdzdd/dd/../util/MyList.hpp \
+ ../include/tdzdd/util/demangle.hpp ../include/tdzdd/dd/DdReducer.hpp \
+ ../include/tdzdd/eval/Cardinality.hpp \
+ ../include/tdzdd/eval/../util/BigNumber.hpp \
+ ../include/tdzdd/op/BinaryOperation.hpp \
+ ../include/tdzdd/op/Lookahead.hpp ../include/tdzdd/op/Unreduction.hpp \
+ ddpaths/PathZdd.hpp ddpaths/../graphillion/Graph.hpp \
+ ddpaths/PathZddByStdMap.hpp ddpaths/../graphillion/DegreeConstraint.hpp \
+ ddpaths/../graphillion/IntSubset.hpp \
+ ddpaths/../graphillion/FrontierBasedSearch.hpp \
+ ddpaths/../graphillion/SizeConstraint.hpp
+ddqueens/ddqueens.o: ../include/tdzdd/DdStructure.hpp \
+ ../include/tdzdd/DdEval.hpp ../include/tdzdd/util/MessageHandler.hpp \
+ ../include/tdzdd/util/ResourceUsage.hpp ../include/tdzdd/DdSpec.hpp \
+ ../include/tdzdd/dd/DdBuilder.hpp ../include/tdzdd/dd/Node.hpp \
+ ../include/tdzdd/dd/NodeTable.hpp ../include/tdzdd/dd/DataTable.hpp \
+ ../include/tdzdd/dd/../util/MyVector.hpp \
+ ../include/tdzdd/dd/../util/MemoryPool.hpp \
+ ../include/tdzdd/dd/../util/MyHashTable.hpp \
+ ../include/tdzdd/dd/../util/MyList.hpp \
+ ../include/tdzdd/util/demangle.hpp ../include/tdzdd/dd/DdReducer.hpp \
+ ../include/tdzdd/eval/Cardinality.hpp \
+ ../include/tdzdd/eval/../util/BigNumber.hpp \
+ ../include/tdzdd/op/BinaryOperation.hpp \
+ ../include/tdzdd/op/Lookahead.hpp ../include/tdzdd/op/Unreduction.hpp \
+ ddqueens/ColoredZdd.hpp ddqueens/NAryZdd.hpp ddqueens/NQueenZdd.hpp \
+ ddqueens/ZddInterleave.hpp
+ddqueens/ddqueens-debug.o: ../include/tdzdd/DdStructure.hpp \
+ ../include/tdzdd/DdEval.hpp ../include/tdzdd/util/MessageHandler.hpp \
+ ../include/tdzdd/util/ResourceUsage.hpp ../include/tdzdd/DdSpec.hpp \
+ ../include/tdzdd/dd/DdBuilder.hpp ../include/tdzdd/dd/Node.hpp \
+ ../include/tdzdd/dd/NodeTable.hpp ../include/tdzdd/dd/DataTable.hpp \
+ ../include/tdzdd/dd/../util/MyVector.hpp \
+ ../include/tdzdd/dd/../util/MemoryPool.hpp \
+ ../include/tdzdd/dd/../util/MyHashTable.hpp \
+ ../include/tdzdd/dd/../util/MyList.hpp \
+ ../include/tdzdd/util/demangle.hpp ../include/tdzdd/dd/DdReducer.hpp \
+ ../include/tdzdd/eval/Cardinality.hpp \
+ ../include/tdzdd/eval/../util/BigNumber.hpp \
+ ../include/tdzdd/op/BinaryOperation.hpp \
+ ../include/tdzdd/op/Lookahead.hpp ../include/tdzdd/op/Unreduction.hpp \
+ ddqueens/ColoredZdd.hpp ddqueens/NAryZdd.hpp ddqueens/NQueenZdd.hpp \
+ ddqueens/ZddInterleave.hpp
+graphillion/graphillion_example.o: \
+ ../include/tdzdd/DdStructure.hpp ../include/tdzdd/DdEval.hpp \
+ ../include/tdzdd/util/MessageHandler.hpp \
+ ../include/tdzdd/util/ResourceUsage.hpp ../include/tdzdd/DdSpec.hpp \
+ ../include/tdzdd/dd/DdBuilder.hpp ../include/tdzdd/dd/Node.hpp \
+ ../include/tdzdd/dd/NodeTable.hpp ../include/tdzdd/dd/DataTable.hpp \
+ ../include/tdzdd/dd/../util/MyVector.hpp \
+ ../include/tdzdd/dd/../util/MemoryPool.hpp \
+ ../include/tdzdd/dd/../util/MyHashTable.hpp \
+ ../include/tdzdd/dd/../util/MyList.hpp \
+ ../include/tdzdd/util/demangle.hpp ../include/tdzdd/dd/DdReducer.hpp \
+ ../include/tdzdd/eval/Cardinality.hpp \
+ ../include/tdzdd/eval/../util/BigNumber.hpp \
+ ../include/tdzdd/op/BinaryOperation.hpp \
+ ../include/tdzdd/op/Lookahead.hpp ../include/tdzdd/op/Unreduction.hpp \
+ graphillion/DegreeConstraint.hpp graphillion/Graph.hpp \
+ graphillion/IntSubset.hpp graphillion/FrontierBasedSearch.hpp \
+ graphillion/GraphillionZdd.hpp graphillion/SapporoZdd.hpp \
+ graphillion/SizeConstraint.hpp graphillion/ToZBDD.hpp
+graphillion/graphillion_example-debug.o: \
+ ../include/tdzdd/DdStructure.hpp ../include/tdzdd/DdEval.hpp \
+ ../include/tdzdd/util/MessageHandler.hpp \
+ ../include/tdzdd/util/ResourceUsage.hpp ../include/tdzdd/DdSpec.hpp \
+ ../include/tdzdd/dd/DdBuilder.hpp ../include/tdzdd/dd/Node.hpp \
+ ../include/tdzdd/dd/NodeTable.hpp ../include/tdzdd/dd/DataTable.hpp \
+ ../include/tdzdd/dd/../util/MyVector.hpp \
+ ../include/tdzdd/dd/../util/MemoryPool.hpp \
+ ../include/tdzdd/dd/../util/MyHashTable.hpp \
+ ../include/tdzdd/dd/../util/MyList.hpp \
+ ../include/tdzdd/util/demangle.hpp ../include/tdzdd/dd/DdReducer.hpp \
+ ../include/tdzdd/eval/Cardinality.hpp \
+ ../include/tdzdd/eval/../util/BigNumber.hpp \
+ ../include/tdzdd/op/BinaryOperation.hpp \
+ ../include/tdzdd/op/Lookahead.hpp ../include/tdzdd/op/Unreduction.hpp \
+ graphillion/DegreeConstraint.hpp graphillion/Graph.hpp \
+ graphillion/IntSubset.hpp graphillion/FrontierBasedSearch.hpp \
+ graphillion/GraphillionZdd.hpp graphillion/SapporoZdd.hpp \
+ graphillion/SizeConstraint.hpp graphillion/ToZBDD.hpp
+test/example1.o: ../include/tdzdd/DdStructure.hpp \
+ ../include/tdzdd/DdEval.hpp ../include/tdzdd/util/MessageHandler.hpp \
+ ../include/tdzdd/util/ResourceUsage.hpp ../include/tdzdd/DdSpec.hpp \
+ ../include/tdzdd/dd/DdBuilder.hpp ../include/tdzdd/dd/Node.hpp \
+ ../include/tdzdd/dd/NodeTable.hpp ../include/tdzdd/dd/DataTable.hpp \
+ ../include/tdzdd/dd/../util/MyVector.hpp \
+ ../include/tdzdd/dd/../util/MemoryPool.hpp \
+ ../include/tdzdd/dd/../util/MyHashTable.hpp \
+ ../include/tdzdd/dd/../util/MyList.hpp \
+ ../include/tdzdd/util/demangle.hpp ../include/tdzdd/dd/DdReducer.hpp \
+ ../include/tdzdd/eval/Cardinality.hpp \
+ ../include/tdzdd/eval/../util/BigNumber.hpp \
+ ../include/tdzdd/op/BinaryOperation.hpp \
+ ../include/tdzdd/op/Lookahead.hpp ../include/tdzdd/op/Unreduction.hpp
+test/example1-debug.o: ../include/tdzdd/DdStructure.hpp \
+ ../include/tdzdd/DdEval.hpp ../include/tdzdd/util/MessageHandler.hpp \
+ ../include/tdzdd/util/ResourceUsage.hpp ../include/tdzdd/DdSpec.hpp \
+ ../include/tdzdd/dd/DdBuilder.hpp ../include/tdzdd/dd/Node.hpp \
+ ../include/tdzdd/dd/NodeTable.hpp ../include/tdzdd/dd/DataTable.hpp \
+ ../include/tdzdd/dd/../util/MyVector.hpp \
+ ../include/tdzdd/dd/../util/MemoryPool.hpp \
+ ../include/tdzdd/dd/../util/MyHashTable.hpp \
+ ../include/tdzdd/dd/../util/MyList.hpp \
+ ../include/tdzdd/util/demangle.hpp ../include/tdzdd/dd/DdReducer.hpp \
+ ../include/tdzdd/eval/Cardinality.hpp \
+ ../include/tdzdd/eval/../util/BigNumber.hpp \
+ ../include/tdzdd/op/BinaryOperation.hpp \
+ ../include/tdzdd/op/Lookahead.hpp ../include/tdzdd/op/Unreduction.hpp
+test/example2.o: ../include/tdzdd/DdStructure.hpp \
+ ../include/tdzdd/DdEval.hpp ../include/tdzdd/util/MessageHandler.hpp \
+ ../include/tdzdd/util/ResourceUsage.hpp ../include/tdzdd/DdSpec.hpp \
+ ../include/tdzdd/dd/DdBuilder.hpp ../include/tdzdd/dd/Node.hpp \
+ ../include/tdzdd/dd/NodeTable.hpp ../include/tdzdd/dd/DataTable.hpp \
+ ../include/tdzdd/dd/../util/MyVector.hpp \
+ ../include/tdzdd/dd/../util/MemoryPool.hpp \
+ ../include/tdzdd/dd/../util/MyHashTable.hpp \
+ ../include/tdzdd/dd/../util/MyList.hpp \
+ ../include/tdzdd/util/demangle.hpp ../include/tdzdd/dd/DdReducer.hpp \
+ ../include/tdzdd/eval/Cardinality.hpp \
+ ../include/tdzdd/eval/../util/BigNumber.hpp \
+ ../include/tdzdd/op/BinaryOperation.hpp \
+ ../include/tdzdd/op/Lookahead.hpp ../include/tdzdd/op/Unreduction.hpp
+test/example2-debug.o: ../include/tdzdd/DdStructure.hpp \
+ ../include/tdzdd/DdEval.hpp ../include/tdzdd/util/MessageHandler.hpp \
+ ../include/tdzdd/util/ResourceUsage.hpp ../include/tdzdd/DdSpec.hpp \
+ ../include/tdzdd/dd/DdBuilder.hpp ../include/tdzdd/dd/Node.hpp \
+ ../include/tdzdd/dd/NodeTable.hpp ../include/tdzdd/dd/DataTable.hpp \
+ ../include/tdzdd/dd/../util/MyVector.hpp \
+ ../include/tdzdd/dd/../util/MemoryPool.hpp \
+ ../include/tdzdd/dd/../util/MyHashTable.hpp \
+ ../include/tdzdd/dd/../util/MyList.hpp \
+ ../include/tdzdd/util/demangle.hpp ../include/tdzdd/dd/DdReducer.hpp \
+ ../include/tdzdd/eval/Cardinality.hpp \
+ ../include/tdzdd/eval/../util/BigNumber.hpp \
+ ../include/tdzdd/op/BinaryOperation.hpp \
+ ../include/tdzdd/op/Lookahead.hpp ../include/tdzdd/op/Unreduction.hpp
+test/test.o:
+test/test-debug.o:
+test/testRandomDd.o: ../include/tdzdd/DdStructure.hpp \
+ ../include/tdzdd/DdEval.hpp ../include/tdzdd/util/MessageHandler.hpp \
+ ../include/tdzdd/util/ResourceUsage.hpp ../include/tdzdd/DdSpec.hpp \
+ ../include/tdzdd/dd/DdBuilder.hpp ../include/tdzdd/dd/Node.hpp \
+ ../include/tdzdd/dd/NodeTable.hpp ../include/tdzdd/dd/DataTable.hpp \
+ ../include/tdzdd/dd/../util/MyVector.hpp \
+ ../include/tdzdd/dd/../util/MemoryPool.hpp \
+ ../include/tdzdd/dd/../util/MyHashTable.hpp \
+ ../include/tdzdd/dd/../util/MyList.hpp \
+ ../include/tdzdd/util/demangle.hpp ../include/tdzdd/dd/DdReducer.hpp \
+ ../include/tdzdd/eval/Cardinality.hpp \
+ ../include/tdzdd/eval/../util/BigNumber.hpp \
+ ../include/tdzdd/op/BinaryOperation.hpp \
+ ../include/tdzdd/op/Lookahead.hpp ../include/tdzdd/op/Unreduction.hpp \
+ test/RandomDd.hpp
+test/testRandomDd-debug.o: ../include/tdzdd/DdStructure.hpp \
+ ../include/tdzdd/DdEval.hpp ../include/tdzdd/util/MessageHandler.hpp \
+ ../include/tdzdd/util/ResourceUsage.hpp ../include/tdzdd/DdSpec.hpp \
+ ../include/tdzdd/dd/DdBuilder.hpp ../include/tdzdd/dd/Node.hpp \
+ ../include/tdzdd/dd/NodeTable.hpp ../include/tdzdd/dd/DataTable.hpp \
+ ../include/tdzdd/dd/../util/MyVector.hpp \
+ ../include/tdzdd/dd/../util/MemoryPool.hpp \
+ ../include/tdzdd/dd/../util/MyHashTable.hpp \
+ ../include/tdzdd/dd/../util/MyList.hpp \
+ ../include/tdzdd/util/demangle.hpp ../include/tdzdd/dd/DdReducer.hpp \
+ ../include/tdzdd/eval/Cardinality.hpp \
+ ../include/tdzdd/eval/../util/BigNumber.hpp \
+ ../include/tdzdd/op/BinaryOperation.hpp \
+ ../include/tdzdd/op/Lookahead.hpp ../include/tdzdd/op/Unreduction.hpp \
+ test/RandomDd.hpp
+test/testSizeConstraint.o: \
+ ../include/tdzdd/DdStructure.hpp ../include/tdzdd/DdEval.hpp \
+ ../include/tdzdd/util/MessageHandler.hpp \
+ ../include/tdzdd/util/ResourceUsage.hpp ../include/tdzdd/DdSpec.hpp \
+ ../include/tdzdd/dd/DdBuilder.hpp ../include/tdzdd/dd/Node.hpp \
+ ../include/tdzdd/dd/NodeTable.hpp ../include/tdzdd/dd/DataTable.hpp \
+ ../include/tdzdd/dd/../util/MyVector.hpp \
+ ../include/tdzdd/dd/../util/MemoryPool.hpp \
+ ../include/tdzdd/dd/../util/MyHashTable.hpp \
+ ../include/tdzdd/dd/../util/MyList.hpp \
+ ../include/tdzdd/util/demangle.hpp ../include/tdzdd/dd/DdReducer.hpp \
+ ../include/tdzdd/eval/Cardinality.hpp \
+ ../include/tdzdd/eval/../util/BigNumber.hpp \
+ ../include/tdzdd/op/BinaryOperation.hpp \
+ ../include/tdzdd/op/Lookahead.hpp ../include/tdzdd/op/Unreduction.hpp \
+ test/../graphillion/SizeConstraint.hpp test/../graphillion/IntSubset.hpp
+test/testSizeConstraint-debug.o: \
+ ../include/tdzdd/DdStructure.hpp ../include/tdzdd/DdEval.hpp \
+ ../include/tdzdd/util/MessageHandler.hpp \
+ ../include/tdzdd/util/ResourceUsage.hpp ../include/tdzdd/DdSpec.hpp \
+ ../include/tdzdd/dd/DdBuilder.hpp ../include/tdzdd/dd/Node.hpp \
+ ../include/tdzdd/dd/NodeTable.hpp ../include/tdzdd/dd/DataTable.hpp \
+ ../include/tdzdd/dd/../util/MyVector.hpp \
+ ../include/tdzdd/dd/../util/MemoryPool.hpp \
+ ../include/tdzdd/dd/../util/MyHashTable.hpp \
+ ../include/tdzdd/dd/../util/MyList.hpp \
+ ../include/tdzdd/util/demangle.hpp ../include/tdzdd/dd/DdReducer.hpp \
+ ../include/tdzdd/eval/Cardinality.hpp \
+ ../include/tdzdd/eval/../util/BigNumber.hpp \
+ ../include/tdzdd/op/BinaryOperation.hpp \
+ ../include/tdzdd/op/Lookahead.hpp ../include/tdzdd/op/Unreduction.hpp \
+ test/../graphillion/SizeConstraint.hpp test/../graphillion/IntSubset.hpp
+bin/ddpaths: ddpaths/ddpaths.o
+debug/ddpaths: ddpaths/ddpaths-debug.o
+bin/ddqueens: ddqueens/ddqueens.o
+debug/ddqueens: ddqueens/ddqueens-debug.o
+bin/cnfbdd: cnfbdd/cnfbdd.o cnfbdd/CnfToBdd.o
+debug/cnfbdd: cnfbdd/cnfbdd-debug.o cnfbdd/CnfToBdd-debug.o
+bin/cnf2ztdd2bdd: cnf2zbdd2bdd/cnf2ztdd2bdd.o cnf2zbdd2bdd/CnfToZtdd.o
+debug/cnf2ztdd2bdd: cnf2zbdd2bdd/cnf2ztdd2bdd-debug.o cnf2zbdd2bdd/CnfToZtdd-debug.o
+bin/graphillion_example: graphillion/graphillion_example.o
+debug/graphillion_example: graphillion/graphillion_example-debug.o
+bin/test: test/example1.o test/example2.o test/test.o test/testRandomDd.o test/testSizeConstraint.o
+debug/test: test/example1-debug.o test/example2-debug.o test/test-debug.o test/testRandomDd-debug.o test/testSizeConstraint-debug.o
