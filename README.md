@@ -10,7 +10,7 @@ with efficient basic functions.
 * Bottom-up/breadth-first DD evaluation
 * Reduction as BDDs/ZDDs
 * Parallel processing with OpenMP
-* Support of *n*-ary (binary, ternary, quaternary, ...) DDs
+* Support of *N*-ary (binary, ternary, quaternary, ...) DDs
 
 Other features include followings.
 
@@ -18,8 +18,11 @@ Other features include followings.
 * Distributed with sample applications
 * Open-source MIT license
 
-Simple example
+Example of DD specifications
 ---------------------------------------------------------------------------
+
+The following code from `apps/test/example1.cpp` is a *DD specification* of
+a binary DD representing a set of all *k*-combinations out of *n* items.
 
 ```C++
 #include <tdzdd/DdStructure.hpp>
@@ -38,8 +41,8 @@ public:
         return n;
     }
 
-    int getChild(int& state, int level, int take) const {
-        state += take;
+    int getChild(int& state, int level, int value) const {
+        state += value;
         if (--level == 0) return (state == k) ? -1 : 0;
         if (state > k) return 0;
         if (state + level < k) return 0;
@@ -47,3 +50,18 @@ public:
     }
 };
 ```
+
+`tdzdd::DdStructure<`*N*`>` is a template class for *N*-ary DD objects.
+We can construct a binary DD by giving a DD specification object
+to the constructor of `tdzdd::DdStructure<2>`.
+
+```C++
+tdzdd::DdStructure<2> dd(Combination(n, k));
+```
+
+An advanced example can be found in `apps/test/example2.cpp`.
+
+See also
+---------------------------------------------------------------------------
+
+* [Graphillion](http://graphillion.org): a Python library using TdZdd.

@@ -41,8 +41,8 @@ public:
         return n;
     }
 
-    int getChild(int& state, int level, int take) const {
-        state += take;
+    int getChild(int& state, int level, int value) const {
+        state += value;
         if (--level == 0) return (state == k) ? -1 : 0;
         if (state > k) return 0;
         if (state + level < k) return 0;
