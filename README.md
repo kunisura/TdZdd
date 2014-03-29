@@ -3,20 +3,29 @@ TdZdd
 
 ### A top-down/breadth-first decision diagram manipulation framework
 
-TdZdd is a software for manipulating ordered decision diagrams (DDs)
-with efficient basic functions.
+TdZdd is a C++ library for manipulating ordered decision diagrams (DDs)
+efficiently with following basic functions.
 
 * Top-down/breadth-first DD construction
-* Bottom-up/breadth-first DD evaluation
 * Reduction as BDDs/ZDDs
-* Parallel processing with OpenMP
+* Dump in a Graphviz (dot) format
+* Bottom-up/breadth-first DD evaluation
+
+The DD construction function takes user's class object as an argument,
+which is a specification of the DD structure to be constructed.
+An argument of the DD evaluation function represents return data type and
+the procedure to be executed at each DD node.
+The construction and evaluation functions can also be used to implement
+import and export functions of DD structures from/to standard BDD packages.
+
+Other features include below.
+
 * Support of *N*-ary (binary, ternary, quaternary, ...) DDs
-
-Other features include followings.
-
+* Parallel processing with OpenMP
 * Header-only C++ library; no need for installation
 * Distributed with sample applications
-* Open-source MIT license
+
+This software is released under the MIT License, see LICENSE.
 
 Example of DD specifications
 ---------------------------------------------------------------------------
@@ -51,9 +60,9 @@ public:
 };
 ```
 
-`tdzdd::DdStructure<`*N*`>` is a template class for *N*-ary DD objects.
+`tdzdd::DdStructure<2>` is a template class for binary DD objects.
 We can construct a binary DD by giving a DD specification object
-to the constructor of `tdzdd::DdStructure<2>`.
+to its constructor.
 
 ```C++
 tdzdd::DdStructure<2> dd(Combination(n, k));
