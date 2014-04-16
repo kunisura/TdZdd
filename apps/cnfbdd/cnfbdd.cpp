@@ -37,8 +37,9 @@
 using namespace tdzdd;
 
 std::string options[][2] = { //
-        {"b", "Only bottom-up reachability analysis; synonym of \"limit 0\""}, //
         {"s", "Sort input clauses"}, //
+        {"n", "Do not perform top-down/bottom-up reachability analysis"}, //
+        {"b", "Bottom-up reachability analysis only; synonym of \"limit 0\""}, //
         {"limit <n>", "Limit BDD size for top-down reachability analysis"}, //
         {"p", "Use parallel algorithms"}, //
         {"cnf", "Dump the input CNF to STDOUT"}, //
@@ -83,13 +84,14 @@ void run() {
     if (!opt["limit"]) optNum["limit"] = INT_MAX;
     if (opt["b"]) optNum["limit"] = 0;
     if (infile == "-") {
-        cnf.load(std::cin, opt["s"], optNum["limit"]);
+        cnf.load(std::cin, opt["s"]);
     }
     else {
         std::ifstream ifs(infile.c_str());
         if (!ifs) throw std::runtime_error(strerror(errno));
-        cnf.load(ifs, opt["s"], optNum["limit"]);
+        cnf.load(ifs, opt["s"]);
     }
+    if (!opt["n"]) cnf.traverse(optNum["limit"]);
 
     if (opt["cnf"]) cnf.dumpCnf(std::cout, "CNF");
     if (opt["dd0"]) cnf.dumpDot(std::cout, "dd0");

@@ -130,14 +130,18 @@ public:
      * Reads DIMACS CNF and analyze reachability.
      * @param is input stream to read.
      * @param sort enables clause sorting.
-     * @param limit the maximum BDD size in top-down traversal.
      */
-    void load(std::istream& is, bool sort = false, size_t limit = 0) {
+    void load(std::istream& is, bool sort = false) {
         readDimacs(is);
         if (sort) sortClauses();
         prepare();
-        traverse(limit);
     }
+
+    /**
+     * Makes rich reachability information.
+     * @param limit the maximum BDD size in top-down traversal.
+     */
+    void traverse(size_t limit);
 
 private:
     /**
@@ -158,12 +162,6 @@ private:
 
     void makeClauseMap(Clause const* base, Clause const* const * from,
             Clause const* const * to, int k);
-
-    /**
-     * Makes rich reachability information.
-     * @param limit the maximum BDD size in top-down traversal.
-     */
-    void traverse(size_t limit);
 
     /**
      * Makes rich reachability information from top to bottom.

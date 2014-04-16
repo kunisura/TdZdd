@@ -49,7 +49,6 @@ namespace tdzdd {
  * - void print_state(std::ostream& os, void const* p) const
  *
  * Optionally, the following functions can be overloaded:
- * - void printLevel(std::ostream& os, int level) const
  * - void print_level(std::ostream& os, int level) const
  *
  * A return code of get_root(void*) or get_child(void*, int, bool)

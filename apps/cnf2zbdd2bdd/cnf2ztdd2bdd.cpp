@@ -38,10 +38,10 @@
 using namespace tdzdd;
 
 std::string options[][2] = { //
-        {"dd0", "Dump a ZTDD spec to STDOUT in DOT format"}, //
-        {"dd1", "Dump a ZTDD before reduction to STDOUT in DOT format"}, //
-        {"dd2", "Dump a ZTDD after reduction to STDOUT in DOT format"}, //
-        {"dump", "Dump the final BDD to STDOUT in DOT format"}}; //
+                { "dd0", "Dump a ZTDD spec to STDOUT in DOT format" }, //
+                { "dd1", "Dump a ZTDD before reduction to STDOUT in DOT format" }, //
+                { "dd2", "Dump a ZTDD after reduction to STDOUT in DOT format" }, //
+                { "dump", "Dump the final BDD to STDOUT in DOT format" } }; //
 
 std::map<std::string,bool> opt;
 std::map<std::string,int> optNum;
@@ -88,17 +88,18 @@ void run() {
         cnf.load(ifs);
     }
 
-    if (opt["dd0"]) cnf.dumpDot(std::cout, "dd0");
+    if (opt["dd0"]) zddLookahead(cnf).dumpDot(std::cout, "CNF");
 
     DdStructure<3> ztdd(cnf);
-    if (opt["dd1"]) ztdd.dumpDot(std::cout, "dd1");
-    ztdd.bddReduce();
-    if (opt["dd2"]) ztdd.dumpDot(std::cout, "dd2");
+    if (opt["dd1"]) ztdd.dumpDot(std::cout, "ZTDD");
+    ztdd.zddReduce();
+    if (opt["dd2"]) ztdd.dumpDot(std::cout, "ZTDD");
     mh << "\n#clause = " << ztdd.zddCardinality();
 
     mh.begin("BDD construction") << " ...";
     Cudd f = ztdd.evaluate(ZtddToCudd());
     mh.end(f.size());
+    if (opt["dump"]) f.dumpDot(std::cout, "BDD");
     mh << "\n#solution = " << std::fixed << std::setprecision(0)
             << f.countMinterm(cnf.numVars());
 
