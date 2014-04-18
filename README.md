@@ -27,21 +27,26 @@ Other features include:
 
 This software is released under the MIT License, see [LICENSE](LICENSE).
 
-*N*-ary DDs
+Overview
 ---------------------------------------------------------------------------
 
+A DD has one root node and two terminal nodes (⊤ and ⊥).
 Every non-terminal node of an *N*-ary DD has *N* outgoing edges.
 
+![An example of binary DD](doc/fig/example1.png)
 
-A DD has one root node and two terminal nodes (⊤ and ⊥).
-An *N*-ary DD is the directed acyclic graph (DAG) that has one root node
-and two terminal nodes (⊤ and ⊥).
+The above picture shows an example of binary *DD structure*,
+where the ⊥ terminal node and all edges to it are omitted for visibility;
+dashed and solid lines are 0- and 1-edges respectively.
+The DD represents a set of all 3-combinations out of 5 items.
+Note that levels of DD nodes are defined in descending order;
+the root node has the highest level and the terminal nodes have level 0.
 
 The following code from [apps/test/example1.cpp](apps/test/example1.cpp)
 is a *DD specification* of a binary DD structure representing a set of all
 *k*-combinations out of *n* items.
 
-```C++
+```cpp
 #include <tdzdd/DdStructure.hpp>
 
 class Combination: public tdzdd::ScalarDdSpec<Combination,int,2> {
