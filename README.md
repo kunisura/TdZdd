@@ -35,7 +35,7 @@ Every non-terminal node of an *N*-ary DD has *N* outgoing edges.
 
 ![An example of binary DD](doc/fig/example1.png)
 
-The above picture shows an example of binary *DD structure*,
+The above picture shows an example of binary DD structure,
 where the ⊥ terminal node and all edges to it are omitted for visibility;
 dashed and solid lines are 0- and 1-edges respectively.
 The DD represents a set of all 3-combinations out of 5 items.
@@ -76,21 +76,24 @@ public:
 Class `Combination` extends `tdzdd::ScalarDdSpec<Combination,int,2>`,
 of which the first template parameter is the derived class itself,
 the second one is the type of its *state*,
-and the third one declares the out-degree of non-terminal DD nodes.
+and the third one declares the out-degree of non-terminal DD nodes (*N*).
 The class contains public member functions `int getRoot(int& state)`
 and `int getChild(int& state, int level, int value)`.
 
-`getRoot` sets the state of the root node and returns 
-
-```C++
-tdzdd::DdStructure<2> dd(Combination(5, 2));
-```
+`getRoot` initializes the `state` argument by the state of the root node
+and returns its level.
+`getChild` receives `state` and `level` of a non-terminal node
+and integer `value` from 0 to *N*-1 representing one of the branches.
+It computes the state and the level of the child node.
+If the child node is not a terminal, it updates `state` and returns the level.
+If the child node is a ⊥ or ⊤ terminal, it returns 0 or -1 respectively;
+`state` is not used in those cases.
 
 `tdzdd::DdStructure<2>` is a template class of binary DD objects.
 We can construct a binary DD by giving a DD specification object
 to its constructor.
 
-```C++
+```cpp
 tdzdd::DdStructure<2> dd(Combination(5, 2));
 ```
 
