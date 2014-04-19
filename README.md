@@ -40,7 +40,7 @@ where the ⊥ terminal node and all edges to it are omitted for visibility;
 dashed and solid lines are 0- and 1-edges respectively.
 The DD represents a set of all 3-combinations out of 5 items.
 Note that levels of DD nodes are defined in descending order;
-the root node has the highest level and the terminal nodes have level 0.
+the root node has the highest level (5) and the terminal nodes have level 0.
 
 The following code from [apps/test/example1.cpp](apps/test/example1.cpp)
 is a *DD specification* of a binary DD structure representing a set of all
@@ -89,13 +89,25 @@ If the child node is not a terminal, it updates `state` and returns the level.
 If the child node is a ⊥ or ⊤ terminal, it returns 0 or -1 respectively;
 `state` is not used in those cases.
 
-`tdzdd::DdStructure<2>` is a template class of binary DD objects.
-We can construct a binary DD by giving a DD specification object
-to its constructor.
+A DD derived from a DD specification can be dumped in "dot" format,
+which can be drawn by [Graphviz](http://www.graphviz.org/) tools:
 
 ```cpp
-tdzdd::DdStructure<2> dd(Combination(5, 2));
+Combination spec(5, 2);
+spec.dumpDot(std::cout);
 ```
+
+`tdzdd::DdStructure<2>` is a template class of explicit binary DD structures.
+We can construct its object from a DD specification object:
+
+```cpp
+tdzdd::DdStructure<2> dd(spec);
+```
+
+The constructor does not automatically apply BDD/ZDD reduction rules.
+Call `void bddReduce()` or `void zddReduce()` member function if it is needed:
+
+It also can be dumped in "dot" format.
 
 An advanced example can be found in
 [apps/test/example2.cpp](apps/test/example2.cpp).
