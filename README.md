@@ -54,8 +54,6 @@ is a *DD specification* of a binary DD structure representing a set of all
 *k*-combinations out of *n* items.
 
 ```cpp
-#include <tdzdd/DdSpec.hpp>
-
 class Combination: public tdzdd::ScalarDdSpec<Combination,int,2> {
     int const n;
     int const k;
@@ -108,7 +106,6 @@ spec.dumpDot(std::cout);
 We can construct its object from a DD specification object:
 
 ```cpp
-// #include <tdzdd/DdStructure.hpp>
 tdzdd::DdStructure<2> dd(spec);
 ```
 
@@ -125,13 +122,23 @@ dd.dumpDot(std::cout);
 DD specifications
 ---------------------------------------------------------------------------
 
+We can implement our own DD specification by deriving it from an appropriate
+one of base classes defined in [`<tdzdd/DdSpec.hpp>`](include/tdzdd/DdSpec.hpp).
+
 ### DdSpec
 
-[`tdzdd::DdSpec<S,ARITY>`](include/tdzdd/DdSpec.hpp) is the base class of
-all types of DD specifications.
-It defines utility member functions such as `dumpDot`.
+`tdzdd::DdSpec<S,N>` is the root of *N*-ary DD specification class hierarchy,
+which defines utility member functions such as `dumpDot`.
+Do not derive a DD specification directly from this class unless you know
+what you are doing. 
 
 ### StatelessDdSpec
+
+`tdzdd::StatelessDdSpec<S,N>` is a base class of the *N*-ary DD specifications
+that do not use state information.
+Users must implement `int getRoot()` and `int getChild(int level, int value)`
+member functions.
+
 
 ### ScalarDdSpec
 
