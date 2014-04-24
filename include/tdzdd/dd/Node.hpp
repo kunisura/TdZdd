@@ -47,18 +47,18 @@ class NodeId {
     uint64_t code_;
 
 public:
-    NodeId() { // Member 'code_' was not initialized in this constructor for SPEED.
+    NodeId() { // 'code_' is not initialized in the default constructor for SPEED.
     }
 
-    NodeId(size_t code)
+    NodeId(uint64_t code)
             : code_(code) {
     }
 
-    NodeId(size_t row, size_t col)
+    NodeId(uint64_t row, uint64_t col)
             : code_((row << NODE_ROW_OFFSET) | col) {
     }
 
-    NodeId(size_t row, size_t col, bool attr)
+    NodeId(uint64_t row, uint64_t col, bool attr)
             : code_((row << NODE_ROW_OFFSET) | col) {
         setAttr(attr);
     }
@@ -92,7 +92,7 @@ public:
         return code_ == 1 || getAttr();
     }
 
-    size_t code() const {
+    uint64_t code() const {
         return code_ & ~NODE_ATTR_MASK;
     }
 
