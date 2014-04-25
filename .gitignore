@@ -1,6 +1,5 @@
 /.settings
 /.cproject
 /.project
-/apps/bin/
-/apps/debug/
 *.o
+*.exe

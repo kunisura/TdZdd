@@ -20,13 +20,53 @@
 # FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 # DEALINGS IN THE SOFTWARE.
 
-SUBDIRS	= ddpaths ddqueens cnfbdd cnf2ztdd2bdd graphillion test 
+TARGET   = cnfbdd
+CXX      = g++
+CPP      = $(CXX) -E
+CPPFLAGS = -I../../include
+CXXFLAGS = -fopenmp -Wall -fmessage-length=0
+LDFLAGS  = -fopenmp
+LDLIBS   = -lcudd
 
-.PONY: all debug clean depend FORCE
+SRCS     = $(wildcard *.cpp)
+OBJS     = $(SRCS:%.cpp=%.o)
 
-all debug clean depend: $(SUBDIRS)
+.PONY: all debug clean depend
 
-$(SUBDIRS): FORCE
-	- $(MAKE) -C $@ $(MAKECMDGOALS)
+all:	$(TARGET)
+debug:	$(TARGET:%=%-debug)
 
-FORCE:
+%.o: %.cpp
+	$(CXX) $(CXXFLAGS) -O3 $(CPPFLAGS) -DNDEBUG $(TARGET_ARCH) -c -o $@ $<
+
+%-debug.o: %.cpp
+	$(CXX) $(CXXFLAGS) -g $(CPPFLAGS) -DDEBUG $(TARGET_ARCH) -c -o $@ $<
+
+$(TARGET): $(OBJS)
+	$(CXX) $(LDFLAGS) $(TARGET_ARCH) $^ $(LDLIBS) -o $@
+
+$(TARGET:%=%-debug): $(OBJS:%.o=%-debug.o)
+	$(CXX) $(LDFLAGS) $(TARGET_ARCH) $^ $(LDLIBS) -o $@
+
+clean:
+	$(RM) $(TARGET) $(OBJS) $(TARGET:%=%-debug) $(OBJS:%.o=%-debug.o)
+
+define make-depend
+	$(RM) depend.in
+	for i in $(SRCS:%.cpp=%); do\
+	    $(CPP) $(CPPFLAGS) -MM $$i.cpp | perl -n0 -e\
+	        's!\s+(?:\\\s*)?\S*\.cpp!!g;\
+	         s!^\S+.o:!'$$i'.o:!;\
+	         print;\
+	         s!^\S+.o:!'$$i'-debug.o:!;\
+	         print' >> depend.in;\
+	done
+endef
+
+depend:
+	$(make-depend)
+
+depend.in: $(SRCS) $(HDRS) Makefile
+	$(make-depend)
+
+include depend.in

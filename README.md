@@ -1,4 +1,4 @@
-TdZdd
+﻿TdZdd
 ===========================================================================
 
 ### A top-down/breadth-first decision diagram manipulation framework
@@ -103,15 +103,14 @@ spec.dumpDot(std::cout);
 ```
 
 `tdzdd::DdStructure<2>` is a class of explicit binary DD structures.
-We can construct its object from a DD specification object:
+Its object can be constructed from a DD specification object:
 
 ```cpp
 tdzdd::DdStructure<2> dd(spec);
 ```
 
-A DD structrue can be reduced as a BDD or ZDD using its
-`void bddReduce()` or `void zddReduce()` member function,
-and also can be dumped in "dot" format:
+A DD structrue can be reduced as a BDD or ZDD using its `void bddReduce()` or
+`void zddReduce()` member function, and also can be dumped in "dot" format:
 
 ```cpp
 dd.zddReduce();
@@ -122,13 +121,13 @@ dd.dumpDot(std::cout);
 DD specifications
 ---------------------------------------------------------------------------
 
-We can implement our own DD specification by deriving it from an appropriate
-one of base classes defined in [`<tdzdd/DdSpec.hpp>`](include/tdzdd/DdSpec.hpp).
+DD specification can be made by deriving it from an appropriate one of base
+classes defined in [<tdzdd/DdSpec.hpp>](include/tdzdd/DdSpec.hpp).
 
 ### DdSpec
 
-`tdzdd::DdSpec<S,N>` is the root of *N*-ary DD specification class hierarchy,
-which defines utility member functions such as `dumpDot`.
+`tdzdd::DdSpec<S,N>` is the common base of all above classes, which defines
+utility member functions such as `dumpDot`.
 Do not derive a DD specification directly from this class unless you know
 what you are doing. 
 
