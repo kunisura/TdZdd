@@ -20,7 +20,7 @@
 # FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 # DEALINGS IN THE SOFTWARE.
 
-TARGET   = cnf2zbdd2bdd
+TARGET   = cnf2ztdd2bdd
 CXX      = g++
 CPP      = $(CXX) -E
 CPPFLAGS = -I../../include
