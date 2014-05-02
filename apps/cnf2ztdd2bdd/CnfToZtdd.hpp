@@ -43,7 +43,7 @@ struct CnfToZtddState {
 	bool operator==(CnfToZtddState const& o) const;
 };
 
-class CnfToZtdd: public tdzdd::ScalarDdSpec<CnfToZtdd, CnfToZtddState, 3> {
+class CnfToZtdd: public tdzdd::DdSpec<CnfToZtdd, CnfToZtddState, 3> {
 	typedef CnfToZtddState::Clause Clause;
 
 	int nv; // the number of variables

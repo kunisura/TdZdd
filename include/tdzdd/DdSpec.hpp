@@ -59,7 +59,7 @@ namespace tdzdd {
  * @tparam AR arity of the nodes.
  */
 template<typename S, int AR>
-class DdSpec {
+class DdSpecBase {
 public:
     static int const ARITY = AR;
 
@@ -106,7 +106,7 @@ public:
      * @param o the ZDD.
      * @return os itself.
      */
-    friend std::ostream& operator<<(std::ostream& os, DdSpec const& o) {
+    friend std::ostream& operator<<(std::ostream& os, DdSpecBase const& o) {
         o.dumpDot(os);
         return os;
     }
@@ -184,7 +184,7 @@ private:
  * @tparam AR arity of the nodes.
  */
 template<typename S, int AR>
-class StatelessDdSpec: public DdSpec<S,AR> {
+class StatelessDdSpec: public DdSpecBase<S,AR> {
 public:
     int datasize() const {
         return 0;
@@ -241,7 +241,7 @@ public:
  * @tparam AR arity of the nodes.
  */
 template<typename S, typename T, int AR>
-class ScalarDdSpec: public DdSpec<S,AR> {
+class DdSpec: public DdSpecBase<S,AR> {
 public:
     typedef T State;
 
@@ -327,7 +327,7 @@ public:
  * The size of array must be set by setArraySize(int n) in the constructor
  * and cannot be changed.
  * If you want some arbitrary-sized data storage for states,
- * use pointers to those storages in ScalarDdSpec instead.
+ * use pointers to those storages in DdSpec instead.
  *
  * Every implementation must have the following functions:
  * - int getRoot(T* array)
@@ -342,7 +342,7 @@ public:
  * @tparam AR arity of the nodes.
  */
 template<typename S, typename T, int AR>
-class PodArrayDdSpec: public DdSpec<S,AR> {
+class PodArrayDdSpec: public DdSpecBase<S,AR> {
 public:
     typedef T State;
 
@@ -444,152 +444,6 @@ public:
 };
 
 /**
- * Abstract class of DD specifications using non-POD array states.
- * The size of array must be set by setArraySize(int n) in the constructor
- * and cannot be changed.
- * If you want some arbitrary-sized data storage for states,
- * use pointers to those storages in ScalarDdSpec instead.
- *
- * Every implementation must have the following functions:
- * - int getRoot(T* array)
- * - int getChild(T* array, int level, int value)
- *
- * Optionally, the following functions can be overloaded:
- * - void construct(void* p)
- * - void getCopy(void* p, T const& state)
- * - size_t hashCode(T const* p) const
- * - bool equalTo(T const* p, T const* q) const
- * - void printLevel(std::ostream& os, int level) const
- * - void printState(std::ostream& os, State const* a) const
- *
- * @tparam S the class implementing this class.
- * @tparam T data type of array elements.
- * @tparam AR arity of the nodes.
- */
-template<typename S, typename T, int AR>
-class ArrayDdSpec: public DdSpec<S,AR> {
-public:
-    typedef T State;
-
-private:
-    int arraySize;
-
-    static State* state(void* p) {
-        return static_cast<State*>(p);
-    }
-
-    static State const* state(void const* p) {
-        return static_cast<State const*>(p);
-    }
-
-protected:
-    void setArraySize(int n) {
-        assert(0 <= n);
-        if (arraySize >= 0) throw std::runtime_error(
-                "Cannot set array size twice; use setArraySize(int) only once in the constructor of DD spec.");
-        arraySize = n;
-    }
-
-    int getArraySize() const {
-        return arraySize;
-    }
-
-public:
-    ArrayDdSpec()
-            : arraySize(-1) {
-    }
-
-    int datasize() const {
-        if (arraySize < 0) throw std::runtime_error(
-                "Array size is unknown; please set it by setArraySize(int) in the constructor of DD spec.");
-        return arraySize * sizeof(State);
-    }
-
-    void construct(void* p) {
-        new (p) State();
-    }
-
-    int get_root(void* p) {
-        for (int i = 0; i < arraySize; ++i) {
-            this->entity().construct(state(p) + i);
-        }
-
-        return this->entity().getRoot(state(p));
-    }
-
-    int get_child(void* p, int level, int value) {
-        assert(0 <= value && value < S::ARITY);
-        return this->entity().getChild(state(p), level, value);
-    }
-
-    void getCopy(void* p, T const& s) {
-        new (p) State(s);
-    }
-
-    void get_copy(void* to, void const* from) {
-        for (int i = 0; i < arraySize; ++i) {
-            this->entity().getCopy(state(to) + i, state(from)[i]);
-        }
-    }
-
-    void destruct(void* p) {
-        for (int i = 0; i < arraySize; ++i) {
-            state(p)[i].~State();
-        }
-    }
-
-    void destructLevel(int level) {
-    }
-
-    size_t hashCode(State const& state) const {
-        //return static_cast<size_t>(state);
-        return state.hash();
-    }
-
-    size_t hashCodeAtLevel(State const& state, int level) const {
-        return this->entity().hashCode(state);
-    }
-
-    size_t hash_code(void const* p, int level) const {
-        size_t h = 0;
-        for (int i = 0; i < arraySize; ++i) {
-            h += this->entity().hashCodeAtLevel(state(p)[i]);
-            h *= 314159257;
-        }
-        return h;
-    }
-
-    bool equalTo(State const& state1, State const& state2) const {
-        return std::equal_to<State>()(state1, state2);
-    }
-
-    bool equalToAtLevel(State const& state1, State const& state2,
-            int level) const {
-        return this->entity().equalTo(state1, state2);
-    }
-
-    bool equal_to(void const* p, void const* q, int level) const {
-        for (int i = 0; i < arraySize; ++i) {
-            if (!this->entity().equalToAtLevel(state(p)[i], state(q)[i], level)) return false;
-        }
-        return true;
-    }
-
-    void printState(std::ostream& os, State const* a) const {
-        os << "[";
-        for (int i = 0; i < arraySize; ++i) {
-            if (i > 0) os << ",";
-            os << a[i];
-        }
-        os << "]";
-    }
-
-    void print_state(std::ostream& os, void const* a) const {
-        this->entity().printState(os, state(a));
-    }
-};
-
-/**
  * Abstract class of DD specifications using both POD scalar and POD array states.
  *
  * Every implementation must have the following functions:
@@ -606,7 +460,7 @@ public:
  * @tparam AR arity of the nodes.
  */
 template<typename S, typename TS, typename TA, int AR>
-class PodHybridDdSpec: public DdSpec<S,AR> {
+class PodHybridDdSpec: public DdSpecBase<S,AR> {
 public:
     typedef TS S_State;
     typedef TA A_State;

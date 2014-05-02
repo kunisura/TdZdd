@@ -34,7 +34,7 @@
 
 #include <tdzdd/DdSpec.hpp>
 
-class GraphillionZdd: public tdzdd::ScalarDdSpec<GraphillionZdd,uint64_t,2> {
+class GraphillionZdd: public tdzdd::DdSpec<GraphillionZdd,uint64_t,2> {
     struct Node {
         int index;
         uint64_t child[2];

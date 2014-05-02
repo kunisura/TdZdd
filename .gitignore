@@ -3,3 +3,4 @@
 /.project
 *.o
 *.exe
+.*.md.html

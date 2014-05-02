@@ -27,7 +27,7 @@
 
 extern bool useMP;
 
-class Combination: public tdzdd::ScalarDdSpec<Combination,int,2> {
+class Combination: public tdzdd::DdSpec<Combination,int,2> {
     int const n;
     int const k;
 

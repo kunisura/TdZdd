@@ -31,7 +31,7 @@
 
 #include "../graphillion/Graph.hpp"
 
-struct PathZddByStdMap: public tdzdd::ScalarDdSpec<PathZddByStdMap,
+struct PathZddByStdMap: public tdzdd::DdSpec<PathZddByStdMap,
         std::map<int16_t,int16_t>,2> {
 
     Graph const& graph;

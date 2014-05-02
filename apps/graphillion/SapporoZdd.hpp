@@ -41,7 +41,7 @@
  * ZBDD nodes at level @a i + @p offset are converted to
  * TdZdd nodes at level @a i.
  */
-class SapporoZdd: public tdzdd::ScalarDdSpec<SapporoZdd,ZBDD,2> {
+class SapporoZdd: public tdzdd::DdSpec<SapporoZdd,ZBDD,2> {
     ZBDD const root;
     int const offset;
 

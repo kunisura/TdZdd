@@ -41,7 +41,7 @@ struct CnfToBddState {
     ClauseSet* id;
 };
 
-class CnfToBdd: public tdzdd::ScalarDdSpec<CnfToBdd,CnfToBddState,2> {
+class CnfToBdd: public tdzdd::DdSpec<CnfToBdd,CnfToBddState,2> {
     typedef CnfToBddState::ClauseNumber ClauseNumber;
     typedef CnfToBddState::ClauseSet ClauseSet;
     typedef std::vector<ClauseNumber> ClauseList;

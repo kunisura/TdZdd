@@ -31,7 +31,7 @@
 
 #include "IntSubset.hpp"
 
-class SizeConstraint: public tdzdd::ScalarDdSpec<SizeConstraint,int,2> {
+class SizeConstraint: public tdzdd::DdSpec<SizeConstraint,int,2> {
     int const n;
     IntSubset const* const constraint;
 

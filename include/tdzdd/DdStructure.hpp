@@ -53,7 +53,7 @@ namespace tdzdd {
  * @tparam ARITY arity of the nodes.
  */
 template<int ARITY>
-class DdStructure: public ScalarDdSpec<DdStructure<ARITY>,NodeId,ARITY> {
+class DdStructure: public DdSpec<DdStructure<ARITY>,NodeId,ARITY> {
     NodeTableHandler<ARITY> diagram; ///< The diagram structure.
     NodeId root_;                    ///< Root node ID.
     bool useMP;                      ///< Flag to use MP algorithms.
@@ -87,8 +87,9 @@ public:
 
         for (int i = 1; i <= n; ++i) {
             table.initRow(i, 1);
-            table[i][0].branch[0] = f;
-            table[i][0].branch[1] = f;
+            for (int b = 0; b < ARITY; ++b) {
+                table[i][0].branch[b] = f;
+            }
             f = NodeId(i, 0);
         }
 
@@ -101,7 +102,7 @@ public:
      * @param useMP use algorithms for multiple processors.
      */
     template<typename SPEC>
-    DdStructure(DdSpec<SPEC,ARITY> const& spec, bool useMP = false)
+    DdStructure(DdSpecBase<SPEC,ARITY> const& spec, bool useMP = false)
             : useMP(useMP) {
 #ifdef _OPENMP
         if (useMP) constructMP_(spec.entity());
@@ -162,7 +163,7 @@ public:
      * @param spec ZDD spec.
      */
     template<typename SPEC>
-    void zddSubset(DdSpec<SPEC,ARITY> const& spec) {
+    void zddSubset(DdSpecBase<SPEC,ARITY> const& spec) {
 #ifdef _OPENMP
         if (useMP) zddSubsetMP_(spec.entity());
         else
@@ -285,7 +286,7 @@ public:
     }
 
     /**
-     * Checks topological equivalence with another DD.
+     * Checks structural equivalence with another DD.
      * @return true if they have the same structure.
      */
     bool operator==(DdStructure const& o) const {
@@ -335,7 +336,7 @@ public:
     }
 
     /**
-     * Checks topological inequivalence with another DD.
+     * Checks structural inequivalence with another DD.
      * @return true if they have the different structure.
      */
     bool operator!=(DdStructure const& o) const {
@@ -657,7 +658,7 @@ public:
     }
 
     /**
-     * Implements ScalarDdSpec.
+     * Implements DdSpec.
      */
     int getRoot(NodeId& f) const {
         f = root_;
@@ -665,7 +666,7 @@ public:
     }
 
     /**
-     * Implements ScalarDdSpec.
+     * Implements DdSpec.
      */
     int getChild(NodeId& f, int level, int value) const {
         assert(level > 0 && level == f.row());
@@ -675,7 +676,7 @@ public:
     }
 
     /**
-     * Implements ScalarDdSpec.
+     * Implements DdSpec.
      */
     size_t hashCode(NodeId const& f) const {
         return f.hash();

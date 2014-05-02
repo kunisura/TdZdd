@@ -29,7 +29,7 @@
 #include <tdzdd/DdSpec.hpp>
 
 template<int ARITY>
-class RandomDd: public tdzdd::ScalarDdSpec<RandomDd<ARITY>,size_t,ARITY> {
+class RandomDd: public tdzdd::DdSpec<RandomDd<ARITY>,size_t,ARITY> {
     int const n;
     size_t const width;
     int const drop;

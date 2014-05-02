@@ -52,7 +52,7 @@
  * CAUTION: Do not use in parallel. CUDD is not thread-safe.
  */
 template<int N>
-class Cudd_: public tdzdd::ScalarDdSpec<Cudd_<N>,Cudd_<N>,2> {
+class Cudd_: public tdzdd::DdSpec<Cudd_<N>,Cudd_<N>,2> {
     DdNode* dd;
 
     static DdNode* varAtLevel(int level) {
