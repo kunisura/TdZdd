@@ -33,83 +33,83 @@
 #include "../cnfbdd/Cudd.hpp"
 
 struct CnfToZtddState {
-	typedef std::vector<int> Clause;
+    typedef std::vector<int> Clause;
 
-	Clause const* beg; // the first clause
-	Clause const* end; // following the last clause
-	size_t pos; // literal position
+    Clause const* beg; // the first clause
+    Clause const* end; // following the last clause
+    size_t pos; // literal position
 
-	size_t hash() const;
-	bool operator==(CnfToZtddState const& o) const;
+    size_t hash() const;
+    bool operator==(CnfToZtddState const& o) const;
 };
 
-class CnfToZtdd: public tdzdd::DdSpec<CnfToZtdd, CnfToZtddState, 3> {
-	typedef CnfToZtddState::Clause Clause;
+class CnfToZtdd: public tdzdd::DdSpec<CnfToZtdd,CnfToZtddState,3> {
+    typedef CnfToZtddState::Clause Clause;
 
-	int nv; // the number of variables
-	std::vector<Clause> cnf; // sorted list of clauses
+    int nv; // the number of variables
+    std::vector<Clause> cnf; // sorted list of clauses
 
 public:
-	/**
-	 * Gets the variable number at given level.
-	 * @param level variable level.
-	 * @return valiable number.
-	 */
-	int varAtLevel(int level) const {
-		assert(1 <= level && level <= nv);
-		return nv - level + 1;
-	}
+    /**
+     * Gets the variable number at given level.
+     * @param level variable level.
+     * @return valiable number.
+     */
+    int varAtLevel(int level) const {
+        assert(1 <= level && level <= nv);
+        return nv - level + 1;
+    }
 
-	/**
-	 * Gets the variable level of a given variable.
-	 * @param var variable number.
-	 * @return valiable level.
-	 */
-	int levelOfVar(int var) const {
-		assert(1 <= var && var <= nv);
-		return nv - var + 1;
-	}
+    /**
+     * Gets the variable level of a given variable.
+     * @param var variable number.
+     * @return valiable level.
+     */
+    int levelOfVar(int var) const {
+        assert(1 <= var && var <= nv);
+        return nv - var + 1;
+    }
 
-	/**
-	 * Gets the number of variables.
-	 * @return the number of clauses.
-	 */
-	int numVars() const {
-		return nv;
-	}
+    /**
+     * Gets the number of variables.
+     * @return the number of clauses.
+     */
+    int numVars() const {
+        return nv;
+    }
 
-	/**
-	 * Gets the number of clauses.
-	 * @return the number of clauses.
-	 */
-	size_t numClauses() const {
-		return cnf.size();
-	}
+    /**
+     * Gets the number of clauses.
+     * @return the number of clauses.
+     */
+    size_t numClauses() const {
+        return cnf.size();
+    }
 
-	/**
-	 * Reads DIMACS CNF.
-	 * @param is input stream to read.
-	 */
-	void load(std::istream& is) {
-		readDimacs(is);
-		sortClauses();
-	}
+    /**
+     * Reads DIMACS CNF.
+     * @param is input stream to read.
+     */
+    void load(std::istream& is) {
+        readDimacs(is);
+        sortClauses();
+    }
 
 private:
-	void readDimacs(std::istream& is);
-	void sortClauses();
+    void readDimacs(std::istream& is);
+    void sortClauses();
 
 public:
-	int getRoot(State& s);
-	int getChild(State& s, int level, int value);
+    int getRoot(State& s);
+    int getChild(State& s, int level, int value);
 
-	size_t hashCode(State const& s) const {
-		return s.hash();
-	}
+    size_t hashCode(State const& s) const {
+        return s.hash();
+    }
 
-	void printLevel(std::ostream& os, int level) const {
-		os << varAtLevel(level);
-	}
+    void printLevel(std::ostream& os, int level) const {
+        os << varAtLevel(level);
+    }
 
-	void printState(std::ostream& os, State const& s) const;
+    void printState(std::ostream& os, State const& s) const;
 };
