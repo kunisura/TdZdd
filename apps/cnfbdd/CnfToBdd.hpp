@@ -72,6 +72,7 @@ class CnfToBdd: public tdzdd::DdSpec<CnfToBdd,CnfToBddState,2> {
     std::vector<ClauseList> clauseMap; // mapping to canonical clause for each level
     std::vector<std::vector<Cudd> > clauseMapCube; // cube of source clauses for each level
     std::vector<std::vector<Cudd> > clauseMapCond; // union of source clauses for each level
+    bool useClauseMap_; // switch for clauseMap
 
     std::vector<Cudd> frontierSet; // reachable state set for each level
     //std::vector<DdStructure> frontierZdd; // reachable state set for each level
@@ -80,6 +81,17 @@ class CnfToBdd: public tdzdd::DdSpec<CnfToBdd,CnfToBddState,2> {
     std::vector<uint16_t> work;
 
 public:
+    /**
+     * Enables/disables mapping to canonical clause IDs.
+     * @param flag new value.
+     * @return old value.
+     */
+    bool useClauseMap(bool flag) {
+        bool tmp = useClauseMap_;
+        useClauseMap_ = flag;
+        return tmp;
+    }
+
     /**
      * Gets the variable number at given level.
      * @param level variable level.

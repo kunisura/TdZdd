@@ -41,6 +41,7 @@ std::string options[][2] = { //
         {"n", "Do not perform top-down/bottom-up reachability analysis"}, //
         {"b", "Bottom-up reachability analysis only; synonym of \"limit 0\""}, //
         {"limit <n>", "Limit BDD size for top-down reachability analysis"}, //
+        {"c", "Disable mapping to canonical clause IDs"}, //
         {"p", "Use parallel algorithms"}, //
         {"cnf", "Dump the input CNF to STDOUT"}, //
         {"dd0", "Dump a state transition graph to STDOUT in DOT format"}, //
@@ -91,6 +92,8 @@ void run() {
         if (!ifs) throw std::runtime_error(strerror(errno));
         cnf.load(ifs, opt["s"]);
     }
+
+    cnf.useClauseMap(!opt["c"]);
     if (!opt["n"]) cnf.traverse(optNum["limit"]);
 
     if (opt["cnf"]) cnf.dumpCnf(std::cout, "CNF");

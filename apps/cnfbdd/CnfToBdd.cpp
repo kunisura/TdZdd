@@ -233,6 +233,7 @@ void CnfToBdd::prepare() {
             clauseMap[i][j] = j;
         }
     }
+    useClauseMap_ = true;
 
     std::vector<Clause> rev(nc);
     std::vector<Clause const*> cp(nc);
@@ -359,8 +360,7 @@ void CnfToBdd::traverseBU() {
         if (i < nv) q &= leaveConstraint[i + 1];
         mh << ".";
         frontierSet[i] &= p | q;
-        double states = frontierSet[i].countMinterm(
-                frontierClauses[i].size());
+        double states = frontierSet[i].countMinterm(frontierClauses[i].size());
         totalStates += states;
         mh << " " // << std::fixed << std::setprecision(0)
                 << states;
@@ -376,8 +376,7 @@ void CnfToBdd::dumpCnf(std::ostream& os, std::string title) const {
 
     os << "  0 [shape=none,label=\"\"];\n";
     for (int v = 1; v <= nv; ++v) {
-        os << "  " << v << " [label=\"" << levelOfVar(v)
-                << "\",shape=none];\n";
+        os << "  " << v << " [label=\"" << levelOfVar(v) << "\",shape=none];\n";
     }
 
     os << "  0";
@@ -514,11 +513,16 @@ int CnfToBdd::getChild(State& s, int level, int take) {
     if (level <= completingLevel && work.empty()) return -1;
 
     s.set = ClauseSet::newInstance(pools[level], work);
-    for (size_t k = 0; k < work.size(); ++k) {
-        work[k] = clauseMap[level][work[k]];
+    if (useClauseMap_) {
+        for (size_t k = 0; k < work.size(); ++k) {
+            work[k] = clauseMap[level][work[k]];
+        }
+        //std::sort(work.begin(), work.end());
+        s.id = ClauseSet::newInstance(pools[level], work);
     }
-    //std::sort(work.begin(), work.end());
-    s.id = ClauseSet::newInstance(pools[level], work);
+    else {
+        s.id = s.set;
+    }
 
     return level;
 }
