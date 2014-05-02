@@ -192,6 +192,17 @@ public:
 
     size_t shiftLeft(int k) {
         assert(k >= 0);
+        if (k >= 63) {
+            int w = k / 63;
+            for (uint64_t* q = array + size() - 1; q >= array; --q) {
+                *(q + w) = *q;
+            }
+            for (uint64_t* q = array; q < array + w; ++q) {
+                *q = MSB;
+            }
+        }
+        k %= 63;
+
         uint64_t* p = array;
         uint64_t x = 0;
 
