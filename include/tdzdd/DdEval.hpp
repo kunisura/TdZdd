@@ -27,8 +27,6 @@
 #include <cassert>
 #include <iostream>
 
-#include "util/MessageHandler.hpp"
-
 namespace tdzdd {
 
 /**
@@ -96,19 +94,19 @@ public:
  * - R getValue(T const& work)
  * - void destructLevel(int i)
  *
- * @tparam S the class implementing this class.
+ * @tparam E the class implementing this class.
  * @tparam T data type of work area for each node.
  * @tparam R data type of return value.
  */
-template<typename S, typename T, typename R = T>
+template<typename E, typename T, typename R = T>
 class DdEval {
 public:
-    S& entity() {
-        return *static_cast<S*>(this);
+    E& entity() {
+        return *static_cast<E*>(this);
     }
 
-    S const& entity() const {
-        return *static_cast<S const*>(this);
+    E const& entity() const {
+        return *static_cast<E const*>(this);
     }
 
     /**
