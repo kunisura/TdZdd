@@ -82,10 +82,10 @@ public:
 };
 
 /**
- * Base class of DD evaluatores.
+ * Base class of DD evaluators.
  *
  * Every implementation must define the following functions:
- * - void evalTerminal(T& v, int value)
+ * - void evalTerminal(T& v, int id)
  * - void evalNode(T& v, int level, DdValues<T,ARITY> const& values)
  *
  * Optionally, the following functions can be overloaded:
