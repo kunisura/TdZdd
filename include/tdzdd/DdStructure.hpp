@@ -38,7 +38,6 @@
 #include "dd/Node.hpp"
 #include "dd/NodeTable.hpp"
 #include "eval/Cardinality.hpp"
-#include "op/BinaryOperation.hpp"
 #include "op/Lookahead.hpp"
 #include "op/Unreduction.hpp"
 #include "util/demangle.hpp"
@@ -270,7 +269,7 @@ public:
     }
 
     /**
-     * Gets the level of root ZDD variable.
+     * Gets the level of the root node.
      * @return the level of root ZDD variable.
      */
     int topLevel() const {
@@ -400,7 +399,9 @@ public:
      * @param numVars the number of variables.
      */
     DdStructure bdd2zdd(int numVars) const {
-        return DdStructure(zddLookahead(bddUnreduction(*this, numVars)), useMP);
+        return DdStructure(
+                ZddLookahead<BddUnreduction<DdStructure> >(
+                        BddUnreduction<DdStructure>(*this, numVars)), useMP);
     }
 
     /**
@@ -408,7 +409,9 @@ public:
      * @param numVars the number of variables.
      */
     DdStructure zdd2bdd(int numVars) const {
-        return DdStructure(bddLookahead(zddUnreduction(*this, numVars)), useMP);
+        return DdStructure(
+                BddLookahead<ZddUnreduction<DdStructure> >(
+                        ZddUnreduction<DdStructure>(*this, numVars)), useMP);
     }
 
     /**

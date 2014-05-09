@@ -138,14 +138,4 @@ struct ZddUnreduction: public Unreduction_<ZddUnreduction<S>,S,true> {
     }
 };
 
-template<typename S>
-BddUnreduction<S> bddUnreduction(S const& s, int numVars) {
-    return BddUnreduction<S>(s, numVars);
-}
-
-template<typename S>
-ZddUnreduction<S> zddUnreduction(S const& s, int numVars) {
-    return ZddUnreduction<S>(s, numVars);
-}
-
 } // namespace tdzdd

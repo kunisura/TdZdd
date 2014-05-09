@@ -31,6 +31,7 @@
 #include <vector>
 
 #include <tdzdd/DdStructure.hpp>
+#include <tdzdd/DdSpecOp.hpp>
 
 #include "CnfToZtdd.hpp"
 #include "ZtddToCudd.hpp"

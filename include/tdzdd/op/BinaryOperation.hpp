@@ -382,24 +382,4 @@ struct ZddUnion: public BinaryOperation<ZddUnion<S1,S2>,S1,S2> {
     }
 };
 
-template<typename S1, typename S2>
-BddAnd<S1,S2> bddAnd(S1 const& spec1, S2 const& spec2) {
-    return BddAnd<S1,S2>(spec1, spec2);
-}
-
-template<typename S1, typename S2>
-BddOr<S1,S2> bddOr(S1 const& spec1, S2 const& spec2) {
-    return BddOr<S1,S2>(spec1, spec2);
-}
-
-template<typename S1, typename S2>
-ZddIntersection<S1,S2> zddIntersection(S1 const& spec1, S2 const& spec2) {
-    return ZddIntersection<S1,S2>(spec1, spec2);
-}
-
-template<typename S1, typename S2>
-ZddUnion<S1,S2> zddUnion(S1 const& spec1, S2 const& spec2) {
-    return ZddUnion<S1,S2>(spec1, spec2);
-}
-
 } // namespace tdzdd

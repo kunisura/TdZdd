@@ -27,6 +27,7 @@
 #include <climits>
 
 #include <tdzdd/DdStructure.hpp>
+#include <tdzdd/DdSpecOp.hpp>
 #include "../graphillion/SizeConstraint.hpp"
 
 using namespace tdzdd;
@@ -38,7 +39,7 @@ extern bool useMP;
  */
 struct MinNumItems: public DdEval<MinNumItems,int> {
     void evalTerminal(int& n, bool one) const {
-        n = one ? 0 : INT_MAX;
+        n = one ? 0 : INT_MAX - 1;
     }
 
     void evalNode(int& n, int, DdValues<int,2> const& values) const {

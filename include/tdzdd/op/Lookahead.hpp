@@ -183,14 +183,4 @@ public:
     }
 };
 
-template<typename S>
-BddLookahead<S> bddLookahead(S const& spec) {
-    return BddLookahead<S>(spec);
-}
-
-template<typename S>
-ZddLookahead<S> zddLookahead(S const& spec) {
-    return ZddLookahead<S>(spec);
-}
-
 } // namespace tdzdd
