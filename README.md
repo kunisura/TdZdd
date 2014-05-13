@@ -16,8 +16,8 @@ It has three basic functions:
 
 The DD construction function takes user's class object as an argument,
 which is a specification of the DD structure to be constructed.
-An argument of the DD evaluation function represents return data type and
-the procedure to be executed at each DD node.
+An argument of the DD evaluation function represents procedures to be executed
+at each DD node.
 The construction and evaluation functions can also be used to implement
 import and export functions of DD structures from/to other DD libraries.
 
@@ -33,12 +33,11 @@ This software is released under the MIT License, see [LICENSE](LICENSE).
 Documents
 ---------------------------------------------------------------------------
 
-* [User's Guide](doc/users-guide.md)
-* [Reference Manual](doc/html/index.html)
+* [User Guide and Reference](doc/index.html)
+* Technical report: [Efficient Top-Down ZDD Construction Techniques Using Recursive Specifications](http://www-alg.ist.hokudai.ac.jp/~thomas/TCSTR/tcstr_13_69/tcstr_13_69.pdf)
+* Slides in Japanese: [TdZdd: フロンティア法のための効率的なトップダウンZDD構築を実現するC++ライブラリ](http://www-erato.ist.hokudai.ac.jp/docs/autumn2013/iwashita.pdf)
 
 See also
 ---------------------------------------------------------------------------
 
 * [Graphillion - Fast, lightweight library for a huge number of graphs](http://graphillion.org)
-* [Efficient Top-Down ZDD Construction Techniques Using Recursive Specifications](http://www-alg.ist.hokudai.ac.jp/~thomas/TCSTR/tcstr_13_69/tcstr_13_69.pdf)
-* (Japanese) [TdZdd: フロンティア法のための効率的なトップダウンZDD構築を実現するC++ライブラリ](http://www-erato.ist.hokudai.ac.jp/docs/autumn2013/iwashita.pdf)

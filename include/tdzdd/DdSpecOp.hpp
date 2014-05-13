@@ -30,7 +30,7 @@
 
 namespace tdzdd {
 
-/***
+/**
  * Returns a BDD specification for logical AND of two BDD specifications.
  * @param spec1 the first BDD specification.
  * @param spec2 the second BDD specification.
@@ -41,7 +41,7 @@ BddAnd<S1,S2> bddAnd(S1 const& spec1, S2 const& spec2) {
     return BddAnd<S1,S2>(spec1, spec2);
 }
 
-/***
+/**
  * Returns a BDD specification for logical OR of two BDD specifications.
  * @param spec1 the first BDD specification.
  * @param spec2 the second BDD specification.
@@ -52,7 +52,7 @@ BddOr<S1,S2> bddOr(S1 const& spec1, S2 const& spec2) {
     return BddOr<S1,S2>(spec1, spec2);
 }
 
-/***
+/**
  * Returns a ZDD specification for set intersection of two ZDD specifications.
  * @param spec1 the first ZDD specification.
  * @param spec2 the second ZDD specification.
@@ -63,7 +63,7 @@ ZddIntersection<S1,S2> zddIntersection(S1 const& spec1, S2 const& spec2) {
     return ZddIntersection<S1,S2>(spec1, spec2);
 }
 
-/***
+/**
  * Returns a ZDD specification for set union of two ZDD specifications.
  * @param spec1 the first ZDD specification.
  * @param spec2 the second ZDD specification.
