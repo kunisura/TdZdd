@@ -1,5 +1,39 @@
 test.o:
 test-debug.o:
+example2.o: ../../include/tdzdd/DdStructure.hpp \
+ ../../include/tdzdd/DdEval.hpp ../../include/tdzdd/DdSpec.hpp \
+ ../../include/tdzdd/dd/DdBuilder.hpp ../../include/tdzdd/dd/Node.hpp \
+ ../../include/tdzdd/dd/NodeTable.hpp \
+ ../../include/tdzdd/dd/DataTable.hpp \
+ ../../include/tdzdd/dd/../util/MyVector.hpp \
+ ../../include/tdzdd/dd/../util/MemoryPool.hpp \
+ ../../include/tdzdd/dd/../util/MessageHandler.hpp \
+ ../../include/tdzdd/dd/../util/ResourceUsage.hpp \
+ ../../include/tdzdd/dd/../util/MyHashTable.hpp \
+ ../../include/tdzdd/dd/../util/MyList.hpp \
+ ../../include/tdzdd/util/demangle.hpp \
+ ../../include/tdzdd/dd/DdReducer.hpp \
+ ../../include/tdzdd/eval/Cardinality.hpp \
+ ../../include/tdzdd/eval/../util/BigNumber.hpp \
+ ../../include/tdzdd/op/Lookahead.hpp \
+ ../../include/tdzdd/op/Unreduction.hpp
+example2-debug.o: ../../include/tdzdd/DdStructure.hpp \
+ ../../include/tdzdd/DdEval.hpp ../../include/tdzdd/DdSpec.hpp \
+ ../../include/tdzdd/dd/DdBuilder.hpp ../../include/tdzdd/dd/Node.hpp \
+ ../../include/tdzdd/dd/NodeTable.hpp \
+ ../../include/tdzdd/dd/DataTable.hpp \
+ ../../include/tdzdd/dd/../util/MyVector.hpp \
+ ../../include/tdzdd/dd/../util/MemoryPool.hpp \
+ ../../include/tdzdd/dd/../util/MessageHandler.hpp \
+ ../../include/tdzdd/dd/../util/ResourceUsage.hpp \
+ ../../include/tdzdd/dd/../util/MyHashTable.hpp \
+ ../../include/tdzdd/dd/../util/MyList.hpp \
+ ../../include/tdzdd/util/demangle.hpp \
+ ../../include/tdzdd/dd/DdReducer.hpp \
+ ../../include/tdzdd/eval/Cardinality.hpp \
+ ../../include/tdzdd/eval/../util/BigNumber.hpp \
+ ../../include/tdzdd/op/Lookahead.hpp \
+ ../../include/tdzdd/op/Unreduction.hpp
 testSizeConstraint.o: \
  ../../include/tdzdd/DdStructure.hpp ../../include/tdzdd/DdEval.hpp \
  ../../include/tdzdd/DdSpec.hpp ../../include/tdzdd/dd/DdBuilder.hpp \
@@ -15,11 +49,10 @@ testSizeConstraint.o: \
  ../../include/tdzdd/dd/DdReducer.hpp \
  ../../include/tdzdd/eval/Cardinality.hpp \
  ../../include/tdzdd/eval/../util/BigNumber.hpp \
- ../../include/tdzdd/DdSpecOp.hpp \
- ../../include/tdzdd/op/BinaryOperation.hpp \
  ../../include/tdzdd/op/Lookahead.hpp \
- ../../include/tdzdd/op/Unreduction.hpp ../graphillion/SizeConstraint.hpp \
- ../graphillion/IntSubset.hpp
+ ../../include/tdzdd/op/Unreduction.hpp ../../include/tdzdd/DdSpecOp.hpp \
+ ../../include/tdzdd/op/BinaryOperation.hpp \
+ ../graphillion/SizeConstraint.hpp ../graphillion/IntSubset.hpp
 testSizeConstraint-debug.o: \
  ../../include/tdzdd/DdStructure.hpp ../../include/tdzdd/DdEval.hpp \
  ../../include/tdzdd/DdSpec.hpp ../../include/tdzdd/dd/DdBuilder.hpp \
@@ -35,41 +68,10 @@ testSizeConstraint-debug.o: \
  ../../include/tdzdd/dd/DdReducer.hpp \
  ../../include/tdzdd/eval/Cardinality.hpp \
  ../../include/tdzdd/eval/../util/BigNumber.hpp \
- ../../include/tdzdd/DdSpecOp.hpp \
- ../../include/tdzdd/op/BinaryOperation.hpp \
  ../../include/tdzdd/op/Lookahead.hpp \
- ../../include/tdzdd/op/Unreduction.hpp ../graphillion/SizeConstraint.hpp \
- ../graphillion/IntSubset.hpp
-example2.o: ../../include/tdzdd/DdStructure.hpp \
- ../../include/tdzdd/DdEval.hpp ../../include/tdzdd/DdSpec.hpp \
- ../../include/tdzdd/dd/DdBuilder.hpp ../../include/tdzdd/dd/Node.hpp \
- ../../include/tdzdd/dd/NodeTable.hpp \
- ../../include/tdzdd/dd/DataTable.hpp \
- ../../include/tdzdd/dd/../util/MyVector.hpp \
- ../../include/tdzdd/dd/../util/MemoryPool.hpp \
- ../../include/tdzdd/dd/../util/MessageHandler.hpp \
- ../../include/tdzdd/dd/../util/ResourceUsage.hpp \
- ../../include/tdzdd/dd/../util/MyHashTable.hpp \
- ../../include/tdzdd/dd/../util/MyList.hpp \
- ../../include/tdzdd/util/demangle.hpp \
- ../../include/tdzdd/dd/DdReducer.hpp \
- ../../include/tdzdd/eval/Cardinality.hpp \
- ../../include/tdzdd/eval/../util/BigNumber.hpp
-example2-debug.o: ../../include/tdzdd/DdStructure.hpp \
- ../../include/tdzdd/DdEval.hpp ../../include/tdzdd/DdSpec.hpp \
- ../../include/tdzdd/dd/DdBuilder.hpp ../../include/tdzdd/dd/Node.hpp \
- ../../include/tdzdd/dd/NodeTable.hpp \
- ../../include/tdzdd/dd/DataTable.hpp \
- ../../include/tdzdd/dd/../util/MyVector.hpp \
- ../../include/tdzdd/dd/../util/MemoryPool.hpp \
- ../../include/tdzdd/dd/../util/MessageHandler.hpp \
- ../../include/tdzdd/dd/../util/ResourceUsage.hpp \
- ../../include/tdzdd/dd/../util/MyHashTable.hpp \
- ../../include/tdzdd/dd/../util/MyList.hpp \
- ../../include/tdzdd/util/demangle.hpp \
- ../../include/tdzdd/dd/DdReducer.hpp \
- ../../include/tdzdd/eval/Cardinality.hpp \
- ../../include/tdzdd/eval/../util/BigNumber.hpp
+ ../../include/tdzdd/op/Unreduction.hpp ../../include/tdzdd/DdSpecOp.hpp \
+ ../../include/tdzdd/op/BinaryOperation.hpp \
+ ../graphillion/SizeConstraint.hpp ../graphillion/IntSubset.hpp
 example1.o: ../../include/tdzdd/DdStructure.hpp \
  ../../include/tdzdd/DdEval.hpp ../../include/tdzdd/DdSpec.hpp \
  ../../include/tdzdd/dd/DdBuilder.hpp ../../include/tdzdd/dd/Node.hpp \
@@ -84,7 +86,9 @@ example1.o: ../../include/tdzdd/DdStructure.hpp \
  ../../include/tdzdd/util/demangle.hpp \
  ../../include/tdzdd/dd/DdReducer.hpp \
  ../../include/tdzdd/eval/Cardinality.hpp \
- ../../include/tdzdd/eval/../util/BigNumber.hpp
+ ../../include/tdzdd/eval/../util/BigNumber.hpp \
+ ../../include/tdzdd/op/Lookahead.hpp \
+ ../../include/tdzdd/op/Unreduction.hpp
 example1-debug.o: ../../include/tdzdd/DdStructure.hpp \
  ../../include/tdzdd/DdEval.hpp ../../include/tdzdd/DdSpec.hpp \
  ../../include/tdzdd/dd/DdBuilder.hpp ../../include/tdzdd/dd/Node.hpp \
@@ -99,7 +103,9 @@ example1-debug.o: ../../include/tdzdd/DdStructure.hpp \
  ../../include/tdzdd/util/demangle.hpp \
  ../../include/tdzdd/dd/DdReducer.hpp \
  ../../include/tdzdd/eval/Cardinality.hpp \
- ../../include/tdzdd/eval/../util/BigNumber.hpp
+ ../../include/tdzdd/eval/../util/BigNumber.hpp \
+ ../../include/tdzdd/op/Lookahead.hpp \
+ ../../include/tdzdd/op/Unreduction.hpp
 testRandomDd.o: ../../include/tdzdd/DdStructure.hpp \
  ../../include/tdzdd/DdEval.hpp ../../include/tdzdd/DdSpec.hpp \
  ../../include/tdzdd/dd/DdBuilder.hpp ../../include/tdzdd/dd/Node.hpp \
@@ -114,7 +120,9 @@ testRandomDd.o: ../../include/tdzdd/DdStructure.hpp \
  ../../include/tdzdd/util/demangle.hpp \
  ../../include/tdzdd/dd/DdReducer.hpp \
  ../../include/tdzdd/eval/Cardinality.hpp \
- ../../include/tdzdd/eval/../util/BigNumber.hpp RandomDd.hpp
+ ../../include/tdzdd/eval/../util/BigNumber.hpp \
+ ../../include/tdzdd/op/Lookahead.hpp \
+ ../../include/tdzdd/op/Unreduction.hpp RandomDd.hpp
 testRandomDd-debug.o: ../../include/tdzdd/DdStructure.hpp \
  ../../include/tdzdd/DdEval.hpp ../../include/tdzdd/DdSpec.hpp \
  ../../include/tdzdd/dd/DdBuilder.hpp ../../include/tdzdd/dd/Node.hpp \
@@ -129,4 +137,6 @@ testRandomDd-debug.o: ../../include/tdzdd/DdStructure.hpp \
  ../../include/tdzdd/util/demangle.hpp \
  ../../include/tdzdd/dd/DdReducer.hpp \
  ../../include/tdzdd/eval/Cardinality.hpp \
- ../../include/tdzdd/eval/../util/BigNumber.hpp RandomDd.hpp
+ ../../include/tdzdd/eval/../util/BigNumber.hpp \
+ ../../include/tdzdd/op/Lookahead.hpp \
+ ../../include/tdzdd/op/Unreduction.hpp RandomDd.hpp
