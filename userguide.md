@@ -179,10 +179,10 @@ is an *N*-ary DD specification using an array of type `T` to store state
 information.
 The size of the array must be fixed to some positive integer *m* by calling
 predefined function `setArraySize(m)` in the constructor of `S`.
-`T` must be a plain old data (POD) type, which does not use object-oriented
-features such as user-defined constructor, destructor, and copy-assignment;
-because the library handles the state information just as
-(`sizeof(T)` × *m*)-byte raw data for efficiency.
+The library handles the state information just as (`sizeof(T)` × *m*)-byte
+raw data for efficiency;
+therefore, `T` must be a data structure without object-oriented features
+(user-defined constructor, destructor, copy-assignment, etc.).
 Class `S` must implement the following member functions:
 
 * `int getRoot(T* array)` stores state information of the root node into
@@ -208,10 +208,10 @@ is an *N*-ary DD specification using a combination of type `TS` and an array
 of type `TA` to store state information.
 The size of the array must be fixed to some positive integer *m* by calling
 predefined function `setArraySize(m)` in the constructor of `S`.
-Both `TS` and `TA` must be plain old data (POD) types, which do not use
-object-oriented features such as user-defined constructor, destructor, and
-copy-assignment; because the library handles the state information just as
-(`sizeof(TS)` + `sizeof(TA)` × *m*)-byte raw data for efficiency.
+The library handles the state information just as
+(`sizeof(TS)` + `sizeof(TA)` × *m*)-byte raw data for efficiency;
+therefore, both `TS` and `TA` must be data structures without object-oriented
+features (user-defined constructor, destructor, copy-assignment, etc.).
 Class `S` must implement the following member functions:
 
 * `int getRoot(TS& scalar, TA* array)` stores state information of the root
