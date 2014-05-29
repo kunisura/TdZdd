@@ -1,41 +1,3 @@
-cnfbdd.o: ../../include/tdzdd/DdStructure.hpp \
- ../../include/tdzdd/DdEval.hpp \
- ../../include/tdzdd/util/MessageHandler.hpp \
- ../../include/tdzdd/util/ResourceUsage.hpp \
- ../../include/tdzdd/DdSpec.hpp ../../include/tdzdd/dd/DdBuilder.hpp \
- ../../include/tdzdd/dd/Node.hpp ../../include/tdzdd/dd/NodeTable.hpp \
- ../../include/tdzdd/dd/DataTable.hpp \
- ../../include/tdzdd/dd/../util/MyVector.hpp \
- ../../include/tdzdd/dd/../util/MemoryPool.hpp \
- ../../include/tdzdd/dd/../util/MyHashTable.hpp \
- ../../include/tdzdd/dd/../util/MyList.hpp \
- ../../include/tdzdd/util/demangle.hpp \
- ../../include/tdzdd/dd/DdReducer.hpp \
- ../../include/tdzdd/eval/Cardinality.hpp \
- ../../include/tdzdd/eval/../util/BigNumber.hpp \
- ../../include/tdzdd/op/BinaryOperation.hpp \
- ../../include/tdzdd/op/Lookahead.hpp \
- ../../include/tdzdd/op/Unreduction.hpp CnfToBdd.hpp \
- ../../include/tdzdd/util/MySet.hpp Cudd.hpp
-cnfbdd-debug.o: ../../include/tdzdd/DdStructure.hpp \
- ../../include/tdzdd/DdEval.hpp \
- ../../include/tdzdd/util/MessageHandler.hpp \
- ../../include/tdzdd/util/ResourceUsage.hpp \
- ../../include/tdzdd/DdSpec.hpp ../../include/tdzdd/dd/DdBuilder.hpp \
- ../../include/tdzdd/dd/Node.hpp ../../include/tdzdd/dd/NodeTable.hpp \
- ../../include/tdzdd/dd/DataTable.hpp \
- ../../include/tdzdd/dd/../util/MyVector.hpp \
- ../../include/tdzdd/dd/../util/MemoryPool.hpp \
- ../../include/tdzdd/dd/../util/MyHashTable.hpp \
- ../../include/tdzdd/dd/../util/MyList.hpp \
- ../../include/tdzdd/util/demangle.hpp \
- ../../include/tdzdd/dd/DdReducer.hpp \
- ../../include/tdzdd/eval/Cardinality.hpp \
- ../../include/tdzdd/eval/../util/BigNumber.hpp \
- ../../include/tdzdd/op/BinaryOperation.hpp \
- ../../include/tdzdd/op/Lookahead.hpp \
- ../../include/tdzdd/op/Unreduction.hpp CnfToBdd.hpp \
- ../../include/tdzdd/util/MySet.hpp Cudd.hpp
 CnfToBdd.o: CnfToBdd.hpp ../../include/tdzdd/DdSpec.hpp \
  ../../include/tdzdd/dd/DdBuilder.hpp ../../include/tdzdd/dd/Node.hpp \
  ../../include/tdzdd/dd/NodeTable.hpp \
@@ -60,3 +22,39 @@ CnfToBdd-debug.o: CnfToBdd.hpp ../../include/tdzdd/DdSpec.hpp \
  ../../include/tdzdd/dd/../util/MyList.hpp \
  ../../include/tdzdd/util/demangle.hpp ../../include/tdzdd/util/MySet.hpp \
  Cudd.hpp
+cnfbdd.o: ../../include/tdzdd/DdStructure.hpp \
+ ../../include/tdzdd/DdEval.hpp ../../include/tdzdd/DdSpec.hpp \
+ ../../include/tdzdd/dd/DdBuilder.hpp ../../include/tdzdd/dd/Node.hpp \
+ ../../include/tdzdd/dd/NodeTable.hpp \
+ ../../include/tdzdd/dd/DataTable.hpp \
+ ../../include/tdzdd/dd/../util/MyVector.hpp \
+ ../../include/tdzdd/dd/../util/MemoryPool.hpp \
+ ../../include/tdzdd/dd/../util/MessageHandler.hpp \
+ ../../include/tdzdd/dd/../util/ResourceUsage.hpp \
+ ../../include/tdzdd/dd/../util/MyHashTable.hpp \
+ ../../include/tdzdd/dd/../util/MyList.hpp \
+ ../../include/tdzdd/util/demangle.hpp \
+ ../../include/tdzdd/dd/DdReducer.hpp \
+ ../../include/tdzdd/eval/Cardinality.hpp \
+ ../../include/tdzdd/eval/../util/BigNumber.hpp \
+ ../../include/tdzdd/op/Lookahead.hpp \
+ ../../include/tdzdd/op/Unreduction.hpp CnfToBdd.hpp \
+ ../../include/tdzdd/util/MySet.hpp Cudd.hpp
+cnfbdd-debug.o: ../../include/tdzdd/DdStructure.hpp \
+ ../../include/tdzdd/DdEval.hpp ../../include/tdzdd/DdSpec.hpp \
+ ../../include/tdzdd/dd/DdBuilder.hpp ../../include/tdzdd/dd/Node.hpp \
+ ../../include/tdzdd/dd/NodeTable.hpp \
+ ../../include/tdzdd/dd/DataTable.hpp \
+ ../../include/tdzdd/dd/../util/MyVector.hpp \
+ ../../include/tdzdd/dd/../util/MemoryPool.hpp \
+ ../../include/tdzdd/dd/../util/MessageHandler.hpp \
+ ../../include/tdzdd/dd/../util/ResourceUsage.hpp \
+ ../../include/tdzdd/dd/../util/MyHashTable.hpp \
+ ../../include/tdzdd/dd/../util/MyList.hpp \
+ ../../include/tdzdd/util/demangle.hpp \
+ ../../include/tdzdd/dd/DdReducer.hpp \
+ ../../include/tdzdd/eval/Cardinality.hpp \
+ ../../include/tdzdd/eval/../util/BigNumber.hpp \
+ ../../include/tdzdd/op/Lookahead.hpp \
+ ../../include/tdzdd/op/Unreduction.hpp CnfToBdd.hpp \
+ ../../include/tdzdd/util/MySet.hpp Cudd.hpp

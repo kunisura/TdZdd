@@ -20,7 +20,7 @@
 # FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 # DEALINGS IN THE SOFTWARE.
 
-SUBDIRS	= ddpaths ddqueens cnfbdd cnf2ztdd2bdd graphillion test 
+SUBDIRS	= ddpaths ddqueens numberlink cnfbdd cnf2ztdd2bdd graphillion test 
 
 .PONY: all debug clean depend FORCE
 
