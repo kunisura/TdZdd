@@ -32,7 +32,7 @@
 using namespace tdzdd;
 
 std::string options[][2] = { //
-        {"rot <n>", "Rotate <n> x 90 degrees counterclockwise"}, //
+        //{"rot <n>", "Rotate <n> x 90 degrees counterclockwise"}, //
         {"p", "Use parallel algorithms"}, //
         {"dd0", "Dump a state transition graph to STDOUT in DOT format"}, //
         {"dd1", "Dump a BDD before reduction to STDOUT in DOT format"}, //

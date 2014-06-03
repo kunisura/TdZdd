@@ -48,7 +48,8 @@
 <li><a href="#dd-structure">DD structure</a></li>
 </ul>
 <hr/>
- <h1>Overview </h1>
+<p> <a class="anchor" id="overview"></a> </p>
+<h1>Overview </h1>
 <p>A DD has one root node and two terminal nodes (⊤ and ⊥). Every non-terminal node of an <em>N</em>-ary DD has <em>N</em> outgoing edges.</p>
 <div class="image">
 <img src="example1.png" alt="example1.png"/>
@@ -103,7 +104,8 @@ An example of binary DD</div></div>
 <div class="fragment"><div class="line"><span class="keywordtype">int</span> max = dd.<a class="code" href="classtdzdd_1_1DdStructure.html#a665dc9108902aeee588866944a4e7960" title="Evaluates the DD from the bottom to the top. ">evaluate</a>(MaxNumItems());</div>
 </div><!-- fragment --><p>The construction and evaluation functions can also be used easily to implement import and export functions of DD structures from/to other DD libraries.</p>
 <hr/>
- <h1>DD specification </h1>
+<p> <a class="anchor" id="dd-specification"></a> </p>
+<h1>DD specification </h1>
 <p>A DD specification is defined by deriving it from an appropriate one of the base classes defined in &lt;<a class="el" href="DdSpec_8hpp.html">tdzdd/DdSpec.hpp</a>&gt;.</p>
 <p>Every DD specification must have <code>getRoot</code> and <code>getChild</code> member functions. <code>getRoot</code> defines the root node configuration. <code>getChild</code> defines a mapping from parent node configurations to child node configurations. If the node is not a terminal, the functions update state information and return a positive integer representing the node level. If the node is ⊥ or ⊤, they simply return 0 or -1 respectively for convenience, even though both nodes are level 0. We refer to such a return value as a <em>level code</em>.</p>
 <h2>DdSpec </h2>
@@ -176,7 +178,8 @@ An example of binary DD</div></div>
 <div class="fragment"><div class="line"><span class="keywordtype">void</span> <a class="code" href="classtdzdd_1_1DdSpecBase.html#a52c50e764aae54e24335f2517ad24493">tdzdd::DdSpecBase&lt;S,N&gt;::printLevel</a>(std::ostream&amp; os, <span class="keywordtype">int</span> level) <span class="keyword">const</span>;</div>
 </div><!-- fragment --><p>The default implementation prints the <code>level</code> itself.</p>
 <hr/>
- <h1>Operations on DD specifications </h1>
+<p> <a class="anchor" id="operations-on-dd-specifications"></a> </p>
+<h1>Operations on DD specifications </h1>
 <p>Operations on DD specifications are defined as global functions in &lt;<a class="el" href="DdSpecOp_8hpp.html">tdzdd/DdSpecOp.hpp</a>&gt;. Note that they are also applicable to DD structures.</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> S1, <span class="keyword">typename</span> S2&gt;</div>
 <div class="line">tdzdd::BddAnd&lt;S1,S2&gt; <a class="code" href="namespacetdzdd.html#a10e3d2a34c7b9f8686c3d8541e622de3" title="Returns a BDD specification for logical AND of two BDD specifications. ">tdzdd::bddAnd</a>(S1 <span class="keyword">const</span>&amp; spec1, S2 <span class="keyword">const</span>&amp; spec2);</div>
@@ -203,7 +206,8 @@ An example of binary DD</div></div>
 <div class="line">tdzdd::ZddUnreduction&lt;S&gt; <a class="code" href="namespacetdzdd.html#a200a5f4ec299357e5352b621e2a0fe2c" title="Creates a QDD specification from a ZDD specification by complementing skipped nodes in terms of the Z...">tdzdd::zddUnreduction</a>(S <span class="keyword">const</span>&amp; spec, <span class="keywordtype">int</span> numVars);</div>
 </div><!-- fragment --><p> creates a QDD specification from a ZDD specification by complementing skipped nodes in terms of the ZDD node deletion rule.</p>
 <hr/>
- <h1>DD structure </h1>
+<p> <a class="anchor" id="dd-structure"></a> </p>
+<h1>DD structure </h1>
 <p>The template class of DD structures is defined in &lt;<a class="el" href="DdStructure_8hpp.html">tdzdd/DdStructure.hpp</a>&gt;.</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span>&lt;<span class="keywordtype">int</span> N&gt;</div>
 <div class="line"><span class="keyword">class </span><a class="code" href="classtdzdd_1_1DdStructure.html" title="Ordered n-ary decision diagram structure. ">tdzdd::DdStructure</a>;</div>
@@ -264,7 +268,7 @@ An example of binary DD</div></div>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu May 29 2014 19:04:32 for TdZdd by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Jun 3 2014 17:55:11 for TdZdd by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.4
 </small></address>

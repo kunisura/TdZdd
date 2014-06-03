@@ -8,6 +8,7 @@ TdZdd User Guide						{#mainpage}
 
 
 ===========================================================================
+<a name="overview"></a>
 Overview
 ===========================================================================
 
@@ -120,6 +121,7 @@ import and export functions of DD structures from/to other DD libraries.
 
 
 ===========================================================================
+<a name="dd-specification"></a>
 DD specification
 ===========================================================================
 
@@ -300,6 +302,7 @@ The default implementation prints the `level` itself.
 
 
 ===========================================================================
+<a name="operations-on-dd-specifications"></a>
 Operations on DD specifications
 ===========================================================================
 
@@ -359,6 +362,7 @@ skipped nodes in terms of the ZDD node deletion rule.
 
 
 ===========================================================================
+<a name="dd-structure"></a>
 DD structure
 ===========================================================================
 
