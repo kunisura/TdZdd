@@ -31,9 +31,9 @@
  *  other                connected to mate[j]
  */
 
-NumlinZdd::NumlinZdd(Board const& quiz)
-        : quiz_(quiz), rows(quiz.getRows()), cols(quiz.getCols()),
-          maxLevel(rows * (cols - 1)) {
+NumlinZdd::NumlinZdd(Board const& quiz) :
+        quiz_(quiz), rows(quiz.getRows()), cols(quiz.getCols()), maxLevel(
+                rows * (cols - 1)) {
     setArraySize(cols);
 
     for (finalNumRow = rows - 1; finalNumRow >= 0; --finalNumRow) {
@@ -62,17 +62,21 @@ int NumlinZdd::getChild(State* mate, int level, int take) const {
         if (ret <= 0) return ret;
     }
 
-    if (i == rows - 1) return level - 1;
-
     // vertical line
     do {
-        if (mate[j] != j && mate[j] != cols) { // degree=1
-            int ret = linkVert(mate, i, j);
-            if (ret <= 0) return ret;
+        if (i < rows - 1) { // not bottom
+            if (mate[j] != j && mate[j] != cols) { // degree=1
+                int ret = linkVert(mate, i, j);
+                if (ret <= 0) return ret;
+            }
+            else {
+                int t = quiz_.number[i + 1][j];
+                mate[j] = (t > 0) ? cols + t : j;
+            }
         }
-        else {
-            int t = quiz_.number[i + 1][j];
-            mate[j] = (t > 0) ? cols + t : j;
+        else { // bottom
+            if (mate[j] != j && mate[j] != cols) return 0; // degree=1
+            mate[j] = cols;
         }
     } while (++j == cols - 1); // repeat for the rightmost column
 
@@ -99,7 +103,7 @@ int NumlinZdd::linkHoriz(State* mate, int i, int j) const {
     assert(mj > cols && mk > cols);
     if (mj != mk) return 0; // connecting incompatible numbers
 
-    return checkCompletion(mate, i + 1, j - 1);
+    return checkCompletion(mate, i + 1, j - 1); // touched previously
 }
 
 int NumlinZdd::linkVert(State* mate, int i, int j) const {

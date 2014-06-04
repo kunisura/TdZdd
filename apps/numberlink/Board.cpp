@@ -170,7 +170,7 @@ void Board::makeVerticalLinks() {
         for (int j = 0; j < cols; ++j) {
             if (number[i][j]) ++degree[i][j];
             if (j >= 1 && hlink[i][j - 1]) ++degree[i][j];
-            if (hlink[i][j]) ++degree[i][j];
+            if (j + 1 < cols && hlink[i][j]) ++degree[i][j];
         }
     }
 

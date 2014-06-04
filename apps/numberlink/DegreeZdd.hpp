@@ -28,8 +28,9 @@
 #include <tdzdd/DdSpec.hpp>
 #include "Board.hpp"
 
-class NumlinZdd: public tdzdd::PodArrayDdSpec<NumlinZdd,uint8_t,2> {
+class DegreeZdd: public tdzdd::PodArrayDdSpec<DegreeZdd,int,2> {
     Board const& quiz_;
+    bool kansai;
     int rows;
     int cols;
     int maxLevel;
@@ -40,8 +41,9 @@ public:
     /**
      * Constructor.
      * @param quiz matrix of number pairs.
+     * @param kansai true if unused box is allowed.
      */
-    NumlinZdd(Board const& quiz);
+    DegreeZdd(Board const& quiz, bool kansai);
 
     /**
      * Gets the row and column positions of a given level.
@@ -62,52 +64,24 @@ public:
 
     /**
      * Gets a root configuration.
-     * @param mate mate array.
+     * @param degree degree array.
      * @return root level.
      */
-    int getRoot(State* mate) const;
+    int getRoot(State* degree) const;
 
     /**
      * Gets a child configuration.
-     * @param mate mate array.
+     * @param degree degree array.
      * @param level decision level.
      * @param take 1 to take the edge; 0 otherwise.
      * @return next decision level.
      */
-    int getChild(State* mate, int level, int take) const;
+    int getChild(State* degree, int level, int take) const;
 
     /**
      * Prints a state.
      * @param os output stream.
      * @param a state array.
      */
-    void printState(std::ostream& os, State const* mate) const;
-
-private:
-    /**
-     * Take a horizontal line (i, j)-(i, j+1).
-     * @param mate mate array.
-     * @param i row position.
-     * @param j column position.
-     * @return -1/0 when jumping to the 1/0-terminal.
-     */
-    int linkHoriz(State* mate, int i, int j) const;
-
-    /**
-     * Take a vertical line (i, j)-(i+1, j).
-     * @param mate mate array.
-     * @param i row position.
-     * @param j column position.
-     * @return -1/0 when jumping to the 1/0-terminal.
-     */
-    int linkVert(State* mate, int i, int j) const;
-
-    /**
-     * Check if the puzzle is completed.
-     * @param mate mate array.
-     * @param i row position of the last decision.
-     * @param j column position of the last decision.
-     * @return -1/0 when jumping to the 1/0-terminal.
-     */
-    int checkCompletion(State const* mate, int i, int j) const;
+    void printState(std::ostream& os, State const* degree) const;
 };

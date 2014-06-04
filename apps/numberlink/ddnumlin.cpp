@@ -26,12 +26,15 @@
 #include <stdexcept>
 
 #include <tdzdd/DdStructure.hpp>
+#include <tdzdd/DdSpecOp.hpp>
 #include "Board.hpp"
+#include "DegreeZdd.hpp"
 #include "NumlinZdd.hpp"
 
 using namespace tdzdd;
 
 std::string options[][2] = { //
+        {"k", "Allow unused area (\"Kansai\" answers)"}, //
         //{"rot <n>", "Rotate <n> x 90 degrees counterclockwise"}, //
         {"p", "Use parallel algorithms"}, //
         {"dd0", "Dump a state transition graph to STDOUT in DOT format"}, //
@@ -80,6 +83,7 @@ void output(std::ostream& os, DdStructure<2> const& dd,
 
         answer.makeVerticalLinks();
 
+        //answer.fillNumbers();
         //answer.writeNumbers(os);
         answer.printNumlin(os);
         os << "\n";
@@ -103,11 +107,18 @@ void run() {
 
     quiz.printNumlin(mh);
 
+    DegreeZdd degree(quiz, opt["k"]);
     NumlinZdd numlin(quiz);
 
     if (opt["dd0"]) numlin.dumpDot(std::cout, "dd0");
 
-    DdStructure<2> dd(numlin, opt["p"]);
+    //DdStructure<2> dd(numlin, opt["p"]);
+    //DdStructure<2> dd(zddLookahead(numlin), opt["p"]);
+
+    DdStructure<2> dd(degree, opt["p"]);
+    dd.zddReduce();
+    dd.zddSubset(zddLookahead(numlin));
+
     if (opt["dd1"]) dd.dumpDot(std::cout, "dd1");
     dd.zddReduce();
     if (opt["dump"]) dd.dumpDot(std::cout, "ZDD");
