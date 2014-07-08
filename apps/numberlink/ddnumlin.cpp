@@ -34,7 +34,7 @@
 using namespace tdzdd;
 
 std::string options[][2] = { //
-        {"k", "Allow unused area (\"Kansai\" answers)"}, //
+        {"k", "Allow unused area (\"Kansai\" solutions)"}, //
         //{"rot <n>", "Rotate <n> x 90 degrees counterclockwise"}, //
         {"p", "Use parallel algorithms"}, //
         {"dd0", "Dump a state transition graph to STDOUT in DOT format"}, //
