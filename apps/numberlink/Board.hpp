@@ -54,6 +54,11 @@ struct Board {
     void init(int rows, int cols);
 
     /**
+     * Reflect the elements along its main diagonal.
+     */
+    void transpose();
+
+    /**
      * Read a board configuration.
      * @param is input stream.
      */

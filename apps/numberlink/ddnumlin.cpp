@@ -36,7 +36,7 @@ using namespace tdzdd;
 std::string options[][2] = { //
         {"k", "Allow unused area (\"Kansai\" solutions)"}, //
         //{"rot <n>", "Rotate <n> x 90 degrees counterclockwise"}, //
-        {"p", "Use parallel algorithms"}, //
+        {"s", "Do not use parallel processing"}, //
         {"dd0", "Dump a state transition graph to STDOUT in DOT format"}, //
         {"dd1", "Dump a BDD before reduction to STDOUT in DOT format"}, //
         {"dump", "Dump the final ZDD to STDOUT in DOT format"}}; //
@@ -62,7 +62,7 @@ void usage(char const* cmd) {
 }
 
 void output(std::ostream& os, DdStructure<2> const& dd,
-        NumlinZdd const& numlin) {
+        NumlinZdd const& numlin, bool transposed) {
     Board const& quiz = numlin.quiz();
     int rows = quiz.getRows();
     int cols = quiz.getCols();
@@ -83,6 +83,7 @@ void output(std::ostream& os, DdStructure<2> const& dd,
 
         answer.makeVerticalLinks();
 
+        if (transposed) answer.transpose();
         //answer.fillNumbers();
         //answer.writeNumbers(os);
         answer.printNumlin(os);
@@ -107,15 +108,22 @@ void run() {
 
     quiz.printNumlin(mh);
 
+    bool transposed = false;
+    if (!opt["rot"] && quiz.getRows() < quiz.getCols()) {
+        mh << "\nThe board is transposed because it has more columns than rows.";
+        quiz.transpose();
+        transposed = true;
+    }
+
     DegreeZdd degree(quiz, opt["k"]);
     NumlinZdd numlin(quiz);
 
     if (opt["dd0"]) numlin.dumpDot(std::cout, "dd0");
 
-    //DdStructure<2> dd(numlin, opt["p"]);
-    //DdStructure<2> dd(zddLookahead(numlin), opt["p"]);
+    //DdStructure<2> dd(numlin, !opt["s"]);
+    //DdStructure<2> dd(zddLookahead(numlin), !opt["s"]);
 
-    DdStructure<2> dd(degree, opt["p"]);
+    DdStructure<2> dd(zddLookahead(degree), !opt["s"]);
     dd.zddReduce();
     dd.zddSubset(zddLookahead(numlin));
 
@@ -129,12 +137,12 @@ void run() {
         mh.begin("writing") << " ...\n";
 
         if (outfile == "-") {
-            output(std::cout, dd, numlin);
+            output(std::cout, dd, numlin, transposed);
         }
         else {
             std::ofstream ofs(outfile.c_str());
             if (!ofs) throw std::runtime_error(strerror(errno));
-            output(ofs, dd, numlin);
+            output(ofs, dd, numlin, transposed);
         }
 
         mh.end();

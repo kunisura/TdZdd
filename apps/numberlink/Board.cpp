@@ -45,6 +45,31 @@ void Board::init(int rows, int cols) {
     }
 }
 
+namespace {
+
+template<typename M>
+M transposed_matrix(M& a) {
+    int rows = a[0].size();
+    int cols = a.size();
+    M b(rows);
+    for (int i = 0; i < rows; ++i) {
+        b[i].resize(cols);
+        for (int j = 0; j < cols; ++j) {
+            b[i][j] = a[j][i];
+        }
+    }
+    return b;
+}
+
+}
+
+void Board::transpose() {
+    number = transposed_matrix(number);
+    typeof(vlink) tmp = transposed_matrix(hlink);
+    hlink = transposed_matrix(vlink);
+    vlink = tmp;
+}
+
 void Board::readNumbers(std::istream& is) {
     int rows;
     int cols;
