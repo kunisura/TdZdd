@@ -30,11 +30,11 @@
 
 class NumlinZdd: public tdzdd::PodArrayDdSpec<NumlinZdd,uint8_t,2> {
     Board const& quiz_;
-    int rows;
-    int cols;
-    int maxLevel;
-    int finalNumRow;
-    int finalNumCol;
+    int const rows;
+    int const cols;
+    int const maxLevel;
+    int const finalNumRow;
+    int const finalNumCol;
 
 public:
     /**

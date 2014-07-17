@@ -47,6 +47,30 @@ struct Board {
     }
 
     /**
+     * Get the row number of the final hint.
+     */
+    int getFinalNumRow() const {
+        for (int i = getRows() - 1; i >= 0; --i) {
+            for (int j = getCols() - 1; j >= 0; --j) {
+                if (number[i][j] > 0) return i;
+            }
+        }
+        return 0;
+    }
+
+    /**
+     * Get the column number of the final hint.
+     */
+    int getFinalNumCol() const {
+        for (int i = getRows() - 1; i >= 0; --i) {
+            for (int j = getCols() - 1; j >= 0; --j) {
+                if (number[i][j] > 0) return j;
+            }
+        }
+        return 0;
+    }
+
+    /**
      * Initialize the board.
      * @param rows the number of rows.
      * @param cols the number of columns.

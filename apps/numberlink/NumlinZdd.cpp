@@ -33,14 +33,9 @@
 
 NumlinZdd::NumlinZdd(Board const& quiz) :
         quiz_(quiz), rows(quiz.getRows()), cols(quiz.getCols()), maxLevel(
-                rows * (cols - 1)) {
+                rows * (cols - 1)), finalNumRow(quiz.getFinalNumRow()), finalNumCol(
+                quiz.getFinalNumCol()) {
     setArraySize(cols);
-
-    for (finalNumRow = rows - 1; finalNumRow >= 0; --finalNumRow) {
-        for (finalNumCol = cols - 1; finalNumCol >= 0; --finalNumCol) {
-            if (quiz.number[finalNumRow][finalNumCol] > 0) return;
-        }
-    }
 }
 
 int NumlinZdd::getRoot(State* mate) const {

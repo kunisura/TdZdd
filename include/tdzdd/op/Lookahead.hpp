@@ -122,16 +122,17 @@ class ZddLookahead: public DdSpecBase<ZddLookahead<S>,S::ARITY> {
     std::vector<char> work;
 
     int lookahead(void* p, int level) {
+        void* const q = work.data();
         while (level >= 1) {
             for (int b = 1; b < Spec::ARITY; ++b) {
-                spec.get_copy(work.data(), p);
-                if (spec.get_child(work.data(), level, b) != 0) {
-                    spec.destruct(work.data());
+                spec.get_copy(q, p);
+                if (spec.get_child(q, level, b) != 0) {
+                    spec.destruct(q);
                     return level;
                 }
-                spec.destruct(work.data());
+                spec.destruct(q);
             }
-            level = spec.get_child(p, level, false);
+            level = spec.get_child(p, level, 0);
         }
 
         return level;
