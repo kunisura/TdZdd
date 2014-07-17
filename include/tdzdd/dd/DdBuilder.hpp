@@ -966,25 +966,28 @@ class ZddSubsetterMP: DdBuilderMPBase {
     typedef MyHashTable<SpecNode*,Hasher<Spec>,Hasher<Spec> > UniqTable;
     static int const AR = Spec::ARITY;
 
+    int const threads;
+
+    MyVector<Spec> specs;
+    int const specNodeSize;
     NodeTableEntity<AR> const& input;
     NodeTableEntity<AR>& output;
-    Spec spec;
-    int const specNodeSize;
 
-    int const threads;
     MyVector<MyVector<MyVector<MyListOnPool<SpecNode> > > > snodeTables;
     MyVector<MemoryPools> pools;
 
 public:
     ZddSubsetterMP(NodeTableHandler<AR> const& input, Spec const& s,
             NodeTableHandler<AR>& output)
-            : input(*input), output(output.privateEntity()), spec(s),
-              specNodeSize(getSpecNodeSize(spec.datasize())),
+            :
 #ifdef _OPENMP
               threads(omp_get_max_threads()),
 #else
               threads(1),
 #endif
+              specs(threads, s),
+              specNodeSize(getSpecNodeSize(s.datasize())),
+              input(*input), output(output.privateEntity()),
               snodeTables(threads),
               pools(threads) {
     }
@@ -996,6 +999,7 @@ public:
     int initialize(NodeId& root) {
         MyVector<SpecNode> tmp(specNodeSize);
         SpecNode* ptmp = tmp.data();
+        Spec& spec = specs[0];
         int n = spec.get_root(state(ptmp));
 
         int k = (root == 1) ? -1 : root.row();
@@ -1007,7 +1011,7 @@ public:
             }
             else {
                 assert(n >= 1);
-                n = downSpec(state(ptmp), n, 0, k);
+                n = downSpec(spec, state(ptmp), n, 0, k);
             }
         }
 
@@ -1055,6 +1059,7 @@ public:
 #else
             int yy = 0;
 #endif
+            Spec& spec = specs[yy];
             MyVector<SpecNode> tmp(specNodeSize);
             SpecNode* ptmp = tmp.data();
             Hasher<Spec> hasher(spec, i);
@@ -1138,7 +1143,7 @@ public:
                         for (int b = 0; b < AR; ++b) {
                             NodeId f(i, j);
                             int kk = downTable(f, b, i - 1);
-                            int ii = downSpec(s[b], i, b, kk);
+                            int ii = downSpec(spec, s[b], i, b, kk);
 
                             while (ii != 0 && kk != 0 && ii != kk) {
                                 if (ii < kk) {
@@ -1147,7 +1152,7 @@ public:
                                 }
                                 else {
                                     assert(ii >= 1);
-                                    ii = downSpec(s[b], ii, 0, kk);
+                                    ii = downSpec(spec, s[b], ii, 0, kk);
                                 }
                             }
 
@@ -1179,9 +1184,8 @@ public:
 
             snodeTables[yy][i].clear();
             pools[yy][i].clear();
+            spec.destructLevel(i);
         }
-
-        spec.destructLevel(i);
     }
 
 private:
@@ -1195,7 +1199,7 @@ private:
         return (f == 1) ? -1 : f.row();
     }
 
-    int downSpec(void* p, int level, int b, int zerosupLevel) {
+    int downSpec(Spec& spec, void* p, int level, int b, int zerosupLevel) {
         if (zerosupLevel < 0) zerosupLevel = 0;
         assert(level > zerosupLevel);
 
