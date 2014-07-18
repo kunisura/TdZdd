@@ -41,12 +41,13 @@ namespace tdzdd {
  */
 template<int ARITY>
 class DdSweeper {
-    static size_t const SWEEP_SHRESHOLD = 100000;
+    static size_t const SWEEP_RATIO = 20;
 
     NodeTableEntity<ARITY>& diagram;
 
     MyVector<int> sweepLevel;
     MyVector<size_t> deadCount;
+    size_t allCount;
 
 public:
     /**
@@ -54,7 +55,7 @@ public:
      * @param diagram the diagram to sweep.
      */
     DdSweeper(NodeTableEntity<ARITY>& diagram) :
-            diagram(diagram) {
+            diagram(diagram), allCount(0) {
     }
 
     /**
@@ -77,13 +78,14 @@ public:
         }
 
         deadCount[current] = count;
+        allCount += diagram[current].size();
 
         int k = sweepLevel[current - 1];
         for (int i = sweepLevel[current]; i > k; --i) {
             deadCount[k] += deadCount[i];
             deadCount[i] = 0;
         }
-        if (deadCount[k] < SWEEP_SHRESHOLD) return;
+        if (deadCount[k] * SWEEP_RATIO < allCount) return;
 
         MyVector<MyVector<NodeId> > newId(diagram.numRows());
 
@@ -120,6 +122,7 @@ public:
         }
 
         deadCount[k] = 0;
+        allCount = diagram.size();
         mh.end(diagram.size());
     }
 };
