@@ -33,6 +33,7 @@
 #include <omp.h>
 #endif
 
+#include "DdSweeper.hpp"
 #include "Node.hpp"
 #include "NodeTable.hpp"
 #include "../util/MemoryPool.hpp"
@@ -79,8 +80,8 @@ protected:
     }
 
     static int getSpecNodeSize(int n) {
-        if (n < 0) throw std::runtime_error(
-                "storage size is not initialized!!!");
+        if (n < 0)
+            throw std::runtime_error("storage size is not initialized!!!");
         return headerSize + (n + sizeof(SpecNode) - 1) / sizeof(SpecNode);
     }
 
@@ -89,8 +90,8 @@ protected:
         SPEC const& spec;
         int const level;
 
-        Hasher(SPEC const& spec, int level)
-                : spec(spec), level(level) {
+        Hasher(SPEC const& spec, int level) :
+                spec(spec), level(level) {
         }
 
         size_t operator()(SpecNode const* p) const {
@@ -168,8 +169,8 @@ protected:
     }
 
     static int getSpecNodeSize(int n) {
-        if (n < 0) throw std::runtime_error(
-                "storage size is not initialized!!!");
+        if (n < 0)
+            throw std::runtime_error("storage size is not initialized!!!");
         return headerSize + (n + sizeof(SpecNode) - 1) / sizeof(SpecNode);
     }
 
@@ -178,8 +179,8 @@ protected:
         SPEC const& spec;
         int const level;
 
-        Hasher(SPEC const& spec, int level)
-                : spec(spec), level(level) {
+        Hasher(SPEC const& spec, int level) :
+                spec(spec), level(level) {
         }
 
         size_t operator()(SpecNode const* p) const {
@@ -204,6 +205,7 @@ class DdBuilder: DdBuilderBase {
     Spec spec;
     int const specNodeSize;
     NodeTableEntity<AR>& output;
+    DdSweeper<AR> sweeper;
 
     MyVector<MyList<SpecNode> > snodeTable;
 
@@ -213,9 +215,9 @@ class DdBuilder: DdBuilderBase {
     }
 
 public:
-    DdBuilder(Spec const& s, NodeTableHandler<AR>& output, int n = 0)
-            : spec(s), specNodeSize(getSpecNodeSize(spec.datasize())),
-              output(output.privateEntity()) {
+    DdBuilder(Spec const& s, NodeTableHandler<AR>& output, int n = 0) :
+            spec(s), specNodeSize(getSpecNodeSize(spec.datasize())),
+            output(output.privateEntity()), sweeper(this->output) {
         if (n >= 1) init(n);
     }
 
@@ -263,6 +265,8 @@ public:
         MyList<SpecNode>& snodes = snodeTable[i];
         size_t j0 = output[i].size();
         size_t m = j0;
+        int lowestChild = i - 1;
+        size_t deadCount = 0;
 
         {
             Hasher<Spec> hasher(spec, i);
@@ -298,6 +302,8 @@ public:
                 continue;
             }
 
+            bool allZero = true;
+
             for (int b = 0; b < AR; ++b) {
                 spec.get_copy(state(pp), state(p));
                 int ii = spec.get_child(state(pp), i, b);
@@ -305,10 +311,12 @@ public:
                 if (ii <= 0) {
                     q->branch[b] = ii ? 1 : 0;
                     spec.destruct(state(pp));
+                    if (ii) allZero = false;
                 }
                 else if (ii == i - 1) {
                     srcPtr(pp) = &q->branch[b];
                     pp = snodeTable[ii].alloc_front(specNodeSize);
+                    allZero = false;
                 }
                 else {
                     assert(ii < i - 1);
@@ -316,16 +324,20 @@ public:
                     spec.get_copy(state(ppp), state(pp));
                     spec.destruct(state(pp));
                     srcPtr(ppp) = &q->branch[b];
+                    if (ii < lowestChild) lowestChild = ii;
+                    allZero = false;
                 }
             }
 
             spec.destruct(state(p));
             ++q;
+            if (allZero) ++deadCount;
         }
 
         assert(q == output[i].data() + m);
         snodeTable[i - 1].pop_front();
         spec.destructLevel(i);
+        sweeper.update(i, lowestChild, deadCount);
     }
 };
 
@@ -345,6 +357,7 @@ class DdBuilderMP: DdBuilderMPBase {
     MyVector<Spec> specs;
     int const specNodeSize;
     NodeTableEntity<AR>& output;
+    DdSweeper<AR> sweeper;
 
     MyVector<MyVector<MyVector<MyList<SpecNode> > > > snodeTables;
 
@@ -363,19 +376,18 @@ class DdBuilderMP: DdBuilderMPBase {
     }
 
 public:
-    DdBuilderMP(Spec const& s, NodeTableHandler<AR>& output, int n = 0)
-            :
+    DdBuilderMP(Spec const& s, NodeTableHandler<AR>& output, int n = 0) :
 #ifdef _OPENMP
-              threads(omp_get_max_threads()),
-              tasks(MyHashConstant::primeSize(TASKS_PER_THREAD * threads)),
+            threads(omp_get_max_threads()),
+            tasks(MyHashConstant::primeSize(TASKS_PER_THREAD * threads)),
 #else
-              threads(1),
-              tasks(1),
+            threads(1),
+            tasks(1),
 #endif
-
-              specs(threads, s),
-              specNodeSize(getSpecNodeSize(s.datasize())),
-              output(output.privateEntity()), snodeTables(threads) {
+            specs(threads, s),
+            specNodeSize(getSpecNodeSize(s.datasize())),
+            output(output.privateEntity()), sweeper(this->output),
+            snodeTables(threads) {
         if (n >= 1) init(n);
 #ifdef DEBUG
         MessageHandler mh;
@@ -435,13 +447,15 @@ public:
         assert(output.numRows() - snodeTables[0][0].size() == 0);
 
         MyVector<size_t> nodeColumn(tasks);
+        int lowestChild = i - 1;
+        size_t deadCount = 0;
 
 #ifdef DEBUG
         etcP1.start();
 #endif
 
 #ifdef _OPENMP
-#pragma omp parallel
+#pragma omp parallel reduction(min:lowestChild) reduction(+:deadCount)
 #endif
         {
 #ifdef _OPENMP
@@ -543,13 +557,15 @@ public:
 
                         Node<AR>& q = output[i][j];
                         spec.get_copy(state(ptmp), state(p));
-                        void* s[2] = {state(ptmp), state(p)};
+                        void* s[2] = { state(ptmp), state(p) };
+                        bool allZero = true;
 
                         for (int b = 0; b < AR; ++b) {
                             int ii = spec.get_child(s[b], i, b);
 
                             if (ii <= 0) {
                                 q.branch[b] = ii ? 1 : 0;
+                                if (ii) allZero = false;
                             }
                             else {
                                 assert(ii <= i - 1);
@@ -559,16 +575,22 @@ public:
                                                 specNodeSize);
                                 spec.get_copy(state(pp), s[b]);
                                 srcPtr(pp) = &q.branch[b];
+                                if (ii < lowestChild) lowestChild = ii;
+                                allZero = false;
                             }
 
                             spec.destruct(s[b]);
                         }
+
+                        if (allZero) ++deadCount;
                     }
                 }
             }
 
             spec.destructLevel(i);
         }
+
+        sweeper.update(i, lowestChild, deadCount);
 #ifdef DEBUG
         etcP2.stop();
 #endif
@@ -600,9 +622,9 @@ class InstantDdBuilder: DdBuilderBase {
 
 public:
     InstantDdBuilder(Spec const& s, NodeTableHandler<AR>& output,
-            std::ostream& os = std::cout, bool cut = false)
-            : output(output.privateEntity()), spec(s),
-              specNodeSize(getSpecNodeSize(spec.datasize())), os(os), cut(cut) {
+            std::ostream& os = std::cout, bool cut = false) :
+            output(output.privateEntity()), spec(s),
+            specNodeSize(getSpecNodeSize(spec.datasize())), os(os), cut(cut) {
     }
 
     /**
@@ -774,16 +796,17 @@ class ZddSubsetter: DdBuilderBase {
     Spec spec;
     int const specNodeSize;
     DataTable<MyListOnPool<SpecNode> > work;
+    DdSweeper<AR> sweeper;
 
     MyVector<SpecNode> tmp;
     MemoryPools pools;
 
 public:
     ZddSubsetter(NodeTableHandler<AR> const& input, Spec const& s,
-            NodeTableHandler<AR>& output)
-            : input(*input), output(output.privateEntity()), spec(s),
-              specNodeSize(getSpecNodeSize(spec.datasize())),
-              work(input->numRows()) {
+            NodeTableHandler<AR>& output) :
+            input(*input), output(output.privateEntity()), spec(s),
+            specNodeSize(getSpecNodeSize(spec.datasize())),
+            work(input->numRows()), sweeper(this->output) {
     }
 
     /**
@@ -843,6 +866,8 @@ public:
         SpecNode* const ptmp = tmp.data();
         size_t const m = input[i].size();
         size_t mm = 0;
+        int lowestChild = i - 1;
+        size_t deadCount = 0;
 
         if (work[i].empty()) work[i].resize(m);
         assert(work[i].size() == m);
@@ -889,7 +914,8 @@ public:
                 }
 
                 spec.get_copy(state(ptmp), state(p));
-                void* s[2] = {state(ptmp), state(p)};
+                void* s[2] = { state(ptmp), state(p) };
+                bool allZero = true;
 
                 for (int b = 0; b < AR; ++b) {
                     NodeId f(i, j);
@@ -910,6 +936,7 @@ public:
                     if (ii <= 0 || kk <= 0) {
                         bool val = ii != 0 && kk != 0;
                         q->branch[b] = val;
+                        if (val) allZero = false;
                     }
                     else {
                         assert(ii == f.row() && ii == kk && ii < i);
@@ -918,12 +945,15 @@ public:
                                 specNodeSize);
                         spec.get_copy(state(pp), s[b]);
                         srcPtr(pp) = &q->branch[b];
+                        if (ii < lowestChild) lowestChild = ii;
+                        allZero = false;
                     }
                 }
 
                 spec.destruct(state(p));
                 spec.destruct(state(ptmp));
                 ++q;
+                if (allZero) ++deadCount;
             }
         }
 
@@ -931,6 +961,7 @@ public:
         work[i].clear();
         pools[i].clear();
         spec.destructLevel(i);
+        sweeper.update(i, lowestChild, deadCount);
     }
 
 private:
@@ -972,24 +1003,23 @@ class ZddSubsetterMP: DdBuilderMPBase {
     int const specNodeSize;
     NodeTableEntity<AR> const& input;
     NodeTableEntity<AR>& output;
+    DdSweeper<AR> sweeper;
 
     MyVector<MyVector<MyVector<MyListOnPool<SpecNode> > > > snodeTables;
     MyVector<MemoryPools> pools;
 
 public:
     ZddSubsetterMP(NodeTableHandler<AR> const& input, Spec const& s,
-            NodeTableHandler<AR>& output)
-            :
+            NodeTableHandler<AR>& output) :
 #ifdef _OPENMP
-              threads(omp_get_max_threads()),
+            threads(omp_get_max_threads()),
 #else
-              threads(1),
+            threads(1),
 #endif
-              specs(threads, s),
-              specNodeSize(getSpecNodeSize(s.datasize())),
-              input(*input), output(output.privateEntity()),
-              snodeTables(threads),
-              pools(threads) {
+            specs(threads, s),
+            specNodeSize(getSpecNodeSize(s.datasize())), input(*input),
+            output(output.privateEntity()), sweeper(this->output),
+            snodeTables(threads), pools(threads) {
     }
 
     /**
@@ -1048,10 +1078,13 @@ public:
     void subset(int i) {
         assert(0 < i && i < output.numRows());
         size_t const m = input[i].size();
+
         MyVector<size_t> nodeColumn(m);
+        int lowestChild = i - 1;
+        size_t deadCount = 0;
 
 #ifdef _OPENMP
-#pragma omp parallel
+#pragma omp parallel reduction(min:lowestChild) reduction(+:deadCount)
 #endif
         {
 #ifdef _OPENMP
@@ -1138,7 +1171,8 @@ public:
                         *srcPtr(p) = NodeId(i, jj);
                         Node<AR>& q = output[i][jj];
                         spec.get_copy(state(ptmp), state(p));
-                        void* s[2] = {state(ptmp), state(p)};
+                        void* s[2] = { state(ptmp), state(p) };
+                        bool allZero = true;
 
                         for (int b = 0; b < AR; ++b) {
                             NodeId f(i, j);
@@ -1159,6 +1193,7 @@ public:
                             if (ii <= 0 || kk <= 0) {
                                 bool val = ii != 0 && kk != 0;
                                 q.branch[b] = val;
+                                if (val) allZero = false;
                             }
                             else {
                                 assert(ii == f.row() && ii == kk && ii < i);
@@ -1174,10 +1209,14 @@ public:
                                                 pools[yy][ii], specNodeSize);
                                 spec.get_copy(state(pp), s[b]);
                                 srcPtr(pp) = &q.branch[b];
+                                if (ii < lowestChild) lowestChild = ii;
+                                allZero = false;
                             }
 
                             spec.destruct(s[b]);
                         }
+
+                        if (allZero) ++deadCount;
                     }
                 }
             }
@@ -1186,6 +1225,8 @@ public:
             pools[yy][i].clear();
             spec.destructLevel(i);
         }
+
+        sweeper.update(i, lowestChild, deadCount);
     }
 
 private:
@@ -1211,4 +1252,4 @@ private:
     }
 };
 
-}// namespace tdzdd
+} // namespace tdzdd

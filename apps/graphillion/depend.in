@@ -1,7 +1,8 @@
 graphillion_example.o: \
  ../../include/tdzdd/DdStructure.hpp ../../include/tdzdd/DdEval.hpp \
  ../../include/tdzdd/DdSpec.hpp ../../include/tdzdd/dd/DdBuilder.hpp \
- ../../include/tdzdd/dd/Node.hpp ../../include/tdzdd/dd/NodeTable.hpp \
+ ../../include/tdzdd/dd/DdSweeper.hpp ../../include/tdzdd/dd/Node.hpp \
+ ../../include/tdzdd/dd/NodeTable.hpp \
  ../../include/tdzdd/dd/DataTable.hpp \
  ../../include/tdzdd/dd/../util/MyVector.hpp \
  ../../include/tdzdd/dd/../util/MemoryPool.hpp \
@@ -20,7 +21,8 @@ graphillion_example.o: \
 graphillion_example-debug.o: \
  ../../include/tdzdd/DdStructure.hpp ../../include/tdzdd/DdEval.hpp \
  ../../include/tdzdd/DdSpec.hpp ../../include/tdzdd/dd/DdBuilder.hpp \
- ../../include/tdzdd/dd/Node.hpp ../../include/tdzdd/dd/NodeTable.hpp \
+ ../../include/tdzdd/dd/DdSweeper.hpp ../../include/tdzdd/dd/Node.hpp \
+ ../../include/tdzdd/dd/NodeTable.hpp \
  ../../include/tdzdd/dd/DataTable.hpp \
  ../../include/tdzdd/dd/../util/MyVector.hpp \
  ../../include/tdzdd/dd/../util/MemoryPool.hpp \

@@ -224,45 +224,43 @@ public:
 
     /**
      * Resizes the array.
-     * Data is moved if the new size exceeds the capacity.
+     * Data may be moved unless new size is the same as capacity.
      * @param n new size.
      */
     void resize(Size n) {
-        if (size_ < n) {
-            reserve(n);
-            for (T* p = array_ + size_; p < array_ + n; ++p) {
-                new (p) T();
+        assert(n >= 0);
+        if (n == 0) {
+            clear();
+        }
+        else if (capacity_ * 10 <= n * 11 && n <= capacity_) {
+            while (n < size_) {
+                array_[--size_].~T();
             }
-            size_ = n;
+
+            while (size_ < n) {
+                new (array_ + size_++) T();
+            }
         }
         else {
             while (n < size_) {
                 array_[--size_].~T();
             }
+            assert(size_ <= n);
+
+            T* tmp = allocate(n);
+            for (Size i = 0; i < size_; ++i) {
+                moveElement(array_[i], tmp[i]);
+            }
+
+            while (size_ < n) {
+                new (tmp + size_++) T();
+            }
+
+            deallocate(array_, capacity_);
+            array_ = tmp;
+            capacity_ = n;
         }
     }
-
-//    /*
-//     * Resizes the array.
-//     * Data is moved if the new size exceeds the capacity.
-//     * @param n new size.
-//     * @param args initializer for new elements.
-//     */
-//    template<typename ... Args>
-//    void resize(Size n, Args const&... args) {
-//        if (size_ < n) {
-//            reserve(n);
-//            for (T* p = array_ + size_; p < array_ + n; ++p) {
-//                new (p) T(args...);
-//            }
-//            size_ = n;
-//        }
-//        else {
-//            while (n < size_) {
-//                array_[--size_].~T();
-//            }
-//        }
-//    }
 
     /**
      * Erases elements.

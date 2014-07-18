@@ -1,5 +1,6 @@
 CnfToZtdd.o: CnfToZtdd.hpp ../../include/tdzdd/DdSpec.hpp \
- ../../include/tdzdd/dd/DdBuilder.hpp ../../include/tdzdd/dd/Node.hpp \
+ ../../include/tdzdd/dd/DdBuilder.hpp \
+ ../../include/tdzdd/dd/DdSweeper.hpp ../../include/tdzdd/dd/Node.hpp \
  ../../include/tdzdd/dd/NodeTable.hpp \
  ../../include/tdzdd/dd/DataTable.hpp \
  ../../include/tdzdd/dd/../util/MyVector.hpp \
@@ -10,7 +11,8 @@ CnfToZtdd.o: CnfToZtdd.hpp ../../include/tdzdd/DdSpec.hpp \
  ../../include/tdzdd/dd/../util/MyList.hpp \
  ../../include/tdzdd/util/demangle.hpp ../cnfbdd/Cudd.hpp
 CnfToZtdd-debug.o: CnfToZtdd.hpp ../../include/tdzdd/DdSpec.hpp \
- ../../include/tdzdd/dd/DdBuilder.hpp ../../include/tdzdd/dd/Node.hpp \
+ ../../include/tdzdd/dd/DdBuilder.hpp \
+ ../../include/tdzdd/dd/DdSweeper.hpp ../../include/tdzdd/dd/Node.hpp \
  ../../include/tdzdd/dd/NodeTable.hpp \
  ../../include/tdzdd/dd/DataTable.hpp \
  ../../include/tdzdd/dd/../util/MyVector.hpp \
@@ -22,7 +24,8 @@ CnfToZtdd-debug.o: CnfToZtdd.hpp ../../include/tdzdd/DdSpec.hpp \
  ../../include/tdzdd/util/demangle.hpp ../cnfbdd/Cudd.hpp
 cnf2ztdd2bdd.o: ../../include/tdzdd/DdStructure.hpp \
  ../../include/tdzdd/DdEval.hpp ../../include/tdzdd/DdSpec.hpp \
- ../../include/tdzdd/dd/DdBuilder.hpp ../../include/tdzdd/dd/Node.hpp \
+ ../../include/tdzdd/dd/DdBuilder.hpp \
+ ../../include/tdzdd/dd/DdSweeper.hpp ../../include/tdzdd/dd/Node.hpp \
  ../../include/tdzdd/dd/NodeTable.hpp \
  ../../include/tdzdd/dd/DataTable.hpp \
  ../../include/tdzdd/dd/../util/MyVector.hpp \
@@ -41,7 +44,8 @@ cnf2ztdd2bdd.o: ../../include/tdzdd/DdStructure.hpp \
  ../cnfbdd/Cudd.hpp ZtddToCudd.hpp
 cnf2ztdd2bdd-debug.o: ../../include/tdzdd/DdStructure.hpp \
  ../../include/tdzdd/DdEval.hpp ../../include/tdzdd/DdSpec.hpp \
- ../../include/tdzdd/dd/DdBuilder.hpp ../../include/tdzdd/dd/Node.hpp \
+ ../../include/tdzdd/dd/DdBuilder.hpp \
+ ../../include/tdzdd/dd/DdSweeper.hpp ../../include/tdzdd/dd/Node.hpp \
  ../../include/tdzdd/dd/NodeTable.hpp \
  ../../include/tdzdd/dd/DataTable.hpp \
  ../../include/tdzdd/dd/../util/MyVector.hpp \

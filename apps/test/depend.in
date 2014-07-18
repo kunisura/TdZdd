@@ -1,6 +1,7 @@
 example1.o: ../../include/tdzdd/DdStructure.hpp \
  ../../include/tdzdd/DdEval.hpp ../../include/tdzdd/DdSpec.hpp \
- ../../include/tdzdd/dd/DdBuilder.hpp ../../include/tdzdd/dd/Node.hpp \
+ ../../include/tdzdd/dd/DdBuilder.hpp \
+ ../../include/tdzdd/dd/DdSweeper.hpp ../../include/tdzdd/dd/Node.hpp \
  ../../include/tdzdd/dd/NodeTable.hpp \
  ../../include/tdzdd/dd/DataTable.hpp \
  ../../include/tdzdd/dd/../util/MyVector.hpp \
@@ -17,7 +18,8 @@ example1.o: ../../include/tdzdd/DdStructure.hpp \
  ../../include/tdzdd/op/Unreduction.hpp
 example1-debug.o: ../../include/tdzdd/DdStructure.hpp \
  ../../include/tdzdd/DdEval.hpp ../../include/tdzdd/DdSpec.hpp \
- ../../include/tdzdd/dd/DdBuilder.hpp ../../include/tdzdd/dd/Node.hpp \
+ ../../include/tdzdd/dd/DdBuilder.hpp \
+ ../../include/tdzdd/dd/DdSweeper.hpp ../../include/tdzdd/dd/Node.hpp \
  ../../include/tdzdd/dd/NodeTable.hpp \
  ../../include/tdzdd/dd/DataTable.hpp \
  ../../include/tdzdd/dd/../util/MyVector.hpp \
@@ -34,7 +36,8 @@ example1-debug.o: ../../include/tdzdd/DdStructure.hpp \
  ../../include/tdzdd/op/Unreduction.hpp
 example2.o: ../../include/tdzdd/DdStructure.hpp \
  ../../include/tdzdd/DdEval.hpp ../../include/tdzdd/DdSpec.hpp \
- ../../include/tdzdd/dd/DdBuilder.hpp ../../include/tdzdd/dd/Node.hpp \
+ ../../include/tdzdd/dd/DdBuilder.hpp \
+ ../../include/tdzdd/dd/DdSweeper.hpp ../../include/tdzdd/dd/Node.hpp \
  ../../include/tdzdd/dd/NodeTable.hpp \
  ../../include/tdzdd/dd/DataTable.hpp \
  ../../include/tdzdd/dd/../util/MyVector.hpp \
@@ -51,7 +54,8 @@ example2.o: ../../include/tdzdd/DdStructure.hpp \
  ../../include/tdzdd/op/Unreduction.hpp
 example2-debug.o: ../../include/tdzdd/DdStructure.hpp \
  ../../include/tdzdd/DdEval.hpp ../../include/tdzdd/DdSpec.hpp \
- ../../include/tdzdd/dd/DdBuilder.hpp ../../include/tdzdd/dd/Node.hpp \
+ ../../include/tdzdd/dd/DdBuilder.hpp \
+ ../../include/tdzdd/dd/DdSweeper.hpp ../../include/tdzdd/dd/Node.hpp \
  ../../include/tdzdd/dd/NodeTable.hpp \
  ../../include/tdzdd/dd/DataTable.hpp \
  ../../include/tdzdd/dd/../util/MyVector.hpp \
@@ -70,7 +74,8 @@ test.o:
 test-debug.o:
 testRandomDd.o: ../../include/tdzdd/DdStructure.hpp \
  ../../include/tdzdd/DdEval.hpp ../../include/tdzdd/DdSpec.hpp \
- ../../include/tdzdd/dd/DdBuilder.hpp ../../include/tdzdd/dd/Node.hpp \
+ ../../include/tdzdd/dd/DdBuilder.hpp \
+ ../../include/tdzdd/dd/DdSweeper.hpp ../../include/tdzdd/dd/Node.hpp \
  ../../include/tdzdd/dd/NodeTable.hpp \
  ../../include/tdzdd/dd/DataTable.hpp \
  ../../include/tdzdd/dd/../util/MyVector.hpp \
@@ -87,7 +92,8 @@ testRandomDd.o: ../../include/tdzdd/DdStructure.hpp \
  ../../include/tdzdd/op/Unreduction.hpp RandomDd.hpp
 testRandomDd-debug.o: ../../include/tdzdd/DdStructure.hpp \
  ../../include/tdzdd/DdEval.hpp ../../include/tdzdd/DdSpec.hpp \
- ../../include/tdzdd/dd/DdBuilder.hpp ../../include/tdzdd/dd/Node.hpp \
+ ../../include/tdzdd/dd/DdBuilder.hpp \
+ ../../include/tdzdd/dd/DdSweeper.hpp ../../include/tdzdd/dd/Node.hpp \
  ../../include/tdzdd/dd/NodeTable.hpp \
  ../../include/tdzdd/dd/DataTable.hpp \
  ../../include/tdzdd/dd/../util/MyVector.hpp \
@@ -105,7 +111,8 @@ testRandomDd-debug.o: ../../include/tdzdd/DdStructure.hpp \
 testSizeConstraint.o: \
  ../../include/tdzdd/DdStructure.hpp ../../include/tdzdd/DdEval.hpp \
  ../../include/tdzdd/DdSpec.hpp ../../include/tdzdd/dd/DdBuilder.hpp \
- ../../include/tdzdd/dd/Node.hpp ../../include/tdzdd/dd/NodeTable.hpp \
+ ../../include/tdzdd/dd/DdSweeper.hpp ../../include/tdzdd/dd/Node.hpp \
+ ../../include/tdzdd/dd/NodeTable.hpp \
  ../../include/tdzdd/dd/DataTable.hpp \
  ../../include/tdzdd/dd/../util/MyVector.hpp \
  ../../include/tdzdd/dd/../util/MemoryPool.hpp \
@@ -124,7 +131,8 @@ testSizeConstraint.o: \
 testSizeConstraint-debug.o: \
  ../../include/tdzdd/DdStructure.hpp ../../include/tdzdd/DdEval.hpp \
  ../../include/tdzdd/DdSpec.hpp ../../include/tdzdd/dd/DdBuilder.hpp \
- ../../include/tdzdd/dd/Node.hpp ../../include/tdzdd/dd/NodeTable.hpp \
+ ../../include/tdzdd/dd/DdSweeper.hpp ../../include/tdzdd/dd/Node.hpp \
+ ../../include/tdzdd/dd/NodeTable.hpp \
  ../../include/tdzdd/dd/DataTable.hpp \
  ../../include/tdzdd/dd/../util/MyVector.hpp \
  ../../include/tdzdd/dd/../util/MemoryPool.hpp \

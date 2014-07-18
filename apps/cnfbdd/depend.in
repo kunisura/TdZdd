@@ -1,5 +1,6 @@
 CnfToBdd.o: CnfToBdd.hpp ../../include/tdzdd/DdSpec.hpp \
- ../../include/tdzdd/dd/DdBuilder.hpp ../../include/tdzdd/dd/Node.hpp \
+ ../../include/tdzdd/dd/DdBuilder.hpp \
+ ../../include/tdzdd/dd/DdSweeper.hpp ../../include/tdzdd/dd/Node.hpp \
  ../../include/tdzdd/dd/NodeTable.hpp \
  ../../include/tdzdd/dd/DataTable.hpp \
  ../../include/tdzdd/dd/../util/MyVector.hpp \
@@ -11,7 +12,8 @@ CnfToBdd.o: CnfToBdd.hpp ../../include/tdzdd/DdSpec.hpp \
  ../../include/tdzdd/util/demangle.hpp ../../include/tdzdd/util/MySet.hpp \
  Cudd.hpp
 CnfToBdd-debug.o: CnfToBdd.hpp ../../include/tdzdd/DdSpec.hpp \
- ../../include/tdzdd/dd/DdBuilder.hpp ../../include/tdzdd/dd/Node.hpp \
+ ../../include/tdzdd/dd/DdBuilder.hpp \
+ ../../include/tdzdd/dd/DdSweeper.hpp ../../include/tdzdd/dd/Node.hpp \
  ../../include/tdzdd/dd/NodeTable.hpp \
  ../../include/tdzdd/dd/DataTable.hpp \
  ../../include/tdzdd/dd/../util/MyVector.hpp \
@@ -24,7 +26,8 @@ CnfToBdd-debug.o: CnfToBdd.hpp ../../include/tdzdd/DdSpec.hpp \
  Cudd.hpp
 cnfbdd.o: ../../include/tdzdd/DdStructure.hpp \
  ../../include/tdzdd/DdEval.hpp ../../include/tdzdd/DdSpec.hpp \
- ../../include/tdzdd/dd/DdBuilder.hpp ../../include/tdzdd/dd/Node.hpp \
+ ../../include/tdzdd/dd/DdBuilder.hpp \
+ ../../include/tdzdd/dd/DdSweeper.hpp ../../include/tdzdd/dd/Node.hpp \
  ../../include/tdzdd/dd/NodeTable.hpp \
  ../../include/tdzdd/dd/DataTable.hpp \
  ../../include/tdzdd/dd/../util/MyVector.hpp \
@@ -42,7 +45,8 @@ cnfbdd.o: ../../include/tdzdd/DdStructure.hpp \
  ../../include/tdzdd/util/MySet.hpp Cudd.hpp
 cnfbdd-debug.o: ../../include/tdzdd/DdStructure.hpp \
  ../../include/tdzdd/DdEval.hpp ../../include/tdzdd/DdSpec.hpp \
- ../../include/tdzdd/dd/DdBuilder.hpp ../../include/tdzdd/dd/Node.hpp \
+ ../../include/tdzdd/dd/DdBuilder.hpp \
+ ../../include/tdzdd/dd/DdSweeper.hpp ../../include/tdzdd/dd/Node.hpp \
  ../../include/tdzdd/dd/NodeTable.hpp \
  ../../include/tdzdd/dd/DataTable.hpp \
  ../../include/tdzdd/dd/../util/MyVector.hpp \
