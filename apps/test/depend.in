@@ -1,13 +1,20 @@
-example1.o: ../../include/tdzdd/DdStructure.hpp \
+gtest-all.o: /usr/src/gtest/src/gtest-all.cc /usr/src/gtest/src/gtest.cc \
+ /usr/src/gtest/src/gtest-internal-inl.h \
+ /usr/src/gtest/src/gtest-death-test.cc \
+ /usr/src/gtest/src/gtest-filepath.cc /usr/src/gtest/src/gtest-port.cc \
+ /usr/src/gtest/src/gtest-printers.cc \
+ /usr/src/gtest/src/gtest-test-part.cc \
+ /usr/src/gtest/src/gtest-typed-test.cc
+example1.o: example1.cpp ../../include/tdzdd/DdStructure.hpp \
  ../../include/tdzdd/DdEval.hpp ../../include/tdzdd/DdSpec.hpp \
  ../../include/tdzdd/dd/DdBuilder.hpp \
  ../../include/tdzdd/dd/DdSweeper.hpp ../../include/tdzdd/dd/Node.hpp \
  ../../include/tdzdd/dd/NodeTable.hpp \
  ../../include/tdzdd/dd/DataTable.hpp \
  ../../include/tdzdd/dd/../util/MyVector.hpp \
- ../../include/tdzdd/dd/../util/MemoryPool.hpp \
  ../../include/tdzdd/dd/../util/MessageHandler.hpp \
  ../../include/tdzdd/dd/../util/ResourceUsage.hpp \
+ ../../include/tdzdd/dd/../util/MemoryPool.hpp \
  ../../include/tdzdd/dd/../util/MyHashTable.hpp \
  ../../include/tdzdd/dd/../util/MyList.hpp \
  ../../include/tdzdd/util/demangle.hpp \
@@ -16,16 +23,16 @@ example1.o: ../../include/tdzdd/DdStructure.hpp \
  ../../include/tdzdd/eval/../util/BigNumber.hpp \
  ../../include/tdzdd/op/Lookahead.hpp \
  ../../include/tdzdd/op/Unreduction.hpp
-example1-debug.o: ../../include/tdzdd/DdStructure.hpp \
+example1-debug.o: example1.cpp ../../include/tdzdd/DdStructure.hpp \
  ../../include/tdzdd/DdEval.hpp ../../include/tdzdd/DdSpec.hpp \
  ../../include/tdzdd/dd/DdBuilder.hpp \
  ../../include/tdzdd/dd/DdSweeper.hpp ../../include/tdzdd/dd/Node.hpp \
  ../../include/tdzdd/dd/NodeTable.hpp \
  ../../include/tdzdd/dd/DataTable.hpp \
  ../../include/tdzdd/dd/../util/MyVector.hpp \
- ../../include/tdzdd/dd/../util/MemoryPool.hpp \
  ../../include/tdzdd/dd/../util/MessageHandler.hpp \
  ../../include/tdzdd/dd/../util/ResourceUsage.hpp \
+ ../../include/tdzdd/dd/../util/MemoryPool.hpp \
  ../../include/tdzdd/dd/../util/MyHashTable.hpp \
  ../../include/tdzdd/dd/../util/MyList.hpp \
  ../../include/tdzdd/util/demangle.hpp \
@@ -34,16 +41,16 @@ example1-debug.o: ../../include/tdzdd/DdStructure.hpp \
  ../../include/tdzdd/eval/../util/BigNumber.hpp \
  ../../include/tdzdd/op/Lookahead.hpp \
  ../../include/tdzdd/op/Unreduction.hpp
-example2.o: ../../include/tdzdd/DdStructure.hpp \
+example2.o: example2.cpp ../../include/tdzdd/DdStructure.hpp \
  ../../include/tdzdd/DdEval.hpp ../../include/tdzdd/DdSpec.hpp \
  ../../include/tdzdd/dd/DdBuilder.hpp \
  ../../include/tdzdd/dd/DdSweeper.hpp ../../include/tdzdd/dd/Node.hpp \
  ../../include/tdzdd/dd/NodeTable.hpp \
  ../../include/tdzdd/dd/DataTable.hpp \
  ../../include/tdzdd/dd/../util/MyVector.hpp \
- ../../include/tdzdd/dd/../util/MemoryPool.hpp \
  ../../include/tdzdd/dd/../util/MessageHandler.hpp \
  ../../include/tdzdd/dd/../util/ResourceUsage.hpp \
+ ../../include/tdzdd/dd/../util/MemoryPool.hpp \
  ../../include/tdzdd/dd/../util/MyHashTable.hpp \
  ../../include/tdzdd/dd/../util/MyList.hpp \
  ../../include/tdzdd/util/demangle.hpp \
@@ -52,16 +59,16 @@ example2.o: ../../include/tdzdd/DdStructure.hpp \
  ../../include/tdzdd/eval/../util/BigNumber.hpp \
  ../../include/tdzdd/op/Lookahead.hpp \
  ../../include/tdzdd/op/Unreduction.hpp
-example2-debug.o: ../../include/tdzdd/DdStructure.hpp \
+example2-debug.o: example2.cpp ../../include/tdzdd/DdStructure.hpp \
  ../../include/tdzdd/DdEval.hpp ../../include/tdzdd/DdSpec.hpp \
  ../../include/tdzdd/dd/DdBuilder.hpp \
  ../../include/tdzdd/dd/DdSweeper.hpp ../../include/tdzdd/dd/Node.hpp \
  ../../include/tdzdd/dd/NodeTable.hpp \
  ../../include/tdzdd/dd/DataTable.hpp \
  ../../include/tdzdd/dd/../util/MyVector.hpp \
- ../../include/tdzdd/dd/../util/MemoryPool.hpp \
  ../../include/tdzdd/dd/../util/MessageHandler.hpp \
  ../../include/tdzdd/dd/../util/ResourceUsage.hpp \
+ ../../include/tdzdd/dd/../util/MemoryPool.hpp \
  ../../include/tdzdd/dd/../util/MyHashTable.hpp \
  ../../include/tdzdd/dd/../util/MyList.hpp \
  ../../include/tdzdd/util/demangle.hpp \
@@ -70,18 +77,18 @@ example2-debug.o: ../../include/tdzdd/DdStructure.hpp \
  ../../include/tdzdd/eval/../util/BigNumber.hpp \
  ../../include/tdzdd/op/Lookahead.hpp \
  ../../include/tdzdd/op/Unreduction.hpp
-test.o:
-test-debug.o:
-testRandomDd.o: ../../include/tdzdd/DdStructure.hpp \
+test.o: test.cpp
+test-debug.o: test.cpp
+testRandomDd.o: testRandomDd.cpp ../../include/tdzdd/DdStructure.hpp \
  ../../include/tdzdd/DdEval.hpp ../../include/tdzdd/DdSpec.hpp \
  ../../include/tdzdd/dd/DdBuilder.hpp \
  ../../include/tdzdd/dd/DdSweeper.hpp ../../include/tdzdd/dd/Node.hpp \
  ../../include/tdzdd/dd/NodeTable.hpp \
  ../../include/tdzdd/dd/DataTable.hpp \
  ../../include/tdzdd/dd/../util/MyVector.hpp \
- ../../include/tdzdd/dd/../util/MemoryPool.hpp \
  ../../include/tdzdd/dd/../util/MessageHandler.hpp \
  ../../include/tdzdd/dd/../util/ResourceUsage.hpp \
+ ../../include/tdzdd/dd/../util/MemoryPool.hpp \
  ../../include/tdzdd/dd/../util/MyHashTable.hpp \
  ../../include/tdzdd/dd/../util/MyList.hpp \
  ../../include/tdzdd/util/demangle.hpp \
@@ -90,16 +97,16 @@ testRandomDd.o: ../../include/tdzdd/DdStructure.hpp \
  ../../include/tdzdd/eval/../util/BigNumber.hpp \
  ../../include/tdzdd/op/Lookahead.hpp \
  ../../include/tdzdd/op/Unreduction.hpp RandomDd.hpp
-testRandomDd-debug.o: ../../include/tdzdd/DdStructure.hpp \
+testRandomDd-debug.o: testRandomDd.cpp ../../include/tdzdd/DdStructure.hpp \
  ../../include/tdzdd/DdEval.hpp ../../include/tdzdd/DdSpec.hpp \
  ../../include/tdzdd/dd/DdBuilder.hpp \
  ../../include/tdzdd/dd/DdSweeper.hpp ../../include/tdzdd/dd/Node.hpp \
  ../../include/tdzdd/dd/NodeTable.hpp \
  ../../include/tdzdd/dd/DataTable.hpp \
  ../../include/tdzdd/dd/../util/MyVector.hpp \
- ../../include/tdzdd/dd/../util/MemoryPool.hpp \
  ../../include/tdzdd/dd/../util/MessageHandler.hpp \
  ../../include/tdzdd/dd/../util/ResourceUsage.hpp \
+ ../../include/tdzdd/dd/../util/MemoryPool.hpp \
  ../../include/tdzdd/dd/../util/MyHashTable.hpp \
  ../../include/tdzdd/dd/../util/MyList.hpp \
  ../../include/tdzdd/util/demangle.hpp \
@@ -108,16 +115,16 @@ testRandomDd-debug.o: ../../include/tdzdd/DdStructure.hpp \
  ../../include/tdzdd/eval/../util/BigNumber.hpp \
  ../../include/tdzdd/op/Lookahead.hpp \
  ../../include/tdzdd/op/Unreduction.hpp RandomDd.hpp
-testSizeConstraint.o: \
+testSizeConstraint.o: testSizeConstraint.cpp \
  ../../include/tdzdd/DdStructure.hpp ../../include/tdzdd/DdEval.hpp \
  ../../include/tdzdd/DdSpec.hpp ../../include/tdzdd/dd/DdBuilder.hpp \
  ../../include/tdzdd/dd/DdSweeper.hpp ../../include/tdzdd/dd/Node.hpp \
  ../../include/tdzdd/dd/NodeTable.hpp \
  ../../include/tdzdd/dd/DataTable.hpp \
  ../../include/tdzdd/dd/../util/MyVector.hpp \
- ../../include/tdzdd/dd/../util/MemoryPool.hpp \
  ../../include/tdzdd/dd/../util/MessageHandler.hpp \
  ../../include/tdzdd/dd/../util/ResourceUsage.hpp \
+ ../../include/tdzdd/dd/../util/MemoryPool.hpp \
  ../../include/tdzdd/dd/../util/MyHashTable.hpp \
  ../../include/tdzdd/dd/../util/MyList.hpp \
  ../../include/tdzdd/util/demangle.hpp \
@@ -128,16 +135,16 @@ testSizeConstraint.o: \
  ../../include/tdzdd/op/Unreduction.hpp ../../include/tdzdd/DdSpecOp.hpp \
  ../../include/tdzdd/op/BinaryOperation.hpp \
  ../graphillion/SizeConstraint.hpp ../graphillion/IntSubset.hpp
-testSizeConstraint-debug.o: \
+testSizeConstraint-debug.o: testSizeConstraint.cpp \
  ../../include/tdzdd/DdStructure.hpp ../../include/tdzdd/DdEval.hpp \
  ../../include/tdzdd/DdSpec.hpp ../../include/tdzdd/dd/DdBuilder.hpp \
  ../../include/tdzdd/dd/DdSweeper.hpp ../../include/tdzdd/dd/Node.hpp \
  ../../include/tdzdd/dd/NodeTable.hpp \
  ../../include/tdzdd/dd/DataTable.hpp \
  ../../include/tdzdd/dd/../util/MyVector.hpp \
- ../../include/tdzdd/dd/../util/MemoryPool.hpp \
  ../../include/tdzdd/dd/../util/MessageHandler.hpp \
  ../../include/tdzdd/dd/../util/ResourceUsage.hpp \
+ ../../include/tdzdd/dd/../util/MemoryPool.hpp \
  ../../include/tdzdd/dd/../util/MyHashTable.hpp \
  ../../include/tdzdd/dd/../util/MyList.hpp \
  ../../include/tdzdd/util/demangle.hpp \

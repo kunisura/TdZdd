@@ -20,21 +20,30 @@
 # FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 # DEALINGS IN THE SOFTWARE.
 
-TARGET   = test
-CXX      = g++
-CPP      = $(CXX) -E
-CPPFLAGS = -I../../include
-CXXFLAGS = -fopenmp -Wall -fmessage-length=0
-LDFLAGS  = -fopenmp
-LDLIBS   = -lgtest
+TARGET    = test
+GTEST_DIR = /usr/src/gtest
+GTEST_SRC =  $(GTEST_DIR)/src/gtest-all.cc
+GTEST_LIB =  gtest.a
+CXX       = g++
+CPP       = $(CXX) -E
+CPPFLAGS  = -I../../include
+CXXFLAGS  = -fopenmp -Wall -fmessage-length=0
+LDFLAGS   = -fopenmp
+LDLIBS    = $(GTEST_LIB)
 
-SRCS     = $(wildcard *.cpp)
-OBJS     = $(SRCS:%.cpp=%.o)
+SRCS      = $(wildcard *.cpp)
+OBJS      = $(SRCS:%.cpp=%.o)
 
 .PONY: all debug clean depend
 
-all:	$(TARGET)
-debug:	$(TARGET:%=%-debug)
+all:	$(GTEST_LIB) $(TARGET)
+debug:	$(GTEST_LIB) $(TARGET:%=%-debug)
+
+gtest.o: $(GTEST_SRC)
+	$(CXX) $(CXXFLAGS) $(CPPFLAGS) -I$(GTEST_DIR) $(TARGET_ARCH) -c -o $@ $<
+
+%.a: %.o
+	$(AR) $(ARFLAGS) $@ $^
 
 %.o: %.cpp
 	$(CXX) $(CXXFLAGS) -O3 $(CPPFLAGS) -DNDEBUG $(TARGET_ARCH) -c -o $@ $<
@@ -49,16 +58,15 @@ $(TARGET:%=%-debug): $(OBJS:%.o=%-debug.o)
 	$(CXX) $(LDFLAGS) $(TARGET_ARCH) $^ $(LDLIBS) -o $@
 
 clean:
-	$(RM) $(TARGET) $(OBJS) $(TARGET:%=%-debug) $(OBJS:%.o=%-debug.o)
+	$(RM) $(TARGET) $(TARGET:%=%-debug) *.o *.a
 
 define make-depend
 	$(RM) depend.in
-	for i in $(SRCS:%.cpp=%); do\
-	    $(CPP) $(CPPFLAGS) -MM $$i.cpp | perl -n0 -e\
-	        's!\s+(?:\\\s*)?\S*\.cpp!!g;\
-	         s!^\S+.o:!'$$i'.o:!;\
-	         print;\
-	         s!^\S+.o:!'$$i'-debug.o:!;\
+	$(CPP) $(CPPFLAGS) -I$(GTEST_DIR) -MM $(GTEST_SRC) > depend.in;
+	for i in $(SRCS); do\
+	    $(CPP) $(CPPFLAGS) -MM $$i | perl -n0 -e\
+	        'print;\
+	         s!^(\S+).o:!$$1-debug.o:!;\
 	         print' >> depend.in;\
 	done
 endef
