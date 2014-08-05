@@ -1,6 +1,7 @@
 /.settings
 /.cproject
 /.project
+*.a
 *.o
 *.exe
 .*.md.html

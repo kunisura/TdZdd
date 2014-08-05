@@ -81,7 +81,7 @@ public:
     /**
      * Prints a state.
      * @param os output stream.
-     * @param a state array.
+     * @param degree degree array.
      */
     void printState(std::ostream& os, State const* degree) const;
 };

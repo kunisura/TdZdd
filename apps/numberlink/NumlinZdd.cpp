@@ -31,10 +31,10 @@
  *  other                connected to mate[j]
  */
 
-NumlinZdd::NumlinZdd(Board const& quiz) :
-        quiz_(quiz), rows(quiz.getRows()), cols(quiz.getCols()), maxLevel(
-                rows * (cols - 1)), finalNumRow(quiz.getFinalNumRow()), finalNumCol(
-                quiz.getFinalNumCol()) {
+NumlinZdd::NumlinZdd(Board const& quiz, bool kansai) :
+        quiz_(quiz), kansai(kansai), rows(quiz.getRows()), cols(quiz.getCols()),
+        maxLevel(rows * (cols - 1)),
+        finalNumRow(quiz.getFinalNumRow()), finalNumCol(quiz.getFinalNumCol()) {
     setArraySize(cols);
 }
 
@@ -59,6 +59,8 @@ int NumlinZdd::getChild(State* mate, int level, int take) const {
 
     // vertical line
     do {
+        if (!kansai && mate[j] == j) return 0;
+
         if (i < rows - 1) { // not bottom
             if (mate[j] != j && mate[j] != cols) { // degree=1
                 int ret = linkVert(mate, i, j);
@@ -132,7 +134,7 @@ int NumlinZdd::checkCompletion(State const* mate, int i, int j) const {
     bool completed = true;
 
     for (int k = 0; k < cols; ++k) {
-        if (mate[k] < cols) { // garbage found
+        if (mate[k] < cols && mate[k] != k) { // garbage found
             acceptable = false;
         }
         else if (mate[k] > cols) { // incomplete path found

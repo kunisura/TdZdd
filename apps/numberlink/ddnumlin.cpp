@@ -28,21 +28,22 @@
 #include <tdzdd/DdStructure.hpp>
 #include <tdzdd/DdSpecOp.hpp>
 #include "Board.hpp"
+#include "DdBuilderDF.hpp"
 #include "DegreeZdd.hpp"
+#include "NoUTurnZdd.hpp"
 #include "NumlinZdd.hpp"
 
 using namespace tdzdd;
 
-std::string options[][2] = { //
-        {"k", "Allow unused area (\"Kansai\" solutions)"}, //
-        //{"rot <n>", "Rotate <n> x 90 degrees counterclockwise"}, //
-        {"s", "Do not use parallel processing"}, //
-        {"dd0", "Dump a state transition graph to STDOUT in DOT format"}, //
-        {"dd1", "Dump a BDD before reduction to STDOUT in DOT format"}, //
-        {"dump", "Dump the final ZDD to STDOUT in DOT format"}}; //
+std::string options[][2] = {
+        { "k", "Allow unused area (\"Kansai\" solutions)" },
+        { "a", "Build a ZDD for all solutions" },
+        //{"rot <n>", "Rotate <n> x 90 degrees counterclockwise"},
+        { "p", "Use parallel processing" },
+        { "print <n>", "Print <n> solutions at most (default=10)" } };
 
 std::map<std::string,bool> opt;
-std::map<std::string,int> optNum;
+std::map<std::string,long> optNum;
 std::string infile;
 std::string outfile;
 int rot;
@@ -67,6 +68,7 @@ void output(std::ostream& os, DdStructure<2> const& dd,
     int rows = quiz.getRows();
     int cols = quiz.getCols();
     Board answer = quiz;
+    int count = 0;
 
     for (typeof(dd.begin()) ans = dd.begin(); ans != dd.end(); ++ans) {
         for (int i = 0; i < rows; ++i) {
@@ -88,6 +90,8 @@ void output(std::ostream& os, DdStructure<2> const& dd,
         //answer.writeNumbers(os);
         answer.printNumlin(os);
         os << "\n";
+
+        if (++count == optNum["print"]) break;
     }
 }
 
@@ -110,43 +114,47 @@ void run() {
 
     bool transposed = false;
     if (!opt["rot"] && quiz.getRows() < quiz.getCols()) {
-        mh << "\nThe board is transposed because it has more columns than rows.";
+        mh
+        << "\nThe board is transposed because it has more columns than rows.";
         quiz.transpose();
         transposed = true;
     }
 
-    DegreeZdd degree(quiz, opt["k"]);
-    NumlinZdd numlin(quiz);
+    DdStructure<2> dd;
+    NumlinZdd numlin(quiz, opt["k"]);
 
-    if (opt["dd0"]) numlin.dumpDot(std::cout, "dd0");
+    if (opt["a"]) {
+        DegreeZdd degree(quiz, opt["k"]);
+        dd = DdStructure<2>(zddLookahead(degree), opt["p"]);
+        dd.zddReduce();
+        dd.zddSubset(zddLookahead(numlin));
+    }
+    else {
+        NoUTurnZdd nut(quiz, opt["k"]);
+        //nut.dumpDot(std::cout);
+        dd = DdStructure<2>(zddLookahead(zddIntersection(nut, numlin)),
+                opt["p"]);
+    }
 
-    //DdStructure<2> dd(numlin, !opt["s"]);
-    //DdStructure<2> dd(zddLookahead(numlin), !opt["s"]);
-
-    DdStructure<2> dd(zddLookahead(degree), !opt["s"]);
+    //dd.dumpDot(std::cout, "dd1");
     dd.zddReduce();
-    dd.zddSubset(zddLookahead(numlin));
-
-    if (opt["dd1"]) dd.dumpDot(std::cout, "dd1");
-    dd.zddReduce();
-    if (opt["dump"]) dd.dumpDot(std::cout, "ZDD");
+    //dd.dumpDot(std::cout, "ZDD");
     mh << "\n#solution = " << dd.zddCardinality();
 
-    if (!outfile.empty()) {
-        mh << "\nOUTPUT: " << outfile;
-        mh.begin("writing") << " ...\n";
+    if (outfile.empty()) outfile = "-";
+    mh << "\nOUTPUT: " << outfile;
+    mh.begin("writing") << " ...\n";
 
-        if (outfile == "-") {
-            output(std::cout, dd, numlin, transposed);
-        }
-        else {
-            std::ofstream ofs(outfile.c_str());
-            if (!ofs) throw std::runtime_error(strerror(errno));
-            output(ofs, dd, numlin, transposed);
-        }
-
-        mh.end();
+    if (outfile == "-") {
+        output(std::cout, dd, numlin, transposed);
     }
+    else {
+        std::ofstream ofs(outfile.c_str());
+        if (!ofs) throw std::runtime_error(strerror(errno));
+        output(ofs, dd, numlin, transposed);
+    }
+
+    mh.end();
 }
 
 int main(int argc, char *argv[]) {
@@ -164,7 +172,7 @@ int main(int argc, char *argv[]) {
                 }
                 else if (i + 1 < argc && opt.count(s + " <n>")) {
                     opt[s] = true;
-                    optNum[s] = std::atoi(argv[++i]);
+                    optNum[s] = std::strtol(argv[++i], 0, 0);
                 }
                 else {
                     usage(argv[0]);
@@ -188,6 +196,8 @@ int main(int argc, char *argv[]) {
         usage(argv[0]);
         return 1;
     }
+
+    if (opt["print"] && outfile.empty()) outfile = "-";
 
     rot = optNum["rot"] % 4;
     if (rot < 0) rot += 4;

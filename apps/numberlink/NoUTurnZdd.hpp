@@ -28,14 +28,18 @@
 #include <tdzdd/DdSpec.hpp>
 #include "Board.hpp"
 
-class NumlinZdd: public tdzdd::PodArrayDdSpec<NumlinZdd,uint8_t,2> {
+struct NoTurnZddState {
+    bool hline;
+    bool vline;
+    bool filled;
+};
+
+class NoUTurnZdd: public tdzdd::PodArrayDdSpec<NoUTurnZdd,NoTurnZddState,2> {
     Board const& quiz_;
     bool const kansai;
     int const rows;
     int const cols;
     int const maxLevel;
-    int const finalNumRow;
-    int const finalNumCol;
 
 public:
     /**
@@ -43,7 +47,7 @@ public:
      * @param quiz matrix of number pairs.
      * @param kansai true if unused box is allowed.
      */
-    NumlinZdd(Board const& quiz, bool kansai);
+    NoUTurnZdd(Board const& quiz, bool kansai);
 
     /**
      * Gets the row and column positions of a given level.
@@ -64,52 +68,24 @@ public:
 
     /**
      * Gets a root configuration.
-     * @param mate mate array.
+     * @param a state array.
      * @return root level.
      */
-    int getRoot(State* mate) const;
+    int getRoot(State* a) const;
 
     /**
      * Gets a child configuration.
-     * @param mate mate array.
+     * @param a state array.
      * @param level decision level.
      * @param take 1 to take the edge; 0 otherwise.
      * @return next decision level.
      */
-    int getChild(State* mate, int level, int take) const;
+    int getChild(State* a, int level, int take) const;
 
     /**
      * Prints a state.
      * @param os output stream.
      * @param a state array.
      */
-    void printState(std::ostream& os, State const* mate) const;
-
-private:
-    /**
-     * Take a horizontal line (i, j)-(i, j+1).
-     * @param mate mate array.
-     * @param i row position.
-     * @param j column position.
-     * @return -1/0 when jumping to the 1/0-terminal.
-     */
-    int linkHoriz(State* mate, int i, int j) const;
-
-    /**
-     * Take a vertical line (i, j)-(i+1, j).
-     * @param mate mate array.
-     * @param i row position.
-     * @param j column position.
-     * @return -1/0 when jumping to the 1/0-terminal.
-     */
-    int linkVert(State* mate, int i, int j) const;
-
-    /**
-     * Check if the puzzle is completed.
-     * @param mate mate array.
-     * @param i row position of the last decision.
-     * @param j column position of the last decision.
-     * @return -1/0 when jumping to the 1/0-terminal.
-     */
-    int checkCompletion(State const* mate, int i, int j) const;
+    void printState(std::ostream& os, State const* a) const;
 };
