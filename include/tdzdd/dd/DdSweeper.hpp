@@ -48,6 +48,8 @@ class DdSweeper {
     MyVector<int> sweepLevel;
     MyVector<size_t> deadCount;
     size_t allCount;
+    size_t maxCount;
+    NodeId* rootPtr;
 
 public:
     /**
@@ -55,7 +57,15 @@ public:
      * @param diagram the diagram to sweep.
      */
     DdSweeper(NodeTableEntity<ARITY>& diagram) :
-            diagram(diagram), allCount(0) {
+            diagram(diagram), allCount(0), maxCount(0), rootPtr(0) {
+    }
+
+    /**
+     * Set the root pointer.
+     * @param root reference to the root ID storage.
+     */
+    void setRoot(NodeId& root) {
+        rootPtr = &root;
     }
 
     /**
@@ -85,7 +95,8 @@ public:
             deadCount[k] += deadCount[i];
             deadCount[i] = 0;
         }
-        if (deadCount[k] * SWEEP_RATIO < allCount) return;
+        if (maxCount < allCount) maxCount = allCount;
+        if (deadCount[k] * SWEEP_RATIO < maxCount) return;
 
         MyVector<MyVector<NodeId> > newId(diagram.numRows());
 
@@ -121,6 +132,7 @@ public:
             diagram[i].resize(jj);
         }
 
+        *rootPtr = newId[rootPtr->row()][rootPtr->col()];
         deadCount[k] = 0;
         allCount = diagram.size();
         mh.end(diagram.size());

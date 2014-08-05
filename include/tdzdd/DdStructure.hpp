@@ -238,6 +238,14 @@ public:
      * Gets the root node.
      * @return root node ID.
      */
+    NodeId& root() {
+        return root_;
+    }
+
+    /**
+     * Gets the root node.
+     * @return root node ID.
+     */
     NodeId root() const {
         return root_;
     }

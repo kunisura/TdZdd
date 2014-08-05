@@ -166,6 +166,10 @@ struct Node {
         return true;
     }
 
+    bool operator!=(Node const& o) const {
+        return !operator==(o);
+    }
+
     friend std::ostream& operator<<(std::ostream& os, Node const& o) {
         os << "(" << o.branch[0];
         for (int i = 1; i < ARITY; ++i) {

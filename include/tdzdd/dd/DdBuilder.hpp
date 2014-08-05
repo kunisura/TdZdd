@@ -194,7 +194,7 @@ protected:
 };
 
 /**
- * Basic top-down DD builder.
+ * Basic breadth-first DD builder.
  */
 template<typename S>
 class DdBuilder: DdBuilderBase {
@@ -217,7 +217,8 @@ class DdBuilder: DdBuilderBase {
 public:
     DdBuilder(Spec const& s, NodeTableHandler<AR>& output, int n = 0) :
             spec(s), specNodeSize(getSpecNodeSize(spec.datasize())),
-            output(output.privateEntity()), sweeper(this->output) {
+            output(output.privateEntity()),
+            sweeper(this->output) {
         if (n >= 1) init(n);
     }
 
@@ -238,6 +239,7 @@ public:
      * @param root result storage.
      */
     int initialize(NodeId& root) {
+        sweeper.setRoot(root);
         MyVector<SpecNode> tmp(specNodeSize);
         SpecNode* ptmp = tmp.data();
         int n = spec.get_root(state(ptmp));
@@ -342,7 +344,7 @@ public:
 };
 
 /**
- * Multi-threaded top-down DD builder.
+ * Multi-threaded breadth-first DD builder.
  */
 template<typename S>
 class DdBuilderMP: DdBuilderMPBase {
@@ -380,13 +382,14 @@ public:
 #ifdef _OPENMP
             threads(omp_get_max_threads()),
             tasks(MyHashConstant::primeSize(TASKS_PER_THREAD * threads)),
-#else
+            #else
             threads(1),
             tasks(1),
 #endif
             specs(threads, s),
             specNodeSize(getSpecNodeSize(s.datasize())),
-            output(output.privateEntity()), sweeper(this->output),
+            output(output.privateEntity()),
+            sweeper(this->output),
             snodeTables(threads) {
         if (n >= 1) init(n);
 #ifdef DEBUG
@@ -421,6 +424,7 @@ public:
      * @param root result storage.
      */
     int initialize(NodeId& root) {
+        sweeper.setRoot(root);
         MyVector<SpecNode> tmp(specNodeSize);
         SpecNode* ptmp = tmp.data();
         int n = specs[0].get_root(state(ptmp));
@@ -598,7 +602,7 @@ public:
 };
 
 /**
- * Another top-down DD builder.
+ * Another breadth-first DD builder.
  * A node table for the <I>i</I>-th level becomes available instantly
  * after @p construct(i) is called, and is destructable at any time.
  */
@@ -624,7 +628,8 @@ public:
     InstantDdBuilder(Spec const& s, NodeTableHandler<AR>& output,
             std::ostream& os = std::cout, bool cut = false) :
             output(output.privateEntity()), spec(s),
-            specNodeSize(getSpecNodeSize(spec.datasize())), os(os), cut(cut) {
+            specNodeSize(getSpecNodeSize(spec.datasize())),
+            os(os), cut(cut) {
     }
 
     /**
@@ -782,7 +787,7 @@ public:
 };
 
 /**
- * Top-down ZDD subset builder.
+ * Breadth-first ZDD subset builder.
  */
 template<typename S>
 class ZddSubsetter: DdBuilderBase {
@@ -814,6 +819,7 @@ public:
      * @param root the root node.
      */
     int initialize(NodeId& root) {
+        sweeper.setRoot(root);
         tmp.resize(specNodeSize);
         SpecNode* ptmp = tmp.data();
         int n = spec.get_root(state(ptmp));
@@ -988,7 +994,7 @@ private:
 };
 
 /**
- * Multi-threaded top-down ZDD subset builder.
+ * Multi-threaded breadth-first ZDD subset builder.
  */
 template<typename S>
 class ZddSubsetterMP: DdBuilderMPBase {
@@ -1018,8 +1024,10 @@ public:
 #endif
             specs(threads, s),
             specNodeSize(getSpecNodeSize(s.datasize())), input(*input),
-            output(output.privateEntity()), sweeper(this->output),
-            snodeTables(threads), pools(threads) {
+            output(output.privateEntity()),
+            sweeper(this->output),
+            snodeTables(threads),
+            pools(threads) {
     }
 
     /**
@@ -1027,6 +1035,7 @@ public:
      * @param root the root node.
      */
     int initialize(NodeId& root) {
+        sweeper.setRoot(root);
         MyVector<SpecNode> tmp(specNodeSize);
         SpecNode* ptmp = tmp.data();
         Spec& spec = specs[0];
