@@ -4,4 +4,6 @@
 *.a
 *.o
 *.exe
+*.bak
+*.BAK
 .*.md.html
