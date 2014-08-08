@@ -31,14 +31,15 @@
  *  other                connected to mate[j]
  */
 
-NumlinZdd::NumlinZdd(Board const& quiz, bool kansai) :
+NumlinZdd::NumlinZdd(Board const& quiz, int kansai) :
         quiz_(quiz), kansai(kansai), rows(quiz.getRows()), cols(quiz.getCols()),
         maxLevel(rows * (cols - 1)),
         finalNumRow(quiz.getFinalNumRow()), finalNumCol(quiz.getFinalNumCol()) {
     setArraySize(cols);
 }
 
-int NumlinZdd::getRoot(State* mate) const {
+int NumlinZdd::getRoot(S_State& k, A_State* mate) const {
+    k = 0;
     for (int j = 0; j < cols; ++j) {
         int t = quiz_.number[0][j];
         mate[j] = (t > 0) ? cols + t : j;
@@ -46,7 +47,7 @@ int NumlinZdd::getRoot(State* mate) const {
     return maxLevel;
 }
 
-int NumlinZdd::getChild(State* mate, int level, int take) const {
+int NumlinZdd::getChild(S_State& k, A_State* mate, int level, int take) const {
     std::div_t pos = level2pos(level);
     int i = pos.quot;
     int j = pos.rem;
@@ -59,7 +60,10 @@ int NumlinZdd::getChild(State* mate, int level, int take) const {
 
     // vertical line
     do {
-        if (!kansai && mate[j] == j) return 0;
+        if (mate[j] == j) { // degree=0
+            if (k == kansai) return 0;
+            if (kansai > 0) ++k;
+        }
 
         if (i < rows - 1) { // not bottom
             if (mate[j] != j && mate[j] != cols) { // degree=1
@@ -80,7 +84,7 @@ int NumlinZdd::getChild(State* mate, int level, int take) const {
     return level - 1;
 }
 
-int NumlinZdd::linkHoriz(State* mate, int i, int j) const {
+int NumlinZdd::linkHoriz(A_State* mate, int i, int j) const {
     int k = j + 1;
     int mj = mate[j];
     int mk = mate[k];
@@ -103,7 +107,7 @@ int NumlinZdd::linkHoriz(State* mate, int i, int j) const {
     return checkCompletion(mate, i + 1, j - 1); // touched previously
 }
 
-int NumlinZdd::linkVert(State* mate, int i, int j) const {
+int NumlinZdd::linkVert(A_State* mate, int i, int j) const {
     int mj = mate[j];
     int t = quiz_.number[i + 1][j];
     assert(mj != cols);
@@ -127,7 +131,7 @@ int NumlinZdd::linkVert(State* mate, int i, int j) const {
     return checkCompletion(mate, i + 1, j);
 }
 
-int NumlinZdd::checkCompletion(State const* mate, int i, int j) const {
+int NumlinZdd::checkCompletion(A_State const* mate, int i, int j) const {
     if (i < finalNumRow || (i == finalNumRow && j < finalNumCol)) return 1;
 
     bool acceptable = true;
@@ -146,12 +150,13 @@ int NumlinZdd::checkCompletion(State const* mate, int i, int j) const {
     return completed ? (acceptable ? -1 : 0) : 1;
 }
 
-void NumlinZdd::printState(std::ostream& os, State const* mate) const {
+void NumlinZdd::printState(std::ostream& os, S_State const& k, A_State const* mate) const {
     for (int j = 0; j < cols; ++j) {
         int mj = mate[j];
         if (mj == j) os << " . ";
         else if (mj == cols) os << " * ";
         else if (mj > cols) os << "[" << mj << "]";
         else os << " " << mj << " ";
+        os << "(" << k << ")";
     }
 }

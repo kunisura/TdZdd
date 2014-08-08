@@ -28,9 +28,9 @@
 #include <tdzdd/DdSpec.hpp>
 #include "Board.hpp"
 
-class NumlinZdd: public tdzdd::PodArrayDdSpec<NumlinZdd,uint8_t,2> {
+class NumlinZdd: public tdzdd::PodHybridDdSpec<NumlinZdd,int,uint8_t,2> {
     Board const& quiz_;
-    bool const kansai;
+    int const kansai;
     int const rows;
     int const cols;
     int const maxLevel;
@@ -41,9 +41,9 @@ public:
     /**
      * Constructor.
      * @param quiz matrix of number pairs.
-     * @param kansai true if unused box is allowed.
+     * @param kansai maximum number of unused boxes.
      */
-    NumlinZdd(Board const& quiz, bool kansai);
+    NumlinZdd(Board const& quiz, int kansai);
 
     /**
      * Gets the row and column positions of a given level.
@@ -67,7 +67,7 @@ public:
      * @param mate mate array.
      * @return root level.
      */
-    int getRoot(State* mate) const;
+    int getRoot(S_State& k, A_State* mate) const;
 
     /**
      * Gets a child configuration.
@@ -76,14 +76,14 @@ public:
      * @param take 1 to take the edge; 0 otherwise.
      * @return next decision level.
      */
-    int getChild(State* mate, int level, int take) const;
+    int getChild(S_State& k, A_State* mate, int level, int take) const;
 
     /**
      * Prints a state.
      * @param os output stream.
      * @param a state array.
      */
-    void printState(std::ostream& os, State const* mate) const;
+    void printState(std::ostream& os, S_State const& k, A_State const* mate) const;
 
 private:
     /**
@@ -93,7 +93,7 @@ private:
      * @param j column position.
      * @return -1/0 when jumping to the 1/0-terminal.
      */
-    int linkHoriz(State* mate, int i, int j) const;
+    int linkHoriz(A_State* mate, int i, int j) const;
 
     /**
      * Take a vertical line (i, j)-(i+1, j).
@@ -102,7 +102,7 @@ private:
      * @param j column position.
      * @return -1/0 when jumping to the 1/0-terminal.
      */
-    int linkVert(State* mate, int i, int j) const;
+    int linkVert(A_State* mate, int i, int j) const;
 
     /**
      * Check if the puzzle is completed.
@@ -111,5 +111,5 @@ private:
      * @param j column position of the last decision.
      * @return -1/0 when jumping to the 1/0-terminal.
      */
-    int checkCompletion(State const* mate, int i, int j) const;
+    int checkCompletion(A_State const* mate, int i, int j) const;
 };

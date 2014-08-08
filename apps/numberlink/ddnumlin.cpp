@@ -36,7 +36,7 @@
 using namespace tdzdd;
 
 std::string options[][2] = {
-        { "k", "Allow unused area (\"Kansai\" solutions)" },
+        { "k <n>", "Allow at most <k> blank boxes" },
         { "a", "Build a ZDD for all solutions" },
         //{"rot <n>", "Rotate <n> x 90 degrees counterclockwise"},
         { "p", "Use parallel processing" },
@@ -121,7 +121,7 @@ void run() {
     }
 
     DdStructure<2> dd;
-    NumlinZdd numlin(quiz, opt["k"]);
+    NumlinZdd numlin(quiz, optNum["k"]);
 
     if (opt["a"]) {
         DegreeZdd degree(quiz, opt["k"]);
