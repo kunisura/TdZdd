@@ -36,7 +36,7 @@
 using namespace tdzdd;
 
 std::string options[][2] = {
-        { "k <n>", "Allow at most <k> blank boxes" },
+        { "k <n>", "Allow at most <k> blank boxes (default=infinity)" },
         { "a", "Build a ZDD for all solutions" },
         //{"rot <n>", "Rotate <n> x 90 degrees counterclockwise"},
         { "p", "Use parallel processing" },
@@ -124,14 +124,16 @@ void run() {
     NumlinZdd numlin(quiz, optNum["k"]);
 
     if (opt["a"]) {
-        DegreeZdd degree(quiz, opt["k"]);
+        DegreeZdd degree(quiz, optNum["k"] != 0);
         dd = DdStructure<2>(zddLookahead(degree), opt["p"]);
         dd.zddReduce();
         dd.zddSubset(zddLookahead(numlin));
     }
     else {
-        NoUTurnZdd nut(quiz, opt["k"]);
+        NoUTurnZdd nut(quiz, optNum["k"] != 0);
         //nut.dumpDot(std::cout);
+        //dd = DdStructure<2>(zddLookahead(nut), opt["p"]);
+        //dd.zddSubset(zddLookahead(numlin));
         dd = DdStructure<2>(zddLookahead(zddIntersection(nut, numlin)),
                 opt["p"]);
     }
@@ -197,6 +199,7 @@ int main(int argc, char *argv[]) {
         return 1;
     }
 
+    if (!opt["k"]) optNum["k"] = -1;
     if (opt["print"] && outfile.empty()) outfile = "-";
 
     rot = optNum["rot"] % 4;
