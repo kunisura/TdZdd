@@ -163,14 +163,24 @@ public:
         return *this;
     }
 
-    MessageHandler_& step(char dot = '.') {
+    MessageHandler_& step(char dot = '-') {
         if (!enabled) return *this;
 
-        ++stepCount;
+        if (!stepping && dotTime + 4 < std::time(0)) {
+            *this << '\n';
+            stepping = true;
+        }
 
         if (stepping) {
+            if (stepCount % 50 != column - indent) {
+                *this << '\n';
+                for (int i = stepCount % 50; i > 0; --i) {
+                    *this << '-';
+                }
+            }
             *this << dot;
-            if (column >= indent + 50) {
+            ++stepCount;
+            if (column - indent >= 50) {
                 ResourceUsage usage;
                 ResourceUsage diff = usage - prevUsage;
                 *this << std::setw(3) << std::right
@@ -180,14 +190,8 @@ public:
                 prevUsage = usage;
             }
         }
-        else if (dotTime + 4 < std::time(0)) {
-            *this << '\n';
-            stepping = true;
-            for (int i = stepCount % 50; i > 0; --i) {
-                *this << (i > 1 ? '.' : dot);
-            }
-        }
         else {
+            ++stepCount;
             while (dotCount * totalSteps < stepCount * 10) {
                 if (dotCount == 0) *this << ' ';
                 *this << '.';
