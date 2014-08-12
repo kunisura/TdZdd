@@ -62,7 +62,7 @@ public:
      * Default constructor.
      */
     DdStructure()
-            : root_(0), useMP(true) {
+            : root_(0), useMP(false) {
     }
 
 //    /*
