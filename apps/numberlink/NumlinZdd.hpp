@@ -31,6 +31,7 @@
 class NumlinZdd: public tdzdd::PodHybridDdSpec<NumlinZdd,int,uint8_t,2> {
     Board const& quiz_;
     int const kansai;
+    bool const noRoundabout;
     int const rows;
     int const cols;
     int const maxLevel;
@@ -42,8 +43,9 @@ public:
      * Constructor.
      * @param quiz matrix of number pairs.
      * @param kansai maximum number of unused boxes.
+     * @param noRoundabout flag to prune roundabout ways.
      */
-    NumlinZdd(Board const& quiz, int kansai);
+    NumlinZdd(Board const& quiz, int kansai, bool noRoundabout = false);
 
     /**
      * Gets the row and column positions of a given level.

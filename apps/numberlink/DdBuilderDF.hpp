@@ -31,6 +31,92 @@
 #include <tdzdd/util/MyVector.hpp>
 
 /**
+ * Depth-first DD builder without memo-cache.
+ */
+template<typename S>
+class DdBuilderDF {
+    typedef S Spec;
+    static int const AR = Spec::ARITY;
+
+    tdzdd::NodeTableEntity<AR>& output;
+    Spec spec;
+    int const datasize;
+
+    tdzdd::MyVector<size_t> work;
+
+    void* state(int level) {
+        return &work[datasize * level];
+    }
+
+public:
+    DdBuilderDF(Spec const& s, tdzdd::NodeTableHandler<AR>& output) :
+            output(output.privateEntity()), spec(s),
+            datasize((spec.datasize() + sizeof(size_t) - 1) / sizeof(size_t)),
+            work(datasize) {
+    }
+
+    /**
+     * Builds a DD.
+     * @param root the root node.
+     */
+    void build(tdzdd::NodeId& root) {
+        int n = spec.get_root(state(0));
+        work.resize(datasize * (n + 1));
+
+        if (n <= 0) {
+            output.init(1);
+            root = tdzdd::NodeId(0, n != 0);
+        }
+        else {
+            output.init(n + 1);
+            root = build_(0, n);
+        }
+
+        spec.destruct(state(0));
+    }
+
+private:
+    tdzdd::NodeId build_(int p, int i) {
+        tdzdd::Node<AR> r;
+
+        for (int b = 0; b < AR; ++b) {
+            spec.get_copy(state(p + 1), state(p));
+            int ii = spec.get_child(state(p + 1), i, b);
+
+            if (ii <= 0) {
+                r.branch[b] = (ii != 0);
+            }
+            else {
+                r.branch[b] = build_(p + 1, ii);
+            }
+
+            spec.destruct(state(p + 1));
+        }
+
+        if (r == tdzdd::Node<AR>(0, 0)) return 0;
+
+        output[i].push_back(r);
+        return tdzdd::NodeId(i, output[i].size() - 1);
+    }
+};
+
+/**
+ * Depth-first DD construction.
+ * @param spec ZDD spec.
+ */
+template<typename SPEC, int ARITY>
+void buildDF(tdzdd::DdStructure<ARITY>& dd,
+        tdzdd::DdSpecBase<SPEC,ARITY> const& spec) {
+    tdzdd::NodeTableHandler<ARITY>& diagram = dd.getDiagram();
+    SPEC const& s = spec.entity();
+    tdzdd::MessageHandler mh;
+    mh.begin(typenameof(s)) << " ...";
+    DdBuilderDF<SPEC> builder(s, diagram);
+    builder.build(dd.root());
+    mh.end(dd.size());
+}
+
+/**
  * Depth-first ZDD subset builder.
  */
 template<typename S>

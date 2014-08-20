@@ -31,10 +31,13 @@
  *  other                connected to mate[j]
  */
 
-NumlinZdd::NumlinZdd(Board const& quiz, int kansai) :
-        quiz_(quiz), kansai(kansai), rows(quiz.getRows()), cols(quiz.getCols()),
+NumlinZdd::NumlinZdd(Board const& quiz, int kansai, bool noRoundabout) :
+        quiz_(quiz), kansai(kansai), noRoundabout(noRoundabout),
+        rows(quiz.getRows()),
+        cols(quiz.getCols()),
         maxLevel(rows * (cols - 1)),
-        finalNumRow(quiz.getFinalNumRow()), finalNumCol(quiz.getFinalNumCol()) {
+        finalNumRow(quiz.getFinalNumRow()),
+        finalNumCol(quiz.getFinalNumCol()) {
     setArraySize(cols);
 }
 
@@ -56,6 +59,12 @@ int NumlinZdd::getChild(S_State& k, A_State* mate, int level, int take) const {
     if (take) {
         int ret = linkHoriz(mate, i, j);
         if (ret <= 0) return ret;
+        if (noRoundabout && j < cols - 2 && mate[j + 1] == j + 2) {
+            return 0;
+        }
+    }
+    else if (noRoundabout && mate[j] > cols && mate[j] == mate[j + 1]) {
+        return 0;
     }
 
     // vertical line
@@ -69,10 +78,21 @@ int NumlinZdd::getChild(S_State& k, A_State* mate, int level, int take) const {
             if (mate[j] != j && mate[j] != cols) { // degree=1
                 int ret = linkVert(mate, i, j);
                 if (ret <= 0) return ret;
+                if (noRoundabout && j >= 1 && mate[j] == j - 1) {
+                    return 0;
+                }
             }
             else {
                 int t = quiz_.number[i + 1][j];
-                mate[j] = (t > 0) ? cols + t : j;
+                if (t > 0) {
+                    if (noRoundabout && mate[j] == cols + t) {
+                        return 0;
+                    }
+                    mate[j] = cols + t;
+                }
+                else {
+                    mate[j] = j;
+                }
             }
         }
         else { // bottom
@@ -150,7 +170,8 @@ int NumlinZdd::checkCompletion(A_State const* mate, int i, int j) const {
     return completed ? (acceptable ? -1 : 0) : 1;
 }
 
-void NumlinZdd::printState(std::ostream& os, S_State const& k, A_State const* mate) const {
+void NumlinZdd::printState(std::ostream& os, S_State const& k,
+        A_State const* mate) const {
     for (int j = 0; j < cols; ++j) {
         int mj = mate[j];
         if (mj == j) os << " . ";

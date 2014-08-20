@@ -40,7 +40,7 @@ std::string options[][2] = {
         { "a", "Build a ZDD for all solutions" },
         //{"rot <n>", "Rotate <n> x 90 degrees counterclockwise"},
         { "p", "Use parallel processing" },
-        { "print <n>", "Print <n> solutions at most (default=10)" } };
+        { "print <n>", "Print <n> solutions at most" } };
 
 std::map<std::string,bool> opt;
 std::map<std::string,long> optNum;
@@ -121,7 +121,7 @@ void run() {
     }
 
     DdStructure<2> dd;
-    NumlinZdd numlin(quiz, optNum["k"]);
+    NumlinZdd numlin(quiz, optNum["k"]);//, !opt["a"]);
 
     if (opt["a"]) {
         DegreeZdd degree(quiz, optNum["k"] != 0);
@@ -134,8 +134,10 @@ void run() {
         //nut.dumpDot(std::cout);
         //dd = DdStructure<2>(zddLookahead(nut), opt["p"]);
         //dd.zddSubset(zddLookahead(numlin));
-        dd = DdStructure<2>(zddLookahead(zddIntersection(nut, numlin)),
-                opt["p"]);
+        //zddLookahead(zddIntersection(nut, numlin)).dumpDot(std::cout);
+        dd = DdStructure<2>(zddLookahead(zddIntersection(nut, numlin)), opt["p"]);
+        //dd.useMultiProcessors(opt["p"]);
+        //buildDF(dd, zddIntersection(nut, numlin));
     }
 
     //dd.dumpDot(std::cout, "dd1");
@@ -143,20 +145,21 @@ void run() {
     //dd.dumpDot(std::cout, "ZDD");
     mh << "\n#solution = " << dd.zddCardinality();
 
-    if (outfile.empty()) outfile = "-";
-    mh << "\nOUTPUT: " << outfile;
-    mh.begin("writing") << " ...\n";
+    if (!outfile.empty()) {
+        mh << "\nOUTPUT: " << outfile;
+        mh.begin("writing") << " ...\n";
 
-    if (outfile == "-") {
-        output(std::cout, dd, numlin, transposed);
-    }
-    else {
-        std::ofstream ofs(outfile.c_str());
-        if (!ofs) throw std::runtime_error(strerror(errno));
-        output(ofs, dd, numlin, transposed);
-    }
+        if (outfile == "-") {
+            output(std::cout, dd, numlin, transposed);
+        }
+        else {
+            std::ofstream ofs(outfile.c_str());
+            if (!ofs) throw std::runtime_error(strerror(errno));
+            output(ofs, dd, numlin, transposed);
+        }
 
-    mh.end();
+        mh.end();
+    }
 }
 
 int main(int argc, char *argv[]) {

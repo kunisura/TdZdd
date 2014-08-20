@@ -12,8 +12,7 @@ while (<>) {
         ($cols, $rows) = ($1, $2);
     }
     elsif (/LINE#(\d+)\s*\((\d+),(\d+)\)-\((\d+),(\d+)\)/i) {
-        $board[$2][$3] = $board[$4][$5] = $1;
-        $max = $1 if $max < $1;
+        $board[$3][$2] = $board[$5][$4] = ++$max;
     }
     elsif (/^(?:\d\d)+$/) {
         my @data;
@@ -37,7 +36,7 @@ printf "%d %d\n", $cols, $rows;
 for my $i (0 .. $rows - 1) {
     for my $j (0 .. $cols - 1) {
         print " " if $j >= 1;
-        printf "%${w}s", $board[$j][$i] || "-";
+        printf "%${w}s", $board[$i][$j] || "-";
     }
     print "\n";
 }
