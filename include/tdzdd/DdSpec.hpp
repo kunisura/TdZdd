@@ -42,6 +42,7 @@ namespace tdzdd {
  * - int get_root(void* p)
  * - int get_child(void* p, int level, int value)
  * - void get_copy(void* to, void const* from)
+ * - void merge_states(void* to, void const* from)
  * - void destruct(void* p)
  * - void destructLevel(int level)
  * - size_t hash_code(void const* p, int level) const
@@ -202,6 +203,9 @@ public:
     void get_copy(void* to, void const* from) {
     }
 
+    void merge_states(void* to, void const* from) {
+    }
+
     void destruct(void* p) {
     }
 
@@ -231,6 +235,7 @@ public:
  * Optionally, the following functions can be overloaded:
  * - void construct(void* p)
  * - void getCopy(void* p, T const& state)
+ * - void mergeStates(T const& to, T const& from)
  * - size_t hashCode(T const& state) const
  * - bool equalTo(T const& state1, T const& state2) const
  * - void printLevel(std::ostream& os, int level) const
@@ -279,6 +284,13 @@ public:
 
     void get_copy(void* to, void const* from) {
         this->entity().getCopy(to, state(from));
+    }
+
+    void mergeStates(State& to, State const& from) {
+    }
+
+    void merge_states(void* to, void const* from) {
+        this->entity().mergeStates(state(to), state(from));
     }
 
     void destruct(void* p) {
@@ -334,6 +346,7 @@ public:
  * - int getChild(T* array, int level, int value)
  *
  * Optionally, the following functions can be overloaded:
+ * - void mergeStates(T* to, T const* from)
  * - void printLevel(std::ostream& os, int level) const
  * - void printState(std::ostream& os, State const& s) const
  *
@@ -402,6 +415,13 @@ public:
         }
     }
 
+    void mergeStates(T* to, T const* from) {
+    }
+
+    void merge_states(void* to, void const* from) {
+        this->entity().mergeStates(state(to), state(from));
+    }
+
     void destruct(void* p) {
     }
 
@@ -451,6 +471,7 @@ public:
  * - int getChild(TS& scalar, TA* array, int level, int value)
  *
  * Optionally, the following functions can be overloaded:
+ * - void mergeStates(TS& s_to, TA* a_to, TS const& s_from, TA const* a_from)
  * - void printLevel(std::ostream& os, int level) const
  * - void printState(std::ostream& os, TS const& s, TA const* a) const
  *
@@ -525,6 +546,13 @@ public:
         while (pa != pz) {
             *qa++ = *pa++;
         }
+    }
+
+    void mergeStates(TS& s_to, TA* a_to, TS const& s_from, TA const* a_from) {
+    }
+
+    void merge_states(void* to, void const* from) {
+        this->entity().mergeStates(s_state(to), a_state(to), s_state(from), a_state(from));
     }
 
     void destruct(void* p) {

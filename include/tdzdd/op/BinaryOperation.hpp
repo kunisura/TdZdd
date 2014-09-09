@@ -96,6 +96,11 @@ public:
         spec2.get_copy(state2(to), state2(from));
     }
 
+    void merge_states(void* to, void const* from) {
+        spec1.merge_states(state1(to), state1(from));
+        spec2.merge_states(state2(to), state2(from));
+    }
+
     void destruct(void* p) {
         spec1.destruct(state1(p));
         spec2.destruct(state2(p));

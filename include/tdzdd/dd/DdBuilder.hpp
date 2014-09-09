@@ -283,6 +283,7 @@ public:
                     nodeId(p) = *srcPtr(p) = NodeId(i, m++);
                 }
                 else {
+                    spec.merge_states(state(pp), state(p));
                     *srcPtr(p) = nodeId(pp);
                     nodeId(p) = 0;
                 }
@@ -500,6 +501,7 @@ public:
                             code(p) = j++;
                         }
                         else {
+                            spec.merge_states(state(pp), state(p));
                             code(p) = ~code(pp);
                         }
                     }
@@ -712,6 +714,7 @@ public:
                         pp = snodeTable[ii].alloc_front(specNodeSize);
                     }
                     else {
+                        spec.merge_states(state(pp1), state(pp));
                         spec.destruct(state(pp));
                     }
                     q->branch[b] = nodeId(pp1);
@@ -728,6 +731,7 @@ public:
                         nodeId(pp1) = NodeId(ii, j);
                     }
                     else {
+                        spec.merge_states(state(pp1), state(pp2));
                         spec.destruct(state(pp2));
                         snodeTable[ii].pop_front();
                     }
@@ -894,6 +898,7 @@ public:
                         nodeId(p) = *srcPtr(p) = NodeId(i, mm++);
                     }
                     else {
+                        spec.merge_states(state(pp), state(p));
                         *srcPtr(p) = nodeId(pp);
                         nodeId(p) = 0;
                     }
@@ -1133,6 +1138,7 @@ public:
                             code(p) = jj++;
                         }
                         else {
+                            spec.merge_states(state(pp), state(p));
                             code(p) = ~code(pp);
                         }
                     }
