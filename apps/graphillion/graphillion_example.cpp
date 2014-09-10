@@ -27,6 +27,7 @@
 #include <map>
 #include <string>
 
+#include <tdzdd/DdSpecOp.hpp>
 #include <tdzdd/DdStructure.hpp>
 
 #include "DegreeConstraint.hpp"
@@ -40,21 +41,24 @@
 using namespace tdzdd;
 
 std::string options[][2] = { //
-        {"path", "Restrict to paths and cycles"}, //
-        {"matching", "Restrict to matchings"}, //
-        {"spanning", "Restrict to make no isolated vertices"}, //
-        {"noloop", "Restrict to forests"}, //
-        {"uec <n>", "Number of the uncolored edge components"}, //
-        {"lb <n>", "Lower bound of the number of edges"}, //
-        {"ub <n>", "Upper bound of the number of edges"}, //
-        {"st", "Color the first vertex and the last vertex"}, //
-        {"a", "Read <graph_file> as an adjacency list"}, //
-        {"graph", "Dump input graph to STDOUT in DOT format"}, //
-        {"solutions <n>", "Dump at most <n> solutions to STDOUT in DOT format"}, //
-        {"zdd", "Dump result ZDD to STDOUT in DOT format"}, //
-        {"sapporo", "Translate to Sapporo ZBDD"}, //
-        {"import", "Read constraint ZDD from STDIN"}, //
-        {"export", "Dump result ZDD to STDOUT"}}; //
+                { "path", "Restrict to paths and cycles" }, //
+                { "matching", "Restrict to matchings" }, //
+                { "spanning", "Restrict to make no isolated vertices" }, //
+                { "noloop", "Restrict to forests" }, //
+                { "uec <n>", "Number of the uncolored edge components" }, //
+                { "lb <n>", "Lower bound of the number of edges" }, //
+                { "ub <n>", "Upper bound of the number of edges" }, //
+                { "st", "Color the first vertex and the last vertex" }, //
+                { "nola", "Do not use lookahead" }, //
+                { "a", "Read <graph_file> as an adjacency list" }, //
+                { "count", "Report the number of solutions" }, //
+                { "graph", "Dump input graph to STDOUT in DOT format" }, //
+                { "solutions <n>",
+                        "Dump at most <n> solutions to STDOUT in DOT format" }, //
+                { "zdd", "Dump result ZDD to STDOUT in DOT format" }, //
+                { "sapporo", "Translate to Sapporo ZBDD" }, //
+                { "import", "Read constraint ZDD from STDIN" }, //
+                { "export", "Dump result ZDD to STDOUT" } }; //
 
 std::map<std::string,bool> opt;
 std::map<std::string,int> optNum;
@@ -191,21 +195,14 @@ int main(int argc, char *argv[]) {
             return 0;
         }
 
-        DdStructure<2> dd(n);
-
-        if (opt["import"]) {
-            dd = DdStructure<2>(base);
-//            dd.dumpDot(std::cout, g.edgeLabeler());
-            mh << "#node = " << dd.size() << ", #solution = "
-                    << dd.evaluate(ZddCardinality<>()) << "\n\n";
-        }
+        DegreeConstraint dc(g, 0, !opt["nola"]);
+        IntRange zeroOrTwo(0, 2, 2);
+        IntRange justOne(1, 1);
+        IntRange zeroOrOne(0, 1);
+        IntRange oneOrMore(1);
 
         if (opt["path"]) {
             if (!opt["uec"]) optNum["uec"] = 0;
-
-            IntRange zeroOrTwo(0, 2, 2);
-            IntRange justOne(1, 1);
-            DegreeConstraint dc(g);
 
             for (int v = 1; v <= g.vertexSize(); ++v) {
                 if (g.colorNumber(v) == 0) {
@@ -215,53 +212,63 @@ int main(int argc, char *argv[]) {
                     dc.setConstraint(v, &justOne);
                 }
             }
-            dd.zddSubset(dc);
-
-            mh << "#node = " << dd.size() << ", #solution = "
-                    << dd.evaluate(ZddCardinality<>()) << "\n\n";
         }
 
         if (opt["matching"]) {
-            IntRange zeroOrOne(0, 1);
-            DegreeConstraint dc(g, &zeroOrOne);
-            dd.zddSubset(dc);
-
-            mh << "#node = " << dd.size() << ", #solution = "
-                    << dd.evaluate(ZddCardinality<>()) << "\n\n";
+            for (int v = 1; v <= g.vertexSize(); ++v) {
+                dc.setConstraint(v, &zeroOrOne);
+            }
         }
 
         if (opt["spanning"]) {
-            IntRange oneOrMore(1);
-            DegreeConstraint dc(g);
-
             for (int v = 1; v <= g.vertexSize(); ++v) {
                 if (g.colorNumber(v) == 0) {
                     dc.setConstraint(v, &oneOrMore);
                 }
             }
-            dd.zddSubset(dc);
-
-            mh << "#node = " << dd.size() << ", #solution = "
-                    << dd.evaluate(ZddCardinality<>()) << "\n\n";
         }
+
+        FrontierBasedSearch fbs(g, optNum["uec"], opt["noloop"], !opt["nola"]);
+        ZddIntersection<typeof(dc),typeof(fbs)> dfbs(dc, fbs);
+
+        DdStructure<2> dd;
 
         if (opt["lb"] || opt["ub"]) {
             IntRange r(optNum["lb"], optNum["ub"]);
             SizeConstraint sc(g.edgeSize(), &r);
-            dd.zddSubset(sc);
+            ZddIntersection<typeof(sc),typeof(dfbs)> sdfbs(sc, dfbs);
 
-            mh << "#node = " << dd.size() << ", #solution = "
-                    << dd.evaluate(ZddCardinality<>()) << "\n\n";
+            if (opt["import"]) {
+                dd = DdStructure<2>(base);
+                dd.zddSubset(sdfbs);
+            }
+            else {
+                dd = DdStructure<2>(sdfbs);
+            }
+        }
+        else {
+            if (opt["import"]) {
+                dd = DdStructure<2>(base);
+                dd.zddSubset(dfbs);
+            }
+            else {
+                dd = DdStructure<2>(dfbs);
+            }
         }
 
-        FrontierBasedSearch fbs(g, optNum["uec"], opt["noloop"]);
-        dd.zddSubset(fbs);
+        mh << "\n#node = " << dd.size() << ", #solution = "
+                << std::setprecision(10) << dd.evaluate(ZddCardinality<double>())
+                << "\n";
+
+        if (opt["count"]) {
+            MessageHandler mh;
+            mh.begin("counting solutions") << " ...";
+            mh << "\n#solution = " << dd.evaluate(ZddCardinality<>());
+            mh.end();
+        }
 
         if (opt["zdd"]) dd.dumpDot(std::cout, "ZDD");
         if (opt["export"]) dd.dumpSapporo(std::cout);
-
-        mh << "#node = " << dd.size() << ", #solution = "
-                << dd.evaluate(ZddCardinality<>()) << "\n\n";
 
         if (opt["sapporo"]) {
             BDD_Init(1024, 1024 * 1024 * 1024);
@@ -293,6 +300,6 @@ int main(int argc, char *argv[]) {
         return 1;
     }
 
-    mh.end();
+    mh.end("finished");
     return 0;
 }

@@ -261,7 +261,8 @@ class FrontierBasedSearch: public tdzdd::PodHybridDdSpec<FrontierBasedSearch,
     int const mateSize;
     std::vector<Mate> initialMate;
     int numUEC;
-    bool noLoop;
+    bool const noLoop;
+    bool const lookahead;
 
     int takable(Count& c, Mate const* mate, Graph::EdgeInfo const& e) const {
         Mate const& w1 = mate[e.v1 - e.v0];
@@ -401,10 +402,10 @@ class FrontierBasedSearch: public tdzdd::PodHybridDdSpec<FrontierBasedSearch,
 
 public:
     FrontierBasedSearch(Graph const& graph, int numUEC = -1,
-            bool noLoop = false)
+            bool noLoop = false, bool lookahead = true)
             : graph(graph), m(graph.vertexSize()), n(graph.edgeSize()),
               mateSize(graph.maxFrontierSize()), initialMate(1 + m + mateSize),
-              numUEC(numUEC), noLoop(noLoop) {
+              numUEC(numUEC), noLoop(noLoop), lookahead(lookahead) {
         this->setArraySize(mateSize);
 
         std::vector<int> rootOfColor(graph.numColor() + 1);
@@ -447,7 +448,7 @@ public:
         Graph::EdgeInfo const* ee = &graph.edgeInfo(i);
         update(mate, *e, *ee);
 
-        while (true) {
+        while (lookahead) {
             e = ee;
 
             Count c = count;
