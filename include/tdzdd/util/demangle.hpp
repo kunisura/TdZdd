@@ -64,6 +64,11 @@ inline std::string demangleTypename(char const* name) {
             s = s.replace(i, j + 2 - i, "");
             j = i;
         }
+        else if (s[j] == '(') { // (anonymous namespace)
+            size_t k = j + 1;
+            while (k < s.size() && s[k++] != ')');
+            s = s.replace(j, k - j, "");
+        }
         else {
             i = ++j;
         }
