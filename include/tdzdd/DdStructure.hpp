@@ -314,23 +314,21 @@ public:
         }
 
         for (int i = 1; i <= n; ++i) {
-            typeof((*diagram)[i])& nodes = (*diagram)[i];
-            size_t m = nodes.size();
+            size_t m = (*diagram)[i].size();
             uniq.initialize(m * 2);
 
             for (size_t j = 0; j < m; ++j) {
-                uniq[nodes[j]] = j;
+                uniq[(*diagram)[i][j]] = j;
             }
 
-            typeof((*o.diagram)[i])& onodes = (*o.diagram)[i];
-            size_t om = onodes.size();
+            size_t om = (*o.diagram)[i].size();
             equiv[i].resize(om);
 
             for (size_t j = 0; j < om; ++j) {
                 InitializedNode<ARITY> node;
 
                 for (int b = 0; b < ARITY; ++b) {
-                    NodeId f = onodes[j].branch[b];
+                    NodeId f = (*o.diagram)[i][j].branch[b];
                     node.branch[b] = equiv[f.row()][f.col()];
                 }
 
