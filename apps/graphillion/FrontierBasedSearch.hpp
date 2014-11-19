@@ -42,6 +42,14 @@ struct FrontierBasedSearchCount {
             : uec(uncoloredEdgeComponents) {
     }
 
+    operator size_t() const {
+        return uec;
+    }
+
+    bool operator==(FrontierBasedSearchCount const& o) const {
+        return uec == o.uec;
+    }
+
     friend std::ostream& operator<<(std::ostream& os,
             FrontierBasedSearchCount const& o) {
         return os << o.uec;
@@ -250,7 +258,7 @@ public:
     }
 };
 
-class FrontierBasedSearch: public tdzdd::PodHybridDdSpec<FrontierBasedSearch,
+class FrontierBasedSearch: public tdzdd::HybridDdSpec<FrontierBasedSearch,
         FrontierBasedSearchCount,FrontierBasedSearchMate,2> {
     typedef FrontierBasedSearchCount Count;
     typedef FrontierBasedSearchMate Mate;

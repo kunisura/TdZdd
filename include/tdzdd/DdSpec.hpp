@@ -140,8 +140,9 @@ private:
             os << "  \"^\" -> \"" << root << "\" [style=dashed";
             if (root.getAttr()) os << ",arrowtail=dot";
             os << "];\n";
-            if (cut) os << "  \"" << root
-                    << "\" [shape=square,fixedsize=true,width=0.2,label=\"\"];\n";
+            if (cut)
+                os << "  \"" << root
+                        << "\" [shape=square,fixedsize=true,width=0.2,label=\"\"];\n";
         }
         else if (!cut && root != 0) {
             os << "  \"^\" [shape=none,label=\"" << title << "\"];\n";
@@ -376,8 +377,9 @@ private:
 protected:
     void setArraySize(int n) {
         assert(0 <= n);
-        if (arraySize >= 0) throw std::runtime_error(
-                "Cannot set array size twice; use setArraySize(int) only once in the constructor of DD spec.");
+        if (arraySize >= 0)
+            throw std::runtime_error(
+                    "Cannot set array size twice; use setArraySize(int) only once in the constructor of DD spec.");
         arraySize = n;
         dataWords = (n * sizeof(State) + sizeof(Word) - 1) / sizeof(Word);
     }
@@ -387,13 +389,14 @@ protected:
     }
 
 public:
-    PodArrayDdSpec()
-            : arraySize(-1), dataWords(-1) {
+    PodArrayDdSpec() :
+            arraySize(-1), dataWords(-1) {
     }
 
     int datasize() const {
-        if (dataWords < 0) throw std::runtime_error(
-                "Array size is unknown; please set it by setArraySize(int) in the constructor of DD spec.");
+        if (dataWords < 0)
+            throw std::runtime_error(
+                    "Array size is unknown; please set it by setArraySize(int) in the constructor of DD spec.");
         return dataWords * sizeof(Word);
     }
 
@@ -464,7 +467,7 @@ public:
 };
 
 /**
- * Abstract class of DD specifications using both POD scalar and POD array states.
+ * Abstract class of DD specifications using both scalar and POD array states.
  *
  * Every implementation must have the following functions:
  * - int getRoot(TS& scalar, TA* array)
@@ -472,6 +475,8 @@ public:
  *
  * Optionally, the following functions can be overloaded:
  * - void mergeStates(TS& s_to, TA* a_to, TS const& s_from, TA const* a_from)
+ * - size_t hashCode(T const& state) const
+ * - bool equalTo(T const& state1, T const& state2) const
  * - void printLevel(std::ostream& os, int level) const
  * - void printState(std::ostream& os, TS const& s, TA const* a) const
  *
@@ -481,49 +486,47 @@ public:
  * @tparam AR arity of the nodes.
  */
 template<typename S, typename TS, typename TA, int AR>
-class PodHybridDdSpec: public DdSpecBase<S,AR> {
+class HybridDdSpec: public DdSpecBase<S,AR> {
 public:
     typedef TS S_State;
     typedef TA A_State;
 
 private:
     typedef size_t Word;
-
-    struct States {
-        S_State s;
-        A_State a[1];
-    };
+    static int const S_WORDS = (sizeof(S_State) + sizeof(Word) - 1)
+                               / sizeof(Word);
 
     int arraySize;
     int dataWords;
 
     static S_State& s_state(void* p) {
-        return static_cast<States*>(p)->s;
+        return *static_cast<S_State*>(p);
     }
 
     static S_State const& s_state(void const* p) {
-        return static_cast<States const*>(p)->s;
+        return *static_cast<S_State const*>(p);
     }
 
     static A_State* a_state(void* p) {
-        return static_cast<States*>(p)->a;
+        return reinterpret_cast<A_State*>(static_cast<Word*>(p) + S_WORDS);
     }
 
     static A_State const* a_state(void const* p) {
-        return static_cast<States const*>(p)->a;
+        return reinterpret_cast<A_State const*>(static_cast<Word const*>(p)
+                                                + S_WORDS);
     }
 
 protected:
     void setArraySize(int n) {
         assert(0 <= n);
         arraySize = n;
-        dataWords = (sizeof(States) + (n - 1) * sizeof(A_State) + sizeof(Word)
-                - 1) / sizeof(Word);
+        dataWords = S_WORDS
+                    + (n * sizeof(A_State) + sizeof(Word) - 1) / sizeof(Word);
     }
 
 public:
-    PodHybridDdSpec()
-            : arraySize(-1), dataWords(-1) {
+    HybridDdSpec() :
+            arraySize(-1), dataWords(-1) {
     }
 
     int datasize() const {
@@ -552,7 +555,8 @@ public:
     }
 
     void merge_states(void* to, void const* from) {
-        this->entity().mergeStates(s_state(to), a_state(to), s_state(from), a_state(from));
+        this->entity().mergeStates(s_state(to), a_state(to), s_state(from),
+                a_state(from));
     }
 
     void destruct(void* p) {
@@ -561,10 +565,21 @@ public:
     void destructLevel(int level) {
     }
 
+    size_t hashCode(S_State const& s) const {
+        //return std::hash<S_State>()(s);
+        return static_cast<size_t>(s);
+    }
+
+    size_t hashCodeAtLevel(S_State const& s, int level) const {
+        return this->entity().hashCode(s);
+    }
+
     size_t hash_code(void const* p, int level) const {
+        size_t h = this->entity().hashCodeAtLevel(s_state(p), level);
+        h *= 271828171;
         Word const* pa = static_cast<Word const*>(p);
         Word const* pz = pa + dataWords;
-        size_t h = 0;
+        pa += S_WORDS;
         while (pa != pz) {
             h += *pa++;
             h *= 314159257;
@@ -572,10 +587,22 @@ public:
         return h;
     }
 
+    bool equalTo(S_State const& s1, S_State const& s2) const {
+        return std::equal_to<S_State>()(s1, s2);
+    }
+
+    bool equalToAtLevel(S_State const& s1, S_State const& s2, int level) const {
+        return this->entity().equalTo(s1, s2);
+    }
+
     bool equal_to(void const* p, void const* q, int level) const {
+        if (!this->entity().equalToAtLevel(s_state(p), s_state(q), level))
+            return false;
         Word const* pa = static_cast<Word const*>(p);
         Word const* qa = static_cast<Word const*>(q);
         Word const* pz = pa + dataWords;
+        pa += S_WORDS;
+        qa += S_WORDS;
         while (pa != pz) {
             if (*pa++ != *qa++) return false;
         }

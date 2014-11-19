@@ -28,7 +28,7 @@
 #include <tdzdd/DdSpec.hpp>
 #include "Board.hpp"
 
-class NumlinZdd: public tdzdd::PodHybridDdSpec<NumlinZdd,int,uint8_t,2> {
+class NumlinZdd: public tdzdd::HybridDdSpec<NumlinZdd,int,uint8_t,2> {
     Board const& quiz_;
     int const kansai;
     bool const noRoundabout;
