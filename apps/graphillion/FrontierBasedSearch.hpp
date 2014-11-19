@@ -42,7 +42,7 @@ struct FrontierBasedSearchCount {
             : uec(uncoloredEdgeComponents) {
     }
 
-    operator size_t() const {
+    size_t hash() const {
         return uec;
     }
 
@@ -471,5 +471,9 @@ public:
 
         assert(i < n);
         return n - i;
+    }
+
+    size_t hashCode(Count const& count) const {
+        return count.hash();
     }
 };
