@@ -52,6 +52,7 @@
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-attribs">Static Public Attributes</a> &#124;
+<a href="#pro-static-methods">Static Protected Member Functions</a> &#124;
 <a href="#friends">Friends</a> &#124;
 <a href="classtdzdd_1_1DdSpecBase-members.html">List of all members</a>  </div>
   <div class="headertitle">
@@ -85,6 +86,15 @@ Public Member Functions</h2></td></tr>
 Static Public Attributes</h2></td></tr>
 <tr class="memitem:a591ed102645d3dbe3eabe70fa6ad0463"><td class="memItemLeft" align="right" valign="top">static int const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtdzdd_1_1DdSpecBase.html#a591ed102645d3dbe3eabe70fa6ad0463">ARITY</a> = AR</td></tr>
 <tr class="separator:a591ed102645d3dbe3eabe70fa6ad0463"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-static-methods"></a>
+Static Protected Member Functions</h2></td></tr>
+<tr class="memitem:a00ffdcbacacb8efb8bc28a36c13598a0"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a00ffdcbacacb8efb8bc28a36c13598a0"><td class="memTemplItemLeft" align="right" valign="top">static size_t&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classtdzdd_1_1DdSpecBase.html#a00ffdcbacacb8efb8bc28a36c13598a0">rawHashCode</a> (T const &amp;o)</td></tr>
+<tr class="separator:a00ffdcbacacb8efb8bc28a36c13598a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d58839db37d665e1d60238f34107560"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a0d58839db37d665e1d60238f34107560"><td class="memTemplItemLeft" align="right" valign="top">static size_t&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classtdzdd_1_1DdSpecBase.html#a0d58839db37d665e1d60238f34107560">rawEqualTo</a> (T const &amp;o1, T const &amp;o2)</td></tr>
+<tr class="separator:a0d58839db37d665e1d60238f34107560"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="friends"></a>
 Friends</h2></td></tr>
@@ -245,7 +255,7 @@ template&lt;typename S, int AR&gt; </div>
 
 <p>Definition at line <a class="el" href="DdSpec_8hpp_source.html#l00067">67</a> of file <a class="el" href="DdSpec_8hpp_source.html">DdSpec.hpp</a>.</p>
 
-<p>Referenced by <a class="el" href="DdStructure_8hpp_source.html#l00104">tdzdd::DdStructure&lt; ARITY &gt;::DdStructure()</a>, <a class="el" href="DdSpec_8hpp_source.html#l00325">tdzdd::DdSpec&lt; DdStructure&lt; ARITY &gt;, NodeId, ARITY &gt;::equal_to()</a>, <a class="el" href="DdSpec_8hpp_source.html#l00598">tdzdd::HybridDdSpec&lt; S, TS, TA, AR &gt;::equal_to()</a>, <a class="el" href="DdSpec_8hpp_source.html#l00321">tdzdd::DdSpec&lt; DdStructure&lt; ARITY &gt;, NodeId, ARITY &gt;::equalToAtLevel()</a>, <a class="el" href="DdSpec_8hpp_source.html#l00594">tdzdd::HybridDdSpec&lt; S, TS, TA, AR &gt;::equalToAtLevel()</a>, <a class="el" href="DdSpec_8hpp_source.html#l00199">tdzdd::StatelessDdSpec&lt; S, AR &gt;::get_child()</a>, <a class="el" href="DdSpec_8hpp_source.html#l00277">tdzdd::DdSpec&lt; DdStructure&lt; ARITY &gt;, NodeId, ARITY &gt;::get_child()</a>, <a class="el" href="DdSpec_8hpp_source.html#l00407">tdzdd::PodArrayDdSpec&lt; S, T, AR &gt;::get_child()</a>, <a class="el" href="DdSpec_8hpp_source.html#l00540">tdzdd::HybridDdSpec&lt; S, TS, TA, AR &gt;::get_child()</a>, <a class="el" href="DdSpec_8hpp_source.html#l00286">tdzdd::DdSpec&lt; DdStructure&lt; ARITY &gt;, NodeId, ARITY &gt;::get_copy()</a>, <a class="el" href="DdSpec_8hpp_source.html#l00195">tdzdd::StatelessDdSpec&lt; S, AR &gt;::get_root()</a>, <a class="el" href="DdSpec_8hpp_source.html#l00272">tdzdd::DdSpec&lt; DdStructure&lt; ARITY &gt;, NodeId, ARITY &gt;::get_root()</a>, <a class="el" href="DdSpec_8hpp_source.html#l00403">tdzdd::PodArrayDdSpec&lt; S, T, AR &gt;::get_root()</a>, <a class="el" href="DdSpec_8hpp_source.html#l00536">tdzdd::HybridDdSpec&lt; S, TS, TA, AR &gt;::get_root()</a>, <a class="el" href="DdSpec_8hpp_source.html#l00313">tdzdd::DdSpec&lt; DdStructure&lt; ARITY &gt;, NodeId, ARITY &gt;::hash_code()</a>, <a class="el" href="DdSpec_8hpp_source.html#l00577">tdzdd::HybridDdSpec&lt; S, TS, TA, AR &gt;::hash_code()</a>, <a class="el" href="DdSpec_8hpp_source.html#l00309">tdzdd::DdSpec&lt; DdStructure&lt; ARITY &gt;, NodeId, ARITY &gt;::hashCodeAtLevel()</a>, <a class="el" href="DdSpec_8hpp_source.html#l00573">tdzdd::HybridDdSpec&lt; S, TS, TA, AR &gt;::hashCodeAtLevel()</a>, <a class="el" href="DdSpec_8hpp_source.html#l00293">tdzdd::DdSpec&lt; DdStructure&lt; ARITY &gt;, NodeId, ARITY &gt;::merge_states()</a>, <a class="el" href="DdSpec_8hpp_source.html#l00424">tdzdd::PodArrayDdSpec&lt; S, T, AR &gt;::merge_states()</a>, <a class="el" href="DdSpec_8hpp_source.html#l00557">tdzdd::HybridDdSpec&lt; S, TS, TA, AR &gt;::merge_states()</a>, <a class="el" href="DdSpec_8hpp_source.html#l00079">tdzdd::DdSpecBase&lt; DdStructure&lt; ARITY &gt;, AR &gt;::print_level()</a>, <a class="el" href="DdSpec_8hpp_source.html#l00333">tdzdd::DdSpec&lt; DdStructure&lt; ARITY &gt;, NodeId, ARITY &gt;::print_state()</a>, <a class="el" href="DdSpec_8hpp_source.html#l00464">tdzdd::PodArrayDdSpec&lt; S, T, AR &gt;::print_state()</a>, <a class="el" href="DdSpec_8hpp_source.html#l00623">tdzdd::HybridDdSpec&lt; S, TS, TA, AR &gt;::print_state()</a>, and <a class="el" href="DdStructure_8hpp_source.html#l00165">tdzdd::DdStructure&lt; ARITY &gt;::zddSubset()</a>.</p>
+<p>Referenced by <a class="el" href="DdStructure_8hpp_source.html#l00104">tdzdd::DdStructure&lt; ARITY &gt;::DdStructure()</a>, <a class="el" href="DdSpec_8hpp_source.html#l00374">tdzdd::DdSpec&lt; DdStructure&lt; ARITY &gt;, NodeId, ARITY &gt;::equal_to()</a>, <a class="el" href="DdSpec_8hpp_source.html#l00646">tdzdd::HybridDdSpec&lt; S, TS, TA, AR &gt;::equal_to()</a>, <a class="el" href="DdSpec_8hpp_source.html#l00370">tdzdd::DdSpec&lt; DdStructure&lt; ARITY &gt;, NodeId, ARITY &gt;::equalToAtLevel()</a>, <a class="el" href="DdSpec_8hpp_source.html#l00642">tdzdd::HybridDdSpec&lt; S, TS, TA, AR &gt;::equalToAtLevel()</a>, <a class="el" href="DdSpec_8hpp_source.html#l00249">tdzdd::StatelessDdSpec&lt; S, AR &gt;::get_child()</a>, <a class="el" href="DdSpec_8hpp_source.html#l00327">tdzdd::DdSpec&lt; DdStructure&lt; ARITY &gt;, NodeId, ARITY &gt;::get_child()</a>, <a class="el" href="DdSpec_8hpp_source.html#l00456">tdzdd::PodArrayDdSpec&lt; S, T, AR &gt;::get_child()</a>, <a class="el" href="DdSpec_8hpp_source.html#l00589">tdzdd::HybridDdSpec&lt; S, TS, TA, AR &gt;::get_child()</a>, <a class="el" href="DdSpec_8hpp_source.html#l00336">tdzdd::DdSpec&lt; DdStructure&lt; ARITY &gt;, NodeId, ARITY &gt;::get_copy()</a>, <a class="el" href="DdSpec_8hpp_source.html#l00245">tdzdd::StatelessDdSpec&lt; S, AR &gt;::get_root()</a>, <a class="el" href="DdSpec_8hpp_source.html#l00322">tdzdd::DdSpec&lt; DdStructure&lt; ARITY &gt;, NodeId, ARITY &gt;::get_root()</a>, <a class="el" href="DdSpec_8hpp_source.html#l00452">tdzdd::PodArrayDdSpec&lt; S, T, AR &gt;::get_root()</a>, <a class="el" href="DdSpec_8hpp_source.html#l00585">tdzdd::HybridDdSpec&lt; S, TS, TA, AR &gt;::get_root()</a>, <a class="el" href="DdSpec_8hpp_source.html#l00362">tdzdd::DdSpec&lt; DdStructure&lt; ARITY &gt;, NodeId, ARITY &gt;::hash_code()</a>, <a class="el" href="DdSpec_8hpp_source.html#l00625">tdzdd::HybridDdSpec&lt; S, TS, TA, AR &gt;::hash_code()</a>, <a class="el" href="DdSpec_8hpp_source.html#l00358">tdzdd::DdSpec&lt; DdStructure&lt; ARITY &gt;, NodeId, ARITY &gt;::hashCodeAtLevel()</a>, <a class="el" href="DdSpec_8hpp_source.html#l00621">tdzdd::HybridDdSpec&lt; S, TS, TA, AR &gt;::hashCodeAtLevel()</a>, <a class="el" href="DdSpec_8hpp_source.html#l00343">tdzdd::DdSpec&lt; DdStructure&lt; ARITY &gt;, NodeId, ARITY &gt;::merge_states()</a>, <a class="el" href="DdSpec_8hpp_source.html#l00473">tdzdd::PodArrayDdSpec&lt; S, T, AR &gt;::merge_states()</a>, <a class="el" href="DdSpec_8hpp_source.html#l00606">tdzdd::HybridDdSpec&lt; S, TS, TA, AR &gt;::merge_states()</a>, <a class="el" href="DdSpec_8hpp_source.html#l00079">tdzdd::DdSpecBase&lt; DdStructure&lt; ARITY &gt;, AR &gt;::print_level()</a>, <a class="el" href="DdSpec_8hpp_source.html#l00382">tdzdd::DdSpec&lt; DdStructure&lt; ARITY &gt;, NodeId, ARITY &gt;::print_state()</a>, <a class="el" href="DdSpec_8hpp_source.html#l00513">tdzdd::PodArrayDdSpec&lt; S, T, AR &gt;::print_state()</a>, <a class="el" href="DdSpec_8hpp_source.html#l00671">tdzdd::HybridDdSpec&lt; S, TS, TA, AR &gt;::print_state()</a>, and <a class="el" href="DdStructure_8hpp_source.html#l00165">tdzdd::DdStructure&lt; ARITY &gt;::zddSubset()</a>.</p>
 
 </div>
 </div>
@@ -352,6 +362,80 @@ template&lt;typename S, int AR&gt; </div>
 
 </div>
 </div>
+<a class="anchor" id="a0d58839db37d665e1d60238f34107560"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename S, int AR&gt; </div>
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static size_t <a class="el" href="classtdzdd_1_1DdSpecBase.html">tdzdd::DdSpecBase</a>&lt; S, AR &gt;::rawEqualTo </td>
+          <td>(</td>
+          <td class="paramtype">T const &amp;&#160;</td>
+          <td class="paramname"><em>o1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">T const &amp;&#160;</td>
+          <td class="paramname"><em>o2</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="DdSpec_8hpp_source.html#l00214">214</a> of file <a class="el" href="DdSpec_8hpp_source.html">DdSpec.hpp</a>.</p>
+
+<p>Referenced by <a class="el" href="DdSpec_8hpp_source.html#l00366">tdzdd::DdSpec&lt; DdStructure&lt; ARITY &gt;, NodeId, ARITY &gt;::equalTo()</a>, and <a class="el" href="DdSpec_8hpp_source.html#l00638">tdzdd::HybridDdSpec&lt; S, TS, TA, AR &gt;::equalTo()</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a00ffdcbacacb8efb8bc28a36c13598a0"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename S, int AR&gt; </div>
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static size_t <a class="el" href="classtdzdd_1_1DdSpecBase.html">tdzdd::DdSpecBase</a>&lt; S, AR &gt;::rawHashCode </td>
+          <td>(</td>
+          <td class="paramtype">T const &amp;&#160;</td>
+          <td class="paramname"><em>o</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="DdSpec_8hpp_source.html#l00200">200</a> of file <a class="el" href="DdSpec_8hpp_source.html">DdSpec.hpp</a>.</p>
+
+<p>Referenced by <a class="el" href="DdSpec_8hpp_source.html#l00354">tdzdd::DdSpec&lt; DdStructure&lt; ARITY &gt;, NodeId, ARITY &gt;::hashCode()</a>, and <a class="el" href="DdSpec_8hpp_source.html#l00617">tdzdd::HybridDdSpec&lt; S, TS, TA, AR &gt;::hashCode()</a>.</p>
+
+</div>
+</div>
 <h2 class="groupheader">Friends And Related Function Documentation</h2>
 <a class="anchor" id="a73ee94e5a8b0b4618a726e202cb61d72"></a>
 <div class="memitem">
@@ -432,7 +516,7 @@ template&lt;typename S, int AR&gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Nov 19 2014 13:46:56 for TdZdd by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Nov 19 2014 15:50:51 for TdZdd by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

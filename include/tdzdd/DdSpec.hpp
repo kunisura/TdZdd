@@ -50,7 +50,7 @@ namespace tdzdd {
  * - void print_state(std::ostream& os, void const* p) const
  *
  * Optionally, the following functions can be overloaded:
- * - void print_level(std::ostream& os, int level) const
+ * - void printLevel(std::ostream& os, int level) const
  *
  * A return code of get_root(void*) or get_child(void*, int, bool)
  * is 0 when the node is forwarded to the 0-terminal
@@ -76,17 +76,13 @@ public:
         os << level;
     }
 
-    void print_level(std::ostream& os, int level) const {
-        entity().printLevel(os, level);
-    }
-
     /**
      * Dumps the node table in Graphviz (dot) format.
      * @param os the output stream.
      * @param title title label.
      */
     void dumpDot(std::ostream& os = std::cout, std::string title =
-            typenameof<S>()) const {
+                         typenameof<S>()) const {
         dumpDot_(os, false, title);
     }
 
@@ -97,7 +93,7 @@ public:
      * @param title title label.
      */
     void dumpDotCut(std::ostream& os = std::cout, std::string title =
-            typenameof<S>()) const {
+                            typenameof<S>()) const {
         dumpDot_(os, true, title);
     }
 
@@ -128,7 +124,7 @@ private:
         os << "digraph \"" << title << "\" {\n";
         for (int i = root.row(); i >= 1; --i) {
             os << "  " << i << " [shape=none,label=\"";
-            entity().print_level(os, i);
+            entity().printLevel(os, i);
             os << "\"];\n";
         }
         for (int i = root.row() - 1; i >= 1; --i) {
@@ -173,6 +169,56 @@ private:
         os << "}\n";
         os.flush();
     }
+
+    template<typename T, typename I>
+    static size_t rawHashCode_(void const* p) {
+        size_t h = 0;
+        I const* a = static_cast<I const*>(p);
+        for (int i = 0; i < sizeof(T) / sizeof(I); ++i) {
+            h += a[i];
+            h *= 314159257;
+        }
+        return h;
+    }
+
+    template<typename T, typename I>
+    static size_t rawEqualTo_(void const* p1, void const* p2) {
+        I const* a1 = static_cast<I const*>(p1);
+        I const* a2 = static_cast<I const*>(p2);
+        for (int i = 0; i < sizeof(T) / sizeof(I); ++i) {
+            if (a1[i] != a2[i]) return false;
+        }
+        return true;
+    }
+
+protected:
+    template<typename T>
+    static size_t rawHashCode(T const& o) {
+        if (sizeof(T) % sizeof(size_t) == 0) {
+            return rawHashCode_<T,size_t>(&o);
+        }
+        if (sizeof(T) % sizeof(unsigned int) == 0) {
+            return rawHashCode_<T,unsigned int>(&o);
+        }
+        if (sizeof(T) % sizeof(unsigned short) == 0) {
+            return rawHashCode_<T,unsigned short>(&o);
+        }
+        return rawHashCode_<T,unsigned char>(&o);
+    }
+
+    template<typename T>
+    static size_t rawEqualTo(T const& o1, T const& o2) {
+        if (sizeof(T) % sizeof(size_t) == 0) {
+            return rawEqualTo_<T,size_t>(&o1, &o2);
+        }
+        if (sizeof(T) % sizeof(unsigned int) == 0) {
+            return rawEqualTo_<T,unsigned int>(&o1, &o2);
+        }
+        if (sizeof(T) % sizeof(unsigned short) == 0) {
+            return rawEqualTo_<T,unsigned short>(&o1, &o2);
+        }
+        return rawEqualTo_<T,unsigned char>(&o1, &o2);
+    }
 };
 
 /**
@@ -181,6 +227,9 @@ private:
  * Every implementation must have the following functions:
  * - int getRoot()
  * - int getChild(int level, int value)
+ *
+ * Optionally, the following functions can be overloaded:
+ * - void printLevel(std::ostream& os, int level) const
  *
  * @tparam S the class implementing this class.
  * @tparam AR arity of the nodes.
@@ -302,8 +351,7 @@ public:
     }
 
     size_t hashCode(State const& s) const {
-        //return std::hash<State>()(s);
-        return static_cast<size_t>(s);
+        return this->rawHashCode(s);
     }
 
     size_t hashCodeAtLevel(State const& s, int level) const {
@@ -315,7 +363,7 @@ public:
     }
 
     bool equalTo(State const& s1, State const& s2) const {
-        return std::equal_to<State>()(s1, s2);
+        return this->rawEqualTo(s1, s2);
     }
 
     bool equalToAtLevel(State const& s1, State const& s2, int level) const {
@@ -474,9 +522,11 @@ public:
  * - int getChild(TS& scalar, TA* array, int level, int value)
  *
  * Optionally, the following functions can be overloaded:
+ * - void construct(void* p)
+ * - void getCopy(void* p, TS const& state)
  * - void mergeStates(TS& s_to, TA* a_to, TS const& s_from, TA const* a_from)
- * - size_t hashCode(T const& state) const
- * - bool equalTo(T const& state1, T const& state2) const
+ * - size_t hashCode(TS const& state) const
+ * - bool equalTo(TS const& state1, TS const& state2) const
  * - void printLevel(std::ostream& os, int level) const
  * - void printState(std::ostream& os, TS const& s, TA const* a) const
  *
@@ -533,6 +583,10 @@ public:
         return dataWords * sizeof(Word);
     }
 
+    void construct(void* p) {
+        new (p) S_State();
+    }
+
     int get_root(void* p) {
         return this->entity().getRoot(s_state(p), a_state(p));
     }
@@ -542,16 +596,26 @@ public:
         return this->entity().getChild(s_state(p), a_state(p), level, value);
     }
 
+    void getCopy(void* p, S_State const& s) {
+        new (p) S_State(s);
+    }
+
     void get_copy(void* to, void const* from) {
+        this->entity().getCopy(to, s_state(from));
         Word const* pa = static_cast<Word const*>(from);
         Word const* pz = pa + dataWords;
         Word* qa = static_cast<Word*>(to);
+        pa += S_WORDS;
+        qa += S_WORDS;
         while (pa != pz) {
             *qa++ = *pa++;
         }
     }
 
-    void mergeStates(TS& s_to, TA* a_to, TS const& s_from, TA const* a_from) {
+    void mergeStates(S_State& s_to,
+                     A_State* a_to,
+                     S_State const& s_from,
+                     A_State const* a_from) {
     }
 
     void merge_states(void* to, void const* from) {
@@ -566,8 +630,7 @@ public:
     }
 
     size_t hashCode(S_State const& s) const {
-        //return std::hash<S_State>()(s);
-        return static_cast<size_t>(s);
+        return this->rawHashCode(s);
     }
 
     size_t hashCodeAtLevel(S_State const& s, int level) const {
@@ -588,7 +651,7 @@ public:
     }
 
     bool equalTo(S_State const& s1, S_State const& s2) const {
-        return std::equal_to<S_State>()(s1, s2);
+        return this->rawEqualTo(s1, s2);
     }
 
     bool equalToAtLevel(S_State const& s1, S_State const& s2, int level) const {
@@ -609,8 +672,9 @@ public:
         return true;
     }
 
-    void printState(std::ostream& os, S_State const& s,
-            A_State const* a) const {
+    void printState(std::ostream& os,
+                    S_State const& s,
+                    A_State const* a) const {
         os << "[";
         os << s << ":";
         for (int i = 0; i < arraySize; ++i) {
