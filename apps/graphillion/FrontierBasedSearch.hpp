@@ -38,6 +38,10 @@
 struct FrontierBasedSearchCount {
     int16_t uec; ///< uncolored edge component counter.
 
+    FrontierBasedSearchCount()
+            : uec(0) {
+    }
+
     FrontierBasedSearchCount(int16_t uncoloredEdgeComponents)
             : uec(uncoloredEdgeComponents) {
     }

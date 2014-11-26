@@ -79,8 +79,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a28936b47ed85b4c58a0983ebced319a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a072b702e2006b5b306efec5b45aa23fc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtdzdd_1_1StatelessDdSpec.html#a072b702e2006b5b306efec5b45aa23fc">get_copy</a> (void *to, void const *from)</td></tr>
 <tr class="separator:a072b702e2006b5b306efec5b45aa23fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a73108d48fd8b3bb3191acc2c0606df55"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtdzdd_1_1StatelessDdSpec.html#a73108d48fd8b3bb3191acc2c0606df55">merge_states</a> (void *to, void const *from)</td></tr>
-<tr class="separator:a73108d48fd8b3bb3191acc2c0606df55"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7346f298bba8554d9d34340dc4ab48df"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtdzdd_1_1StatelessDdSpec.html#a7346f298bba8554d9d34340dc4ab48df">merge_states</a> (void *p1, void *p2)</td></tr>
+<tr class="separator:a7346f298bba8554d9d34340dc4ab48df"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afa3fb942eaf4c9cd4eead1c812ce8882"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtdzdd_1_1StatelessDdSpec.html#afa3fb942eaf4c9cd4eead1c812ce8882">destruct</a> (void *p)</td></tr>
 <tr class="separator:afa3fb942eaf4c9cd4eead1c812ce8882"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2f2ffc7e7f188c991a0b48220013ed58"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtdzdd_1_1StatelessDdSpec.html#a2f2ffc7e7f188c991a0b48220013ed58">destructLevel</a> (int level)</td></tr>
@@ -98,14 +98,13 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a7fc6b18d6e2f454f9ac6f1dc90189874 inherit pub_methods_classtdzdd_1_1DdSpecBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a52c50e764aae54e24335f2517ad24493 inherit pub_methods_classtdzdd_1_1DdSpecBase"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtdzdd_1_1DdSpecBase.html#a52c50e764aae54e24335f2517ad24493">printLevel</a> (std::ostream &amp;os, int level) const </td></tr>
 <tr class="separator:a52c50e764aae54e24335f2517ad24493 inherit pub_methods_classtdzdd_1_1DdSpecBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae22afde83db62256b199a7081b42152f inherit pub_methods_classtdzdd_1_1DdSpecBase"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtdzdd_1_1DdSpecBase.html#ae22afde83db62256b199a7081b42152f">print_level</a> (std::ostream &amp;os, int level) const </td></tr>
-<tr class="separator:ae22afde83db62256b199a7081b42152f inherit pub_methods_classtdzdd_1_1DdSpecBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad62b02638f79b2ad9de09dc21c062de4 inherit pub_methods_classtdzdd_1_1DdSpecBase"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::pair&lt; int, <br class="typebreak"/>
+int &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtdzdd_1_1DdSpecBase.html#ad62b02638f79b2ad9de09dc21c062de4">findOneInstance</a> () const </td></tr>
+<tr class="memdesc:ad62b02638f79b2ad9de09dc21c062de4 inherit pub_methods_classtdzdd_1_1DdSpecBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a random instance using simple depth-first search without caching.  <a href="#ad62b02638f79b2ad9de09dc21c062de4">More...</a><br/></td></tr>
+<tr class="separator:ad62b02638f79b2ad9de09dc21c062de4 inherit pub_methods_classtdzdd_1_1DdSpecBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab77ef493d44d50ae0ffbd571c62c77af inherit pub_methods_classtdzdd_1_1DdSpecBase"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtdzdd_1_1DdSpecBase.html#ab77ef493d44d50ae0ffbd571c62c77af">dumpDot</a> (std::ostream &amp;os=std::cout, std::string title=typenameof&lt; S &gt;()) const </td></tr>
 <tr class="memdesc:ab77ef493d44d50ae0ffbd571c62c77af inherit pub_methods_classtdzdd_1_1DdSpecBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Dumps the node table in Graphviz (dot) format.  <a href="#ab77ef493d44d50ae0ffbd571c62c77af">More...</a><br/></td></tr>
 <tr class="separator:ab77ef493d44d50ae0ffbd571c62c77af inherit pub_methods_classtdzdd_1_1DdSpecBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a34962a2caa34b4ea6d02f6464eade8d3 inherit pub_methods_classtdzdd_1_1DdSpecBase"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtdzdd_1_1DdSpecBase.html#a34962a2caa34b4ea6d02f6464eade8d3">dumpDotCut</a> (std::ostream &amp;os=std::cout, std::string title=typenameof&lt; S &gt;()) const </td></tr>
-<tr class="memdesc:a34962a2caa34b4ea6d02f6464eade8d3 inherit pub_methods_classtdzdd_1_1DdSpecBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Dumps the node table in Graphviz (dot) format.  <a href="#a34962a2caa34b4ea6d02f6464eade8d3">More...</a><br/></td></tr>
-<tr class="separator:a34962a2caa34b4ea6d02f6464eade8d3 inherit pub_methods_classtdzdd_1_1DdSpecBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
@@ -130,6 +129,10 @@ class tdzdd::StatelessDdSpec&lt; S, AR &gt;</h3>
 <li>int getRoot()</li>
 <li>int getChild(int level, int value)</li>
 </ul>
+<p>Optionally, the following functions can be overloaded:</p>
+<ul>
+<li>void <a class="el" href="classtdzdd_1_1DdSpecBase.html#a52c50e764aae54e24335f2517ad24493">printLevel(std::ostream&amp; os, int level) const</a></li>
+</ul>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">S</td><td>the class implementing this class. </td></tr>
@@ -138,7 +141,7 @@ class tdzdd::StatelessDdSpec&lt; S, AR &gt;</h3>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="DdSpec_8hpp_source.html#l00239">239</a> of file <a class="el" href="DdSpec_8hpp_source.html">DdSpec.hpp</a>.</p>
+<p>Definition at line <a class="el" href="DdSpec_8hpp_source.html#l00185">185</a> of file <a class="el" href="DdSpec_8hpp_source.html">DdSpec.hpp</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a class="anchor" id="acc8b68b0a2cde3cf5708bf02dba24c27"></a>
 <div class="memitem">
@@ -163,7 +166,7 @@ template&lt;typename S , int AR&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="DdSpec_8hpp_source.html#l00241">241</a> of file <a class="el" href="DdSpec_8hpp_source.html">DdSpec.hpp</a>.</p>
+<p>Definition at line <a class="el" href="DdSpec_8hpp_source.html#l00187">187</a> of file <a class="el" href="DdSpec_8hpp_source.html">DdSpec.hpp</a>.</p>
 
 </div>
 </div>
@@ -191,7 +194,7 @@ template&lt;typename S , int AR&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="DdSpec_8hpp_source.html#l00260">260</a> of file <a class="el" href="DdSpec_8hpp_source.html">DdSpec.hpp</a>.</p>
+<p>Definition at line <a class="el" href="DdSpec_8hpp_source.html#l00207">207</a> of file <a class="el" href="DdSpec_8hpp_source.html">DdSpec.hpp</a>.</p>
 
 </div>
 </div>
@@ -219,7 +222,7 @@ template&lt;typename S , int AR&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="DdSpec_8hpp_source.html#l00263">263</a> of file <a class="el" href="DdSpec_8hpp_source.html">DdSpec.hpp</a>.</p>
+<p>Definition at line <a class="el" href="DdSpec_8hpp_source.html#l00210">210</a> of file <a class="el" href="DdSpec_8hpp_source.html">DdSpec.hpp</a>.</p>
 
 </div>
 </div>
@@ -263,7 +266,7 @@ template&lt;typename S , int AR&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="DdSpec_8hpp_source.html#l00270">270</a> of file <a class="el" href="DdSpec_8hpp_source.html">DdSpec.hpp</a>.</p>
+<p>Definition at line <a class="el" href="DdSpec_8hpp_source.html#l00217">217</a> of file <a class="el" href="DdSpec_8hpp_source.html">DdSpec.hpp</a>.</p>
 
 </div>
 </div>
@@ -307,9 +310,9 @@ template&lt;typename S , int AR&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="DdSpec_8hpp_source.html#l00249">249</a> of file <a class="el" href="DdSpec_8hpp_source.html">DdSpec.hpp</a>.</p>
+<p>Definition at line <a class="el" href="DdSpec_8hpp_source.html#l00195">195</a> of file <a class="el" href="DdSpec_8hpp_source.html">DdSpec.hpp</a>.</p>
 
-<p>References <a class="el" href="DdSpec_8hpp_source.html#l00067">tdzdd::DdSpecBase&lt; S, AR &gt;::entity()</a>.</p>
+<p>References <a class="el" href="DdSpec_8hpp_source.html#l00072">tdzdd::DdSpecBase&lt; S, AR &gt;::entity()</a>.</p>
 
 </div>
 </div>
@@ -347,7 +350,7 @@ template&lt;typename S , int AR&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="DdSpec_8hpp_source.html#l00254">254</a> of file <a class="el" href="DdSpec_8hpp_source.html">DdSpec.hpp</a>.</p>
+<p>Definition at line <a class="el" href="DdSpec_8hpp_source.html#l00200">200</a> of file <a class="el" href="DdSpec_8hpp_source.html">DdSpec.hpp</a>.</p>
 
 </div>
 </div>
@@ -375,9 +378,9 @@ template&lt;typename S , int AR&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="DdSpec_8hpp_source.html#l00245">245</a> of file <a class="el" href="DdSpec_8hpp_source.html">DdSpec.hpp</a>.</p>
+<p>Definition at line <a class="el" href="DdSpec_8hpp_source.html#l00191">191</a> of file <a class="el" href="DdSpec_8hpp_source.html">DdSpec.hpp</a>.</p>
 
-<p>References <a class="el" href="DdSpec_8hpp_source.html#l00067">tdzdd::DdSpecBase&lt; S, AR &gt;::entity()</a>.</p>
+<p>References <a class="el" href="DdSpec_8hpp_source.html#l00072">tdzdd::DdSpecBase&lt; S, AR &gt;::entity()</a>.</p>
 
 </div>
 </div>
@@ -415,11 +418,11 @@ template&lt;typename S , int AR&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="DdSpec_8hpp_source.html#l00266">266</a> of file <a class="el" href="DdSpec_8hpp_source.html">DdSpec.hpp</a>.</p>
+<p>Definition at line <a class="el" href="DdSpec_8hpp_source.html#l00213">213</a> of file <a class="el" href="DdSpec_8hpp_source.html">DdSpec.hpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a73108d48fd8b3bb3191acc2c0606df55"></a>
+<a class="anchor" id="a7346f298bba8554d9d34340dc4ab48df"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -429,16 +432,16 @@ template&lt;typename S , int AR&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classtdzdd_1_1StatelessDdSpec.html">tdzdd::StatelessDdSpec</a>&lt; S, AR &gt;::merge_states </td>
+          <td class="memname">int <a class="el" href="classtdzdd_1_1StatelessDdSpec.html">tdzdd::StatelessDdSpec</a>&lt; S, AR &gt;::merge_states </td>
           <td>(</td>
           <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>to</em>, </td>
+          <td class="paramname"><em>p1</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">void const *&#160;</td>
-          <td class="paramname"><em>from</em>&#160;</td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>p2</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -453,7 +456,7 @@ template&lt;typename S , int AR&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="DdSpec_8hpp_source.html#l00257">257</a> of file <a class="el" href="DdSpec_8hpp_source.html">DdSpec.hpp</a>.</p>
+<p>Definition at line <a class="el" href="DdSpec_8hpp_source.html#l00203">203</a> of file <a class="el" href="DdSpec_8hpp_source.html">DdSpec.hpp</a>.</p>
 
 </div>
 </div>
@@ -491,7 +494,7 @@ template&lt;typename S , int AR&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="DdSpec_8hpp_source.html#l00274">274</a> of file <a class="el" href="DdSpec_8hpp_source.html">DdSpec.hpp</a>.</p>
+<p>Definition at line <a class="el" href="DdSpec_8hpp_source.html#l00221">221</a> of file <a class="el" href="DdSpec_8hpp_source.html">DdSpec.hpp</a>.</p>
 
 </div>
 </div>
@@ -501,7 +504,7 @@ template&lt;typename S , int AR&gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Nov 19 2014 15:50:51 for TdZdd by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Nov 26 2014 10:27:03 for TdZdd by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

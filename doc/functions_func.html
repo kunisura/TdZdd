@@ -58,6 +58,7 @@
       <li><a href="#index_c"><span>c</span></a></li>
       <li><a href="#index_d"><span>d</span></a></li>
       <li><a href="#index_e"><span>e</span></a></li>
+      <li><a href="#index_f"><span>f</span></a></li>
       <li><a href="#index_g"><span>g</span></a></li>
       <li><a href="#index_h"><span>h</span></a></li>
       <li><a href="#index_i"><span>i</span></a></li>
@@ -101,6 +102,7 @@
 </li>
 <li>construct()
 : <a class="el" href="classtdzdd_1_1DdSpec.html#af1d155d771095d198fabc2b0590005a1">tdzdd::DdSpec&lt; S, T, AR &gt;</a>
+, <a class="el" href="classtdzdd_1_1HybridDdSpec.html#ae88f20d6b1716f99985ad54ad9680f73">tdzdd::HybridDdSpec&lt; S, TS, TA, AR &gt;</a>
 </li>
 </ul>
 
@@ -131,9 +133,6 @@
 <li>dumpDot()
 : <a class="el" href="classtdzdd_1_1DdSpecBase.html#ab77ef493d44d50ae0ffbd571c62c77af">tdzdd::DdSpecBase&lt; S, AR &gt;</a>
 </li>
-<li>dumpDotCut()
-: <a class="el" href="classtdzdd_1_1DdSpecBase.html#a34962a2caa34b4ea6d02f6464eade8d3">tdzdd::DdSpecBase&lt; S, AR &gt;</a>
-</li>
 <li>dumpSapporo()
 : <a class="el" href="classtdzdd_1_1DdStructure.html#a0e362e980a82762dbe8c374eebb2ecc1">tdzdd::DdStructure&lt; ARITY &gt;</a>
 </li>
@@ -141,11 +140,14 @@
 
 
 <h3><a class="anchor" id="index_e"></a>- e -</h3><ul>
+<li>empty()
+: <a class="el" href="classtdzdd_1_1DdStructure.html#a0dccd559a3a4a2535342f0ee4a157f35">tdzdd::DdStructure&lt; ARITY &gt;</a>
+</li>
 <li>end()
 : <a class="el" href="classtdzdd_1_1DdStructure.html#a8a635dd78162f07c06fe9c55312c17a9">tdzdd::DdStructure&lt; ARITY &gt;</a>
 </li>
 <li>entity()
-: <a class="el" href="classtdzdd_1_1DdEval.html#af6d1bf73965b1a4a2780bac9797efc52">tdzdd::DdEval&lt; E, T, R &gt;</a>
+: <a class="el" href="classtdzdd_1_1DdEval.html#a0e3563559e792097615cb437196ebfba">tdzdd::DdEval&lt; E, T, R &gt;</a>
 , <a class="el" href="classtdzdd_1_1DdSpecBase.html#aafdba78506e17b480584df199115ecf5">tdzdd::DdSpecBase&lt; S, AR &gt;</a>
 </li>
 <li>equal_to()
@@ -164,6 +166,13 @@
 </li>
 <li>evaluate()
 : <a class="el" href="classtdzdd_1_1DdStructure.html#a665dc9108902aeee588866944a4e7960">tdzdd::DdStructure&lt; ARITY &gt;</a>
+</li>
+</ul>
+
+
+<h3><a class="anchor" id="index_f"></a>- f -</h3><ul>
+<li>findOneInstance()
+: <a class="el" href="classtdzdd_1_1DdSpecBase.html#ad62b02638f79b2ad9de09dc21c062de4">tdzdd::DdSpecBase&lt; S, AR &gt;</a>
 </li>
 </ul>
 
@@ -198,9 +207,10 @@
 </li>
 <li>getCopy()
 : <a class="el" href="classtdzdd_1_1DdSpec.html#acc4ef2568713f8d45fea4a4acd18fe5f">tdzdd::DdSpec&lt; S, T, AR &gt;</a>
+, <a class="el" href="classtdzdd_1_1HybridDdSpec.html#a3a6663b505a030036dc1baf0a0ce12d1">tdzdd::HybridDdSpec&lt; S, TS, TA, AR &gt;</a>
 </li>
 <li>getDiagram()
-: <a class="el" href="classtdzdd_1_1DdStructure.html#a8dba1d695907e296b26f1a82df0d6dab">tdzdd::DdStructure&lt; ARITY &gt;</a>
+: <a class="el" href="classtdzdd_1_1DdStructure.html#a03b4bfb1658a3fbcea90af01796a2ea6">tdzdd::DdStructure&lt; ARITY &gt;</a>
 </li>
 <li>getLevel()
 : <a class="el" href="classtdzdd_1_1DdValues.html#a3511bf07b4b787abf4f6d0d3825f235f">tdzdd::DdValues&lt; T, ARITY &gt;</a>
@@ -245,15 +255,15 @@
 
 <h3><a class="anchor" id="index_m"></a>- m -</h3><ul>
 <li>merge_states()
-: <a class="el" href="classtdzdd_1_1DdSpec.html#a0f0aba57748a1cf767ec7b3d24177e96">tdzdd::DdSpec&lt; S, T, AR &gt;</a>
-, <a class="el" href="classtdzdd_1_1HybridDdSpec.html#ae5c85aca5f2a8453ad25e0de79d386e4">tdzdd::HybridDdSpec&lt; S, TS, TA, AR &gt;</a>
-, <a class="el" href="classtdzdd_1_1PodArrayDdSpec.html#ab6e7a51a58676a643be1951026e593c9">tdzdd::PodArrayDdSpec&lt; S, T, AR &gt;</a>
-, <a class="el" href="classtdzdd_1_1StatelessDdSpec.html#a73108d48fd8b3bb3191acc2c0606df55">tdzdd::StatelessDdSpec&lt; S, AR &gt;</a>
+: <a class="el" href="classtdzdd_1_1DdSpec.html#a9841d2ab223acba04b6d8b0abc3ddfb4">tdzdd::DdSpec&lt; S, T, AR &gt;</a>
+, <a class="el" href="classtdzdd_1_1HybridDdSpec.html#ad0c363f738b0bde2ef14f894425d4c64">tdzdd::HybridDdSpec&lt; S, TS, TA, AR &gt;</a>
+, <a class="el" href="classtdzdd_1_1PodArrayDdSpec.html#a543b49d33f996d48fbbcc81abc85c4e7">tdzdd::PodArrayDdSpec&lt; S, T, AR &gt;</a>
+, <a class="el" href="classtdzdd_1_1StatelessDdSpec.html#a7346f298bba8554d9d34340dc4ab48df">tdzdd::StatelessDdSpec&lt; S, AR &gt;</a>
 </li>
 <li>mergeStates()
-: <a class="el" href="classtdzdd_1_1DdSpec.html#aadd25c857ff025e53c2311c0c188e3ff">tdzdd::DdSpec&lt; S, T, AR &gt;</a>
-, <a class="el" href="classtdzdd_1_1HybridDdSpec.html#a247a410fe48026eef9d5a7a683f20a76">tdzdd::HybridDdSpec&lt; S, TS, TA, AR &gt;</a>
-, <a class="el" href="classtdzdd_1_1PodArrayDdSpec.html#aeb3a32e8179644acc153efc5c7a6f455">tdzdd::PodArrayDdSpec&lt; S, T, AR &gt;</a>
+: <a class="el" href="classtdzdd_1_1DdSpec.html#ad140db8289637f1d92af5af4251eb64e">tdzdd::DdSpec&lt; S, T, AR &gt;</a>
+, <a class="el" href="classtdzdd_1_1HybridDdSpec.html#a887a0aae2f4dcfd03bfc2dc36a1de260">tdzdd::HybridDdSpec&lt; S, TS, TA, AR &gt;</a>
+, <a class="el" href="classtdzdd_1_1PodArrayDdSpec.html#ad1c29adb4c1d13153c28c75dba90d31d">tdzdd::PodArrayDdSpec&lt; S, T, AR &gt;</a>
 </li>
 </ul>
 
@@ -282,9 +292,6 @@
 <h3><a class="anchor" id="index_p"></a>- p -</h3><ul>
 <li>PodArrayDdSpec()
 : <a class="el" href="classtdzdd_1_1PodArrayDdSpec.html#a70c416df5b289ff5a7d4bf1fa2b64776">tdzdd::PodArrayDdSpec&lt; S, T, AR &gt;</a>
-</li>
-<li>print_level()
-: <a class="el" href="classtdzdd_1_1DdSpecBase.html#ae22afde83db62256b199a7081b42152f">tdzdd::DdSpecBase&lt; S, AR &gt;</a>
 </li>
 <li>print_state()
 : <a class="el" href="classtdzdd_1_1DdSpec.html#a690f18a00f19ab9b56eeab96ba06283b">tdzdd::DdSpec&lt; S, T, AR &gt;</a>
@@ -377,7 +384,7 @@
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Nov 19 2014 15:50:51 for TdZdd by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Nov 26 2014 10:27:03 for TdZdd by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

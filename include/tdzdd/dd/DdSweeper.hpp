@@ -44,6 +44,7 @@ class DdSweeper {
     static size_t const SWEEP_RATIO = 20;
 
     NodeTableEntity<ARITY>& diagram;
+    MyVector<NodeBranchId>* oneSrcPtr;
 
     MyVector<int> sweepLevel;
     MyVector<size_t> deadCount;
@@ -57,7 +58,21 @@ public:
      * @param diagram the diagram to sweep.
      */
     DdSweeper(NodeTableEntity<ARITY>& diagram) :
-            diagram(diagram), allCount(0), maxCount(0), rootPtr(0) {
+            diagram(diagram), oneSrcPtr(0), allCount(0), maxCount(0), rootPtr(0) {
+    }
+
+    /**
+     * Constructor.
+     * @param diagram the diagram to sweep.
+     * @param oneSrcPtr collection of node branch IDs.
+     */
+    DdSweeper(NodeTableEntity<ARITY>& diagram,
+              MyVector<NodeBranchId>& oneSrcPtr) :
+            diagram(diagram),
+            oneSrcPtr(&oneSrcPtr),
+            allCount(0),
+            maxCount(0),
+            rootPtr(0) {
     }
 
     /**
@@ -130,6 +145,17 @@ public:
             }
 
             diagram[i].resize(jj);
+        }
+
+        if (oneSrcPtr) {
+            for (size_t i = 0; i < oneSrcPtr->size(); ++i) {
+                NodeBranchId& nbi = (*oneSrcPtr)[i];
+                if (nbi.row >= k) {
+                    NodeId f = newId[nbi.row][nbi.col];
+                    nbi.row = f.row();
+                    nbi.col = f.col();
+                }
+            }
         }
 
         *rootPtr = newId[rootPtr->row()][rootPtr->col()];

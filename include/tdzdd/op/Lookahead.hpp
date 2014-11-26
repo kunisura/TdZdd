@@ -89,8 +89,8 @@ public:
         spec.get_copy(to, from);
     }
 
-    void merge_states(void* to, void const* from) {
-        spec.merge_states(to, from);
+    int merge_states(void* p1, void* p2) {
+        return spec.merge_states(p1, p2);
     }
 
     void destruct(void* p) {
@@ -163,8 +163,8 @@ public:
         spec.get_copy(to, from);
     }
 
-    void merge_states(void* to, void const* from) {
-        spec.merge_states(to, from);
+    int merge_states(void* p1, void* p2) {
+        return spec.merge_states(p1, p2);
     }
 
     void destruct(void* p) {

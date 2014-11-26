@@ -69,7 +69,7 @@ public:
         MyVector<Node<ARITY> >& t = (*this)[0];
         t.resize(2);
         for (int j = 0; j < 2; ++j) {
-            t[j] = Node<ARITY>(0, 0);
+            t[j] = Node<ARITY>(j, j);
         }
     }
 

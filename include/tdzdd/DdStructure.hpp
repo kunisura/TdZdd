@@ -293,6 +293,14 @@ public:
     }
 
     /**
+     * Checks if DD is a 0-terminal only.
+     * @return true if DD is a 0-terminal only.
+     */
+    bool empty() const {
+        return root_ == 0;
+    }
+
+    /**
      * Checks structural equivalence with another DD.
      * @return true if they have the same structure.
      */
@@ -422,8 +430,6 @@ public:
 
     /**
      * Counts the number of minterms of the function represented by this BDD.
-     * @tparam T data type for counting the number,
-     *          which can be integral, real, or std::string.
      * @param numVars the number of input variables of the function.
      * @return the number of itemsets.
      */
@@ -433,8 +439,6 @@ public:
 
     /**
      * Counts the number of sets in the family of sets represented by this ZDD.
-     * @tparam T data type for counting the number,
-     *          which can be integral, real, or std::string.
      * @return the number of itemsets.
      */
     std::string zddCardinality() const {
@@ -649,8 +653,9 @@ public:
     };
 
     /**
-     * Returns an iterator to the first instance.
-     * The DD is viewed as a set of integer vectors.
+     * Returns an iterator to the first instance,
+     * which is viewed as a collection of item numbers.
+     * Supports binary ZDDs only.
      * @return iterator to the first instance.
      */
     const_iterator begin() const {
@@ -659,7 +664,7 @@ public:
 
     /**
      * Returns an iterator to the element following the last instance.
-     * The DD is viewed as a set of integer vectors.
+     * Supports binary ZDDs only.
      * @return iterator to the instance following the last instance.
      */
     const_iterator end() const {

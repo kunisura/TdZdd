@@ -50,16 +50,16 @@ public:
     NodeId() { // 'code_' is not initialized in the default constructor for SPEED.
     }
 
-    NodeId(uint64_t code)
-            : code_(code) {
+    NodeId(uint64_t code) :
+            code_(code) {
     }
 
-    NodeId(uint64_t row, uint64_t col)
-            : code_((row << NODE_ROW_OFFSET) | col) {
+    NodeId(uint64_t row, uint64_t col) :
+            code_((row << NODE_ROW_OFFSET) | col) {
     }
 
-    NodeId(uint64_t row, uint64_t col, bool attr)
-            : code_((row << NODE_ROW_OFFSET) | col) {
+    NodeId(uint64_t row, uint64_t col, bool attr) :
+            code_((row << NODE_ROW_OFFSET) | col) {
         setAttr(attr);
     }
 
@@ -131,6 +131,19 @@ public:
     }
 };
 
+struct NodeBranchId {
+    size_t col;
+    int row;
+    int val;
+
+    NodeBranchId() {
+    }
+
+    NodeBranchId(int row, size_t col, int val) :
+            col(col), row(row), val(val) {
+    }
+};
+
 template<int ARITY>
 struct Node {
     NodeId branch[ARITY];
@@ -181,16 +194,16 @@ struct Node {
 
 template<int ARITY>
 struct InitializedNode: Node<ARITY> {
-    InitializedNode()
-            : Node<ARITY>(0, 0) {
+    InitializedNode() :
+            Node<ARITY>(0, 0) {
     }
 
-    InitializedNode(NodeId f0, NodeId f1)
-            : Node<ARITY>(f0, f1) {
+    InitializedNode(NodeId f0, NodeId f1) :
+            Node<ARITY>(f0, f1) {
     }
 
-    InitializedNode(Node<ARITY> const& o)
-            : Node<ARITY>(o.branch) {
+    InitializedNode(Node<ARITY> const& o) :
+            Node<ARITY>(o.branch) {
     }
 };
 

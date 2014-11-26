@@ -159,13 +159,12 @@ public:
         uint64_t word;
 
     public:
-        const_iterator(MyBitSet const& bitSet)
-                : bitSet(bitSet), wordPos(bitSet.numWords()), bitPos(-1),
-                  word(0) {
+        const_iterator(MyBitSet const& bitSet) :
+                bitSet(bitSet), wordPos(bitSet.numWords()), bitPos(-1), word(0) {
         }
 
-        const_iterator(MyBitSet const& bitSet, size_t i)
-                : bitSet(bitSet), wordPos(i), bitPos(-1), word(bitSet.word(i)) {
+        const_iterator(MyBitSet const& bitSet, size_t i) :
+                bitSet(bitSet), wordPos(i), bitPos(-1), word(bitSet.word(i)) {
             ++(*this);
         }
 
@@ -278,8 +277,8 @@ public:
 };
 
 class MyBitSetOnPool: public MyBitSet<0> {
-    MyBitSetOnPool(size_t n)
-            : MyBitSet<0>(n) {
+    MyBitSetOnPool(size_t n) :
+            MyBitSet<0>(n) {
     }
 
 public:
@@ -295,8 +294,8 @@ class MySmallSet {
     T array_[N == 0 ? 1 : N];
 
 public:
-    MySmallSet()
-            : size_(0) {
+    MySmallSet() :
+            size_(0) {
     }
 
     /**
@@ -384,10 +383,10 @@ public:
      */
     template<typename C>
     bool equals(C const& c) const {
-        typeof(begin()) p = begin();
-        typeof(c.begin()) q = c.begin();
-        typeof(end()) pz = end();
-        typeof(c.end()) qz = c.end();
+        const_iterator p = begin();
+        typename C::const_iterator q = c.begin();
+        const_iterator pz = end();
+        typename C::const_iterator qz = c.end();
         while (p != pz && q != qz) {
             if (*p != *q) return false;
             ++p, ++q;
@@ -403,10 +402,10 @@ public:
      */
     template<typename C>
     bool intersects(C const& c) const {
-        typeof(begin()) p = begin();
-        typeof(c.begin()) q = c.begin();
-        typeof(end()) pz = end();
-        typeof(c.end()) qz = c.end();
+        const_iterator p = begin();
+        typename C::const_iterator q = c.begin();
+        const_iterator pz = end();
+        typename C::const_iterator qz = c.end();
         while (p != pz && q != qz) {
             if (*p == *q) return true;
             if (*p < *q) ++p;
@@ -423,10 +422,10 @@ public:
      */
     template<typename C>
     bool containsAll(C const& c) const {
-        typeof(begin()) p = begin();
-        typeof(c.begin()) q = c.begin();
-        typeof(end()) pz = end();
-        typeof(c.end()) qz = c.end();
+        const_iterator p = begin();
+        typename C::const_iterator q = c.begin();
+        const_iterator pz = end();
+        typename C::const_iterator qz = c.end();
         while (p != pz && q != qz) {
             if (*p > *q) return false;
             if (*p < *q) ++p;
@@ -457,8 +456,8 @@ public:
         T const* ptr;
 
     public:
-        const_reverse_iterator(T const* ptr)
-                : ptr(ptr) {
+        const_reverse_iterator(T const* ptr) :
+                ptr(ptr) {
         }
 
         T const& operator*() const {
@@ -556,8 +555,11 @@ template<typename T>
 class MySmallSetOnPool: public MySmallSet<T,0> {
 public:
     static MySmallSetOnPool* newInstance(MemoryPool& pool, size_t n) {
-        size_t m = (sizeof(MySmallSet<T,0> ) - sizeof(T) + sizeof(T) * n
-                + sizeof(size_t) - 1) / sizeof(size_t);
+        size_t m = (sizeof(MySmallSet<T,0> ) - sizeof(T)
+                    + sizeof(T) * n
+                    + sizeof(size_t)
+                    - 1)
+                   / sizeof(size_t);
         return new (pool.allocate<size_t>(m)) MySmallSetOnPool();
     }
 
@@ -568,7 +570,8 @@ public:
     template<typename C>
     static MySmallSetOnPool* newInstance(MemoryPool& pool, C const& copy) {
         MySmallSetOnPool* obj = newInstance(pool, copy.size());
-        for (typeof(copy.begin()) t = copy.begin(); t != copy.end(); ++t) {
+        for (typename C::const_iterator t = copy.begin(); t != copy.end();
+                ++t) {
             obj->add(*t);
         }
         return obj;

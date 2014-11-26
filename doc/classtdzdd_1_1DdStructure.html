@@ -116,6 +116,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a632c559161fb9af5e24ceeb275c870a9"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtdzdd_1_1DdStructure.html#a632c559161fb9af5e24ceeb275c870a9">size</a> () const </td></tr>
 <tr class="memdesc:a632c559161fb9af5e24ceeb275c870a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the number of nonterminal nodes.  <a href="#a632c559161fb9af5e24ceeb275c870a9">More...</a><br/></td></tr>
 <tr class="separator:a632c559161fb9af5e24ceeb275c870a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0dccd559a3a4a2535342f0ee4a157f35"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtdzdd_1_1DdStructure.html#a0dccd559a3a4a2535342f0ee4a157f35">empty</a> () const </td></tr>
+<tr class="memdesc:a0dccd559a3a4a2535342f0ee4a157f35"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if DD is a 0-terminal only.  <a href="#a0dccd559a3a4a2535342f0ee4a157f35">More...</a><br/></td></tr>
+<tr class="separator:a0dccd559a3a4a2535342f0ee4a157f35"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad00784e7df35d74edd733181cd150095"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtdzdd_1_1DdStructure.html#ad00784e7df35d74edd733181cd150095">operator==</a> (<a class="el" href="classtdzdd_1_1DdStructure.html">DdStructure</a> const &amp;o) const </td></tr>
 <tr class="memdesc:ad00784e7df35d74edd733181cd150095"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks structural equivalence with another DD.  <a href="#ad00784e7df35d74edd733181cd150095">More...</a><br/></td></tr>
 <tr class="separator:ad00784e7df35d74edd733181cd150095"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -152,7 +155,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a665dc9108902aeee588866944a4e7960"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluates the DD from the bottom to the top.  <a href="#a665dc9108902aeee588866944a4e7960">More...</a><br/></td></tr>
 <tr class="separator:a665dc9108902aeee588866944a4e7960"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad68919761e9fbbcb471147c565f1ba78"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtdzdd_1_1DdStructure_1_1const__iterator.html">const_iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtdzdd_1_1DdStructure.html#ad68919761e9fbbcb471147c565f1ba78">begin</a> () const </td></tr>
-<tr class="memdesc:ad68919761e9fbbcb471147c565f1ba78"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns an iterator to the first instance.  <a href="#ad68919761e9fbbcb471147c565f1ba78">More...</a><br/></td></tr>
+<tr class="memdesc:ad68919761e9fbbcb471147c565f1ba78"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns an iterator to the first instance, which is viewed as a collection of item numbers.  <a href="#ad68919761e9fbbcb471147c565f1ba78">More...</a><br/></td></tr>
 <tr class="separator:ad68919761e9fbbcb471147c565f1ba78"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8a635dd78162f07c06fe9c55312c17a9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtdzdd_1_1DdStructure_1_1const__iterator.html">const_iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtdzdd_1_1DdStructure.html#a8a635dd78162f07c06fe9c55312c17a9">end</a> () const </td></tr>
 <tr class="memdesc:a8a635dd78162f07c06fe9c55312c17a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns an iterator to the element following the last instance.  <a href="#a8a635dd78162f07c06fe9c55312c17a9">More...</a><br/></td></tr>
@@ -182,10 +185,10 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:acc4ef2568713f8d45fea4a4acd18fe5f inherit pub_methods_classtdzdd_1_1DdSpec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a170932b15bc20314175c0f9362b765f0 inherit pub_methods_classtdzdd_1_1DdSpec"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtdzdd_1_1DdSpec.html#a170932b15bc20314175c0f9362b765f0">get_copy</a> (void *to, void const *from)</td></tr>
 <tr class="separator:a170932b15bc20314175c0f9362b765f0 inherit pub_methods_classtdzdd_1_1DdSpec"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aadd25c857ff025e53c2311c0c188e3ff inherit pub_methods_classtdzdd_1_1DdSpec"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtdzdd_1_1DdSpec.html#aadd25c857ff025e53c2311c0c188e3ff">mergeStates</a> (<a class="el" href="classtdzdd_1_1DdSpec.html#a1c1a1e71201a1500e6c2be431302b2d8">State</a> &amp;to, <a class="el" href="classtdzdd_1_1DdSpec.html#a1c1a1e71201a1500e6c2be431302b2d8">State</a> const &amp;from)</td></tr>
-<tr class="separator:aadd25c857ff025e53c2311c0c188e3ff inherit pub_methods_classtdzdd_1_1DdSpec"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0f0aba57748a1cf767ec7b3d24177e96 inherit pub_methods_classtdzdd_1_1DdSpec"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtdzdd_1_1DdSpec.html#a0f0aba57748a1cf767ec7b3d24177e96">merge_states</a> (void *to, void const *from)</td></tr>
-<tr class="separator:a0f0aba57748a1cf767ec7b3d24177e96 inherit pub_methods_classtdzdd_1_1DdSpec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad140db8289637f1d92af5af4251eb64e inherit pub_methods_classtdzdd_1_1DdSpec"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtdzdd_1_1DdSpec.html#ad140db8289637f1d92af5af4251eb64e">mergeStates</a> (<a class="el" href="classtdzdd_1_1DdSpec.html#a1c1a1e71201a1500e6c2be431302b2d8">State</a> &amp;s1, <a class="el" href="classtdzdd_1_1DdSpec.html#a1c1a1e71201a1500e6c2be431302b2d8">State</a> &amp;s2)</td></tr>
+<tr class="separator:ad140db8289637f1d92af5af4251eb64e inherit pub_methods_classtdzdd_1_1DdSpec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9841d2ab223acba04b6d8b0abc3ddfb4 inherit pub_methods_classtdzdd_1_1DdSpec"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtdzdd_1_1DdSpec.html#a9841d2ab223acba04b6d8b0abc3ddfb4">merge_states</a> (void *p1, void *p2)</td></tr>
+<tr class="separator:a9841d2ab223acba04b6d8b0abc3ddfb4 inherit pub_methods_classtdzdd_1_1DdSpec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad3c272f83c40be2b2a21cbee88c42805 inherit pub_methods_classtdzdd_1_1DdSpec"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtdzdd_1_1DdSpec.html#ad3c272f83c40be2b2a21cbee88c42805">destruct</a> (void *p)</td></tr>
 <tr class="separator:ad3c272f83c40be2b2a21cbee88c42805 inherit pub_methods_classtdzdd_1_1DdSpec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9289be6d0f2dee96924337c3510ff7e3 inherit pub_methods_classtdzdd_1_1DdSpec"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtdzdd_1_1DdSpec.html#a9289be6d0f2dee96924337c3510ff7e3">destructLevel</a> (int level)</td></tr>
@@ -213,14 +216,13 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a7fc6b18d6e2f454f9ac6f1dc90189874 inherit pub_methods_classtdzdd_1_1DdSpecBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a52c50e764aae54e24335f2517ad24493 inherit pub_methods_classtdzdd_1_1DdSpecBase"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtdzdd_1_1DdSpecBase.html#a52c50e764aae54e24335f2517ad24493">printLevel</a> (std::ostream &amp;os, int level) const</td></tr>
 <tr class="separator:a52c50e764aae54e24335f2517ad24493 inherit pub_methods_classtdzdd_1_1DdSpecBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae22afde83db62256b199a7081b42152f inherit pub_methods_classtdzdd_1_1DdSpecBase"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtdzdd_1_1DdSpecBase.html#ae22afde83db62256b199a7081b42152f">print_level</a> (std::ostream &amp;os, int level) const</td></tr>
-<tr class="separator:ae22afde83db62256b199a7081b42152f inherit pub_methods_classtdzdd_1_1DdSpecBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad62b02638f79b2ad9de09dc21c062de4 inherit pub_methods_classtdzdd_1_1DdSpecBase"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::pair&lt; int, <br class="typebreak"/>
+int &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtdzdd_1_1DdSpecBase.html#ad62b02638f79b2ad9de09dc21c062de4">findOneInstance</a> () const</td></tr>
+<tr class="memdesc:ad62b02638f79b2ad9de09dc21c062de4 inherit pub_methods_classtdzdd_1_1DdSpecBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a random instance using simple depth-first search without caching.  <a href="#ad62b02638f79b2ad9de09dc21c062de4">More...</a><br/></td></tr>
+<tr class="separator:ad62b02638f79b2ad9de09dc21c062de4 inherit pub_methods_classtdzdd_1_1DdSpecBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab77ef493d44d50ae0ffbd571c62c77af inherit pub_methods_classtdzdd_1_1DdSpecBase"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtdzdd_1_1DdSpecBase.html#ab77ef493d44d50ae0ffbd571c62c77af">dumpDot</a> (std::ostream &amp;os=std::cout, std::string title=typenameof&lt; <a class="el" href="classtdzdd_1_1DdStructure.html">DdStructure</a>&lt; <a class="el" href="classtdzdd_1_1DdSpecBase.html#a591ed102645d3dbe3eabe70fa6ad0463">ARITY</a> &gt; &gt;()) const</td></tr>
 <tr class="memdesc:ab77ef493d44d50ae0ffbd571c62c77af inherit pub_methods_classtdzdd_1_1DdSpecBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Dumps the node table in Graphviz (dot) format.  <a href="#ab77ef493d44d50ae0ffbd571c62c77af">More...</a><br/></td></tr>
 <tr class="separator:ab77ef493d44d50ae0ffbd571c62c77af inherit pub_methods_classtdzdd_1_1DdSpecBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a34962a2caa34b4ea6d02f6464eade8d3 inherit pub_methods_classtdzdd_1_1DdSpecBase"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtdzdd_1_1DdSpecBase.html#a34962a2caa34b4ea6d02f6464eade8d3">dumpDotCut</a> (std::ostream &amp;os=std::cout, std::string title=typenameof&lt; <a class="el" href="classtdzdd_1_1DdStructure.html">DdStructure</a>&lt; <a class="el" href="classtdzdd_1_1DdSpecBase.html#a591ed102645d3dbe3eabe70fa6ad0463">ARITY</a> &gt; &gt;()) const</td></tr>
-<tr class="memdesc:a34962a2caa34b4ea6d02f6464eade8d3 inherit pub_methods_classtdzdd_1_1DdSpecBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Dumps the node table in Graphviz (dot) format.  <a href="#a34962a2caa34b4ea6d02f6464eade8d3">More...</a><br/></td></tr>
-<tr class="separator:a34962a2caa34b4ea6d02f6464eade8d3 inherit pub_methods_classtdzdd_1_1DdSpecBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
@@ -277,7 +279,7 @@ template&lt;int ARITY&gt; </div>
 
 <p>Definition at line <a class="el" href="DdStructure_8hpp_source.html#l00064">64</a> of file <a class="el" href="DdStructure_8hpp_source.html">DdStructure.hpp</a>.</p>
 
-<p>Referenced by <a class="el" href="DdStructure_8hpp_source.html#l00407">tdzdd::DdStructure&lt; ARITY &gt;::bdd2zdd()</a>, and <a class="el" href="DdStructure_8hpp_source.html#l00417">tdzdd::DdStructure&lt; ARITY &gt;::zdd2bdd()</a>.</p>
+<p>Referenced by <a class="el" href="DdStructure_8hpp_source.html#l00415">tdzdd::DdStructure&lt; ARITY &gt;::bdd2zdd()</a>, and <a class="el" href="DdStructure_8hpp_source.html#l00425">tdzdd::DdStructure&lt; ARITY &gt;::zdd2bdd()</a>.</p>
 
 </div>
 </div>
@@ -326,7 +328,7 @@ template&lt;int ARITY&gt; </div>
 
 <p>Definition at line <a class="el" href="DdStructure_8hpp_source.html#l00081">81</a> of file <a class="el" href="DdStructure_8hpp_source.html">DdStructure.hpp</a>.</p>
 
-<p>References <a class="el" href="DdSpec_8hpp_source.html#l00065">tdzdd::DdSpecBase&lt; DdStructure&lt; ARITY &gt;, AR &gt;::ARITY</a>.</p>
+<p>References <a class="el" href="DdSpec_8hpp_source.html#l00070">tdzdd::DdSpecBase&lt; DdStructure&lt; ARITY &gt;, AR &gt;::ARITY</a>.</p>
 
 </div>
 </div>
@@ -377,7 +379,7 @@ template&lt;typename SPEC &gt; </div>
 
 <p>Definition at line <a class="el" href="DdStructure_8hpp_source.html#l00104">104</a> of file <a class="el" href="DdStructure_8hpp_source.html">DdStructure.hpp</a>.</p>
 
-<p>References <a class="el" href="DdSpec_8hpp_source.html#l00067">tdzdd::DdSpecBase&lt; S, AR &gt;::entity()</a>.</p>
+<p>References <a class="el" href="DdSpec_8hpp_source.html#l00072">tdzdd::DdSpecBase&lt; S, AR &gt;::entity()</a>.</p>
 
 </div>
 </div>
@@ -414,7 +416,7 @@ template&lt;int ARITY&gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="DdStructure_8hpp_source.html#l00407">407</a> of file <a class="el" href="DdStructure_8hpp_source.html">DdStructure.hpp</a>.</p>
+<p>Definition at line <a class="el" href="DdStructure_8hpp_source.html#l00415">415</a> of file <a class="el" href="DdStructure_8hpp_source.html">DdStructure.hpp</a>.</p>
 
 <p>References <a class="el" href="DdStructure_8hpp_source.html#l00064">tdzdd::DdStructure&lt; ARITY &gt;::DdStructure()</a>.</p>
 
@@ -445,12 +447,6 @@ template&lt;int ARITY&gt; </div>
 </div><div class="memdoc">
 
 <p>Counts the number of minterms of the function represented by this BDD. </p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">T</td><td>data type for counting the number, which can be integral, real, or std::string. </td></tr>
-  </table>
-  </dd>
-</dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">numVars</td><td>the number of input variables of the function. </td></tr>
@@ -459,9 +455,9 @@ template&lt;int ARITY&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>the number of itemsets. </dd></dl>
 
-<p>Definition at line <a class="el" href="DdStructure_8hpp_source.html#l00430">430</a> of file <a class="el" href="DdStructure_8hpp_source.html">DdStructure.hpp</a>.</p>
+<p>Definition at line <a class="el" href="DdStructure_8hpp_source.html#l00436">436</a> of file <a class="el" href="DdStructure_8hpp_source.html">DdStructure.hpp</a>.</p>
 
-<p>References <a class="el" href="DdStructure_8hpp_source.html#l00450">tdzdd::DdStructure&lt; ARITY &gt;::evaluate()</a>.</p>
+<p>References <a class="el" href="DdStructure_8hpp_source.html#l00454">tdzdd::DdStructure&lt; ARITY &gt;::evaluate()</a>.</p>
 
 </div>
 </div>
@@ -491,7 +487,7 @@ template&lt;int ARITY&gt; </div>
 <p>BDD reduction. </p>
 <p>The node of which two edges points to the identical node is deleted. </p>
 
-<p>Definition at line <a class="el" href="DdStructure_8hpp_source.html#l00363">363</a> of file <a class="el" href="DdStructure_8hpp_source.html">DdStructure.hpp</a>.</p>
+<p>Definition at line <a class="el" href="DdStructure_8hpp_source.html#l00371">371</a> of file <a class="el" href="DdStructure_8hpp_source.html">DdStructure.hpp</a>.</p>
 
 </div>
 </div>
@@ -518,11 +514,11 @@ template&lt;int ARITY&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Returns an iterator to the first instance. </p>
-<p>The DD is viewed as a set of integer vectors. </p>
+<p>Returns an iterator to the first instance, which is viewed as a collection of item numbers. </p>
+<p>Supports binary ZDDs only. </p>
 <dl class="section return"><dt>Returns</dt><dd>iterator to the first instance. </dd></dl>
 
-<p>Definition at line <a class="el" href="DdStructure_8hpp_source.html#l00656">656</a> of file <a class="el" href="DdStructure_8hpp_source.html">DdStructure.hpp</a>.</p>
+<p>Definition at line <a class="el" href="DdStructure_8hpp_source.html#l00661">661</a> of file <a class="el" href="DdStructure_8hpp_source.html">DdStructure.hpp</a>.</p>
 
 </div>
 </div>
@@ -572,7 +568,7 @@ template&lt;int ARITY&gt; </div>
 
 <p>Definition at line <a class="el" href="DdStructure_8hpp_source.html#l00259">259</a> of file <a class="el" href="DdStructure_8hpp_source.html">DdStructure.hpp</a>.</p>
 
-<p>Referenced by <a class="el" href="DdStructure_8hpp_source.html#l00680">tdzdd::DdStructure&lt; ARITY &gt;::getChild()</a>.</p>
+<p>Referenced by <a class="el" href="DdStructure_8hpp_source.html#l00685">tdzdd::DdStructure&lt; ARITY &gt;::getChild()</a>.</p>
 
 </div>
 </div>
@@ -609,9 +605,39 @@ template&lt;int ARITY&gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="DdStructure_8hpp_source.html#l00699">699</a> of file <a class="el" href="DdStructure_8hpp_source.html">DdStructure.hpp</a>.</p>
+<p>Definition at line <a class="el" href="DdStructure_8hpp_source.html#l00704">704</a> of file <a class="el" href="DdStructure_8hpp_source.html">DdStructure.hpp</a>.</p>
 
 <p>References <a class="el" href="DdStructure_8hpp_source.html#l00291">tdzdd::DdStructure&lt; ARITY &gt;::size()</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a0dccd559a3a4a2535342f0ee4a157f35"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;int ARITY&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classtdzdd_1_1DdStructure.html">tdzdd::DdStructure</a>&lt; <a class="el" href="classtdzdd_1_1DdSpecBase.html#a591ed102645d3dbe3eabe70fa6ad0463">ARITY</a> &gt;::empty </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checks if DD is a 0-terminal only. </p>
+<dl class="section return"><dt>Returns</dt><dd>true if DD is a 0-terminal only. </dd></dl>
+
+<p>Definition at line <a class="el" href="DdStructure_8hpp_source.html#l00299">299</a> of file <a class="el" href="DdStructure_8hpp_source.html">DdStructure.hpp</a>.</p>
 
 </div>
 </div>
@@ -639,10 +665,10 @@ template&lt;int ARITY&gt; </div>
 </div><div class="memdoc">
 
 <p>Returns an iterator to the element following the last instance. </p>
-<p>The DD is viewed as a set of integer vectors. </p>
+<p>Supports binary ZDDs only. </p>
 <dl class="section return"><dt>Returns</dt><dd>iterator to the instance following the last instance. </dd></dl>
 
-<p>Definition at line <a class="el" href="DdStructure_8hpp_source.html#l00665">665</a> of file <a class="el" href="DdStructure_8hpp_source.html">DdStructure.hpp</a>.</p>
+<p>Definition at line <a class="el" href="DdStructure_8hpp_source.html#l00670">670</a> of file <a class="el" href="DdStructure_8hpp_source.html">DdStructure.hpp</a>.</p>
 
 </div>
 </div>
@@ -681,11 +707,11 @@ template&lt;typename S , typename T , typename R &gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>value at the root. </dd></dl>
 
-<p>Definition at line <a class="el" href="DdStructure_8hpp_source.html#l00450">450</a> of file <a class="el" href="DdStructure_8hpp_source.html">DdStructure.hpp</a>.</p>
+<p>Definition at line <a class="el" href="DdStructure_8hpp_source.html#l00454">454</a> of file <a class="el" href="DdStructure_8hpp_source.html">DdStructure.hpp</a>.</p>
 
-<p>References <a class="el" href="DdSpec_8hpp_source.html#l00065">tdzdd::DdSpecBase&lt; DdStructure&lt; ARITY &gt;, AR &gt;::ARITY</a>, <a class="el" href="DdEval_8hpp_source.html#l00104">tdzdd::DdEval&lt; E, T, R &gt;::entity()</a>, <a class="el" href="DdEval_8hpp_source.html#l00069">tdzdd::DdValues&lt; T, ARITY &gt;::setLevel()</a>, and <a class="el" href="DdEval_8hpp_source.html#l00064">tdzdd::DdValues&lt; T, ARITY &gt;::setReference()</a>.</p>
+<p>References <a class="el" href="DdSpec_8hpp_source.html#l00070">tdzdd::DdSpecBase&lt; DdStructure&lt; ARITY &gt;, AR &gt;::ARITY</a>, <a class="el" href="DdEval_8hpp_source.html#l00104">tdzdd::DdEval&lt; E, T, R &gt;::entity()</a>, <a class="el" href="DdEval_8hpp_source.html#l00069">tdzdd::DdValues&lt; T, ARITY &gt;::setLevel()</a>, and <a class="el" href="DdEval_8hpp_source.html#l00064">tdzdd::DdValues&lt; T, ARITY &gt;::setReference()</a>.</p>
 
-<p>Referenced by <a class="el" href="DdStructure_8hpp_source.html#l00430">tdzdd::DdStructure&lt; ARITY &gt;::bddCardinality()</a>, and <a class="el" href="DdStructure_8hpp_source.html#l00440">tdzdd::DdStructure&lt; ARITY &gt;::zddCardinality()</a>.</p>
+<p>Referenced by <a class="el" href="DdStructure_8hpp_source.html#l00436">tdzdd::DdStructure&lt; ARITY &gt;::bddCardinality()</a>, and <a class="el" href="DdStructure_8hpp_source.html#l00444">tdzdd::DdStructure&lt; ARITY &gt;::zddCardinality()</a>.</p>
 
 </div>
 </div>
@@ -731,9 +757,9 @@ template&lt;int ARITY&gt; </div>
 
 <p>Implements <a class="el" href="classtdzdd_1_1DdSpec.html" title="Abstract class of DD specifications using scalar states. ">DdSpec</a>. </p>
 
-<p>Definition at line <a class="el" href="DdStructure_8hpp_source.html#l00680">680</a> of file <a class="el" href="DdStructure_8hpp_source.html">DdStructure.hpp</a>.</p>
+<p>Definition at line <a class="el" href="DdStructure_8hpp_source.html#l00685">685</a> of file <a class="el" href="DdStructure_8hpp_source.html">DdStructure.hpp</a>.</p>
 
-<p>References <a class="el" href="DdSpec_8hpp_source.html#l00065">tdzdd::DdSpecBase&lt; DdStructure&lt; ARITY &gt;, AR &gt;::ARITY</a>, and <a class="el" href="DdStructure_8hpp_source.html#l00259">tdzdd::DdStructure&lt; ARITY &gt;::child()</a>.</p>
+<p>References <a class="el" href="DdSpec_8hpp_source.html#l00070">tdzdd::DdSpecBase&lt; DdStructure&lt; ARITY &gt;, AR &gt;::ARITY</a>, and <a class="el" href="DdStructure_8hpp_source.html#l00259">tdzdd::DdStructure&lt; ARITY &gt;::child()</a>.</p>
 
 </div>
 </div>
@@ -823,7 +849,7 @@ template&lt;int ARITY&gt; </div>
 
 <p>Implements <a class="el" href="classtdzdd_1_1DdSpec.html" title="Abstract class of DD specifications using scalar states. ">DdSpec</a>. </p>
 
-<p>Definition at line <a class="el" href="DdStructure_8hpp_source.html#l00672">672</a> of file <a class="el" href="DdStructure_8hpp_source.html">DdStructure.hpp</a>.</p>
+<p>Definition at line <a class="el" href="DdStructure_8hpp_source.html#l00677">677</a> of file <a class="el" href="DdStructure_8hpp_source.html">DdStructure.hpp</a>.</p>
 
 </div>
 </div>
@@ -853,7 +879,7 @@ template&lt;int ARITY&gt; </div>
 
 <p>Implements <a class="el" href="classtdzdd_1_1DdSpec.html" title="Abstract class of DD specifications using scalar states. ">DdSpec</a>. </p>
 
-<p>Definition at line <a class="el" href="DdStructure_8hpp_source.html#l00690">690</a> of file <a class="el" href="DdStructure_8hpp_source.html">DdStructure.hpp</a>.</p>
+<p>Definition at line <a class="el" href="DdStructure_8hpp_source.html#l00695">695</a> of file <a class="el" href="DdStructure_8hpp_source.html">DdStructure.hpp</a>.</p>
 
 </div>
 </div>
@@ -884,9 +910,9 @@ template&lt;int ARITY&gt; </div>
 <p>Checks structural inequivalence with another DD. </p>
 <dl class="section return"><dt>Returns</dt><dd>true if they have the different structure. </dd></dl>
 
-<p>Definition at line <a class="el" href="DdStructure_8hpp_source.html#l00347">347</a> of file <a class="el" href="DdStructure_8hpp_source.html">DdStructure.hpp</a>.</p>
+<p>Definition at line <a class="el" href="DdStructure_8hpp_source.html#l00355">355</a> of file <a class="el" href="DdStructure_8hpp_source.html">DdStructure.hpp</a>.</p>
 
-<p>References <a class="el" href="DdStructure_8hpp_source.html#l00299">tdzdd::DdStructure&lt; ARITY &gt;::operator==()</a>.</p>
+<p>References <a class="el" href="DdStructure_8hpp_source.html#l00307">tdzdd::DdStructure&lt; ARITY &gt;::operator==()</a>.</p>
 
 </div>
 </div>
@@ -917,11 +943,11 @@ template&lt;int ARITY&gt; </div>
 <p>Checks structural equivalence with another DD. </p>
 <dl class="section return"><dt>Returns</dt><dd>true if they have the same structure. </dd></dl>
 
-<p>Definition at line <a class="el" href="DdStructure_8hpp_source.html#l00299">299</a> of file <a class="el" href="DdStructure_8hpp_source.html">DdStructure.hpp</a>.</p>
+<p>Definition at line <a class="el" href="DdStructure_8hpp_source.html#l00307">307</a> of file <a class="el" href="DdStructure_8hpp_source.html">DdStructure.hpp</a>.</p>
 
-<p>References <a class="el" href="DdSpec_8hpp_source.html#l00065">tdzdd::DdSpecBase&lt; DdStructure&lt; ARITY &gt;, AR &gt;::ARITY</a>, and <a class="el" href="DdStructure_8hpp_source.html#l00291">tdzdd::DdStructure&lt; ARITY &gt;::size()</a>.</p>
+<p>References <a class="el" href="DdSpec_8hpp_source.html#l00070">tdzdd::DdSpecBase&lt; DdStructure&lt; ARITY &gt;, AR &gt;::ARITY</a>, and <a class="el" href="DdStructure_8hpp_source.html#l00291">tdzdd::DdStructure&lt; ARITY &gt;::size()</a>.</p>
 
-<p>Referenced by <a class="el" href="DdStructure_8hpp_source.html#l00347">tdzdd::DdStructure&lt; ARITY &gt;::operator!=()</a>.</p>
+<p>Referenced by <a class="el" href="DdStructure_8hpp_source.html#l00355">tdzdd::DdStructure&lt; ARITY &gt;::operator!=()</a>.</p>
 
 </div>
 </div>
@@ -951,7 +977,7 @@ template&lt;int ARITY&gt; </div>
 <p>QDD reduction. </p>
 <p>No node deletion rule is applied. </p>
 
-<p>Definition at line <a class="el" href="DdStructure_8hpp_source.html#l00355">355</a> of file <a class="el" href="DdStructure_8hpp_source.html">DdStructure.hpp</a>.</p>
+<p>Definition at line <a class="el" href="DdStructure_8hpp_source.html#l00363">363</a> of file <a class="el" href="DdStructure_8hpp_source.html">DdStructure.hpp</a>.</p>
 
 </div>
 </div>
@@ -989,7 +1015,7 @@ template&lt;bool BDD, bool ZDD&gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="DdStructure_8hpp_source.html#l00381">381</a> of file <a class="el" href="DdStructure_8hpp_source.html">DdStructure.hpp</a>.</p>
+<p>Definition at line <a class="el" href="DdStructure_8hpp_source.html#l00389">389</a> of file <a class="el" href="DdStructure_8hpp_source.html">DdStructure.hpp</a>.</p>
 
 <p>References <a class="el" href="DdStructure_8hpp_source.html#l00291">tdzdd::DdStructure&lt; ARITY &gt;::size()</a>.</p>
 
@@ -1083,7 +1109,7 @@ template&lt;int ARITY&gt; </div>
 
 <p>Definition at line <a class="el" href="DdStructure_8hpp_source.html#l00291">291</a> of file <a class="el" href="DdStructure_8hpp_source.html">DdStructure.hpp</a>.</p>
 
-<p>Referenced by <a class="el" href="DdStructure_8hpp_source.html#l00699">tdzdd::DdStructure&lt; ARITY &gt;::dumpSapporo()</a>, <a class="el" href="DdStructure_8hpp_source.html#l00299">tdzdd::DdStructure&lt; ARITY &gt;::operator==()</a>, and <a class="el" href="DdStructure_8hpp_source.html#l00381">tdzdd::DdStructure&lt; ARITY &gt;::reduce()</a>.</p>
+<p>Referenced by <a class="el" href="DdStructure_8hpp_source.html#l00704">tdzdd::DdStructure&lt; ARITY &gt;::dumpSapporo()</a>, <a class="el" href="DdStructure_8hpp_source.html#l00307">tdzdd::DdStructure&lt; ARITY &gt;::operator==()</a>, and <a class="el" href="DdStructure_8hpp_source.html#l00389">tdzdd::DdStructure&lt; ARITY &gt;::reduce()</a>.</p>
 
 </div>
 </div>
@@ -1186,7 +1212,7 @@ template&lt;int ARITY&gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="DdStructure_8hpp_source.html#l00417">417</a> of file <a class="el" href="DdStructure_8hpp_source.html">DdStructure.hpp</a>.</p>
+<p>Definition at line <a class="el" href="DdStructure_8hpp_source.html#l00425">425</a> of file <a class="el" href="DdStructure_8hpp_source.html">DdStructure.hpp</a>.</p>
 
 <p>References <a class="el" href="DdStructure_8hpp_source.html#l00064">tdzdd::DdStructure&lt; ARITY &gt;::DdStructure()</a>.</p>
 
@@ -1216,17 +1242,11 @@ template&lt;int ARITY&gt; </div>
 </div><div class="memdoc">
 
 <p>Counts the number of sets in the family of sets represented by this ZDD. </p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">T</td><td>data type for counting the number, which can be integral, real, or std::string. </td></tr>
-  </table>
-  </dd>
-</dl>
 <dl class="section return"><dt>Returns</dt><dd>the number of itemsets. </dd></dl>
 
-<p>Definition at line <a class="el" href="DdStructure_8hpp_source.html#l00440">440</a> of file <a class="el" href="DdStructure_8hpp_source.html">DdStructure.hpp</a>.</p>
+<p>Definition at line <a class="el" href="DdStructure_8hpp_source.html#l00444">444</a> of file <a class="el" href="DdStructure_8hpp_source.html">DdStructure.hpp</a>.</p>
 
-<p>References <a class="el" href="DdStructure_8hpp_source.html#l00450">tdzdd::DdStructure&lt; ARITY &gt;::evaluate()</a>.</p>
+<p>References <a class="el" href="DdStructure_8hpp_source.html#l00454">tdzdd::DdStructure&lt; ARITY &gt;::evaluate()</a>.</p>
 
 </div>
 </div>
@@ -1256,7 +1276,7 @@ template&lt;int ARITY&gt; </div>
 <p>ZDD reduction. </p>
 <p>The node of which 1-edge points to the 0-terminal is deleted. </p>
 
-<p>Definition at line <a class="el" href="DdStructure_8hpp_source.html#l00371">371</a> of file <a class="el" href="DdStructure_8hpp_source.html">DdStructure.hpp</a>.</p>
+<p>Definition at line <a class="el" href="DdStructure_8hpp_source.html#l00379">379</a> of file <a class="el" href="DdStructure_8hpp_source.html">DdStructure.hpp</a>.</p>
 
 </div>
 </div>
@@ -1296,7 +1316,7 @@ template&lt;typename SPEC &gt; </div>
 
 <p>Definition at line <a class="el" href="DdStructure_8hpp_source.html#l00165">165</a> of file <a class="el" href="DdStructure_8hpp_source.html">DdStructure.hpp</a>.</p>
 
-<p>References <a class="el" href="DdSpec_8hpp_source.html#l00067">tdzdd::DdSpecBase&lt; S, AR &gt;::entity()</a>.</p>
+<p>References <a class="el" href="DdSpec_8hpp_source.html#l00072">tdzdd::DdSpecBase&lt; S, AR &gt;::entity()</a>.</p>
 
 </div>
 </div>
@@ -1306,7 +1326,7 @@ template&lt;typename SPEC &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Nov 19 2014 15:50:51 for TdZdd by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Nov 26 2014 10:27:03 for TdZdd by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

@@ -104,6 +104,10 @@ public:
         spec.destructLevel(level);
     }
 
+    int merge_states(void* p1, void* p2) {
+        return spec.merge_states(state(p1), state(p2));
+    }
+
     size_t hash_code(void const* p, int i) const {
         size_t h = size_t(level(p)) * 314159257;
         if (level(p) > 0) h += spec.hash_code(state(p), level(p)) * 271828171;

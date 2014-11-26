@@ -63,7 +63,7 @@ class DdReducer {
         }
 
         friend std::ostream& operator<<(std::ostream& os,
-                ReducNodeInfo const& o) {
+                                        ReducNodeInfo const& o) {
             return os << "(" << o.children << " -> " << o.column << ")";
         }
     };
@@ -84,16 +84,20 @@ class DdReducer {
     bool readyForSequentialReduction;
 
 public:
-    DdReducer(NodeTableHandler<ARITY>& diagram, bool useMP = false)
-            : input(diagram.privateEntity()), oldDiagram(diagram),
-              newDiagram(input.numRows()), output(newDiagram.privateEntity()),
-              newIdTable(input.numRows()), rootPtr(input.numRows()),
+    DdReducer(NodeTableHandler<ARITY>& diagram, bool useMP = false) :
+            input(diagram.privateEntity()),
+            oldDiagram(diagram),
+            newDiagram(input.numRows()),
+            output(newDiagram.privateEntity()),
+            newIdTable(input.numRows()),
+            rootPtr(input.numRows()),
 #ifdef _OPENMP
-              threads(omp_get_max_threads()),
-              tasks(MyHashConstant::primeSize(TASKS_PER_THREAD * threads)),
-              taskMatrix(threads), baseColumn(tasks + 1),
+            threads(omp_get_max_threads()),
+            tasks(MyHashConstant::primeSize(TASKS_PER_THREAD * threads)),
+            taskMatrix(threads),
+            baseColumn(tasks + 1),
 #endif
-              readyForSequentialReduction(false) {
+            readyForSequentialReduction(false) {
 #ifdef DEBUG
         if (useMP) {
             MessageHandler mh;
@@ -471,8 +475,8 @@ private:
                 for (int yy = 0; yy < threads; ++yy) {
                     MyList<ReducNodeInfo>& taskq = taskMatrix[yy][x];
 
-                    for (typeof(taskq.begin()) t = taskq.begin();
-                            t != taskq.end(); ++t) {
+                    for (typename MyList<ReducNodeInfo>::iterator t =
+                            taskq.begin(); t != taskq.end(); ++t) {
                         ReducNodeInfo const* p = *t;
                         ReducNodeInfo const* pp = uniq.add(p);
 
@@ -563,7 +567,7 @@ public:
                 std::sort(roots.begin(), roots.end());
                 roots.resize(
                         std::unique(roots.begin(), roots.end())
-                                - roots.begin());
+                        - roots.begin());
             }
             roots.push_back(m);
 

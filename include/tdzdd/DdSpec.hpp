@@ -29,6 +29,7 @@
 #include <stdexcept>
 
 #include "dd/DdBuilder.hpp"
+#include "dd/DepthFirstSearcher.hpp"
 #include "util/demangle.hpp"
 #include "util/MessageHandler.hpp"
 
@@ -42,7 +43,7 @@ namespace tdzdd {
  * - int get_root(void* p)
  * - int get_child(void* p, int level, int value)
  * - void get_copy(void* to, void const* from)
- * - void merge_states(void* to, void const* from)
+ * - int merge_states(void* p1, void* p2)
  * - void destruct(void* p)
  * - void destructLevel(int level)
  * - size_t hash_code(void const* p, int level) const
@@ -52,9 +53,13 @@ namespace tdzdd {
  * Optionally, the following functions can be overloaded:
  * - void printLevel(std::ostream& os, int level) const
  *
- * A return code of get_root(void*) or get_child(void*, int, bool)
- * is 0 when the node is forwarded to the 0-terminal
- * and is -1 when the node is forwarded to the 1-terminal.
+ * A return code of get_root(void*) or get_child(void*, int, bool) is:
+ * 0 when the node is the 0-terminal, -1 when it is the 1-terminal, or
+ * the node level when it is a non-terminal.
+ * A return code of merge_states(void*, void*) is: 0 when the states are
+ * merged into the first one, 1 when they cannot be merged and the first
+ * one should be forwarded to the 0-terminal, 2 when they cannot be merged
+ * and the second one should be forwarded to the 0-terminal.
  *
  * @tparam S the class implementing this class.
  * @tparam AR arity of the nodes.
@@ -77,24 +82,27 @@ public:
     }
 
     /**
+     * Returns a random instance using simple depth-first search
+     * without caching.
+     * It does not guarantee that the selection is uniform.
+     * merge_states(void*, void*) is not supported.
+     * @return a collection of (item, value) pairs.
+     * @exception std::runtime_error no instance exists.
+     */
+    std::vector<std::pair<int,int> > findOneInstance() const {
+        return DepthFirstSearcher<S>(entity()).findOneInstance();
+    }
+
+public:
+    /**
      * Dumps the node table in Graphviz (dot) format.
      * @param os the output stream.
      * @param title title label.
      */
     void dumpDot(std::ostream& os = std::cout, std::string title =
                          typenameof<S>()) const {
-        dumpDot_(os, false, title);
-    }
-
-    /**
-     * Dumps the node table in Graphviz (dot) format.
-     * Cuts 0-paths form the root and duplicates the 1-terminal.
-     * @param os the output stream.
-     * @param title title label.
-     */
-    void dumpDotCut(std::ostream& os = std::cout, std::string title =
-                            typenameof<S>()) const {
-        dumpDot_(os, true, title);
+        DdDumper<S> dumper(entity());
+        dumper.dump(os, title);
     }
 
     /**
@@ -109,67 +117,6 @@ public:
     }
 
 private:
-    /**
-     * Dumps the node table in Graphviz (dot) format.
-     * @param os the output stream.
-     * @param cut flag to cut 0-paths form the root and to duplicate the 1-terminal.
-     * @param title title label.
-     */
-    void dumpDot_(std::ostream& os, bool cut, std::string title) const {
-        NodeTableHandler<S::ARITY> diagram;
-        InstantDdBuilder<S,true> idb(entity(), diagram, os, cut);
-        NodeId root;
-        idb.initialize(root);
-
-        os << "digraph \"" << title << "\" {\n";
-        for (int i = root.row(); i >= 1; --i) {
-            os << "  " << i << " [shape=none,label=\"";
-            entity().printLevel(os, i);
-            os << "\"];\n";
-        }
-        for (int i = root.row() - 1; i >= 1; --i) {
-            os << "  " << (i + 1) << " -> " << i << " [style=invis];\n";
-        }
-
-        if (root == 1) {
-            os << "  \"^\" [shape=none,label=\"" << title << "\"];\n";
-            os << "  \"^\" -> \"" << root << "\" [style=dashed";
-            if (root.getAttr()) os << ",arrowtail=dot";
-            os << "];\n";
-            if (cut)
-                os << "  \"" << root
-                        << "\" [shape=square,fixedsize=true,width=0.2,label=\"\"];\n";
-        }
-        else if (!cut && root != 0) {
-            os << "  \"^\" [shape=none,label=\"" << title << "\"];\n";
-            os << "  \"^\" -> \"" << root << "\" [style=dashed";
-            if (root.getAttr()) os << ",arrowtail=dot";
-            os << "];\n";
-        }
-        else if (!title.empty()) {
-            os << "  labelloc=\"t\";\n";
-            os << "  label=\"" << title << "\";\n";
-        }
-
-        for (int i = root.row(); i >= 1; --i) {
-            idb.construct(i);
-            diagram.derefLevel(i);
-        }
-
-        if (!cut && root != 0) {
-            os << "  \"" << NodeId(1) << "\" ";
-            if (cut) {
-                os << "[shape=square,fixedsize=true,width=0.2,label=\"\"];\n";
-            }
-            else {
-                os << "[shape=square,label=\"⊤\"];\n";
-            }
-        }
-
-        os << "}\n";
-        os.flush();
-    }
-
     template<typename T, typename I>
     static size_t rawHashCode_(void const* p) {
         size_t h = 0;
@@ -253,7 +200,8 @@ public:
     void get_copy(void* to, void const* from) {
     }
 
-    void merge_states(void* to, void const* from) {
+    int merge_states(void* p1, void* p2) {
+        return 0;
     }
 
     void destruct(void* p) {
@@ -285,7 +233,7 @@ public:
  * Optionally, the following functions can be overloaded:
  * - void construct(void* p)
  * - void getCopy(void* p, T const& state)
- * - void mergeStates(T const& to, T const& from)
+ * - void mergeStates(T& state1, T& state2)
  * - size_t hashCode(T const& state) const
  * - bool equalTo(T const& state1, T const& state2) const
  * - void printLevel(std::ostream& os, int level) const
@@ -336,11 +284,12 @@ public:
         this->entity().getCopy(to, state(from));
     }
 
-    void mergeStates(State& to, State const& from) {
+    int mergeStates(State& s1, State& s2) {
+        return 0;
     }
 
-    void merge_states(void* to, void const* from) {
-        this->entity().mergeStates(state(to), state(from));
+    int merge_states(void* p1, void* p2) {
+        return this->entity().mergeStates(state(p1), state(p2));
     }
 
     void destruct(void* p) {
@@ -395,7 +344,7 @@ public:
  * - int getChild(T* array, int level, int value)
  *
  * Optionally, the following functions can be overloaded:
- * - void mergeStates(T* to, T const* from)
+ * - void mergeStates(T* array1, T* array2)
  * - void printLevel(std::ostream& os, int level) const
  * - void printState(std::ostream& os, State const& s) const
  *
@@ -466,11 +415,12 @@ public:
         }
     }
 
-    void mergeStates(T* to, T const* from) {
+    int mergeStates(T* a1, T* a2) {
+        return 0;
     }
 
-    void merge_states(void* to, void const* from) {
-        this->entity().mergeStates(state(to), state(from));
+    int merge_states(void* p1, void* p2) {
+        return this->entity().mergeStates(state(p1), state(p2));
     }
 
     void destruct(void* p) {
@@ -524,7 +474,7 @@ public:
  * Optionally, the following functions can be overloaded:
  * - void construct(void* p)
  * - void getCopy(void* p, TS const& state)
- * - void mergeStates(TS& s_to, TA* a_to, TS const& s_from, TA const* a_from)
+ * - void mergeStates(TS& s1, TA* a1, TS& s2, TA* a2)
  * - size_t hashCode(TS const& state) const
  * - bool equalTo(TS const& state1, TS const& state2) const
  * - void printLevel(std::ostream& os, int level) const
@@ -588,6 +538,7 @@ public:
     }
 
     int get_root(void* p) {
+        this->entity().construct(p);
         return this->entity().getRoot(s_state(p), a_state(p));
     }
 
@@ -612,15 +563,13 @@ public:
         }
     }
 
-    void mergeStates(S_State& s_to,
-                     A_State* a_to,
-                     S_State const& s_from,
-                     A_State const* a_from) {
+    int mergeStates(S_State& s1, A_State* a1, S_State& s2, A_State* a2) {
+        return 0;
     }
 
-    void merge_states(void* to, void const* from) {
-        this->entity().mergeStates(s_state(to), a_state(to), s_state(from),
-                a_state(from));
+    int merge_states(void* p1, void* p2) {
+        return this->entity().mergeStates(s_state(p1), a_state(p1), s_state(p2),
+                a_state(p2));
     }
 
     void destruct(void* p) {
