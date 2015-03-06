@@ -346,7 +346,7 @@ public:
  * Optionally, the following functions can be overloaded:
  * - void mergeStates(T* array1, T* array2)
  * - void printLevel(std::ostream& os, int level) const
- * - void printState(std::ostream& os, State const& s) const
+ * - void printState(std::ostream& os, State const* array) const
  *
  * @tparam S the class implementing this class.
  * @tparam T data type of array elements.
@@ -524,6 +524,10 @@ protected:
                     + (n * sizeof(A_State) + sizeof(Word) - 1) / sizeof(Word);
     }
 
+    int getArraySize() const {
+        return arraySize;
+    }
+
 public:
     HybridDdSpec() :
             arraySize(-1), dataWords(-1) {
@@ -624,8 +628,7 @@ public:
     void printState(std::ostream& os,
                     S_State const& s,
                     A_State const* a) const {
-        os << "[";
-        os << s << ":";
+        os << "[" << s << ":";
         for (int i = 0; i < arraySize; ++i) {
             if (i > 0) os << ",";
             os << a[i];
