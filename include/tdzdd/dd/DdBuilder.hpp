@@ -382,7 +382,6 @@ public:
             if (allZero) ++deadCount;
         }
 
-        assert(q == output[i].data() + m);
         snodeTable[i - 1].pop_front();
         spec.destructLevel(i);
         sweeper.update(i, lowestChild, deadCount);
@@ -909,7 +908,6 @@ public:
             }
         }
 
-        assert(q == output[i].data() + mm);
         work[i].clear();
         pools[i].clear();
         spec.destructLevel(i);
