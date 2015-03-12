@@ -163,12 +163,13 @@ private:
                     if (f.row() == 0) continue;
 
                     NodeId f0 = input.child(f, 0);
+                    NodeId deletable = BDD ? f0 : 0;
                     bool del = true;
 
-                    for (int bb = 1; bb < ARITY; ++bb) {
-                        NodeId& ff = input.child(f, bb);
-                        if (!((BDD && ff == f0) || (ZDD && ff == 0))) del =
-                                false;
+                    for (int bb = (BDD || ZDD) ? 1 : 0; bb < ARITY; ++bb) {
+                        if (input.child(f, bb) != deletable) {
+                            del = false;
+                        }
                     }
 
                     if (del) {
@@ -349,11 +350,12 @@ private:
                 // make f canonical
                 NodeId& f0 = f.branch[0];
                 f0 = newIdTable[f0.row()][f0.col()];
+                NodeId deletable = BDD ? f0 : 0;
                 bool del = true;
-                for (int b = 1; b < ARITY; ++b) {
+                for (int b = (BDD || ZDD) ? 1 : 0; b < ARITY; ++b) {
                     NodeId& ff = f.branch[b];
                     ff = newIdTable[ff.row()][ff.col()];
-                    if (!((BDD && ff == f0) || (ZDD && ff == 0))) del = false;
+                    if (ff != deletable) del = false;
                 }
 
                 if (del) { // f is redundant
@@ -424,12 +426,14 @@ private:
                 // make f canonical
                 NodeId& f0 = f.branch[0];
                 f0 = newIdTable[f0.row()][f0.col()];
+                NodeId deletable = BDD ? f0 : 0;
                 bool del = true;
-                for (int b = 1; b < ARITY; ++b) {
+                for (int b = (BDD || ZDD) ? 1 : 0; b < ARITY; ++b) {
                     NodeId& ff = f.branch[b];
                     ff = newIdTable[ff.row()][ff.col()];
-                    if (!((BDD && ff == f0) || (ZDD && ff == 0))) del = false;
+                    if (ff != deletable) del = false;
                 }
+
                 if (del) { // f is redundant
                     newIdTable[i][j] = f0;
                     continue;
@@ -481,8 +485,10 @@ private:
                         ReducNodeInfo const* pp = uniq.add(p);
 
                         if (pp == p) {
-                            newIdTable[i][p->column] = NodeId(i + x, j++,
-                                    p->children.branch[0].hasEmpty()); // row += task ID
+                            newIdTable[i][p->column] =
+                                    NodeId(i + x,
+                                           j++,
+                                           p->children.branch[0].hasEmpty()); // row += task ID
                         }
                         else {
                             newIdTable[i][p->column] =
@@ -529,8 +535,9 @@ private:
             for (size_t j = 0; j < m; ++j) {
                 NodeId& ff = newIdTable[i][j];
                 if (ff.row() >= i) {
-                    ff = NodeId(i, ff.col() + baseColumn[ff.row() - i],
-                            ff.getAttr());
+                    ff = NodeId(i,
+                                ff.col() + baseColumn[ff.row() - i],
+                                ff.getAttr());
                     output[i][ff.col()] = input[i][j];
                 }
             }
@@ -565,8 +572,7 @@ public:
             }
             if (r >= 2) {
                 std::sort(roots.begin(), roots.end());
-                roots.resize(
-                        std::unique(roots.begin(), roots.end())
+                roots.resize(std::unique(roots.begin(), roots.end())
                         - roots.begin());
             }
             roots.push_back(m);
