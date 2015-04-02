@@ -160,10 +160,18 @@ public:
 };
 
 /**
+ * QDD evaluator that counts the number of elements.
+ * @tparam T data type for counting the number,
+ *          which can be integral, real, or std::string.
+ */
+template<typename T = std::string>
+struct QddCardinality: public CardinalityBase<QddCardinality<T>,T,false> {
+};
+
+/**
  * BDD evaluator that counts the number of elements.
  * @tparam T data type for counting the number,
  *          which can be integral, real, or std::string.
- * @tparam ARITY arity of the nodes.
  */
 template<typename T = std::string>
 struct BddCardinality: public CardinalityBase<BddCardinality<T>,T,true> {
@@ -176,7 +184,6 @@ struct BddCardinality: public CardinalityBase<BddCardinality<T>,T,true> {
  * ZDD evaluator that counts the number of elements.
  * @tparam T data type for counting the number,
  *          which can be integral, real, or std::string.
- * @tparam ARITY arity of the nodes.
  */
 template<typename T = std::string>
 struct ZddCardinality: public CardinalityBase<ZddCardinality<T>,T,false> {
