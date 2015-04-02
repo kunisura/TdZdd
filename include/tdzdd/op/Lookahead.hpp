@@ -109,8 +109,8 @@ public:
         return spec.equal_to(p, q, level);
     }
 
-    void print_state(std::ostream& os, void const* p) const {
-        spec.print_state(os, p);
+    void print_state(std::ostream& os, void const* p, int level) const {
+        spec.print_state(os, p, level);
     }
 
     void print_level(std::ostream& os, int level) const {
@@ -183,8 +183,8 @@ public:
         return spec.equal_to(p, q, level);
     }
 
-    void print_state(std::ostream& os, void const* p) const {
-        spec.print_state(os, p);
+    void print_state(std::ostream& os, void const* p, int level) const {
+        spec.print_state(os, p, level);
     }
 
     void print_level(std::ostream& os, int level) const {

@@ -48,7 +48,7 @@ namespace tdzdd {
  * - void destructLevel(int level)
  * - size_t hash_code(void const* p, int level) const
  * - bool equal_to(void const* p, void const* q, int level) const
- * - void print_state(std::ostream& os, void const* p) const
+ * - void print_state(std::ostream& os, void const* p, int level) const
  *
  * Optionally, the following functions can be overloaded:
  * - void printLevel(std::ostream& os, int level) const
@@ -218,7 +218,7 @@ public:
         return true;
     }
 
-    void print_state(std::ostream& os, void const* p) const {
+    void print_state(std::ostream& os, void const* p, int level) const {
         os << "＊";
     }
 };
@@ -327,8 +327,12 @@ public:
         os << s;
     }
 
-    void print_state(std::ostream& os, void const* p) const {
-        this->entity().printState(os, state(p));
+    void printStateAtLevel(std::ostream& os, State const& s, int level) const {
+        this->entity().printState(os, s);
+    }
+
+    void print_state(std::ostream& os, void const* p, int level) const {
+        this->entity().printStateAtLevel(os, state(p), level);
     }
 };
 
@@ -459,8 +463,12 @@ public:
         os << "]";
     }
 
-    void print_state(std::ostream& os, void const* p) const {
-        this->entity().printState(os, state(p));
+    void printStateAtLevel(std::ostream& os, State const* a, int level) const {
+        this->entity().printState(os, a);
+    }
+
+    void print_state(std::ostream& os, void const* p, int level) const {
+        this->entity().printStateAtLevel(os, state(p), level);
     }
 };
 
@@ -636,8 +644,14 @@ public:
         os << "]";
     }
 
-    void print_state(std::ostream& os, void const* p) const {
-        this->entity().printState(os, s_state(p), a_state(p));
+    void printStateAtLevel(std::ostream& os,
+                           S_State const& s,
+                           A_State const* a, int level) const {
+        this->entity().printState(os, s, a);
+    }
+
+    void print_state(std::ostream& os, void const* p, int level) const {
+        this->entity().printStateAtLevel(os, s_state(p), a_state(p), level);
     }
 };
 

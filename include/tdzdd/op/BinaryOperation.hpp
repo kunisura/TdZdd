@@ -168,12 +168,12 @@ struct BddAnd: public BinaryOperation<BddAnd<S1,S2>,S1,S2> {
         return std::max(base::level1(p), base::level2(p));
     }
 
-    void print_state(std::ostream& os, void const* p) const {
+    void print_state(std::ostream& os, void const* p, int level) const {
         Word const* q = static_cast<Word const*>(p);
         os << "<" << level1(q) << ",";
-        base::spec1.print_state(os, base::state1(q));
+        base::spec1.print_state(os, base::state1(q), level);
         os << ">∧<" << level2(q) << ",";
-        base::spec2.print_state(os, base::state2(q));
+        base::spec2.print_state(os, base::state2(q), level);
         os << ">";
     }
 };
@@ -215,12 +215,12 @@ struct BddOr: public BinaryOperation<BddOr<S1,S2>,S1,S2> {
         return std::max(base::level1(p), base::level2(p));
     }
 
-    void print_state(std::ostream& os, void const* p) const {
+    void print_state(std::ostream& os, void const* p, int level) const {
         Word const* q = static_cast<Word const*>(p);
         os << "<" << base::level1(q) << ",";
-        base::spec1.print_state(os, base::state1(q));
+        base::spec1.print_state(os, base::state1(q), level);
         os << ">∨<" << base::level2(q) << ",";
-        base::spec2.print_state(os, base::state2(q));
+        base::spec2.print_state(os, base::state2(q), level);
         os << ">";
     }
 };
@@ -335,12 +335,12 @@ public:
                && spec2.equal_to(state2(p), state2(q), level);
     }
 
-    void print_state(std::ostream& os, void const* p) const {
+    void print_state(std::ostream& os, void const* p, int level) const {
         Word const* q = static_cast<Word const*>(p);
         os << "<";
-        spec1.print_state(os, state1(q));
+        spec1.print_state(os, state1(q), level);
         os << ">∩<";
-        spec2.print_state(os, state2(q));
+        spec2.print_state(os, state2(q), level);
         os << ">";
     }
 };
@@ -388,12 +388,12 @@ struct ZddUnion: public BinaryOperation<ZddUnion<S1,S2>,S1,S2> {
         return std::max(base::level1(p), base::level2(p));
     }
 
-    void print_state(std::ostream& os, void const* p) const {
+    void print_state(std::ostream& os, void const* p, int level) const {
         Word const* q = static_cast<Word const*>(p);
         os << "<" << base::level1(q) << ",";
-        base::spec1.print_state(os, base::state1(q));
+        base::spec1.print_state(os, base::state1(q), level);
         os << ">∪<" << base::level2(q) << ",";
-        base::spec2.print_state(os, base::state2(q));
+        base::spec2.print_state(os, base::state2(q), level);
         os << ">";
     }
 };

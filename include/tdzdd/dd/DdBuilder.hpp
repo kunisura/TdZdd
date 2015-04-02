@@ -1383,7 +1383,7 @@ private:
             SpecNode* p = snodes.front();
 
             os << "  \"" << f << "\" [label=\"";
-            spec.print_state(os, state(p));
+            spec.print_state(os, state(p), i);
             os << "\"];\n";
 
             for (int b = 0; b < AR; ++b) {

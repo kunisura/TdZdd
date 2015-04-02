@@ -120,10 +120,10 @@ public:
         return true;
     }
 
-    void print_state(std::ostream& os, void const* p) const {
+    void print_state(std::ostream& os, void const* p, int l) const {
         Word const* q = static_cast<Word const*>(p);
         os << "<" << level(q) << ",";
-        spec.print_state(os, state(q));
+        spec.print_state(os, state(q), l);
         os << ">";
     }
 };
