@@ -51,6 +51,7 @@ TEST(RandomDdTest, BDD_and_ZDD) {
         ASSERT_LE(zdd.size(), qdd.size());
         ASSERT_EQ(qdd.evaluate(BddCardinality<>(n)), bdd.evaluate(BddCardinality<>(n)));
         ASSERT_EQ(qdd.evaluate(ZddCardinality<>()), zdd.evaluate(ZddCardinality<>()));
+        ASSERT_EQ(bdd.evaluate(BddCardinality<>(n)), zdd.evaluate(ZddCardinality<>()));
 
         DdStructure<2> bqd = qdd;
         DdStructure<2> zqd = qdd;

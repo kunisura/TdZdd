@@ -98,12 +98,14 @@ public:
             baseColumn(tasks + 1),
 #endif
             readyForSequentialReduction(false) {
+#ifdef _OPENMP
 #ifdef DEBUG
         if (useMP) {
             MessageHandler mh;
             mh << "#thread = " << threads << ", #task = " << tasks;
         }
         etcS0.start();
+#endif
 #endif
         diagram = newDiagram;
 
@@ -351,8 +353,8 @@ private:
                 NodeId& f0 = f.branch[0];
                 f0 = newIdTable[f0.row()][f0.col()];
                 NodeId deletable = BDD ? f0 : 0;
-                bool del = true;
-                for (int b = (BDD || ZDD) ? 1 : 0; b < ARITY; ++b) {
+                bool del = BDD || ZDD || (f0 == 0);
+                for (int b = 1; b < ARITY; ++b) {
                     NodeId& ff = f.branch[b];
                     ff = newIdTable[ff.row()][ff.col()];
                     if (ff != deletable) del = false;
@@ -427,8 +429,8 @@ private:
                 NodeId& f0 = f.branch[0];
                 f0 = newIdTable[f0.row()][f0.col()];
                 NodeId deletable = BDD ? f0 : 0;
-                bool del = true;
-                for (int b = (BDD || ZDD) ? 1 : 0; b < ARITY; ++b) {
+                bool del = BDD || ZDD || (f0 == 0);
+                for (int b = 1; b < ARITY; ++b) {
                     NodeId& ff = f.branch[b];
                     ff = newIdTable[ff.row()][ff.col()];
                     if (ff != deletable) del = false;

@@ -17,6 +17,7 @@ example1.o: example1.cpp ../../include/tdzdd/DdStructure.hpp \
  ../../include/tdzdd/dd/../util/MemoryPool.hpp \
  ../../include/tdzdd/dd/../util/MyHashTable.hpp \
  ../../include/tdzdd/dd/../util/MyList.hpp \
+ ../../include/tdzdd/dd/DepthFirstSearcher.hpp \
  ../../include/tdzdd/util/demangle.hpp \
  ../../include/tdzdd/dd/DdReducer.hpp \
  ../../include/tdzdd/eval/Cardinality.hpp \
@@ -35,6 +36,7 @@ example1-debug.o: example1.cpp ../../include/tdzdd/DdStructure.hpp \
  ../../include/tdzdd/dd/../util/MemoryPool.hpp \
  ../../include/tdzdd/dd/../util/MyHashTable.hpp \
  ../../include/tdzdd/dd/../util/MyList.hpp \
+ ../../include/tdzdd/dd/DepthFirstSearcher.hpp \
  ../../include/tdzdd/util/demangle.hpp \
  ../../include/tdzdd/dd/DdReducer.hpp \
  ../../include/tdzdd/eval/Cardinality.hpp \
@@ -53,6 +55,7 @@ example2.o: example2.cpp ../../include/tdzdd/DdStructure.hpp \
  ../../include/tdzdd/dd/../util/MemoryPool.hpp \
  ../../include/tdzdd/dd/../util/MyHashTable.hpp \
  ../../include/tdzdd/dd/../util/MyList.hpp \
+ ../../include/tdzdd/dd/DepthFirstSearcher.hpp \
  ../../include/tdzdd/util/demangle.hpp \
  ../../include/tdzdd/dd/DdReducer.hpp \
  ../../include/tdzdd/eval/Cardinality.hpp \
@@ -71,6 +74,7 @@ example2-debug.o: example2.cpp ../../include/tdzdd/DdStructure.hpp \
  ../../include/tdzdd/dd/../util/MemoryPool.hpp \
  ../../include/tdzdd/dd/../util/MyHashTable.hpp \
  ../../include/tdzdd/dd/../util/MyList.hpp \
+ ../../include/tdzdd/dd/DepthFirstSearcher.hpp \
  ../../include/tdzdd/util/demangle.hpp \
  ../../include/tdzdd/dd/DdReducer.hpp \
  ../../include/tdzdd/eval/Cardinality.hpp \
@@ -91,6 +95,7 @@ testRandomDd.o: testRandomDd.cpp ../../include/tdzdd/DdStructure.hpp \
  ../../include/tdzdd/dd/../util/MemoryPool.hpp \
  ../../include/tdzdd/dd/../util/MyHashTable.hpp \
  ../../include/tdzdd/dd/../util/MyList.hpp \
+ ../../include/tdzdd/dd/DepthFirstSearcher.hpp \
  ../../include/tdzdd/util/demangle.hpp \
  ../../include/tdzdd/dd/DdReducer.hpp \
  ../../include/tdzdd/eval/Cardinality.hpp \
@@ -109,6 +114,7 @@ testRandomDd-debug.o: testRandomDd.cpp ../../include/tdzdd/DdStructure.hpp \
  ../../include/tdzdd/dd/../util/MemoryPool.hpp \
  ../../include/tdzdd/dd/../util/MyHashTable.hpp \
  ../../include/tdzdd/dd/../util/MyList.hpp \
+ ../../include/tdzdd/dd/DepthFirstSearcher.hpp \
  ../../include/tdzdd/util/demangle.hpp \
  ../../include/tdzdd/dd/DdReducer.hpp \
  ../../include/tdzdd/eval/Cardinality.hpp \
@@ -127,6 +133,7 @@ testSizeConstraint.o: testSizeConstraint.cpp \
  ../../include/tdzdd/dd/../util/MemoryPool.hpp \
  ../../include/tdzdd/dd/../util/MyHashTable.hpp \
  ../../include/tdzdd/dd/../util/MyList.hpp \
+ ../../include/tdzdd/dd/DepthFirstSearcher.hpp \
  ../../include/tdzdd/util/demangle.hpp \
  ../../include/tdzdd/dd/DdReducer.hpp \
  ../../include/tdzdd/eval/Cardinality.hpp \
@@ -147,6 +154,7 @@ testSizeConstraint-debug.o: testSizeConstraint.cpp \
  ../../include/tdzdd/dd/../util/MemoryPool.hpp \
  ../../include/tdzdd/dd/../util/MyHashTable.hpp \
  ../../include/tdzdd/dd/../util/MyList.hpp \
+ ../../include/tdzdd/dd/DepthFirstSearcher.hpp \
  ../../include/tdzdd/util/demangle.hpp \
  ../../include/tdzdd/dd/DdReducer.hpp \
  ../../include/tdzdd/eval/Cardinality.hpp \

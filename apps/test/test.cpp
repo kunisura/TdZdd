@@ -30,10 +30,8 @@ int main(int argc, char **argv) {
     testing::InitGoogleTest(&argc, argv);
     useMP = false;
     int ret = RUN_ALL_TESTS();
-#ifdef _OPENMP
     useMP = true;
     std::cout << "\n*** Re-running with OpenMP ***\n";
     ret += RUN_ALL_TESTS();
-#endif
     return ret;
 }
