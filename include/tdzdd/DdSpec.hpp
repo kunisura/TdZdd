@@ -121,7 +121,7 @@ private:
     static size_t rawHashCode_(void const* p) {
         size_t h = 0;
         I const* a = static_cast<I const*>(p);
-        for (int i = 0; i < sizeof(T) / sizeof(I); ++i) {
+        for (size_t i = 0; i < sizeof(T) / sizeof(I); ++i) {
             h += a[i];
             h *= 314159257;
         }
@@ -132,7 +132,7 @@ private:
     static size_t rawEqualTo_(void const* p1, void const* p2) {
         I const* a1 = static_cast<I const*>(p1);
         I const* a2 = static_cast<I const*>(p2);
-        for (int i = 0; i < sizeof(T) / sizeof(I); ++i) {
+        for (size_t i = 0; i < sizeof(T) / sizeof(I); ++i) {
             if (a1[i] != a2[i]) return false;
         }
         return true;
