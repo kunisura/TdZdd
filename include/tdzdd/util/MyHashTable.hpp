@@ -400,8 +400,7 @@ public:
         }
 
         iterator& operator++() {
-            while (ptr < end) {
-                ++ptr;
+            while (++ptr < end) {
                 if (!(*ptr == Entry())) break;
             }
             return *this;
@@ -437,8 +436,7 @@ public:
         }
 
         const_iterator& operator++() {
-            while (ptr < end) {
-                ++ptr;
+            while (++ptr < end) {
                 if (!(*ptr == Entry())) break;
             }
             return *this;
