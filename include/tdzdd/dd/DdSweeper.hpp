@@ -75,9 +75,11 @@ public:
      * @param count the number of dead nodes at this level.
      */
     void update(int current, int child, size_t count) {
+        assert(1 <= current);
+        assert(0 <= child);
         if (current <= 1) return;
 
-        if (current >= sweepLevel.size()) {
+        if (size_t(current) >= sweepLevel.size()) {
             sweepLevel.resize(current + 1);
             deadCount.resize(current + 2);
         }

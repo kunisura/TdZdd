@@ -118,24 +118,6 @@ protected:
         int64_t code;
     };
 
-//    /*
-//     * NodeProperty of input node table
-//     */
-//    struct Work {
-//        uint16_t parentRow;
-//        uint16_t nextRow[2];
-//        size_t parentCol;
-//        size_t nextCol[2];
-//        size_t numSibling;
-//        size_t outColBase;
-//        MyListOnPool<SpecNode> snodes[2];
-//
-//        Work()
-//                : parentRow(), nextRow(), parentCol(), nextCol(), numSibling(0),
-//                  outColBase() {
-//        }
-//    };
-
     static NodeId*& srcPtr(SpecNode* p) {
         return p[0].srcPtr;
     }
@@ -560,12 +542,18 @@ public:
                         *srcPtr(p) = NodeId(i, j);
 
                         Node<AR>& q = output[i][j];
-                        spec.get_copy(state(ptmp), state(p));
-                        void* s[2] = { state(ptmp), state(p) };
                         bool allZero = true;
+                        void* s = state(ptmp);
 
                         for (int b = 0; b < AR; ++b) {
-                            int ii = spec.get_child(s[b], i, b);
+                            if (b < AR - 1) {
+                                spec.get_copy(s, state(p));
+                            }
+                            else {
+                                s = state(p);
+                            }
+
+                            int ii = spec.get_child(s, i, b);
 
                             if (ii <= 0) {
                                 q.branch[b] = ii ? 1 : 0;
@@ -573,17 +561,17 @@ public:
                             }
                             else {
                                 assert(ii <= i - 1);
-                                int xx = spec.hash_code(s[b], ii) % tasks;
+                                int xx = spec.hash_code(s, ii) % tasks;
                                 SpecNode* pp =
                                         snodeTables[yy][xx][ii].alloc_front(
                                                 specNodeSize);
-                                spec.get_copy(state(pp), s[b]);
+                                spec.get_copy(state(pp), s);
                                 srcPtr(pp) = &q.branch[b];
                                 if (ii < lowestChild) lowestChild = ii;
                                 allZero = false;
                             }
 
-                            spec.destruct(s[b]);
+                            spec.destruct(s);
                         }
 
                         if (allZero) ++deadCount;
@@ -919,14 +907,20 @@ public:
                     continue;
                 }
 
-                spec.get_copy(state(ptmp), state(p));
-                void* s[2] = { state(ptmp), state(p) };
                 bool allZero = true;
+                void* s = state(ptmp);
 
                 for (int b = 0; b < AR; ++b) {
+                    if (b < AR - 1) {
+                        spec.get_copy(s, state(p));
+                    }
+                    else {
+                        s = state(p);
+                    }
+
                     NodeId f(i, j);
                     int kk = downTable(f, b, i - 1);
-                    int ii = downSpec(s[b], i, b, kk);
+                    int ii = downSpec(s, i, b, kk);
 
                     while (ii != 0 && kk != 0 && ii != kk) {
                         if (ii < kk) {
@@ -935,7 +929,7 @@ public:
                         }
                         else {
                             assert(ii >= 1);
-                            ii = downSpec(s[b], ii, 0, kk);
+                            ii = downSpec(s, ii, 0, kk);
                         }
                     }
 
@@ -949,15 +943,15 @@ public:
                         if (work[ii].empty()) work[ii].resize(input[ii].size());
                         SpecNode* pp = work[ii][f.col()].alloc_front(pools[ii],
                                 specNodeSize);
-                        spec.get_copy(state(pp), s[b]);
+                        spec.get_copy(state(pp), s);
                         srcPtr(pp) = &q->branch[b];
                         if (ii < lowestChild) lowestChild = ii;
                         allZero = false;
                     }
+
+                    spec.destruct(s);
                 }
 
-                spec.destruct(state(p));
-                spec.destruct(state(ptmp));
                 ++q;
                 if (allZero) ++deadCount;
             }
@@ -1179,14 +1173,20 @@ public:
                         size_t const jj = jj0 + code(p);
                         *srcPtr(p) = NodeId(i, jj);
                         Node<AR>& q = output[i][jj];
-                        spec.get_copy(state(ptmp), state(p));
-                        void* s[2] = { state(ptmp), state(p) };
                         bool allZero = true;
+                        void* s = state(ptmp);
 
                         for (int b = 0; b < AR; ++b) {
+                            if (b < AR - 1) {
+                                spec.get_copy(s, state(p));
+                            }
+                            else {
+                                s = state(p);
+                            }
+
                             NodeId f(i, j);
                             int kk = downTable(f, b, i - 1);
-                            int ii = downSpec(spec, s[b], i, b, kk);
+                            int ii = downSpec(spec, s, i, b, kk);
 
                             while (ii != 0 && kk != 0 && ii != kk) {
                                 if (ii < kk) {
@@ -1195,7 +1195,7 @@ public:
                                 }
                                 else {
                                     assert(ii >= 1);
-                                    ii = downSpec(spec, s[b], ii, 0, kk);
+                                    ii = downSpec(spec, s, ii, 0, kk);
                                 }
                             }
 
@@ -1216,13 +1216,13 @@ public:
                                 SpecNode* pp =
                                         snodeTables[yy][ii][jj].alloc_front(
                                                 pools[yy][ii], specNodeSize);
-                                spec.get_copy(state(pp), s[b]);
+                                spec.get_copy(state(pp), s);
                                 srcPtr(pp) = &q.branch[b];
                                 if (ii < lowestChild) lowestChild = ii;
                                 allZero = false;
                             }
 
-                            spec.destruct(s[b]);
+                            spec.destruct(s);
                         }
 
                         if (allZero) ++deadCount;
