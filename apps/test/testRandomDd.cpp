@@ -32,40 +32,61 @@ using namespace tdzdd;
 
 extern bool useMP;
 
-TEST(RandomDdTest, BDD_and_ZDD) {
-    int n = 100;
-    int w = 1000;
-    double d = 0.3;
+template<int A>
+void do_test(int n, int w, double d) {
+    DdStructure<A> dd(RandomDd<A>(n, w, d), useMP);
 
+    DdStructure<A> qdd = dd;
+    DdStructure<A> bdd = dd;
+    DdStructure<A> zdd = dd;
+    qdd.qddReduce();
+    bdd.bddReduce();
+    zdd.zddReduce();
+    ASSERT_LE(qdd.size(), dd.size());
+    ASSERT_LE(bdd.size(), qdd.size());
+    ASSERT_LE(zdd.size(), qdd.size());
+    ASSERT_EQ(qdd.bddCardinality(n), bdd.bddCardinality(n));
+    ASSERT_EQ(qdd.zddCardinality(), zdd.zddCardinality());
+
+    DdStructure<A> bqd = qdd;
+    DdStructure<A> zqd = qdd;
+    bqd.bddReduce();
+    zqd.zddReduce();
+    ASSERT_EQ(bdd, bqd);
+    ASSERT_EQ(zdd, zqd);
+
+    zqd.zddSubset(qdd);
+    ASSERT_EQ(zdd, zqd);
+
+    DdStructure<A> zbd = bdd.bdd2zdd(n);
+    if (bdd != zdd) ASSERT_NE(bdd, zbd);
+    ASSERT_EQ(zdd, zbd);
+
+    DdStructure<A> bzd = zdd.zdd2bdd(n);
+    if (bdd != zdd) ASSERT_NE(zdd, bzd);
+    ASSERT_EQ(bdd, bzd);
+}
+
+TEST(RandomDdTest, Binary) {
+    for (int i = 0; i < 100; ++i) {
+        do_test<2>(100, 1000, 0.3);
+    }
+}
+
+TEST(RandomDdTest, Ternary) {
     for (int i = 0; i < 10; ++i) {
-        DdStructure<2> dd(RandomDd<2>(n, w, d), useMP);
+        do_test<3>(100, 1000, 0.3);
+    }
+}
 
-        DdStructure<2> qdd = dd;
-        DdStructure<2> bdd = dd;
-        DdStructure<2> zdd = dd;
-        qdd.qddReduce();
-        bdd.bddReduce();
-        zdd.zddReduce();
-        ASSERT_LE(qdd.size(), dd.size());
-        ASSERT_LE(bdd.size(), qdd.size());
-        ASSERT_LE(zdd.size(), qdd.size());
-        ASSERT_EQ(qdd.evaluate(BddCardinality<>(n)), bdd.evaluate(BddCardinality<>(n)));
-        ASSERT_EQ(qdd.evaluate(ZddCardinality<>()), zdd.evaluate(ZddCardinality<>()));
-        ASSERT_EQ(bdd.evaluate(BddCardinality<>(n)), zdd.evaluate(ZddCardinality<>()));
+TEST(RandomDdTest, Quaternary) {
+    for (int i = 0; i < 10; ++i) {
+        do_test<4>(100, 1000, 0.3);
+    }
+}
 
-        DdStructure<2> bqd = qdd;
-        DdStructure<2> zqd = qdd;
-        bqd.bddReduce();
-        zqd.zddReduce();
-        ASSERT_EQ(bdd, bqd);
-        ASSERT_EQ(zdd, zqd);
-
-        DdStructure<2> zbd = bdd.bdd2zdd(n);
-        if (bdd != zdd) ASSERT_NE(bdd, zbd);
-        ASSERT_EQ(zdd, zbd);
-
-        DdStructure<2> bzd = zdd.zdd2bdd(n);
-        if (bdd != zdd) ASSERT_NE(zdd, bzd);
-        ASSERT_EQ(bdd, bzd);
+TEST(RandomDdTest, NinetyNineAry) {
+    for (int i = 0; i < 10; ++i) {
+        do_test<99>(10, 1000, 0.3);
     }
 }

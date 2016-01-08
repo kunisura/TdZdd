@@ -434,7 +434,7 @@ public:
      * @return the number of itemsets.
      */
     std::string bddCardinality(int numVars) const {
-        return evaluate(BddCardinality<std::string>(numVars));
+        return evaluate(BddCardinality<std::string,ARITY>(numVars));
     }
 
     /**
@@ -442,7 +442,7 @@ public:
      * @return the number of itemsets.
      */
     std::string zddCardinality() const {
-        return evaluate(ZddCardinality<std::string>());
+        return evaluate(ZddCardinality<std::string,ARITY>());
     }
 
     /**
@@ -478,12 +478,6 @@ public:
             evals[k].initialize(n);
         }
 #endif
-
-        if (n == 0) {
-            T t;
-            eval.evalTerminal(t, root_.col());
-            return t;
-        }
 
         DataTable<T> work(diagram->numRows());
         {
