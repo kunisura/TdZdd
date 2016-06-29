@@ -1,4 +1,4 @@
-TdZdd
+TdZdd 1.0
 ===========================================================================
 
 ### A top-down/breadth-first decision diagram manipulation framework
