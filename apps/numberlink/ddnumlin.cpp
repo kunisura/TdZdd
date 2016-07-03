@@ -28,29 +28,26 @@
 #include <tdzdd/DdStructure.hpp>
 #include <tdzdd/DdSpecOp.hpp>
 #include "Board.hpp"
-#include "DdBuilderDF.hpp"
 #include "DegreeZdd.hpp"
 #include "NoUTurnZdd.hpp"
 #include "NumlinZdd.hpp"
 
 using namespace tdzdd;
 
-std::string options[][2] = {
-        { "k <n>", "Allow at most <k> blank boxes (default=infinity)" },
-        { "a", "Build a ZDD for all solutions" },
-        //{"rot <n>", "Rotate <n> x 90 degrees counterclockwise"},
-        { "p", "Use parallel processing" },
-        { "print <n>", "Print <n> solutions at most" } };
+std::string options[][2] = //
+        {{"k <n>", "Allow at most <k> blank boxes (default=infinity)"}, //
+         {"u", "Allow U-turn paths"}, //
+         {"p", "Use parallel processing"}, //
+         {"print <n>", "Print <n> solutions at most"}};
 
 std::map<std::string,bool> opt;
 std::map<std::string,long> optNum;
 std::string infile;
 std::string outfile;
-int rot;
 
 void usage(char const* cmd) {
     std::cerr << "usage: " << cmd
-            << " [ <option>... ] <input_file> [ <output_file> ]\n";
+              << " [ <option>... ] <input_file> [ <output_file> ]\n";
     std::cerr << "options\n";
     for (unsigned i = 0; i < sizeof(options) / sizeof(options[0]); ++i) {
         std::cerr << "  -" << options[i][0];
@@ -62,25 +59,22 @@ void usage(char const* cmd) {
     std::cerr << "\n";
 }
 
-void output(std::ostream& os, DdStructure<2> const& dd,
-        NumlinZdd const& numlin, bool transposed) {
-    Board const& quiz = numlin.quiz();
-    int rows = quiz.getRows();
-    int cols = quiz.getCols();
+void output(std::ostream& os, DdStructure<2> const& dd, Board const& quiz, bool transposed) {
     Board answer = quiz;
     int count = 0;
 
     for (typeof(dd.begin()) ans = dd.begin(); ans != dd.end(); ++ans) {
-        for (int i = 0; i < rows; ++i) {
-            for (int j = 0; j < cols - 1; ++j) {
+        for (int i = 0; i < quiz.rows; ++i) {
+            for (int j = 0; j < quiz.cols - 1; ++j) {
                 answer.hlink[i][j] = false;
             }
         }
 
         for (typeof(ans->begin()) lev = ans->begin(); lev != ans->end();
                 ++lev) {
-            std::div_t pos = numlin.level2pos(*lev);
-            answer.hlink[pos.quot][pos.rem] = true;
+            int i = quiz.level2row(*lev);
+            int j = quiz.level2col(*lev);
+            answer.hlink[i][j] = true;
         }
 
         answer.makeVerticalLinks();
@@ -100,7 +94,6 @@ void run() {
     Board quiz;
 
     mh << "\nINPUT: " << infile << "\n";
-    if (opt["rot"]) mh << "\nROTATION: " << optNum["rot"];
     if (infile == "-") {
         quiz.readNumbers(std::cin);
     }
@@ -113,36 +106,28 @@ void run() {
     quiz.printNumlin(mh);
 
     bool transposed = false;
-    if (!opt["rot"] && quiz.getRows() < quiz.getCols()) {
-        mh
-        << "\nThe board is transposed because it has more columns than rows.";
+    if (quiz.rows < quiz.cols) {
+        mh << "\nThe board is transposed because it has more columns than rows.";
         quiz.transpose();
         transposed = true;
     }
 
     DdStructure<2> dd;
-    NumlinZdd numlin(quiz, optNum["k"]);//, !opt["a"]);
+    NumlinZdd numlin(quiz, optNum["k"]);        //, !opt["u"]);
 
-    if (opt["a"]) {
-        DegreeZdd degree(quiz, optNum["k"] != 0);
+    if (opt["u"]) {
+        DegreeZdd degree(quiz);
         dd = DdStructure<2>(zddLookahead(degree), opt["p"]);
         dd.zddReduce();
         dd.zddSubset(zddLookahead(numlin));
     }
     else {
-        NoUTurnZdd nut(quiz, optNum["k"] != 0);
-        //nut.dumpDot(std::cout);
-        //dd = DdStructure<2>(zddLookahead(nut), opt["p"]);
-        //dd.zddSubset(zddLookahead(numlin));
-        //zddLookahead(zddIntersection(nut, numlin)).dumpDot(std::cout);
-        dd = DdStructure<2>(zddLookahead(zddIntersection(nut, numlin)), opt["p"]);
-        //dd.useMultiProcessors(opt["p"]);
-        //buildDF(dd, zddIntersection(nut, numlin));
+        ConstraintZdd constraint(quiz);
+        dd = DdStructure<2>(zddLookahead(zddIntersection(constraint, numlin)),
+                opt["p"]);
     }
 
-    //dd.dumpDot(std::cout, "dd1");
     dd.zddReduce();
-    //dd.dumpDot(std::cout, "ZDD");
     mh << "\n#solution = " << dd.zddCardinality();
 
     if (!outfile.empty()) {
@@ -150,12 +135,12 @@ void run() {
         mh.begin("writing") << " ...\n";
 
         if (outfile == "-") {
-            output(std::cout, dd, numlin, transposed);
+            output(std::cout, dd, quiz, transposed);
         }
         else {
             std::ofstream ofs(outfile.c_str());
             if (!ofs) throw std::runtime_error(strerror(errno));
-            output(ofs, dd, numlin, transposed);
+            output(ofs, dd, quiz, transposed);
         }
 
         mh.end();
@@ -204,10 +189,6 @@ int main(int argc, char *argv[]) {
 
     if (!opt["k"]) optNum["k"] = -1;
     if (opt["print"] && outfile.empty()) outfile = "-";
-
-    rot = optNum["rot"] % 4;
-    if (rot < 0) rot += 4;
-    assert(0 <= rot && rot < 4);
 
     MessageHandler::showMessages();
     MessageHandler mh;

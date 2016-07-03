@@ -29,42 +29,20 @@
 #include "Board.hpp"
 
 struct NoTurnZddState {
-    bool hline;
-    bool vline;
-    bool filled;
+    bool hline;  ///< Horizontal line on the upside
+    bool vline;  ///< Vertical line on the left
+    bool filled; ///< Upper-left corner is not blank
 };
 
-class NoUTurnZdd: public tdzdd::PodArrayDdSpec<NoUTurnZdd,NoTurnZddState,2> {
-    Board const& quiz_;
-    bool const kansai;
-    int const rows;
-    int const cols;
-    int const maxLevel;
+class ConstraintZdd: public tdzdd::PodArrayDdSpec<ConstraintZdd,NoTurnZddState,2> {
+    Board const& quiz;
 
 public:
     /**
      * Constructor.
      * @param quiz matrix of number pairs.
-     * @param kansai true if unused box is allowed.
      */
-    NoUTurnZdd(Board const& quiz, bool kansai);
-
-    /**
-     * Gets the row and column positions of a given level.
-     * @param level decision level.
-     * @return row and column positions (quot, rem).
-     */
-    std::div_t level2pos(int level) const {
-        return std::div(maxLevel - level, cols - 1);
-    }
-
-    /**
-     * Returns the quiz.
-     * @return quiz.
-     */
-    Board const& quiz() const {
-        return quiz_;
-    }
+    ConstraintZdd(Board const& quiz);
 
     /**
      * Gets a root configuration.

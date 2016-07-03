@@ -29,40 +29,20 @@
 #include "Board.hpp"
 
 class NumlinZdd: public tdzdd::PodHybridDdSpec<NumlinZdd,int,uint8_t,2> {
-    Board const& quiz_;
-    int const kansai;
+    Board const& quiz;
+    int const maxBlank;
     bool const noRoundabout;
-    int const rows;
-    int const cols;
-    int const maxLevel;
-    int const finalNumRow;
-    int const finalNumCol;
+    int finalHintRow;
+    int finalHintCol;
 
 public:
     /**
      * Constructor.
      * @param quiz matrix of number pairs.
-     * @param kansai maximum number of unused boxes.
+     * @param maxBlank maximum number of unused boxes.
      * @param noRoundabout flag to prune roundabout ways.
      */
-    NumlinZdd(Board const& quiz, int kansai, bool noRoundabout = false);
-
-    /**
-     * Gets the row and column positions of a given level.
-     * @param level decision level.
-     * @return row and column positions (quot, rem).
-     */
-    std::div_t level2pos(int level) const {
-        return std::div(maxLevel - level, cols - 1);
-    }
-
-    /**
-     * Returns the quiz.
-     * @return quiz.
-     */
-    Board const& quiz() const {
-        return quiz_;
-    }
+    NumlinZdd(Board const& quiz, int maxBlank, bool noRoundabout = false);
 
     /**
      * Gets a root configuration.

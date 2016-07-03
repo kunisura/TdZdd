@@ -25,33 +25,39 @@
 #include <iostream>
 #include <vector>
 
-struct Board {
+class Board {
+public:
+    int rows;
+    int cols;
+    int top_level;
     std::vector<std::vector<int> > number;
     std::vector<std::vector<bool> > hlink;
     std::vector<std::vector<bool> > vlink;
 
     /**
-     * Get the number of rows.
-     * @return the number of rows.
+     * Gets the row position of a given level.
+     * @param level decision level.
+     * @return row position.
      */
-    int getRows() const {
-        return number.size();
+    int level2row(int level) const {
+        return (top_level - level) / (cols - 1);
     }
 
     /**
-     * Get the number of columns.
-     * @return the number of columns.
+     * Gets the column position of a given level.
+     * @param level decision level.
+     * @return column position.
      */
-    int getCols() const {
-        return number.at(0).size();
+    int level2col(int level) const {
+        return (top_level - level) % (cols - 1);
     }
 
     /**
      * Get the row number of the final hint.
      */
     int getFinalNumRow() const {
-        for (int i = getRows() - 1; i >= 0; --i) {
-            for (int j = getCols() - 1; j >= 0; --j) {
+        for (int i = rows - 1; i >= 0; --i) {
+            for (int j = cols - 1; j >= 0; --j) {
                 if (number[i][j] > 0) return i;
             }
         }
@@ -62,8 +68,8 @@ struct Board {
      * Get the column number of the final hint.
      */
     int getFinalNumCol() const {
-        for (int i = getRows() - 1; i >= 0; --i) {
-            for (int j = getCols() - 1; j >= 0; --j) {
+        for (int i = rows - 1; i >= 0; --i) {
+            for (int j = cols - 1; j >= 0; --j) {
                 if (number[i][j] > 0) return j;
             }
         }
@@ -71,11 +77,9 @@ struct Board {
     }
 
     /**
-     * Initialize the board.
-     * @param rows the number of rows.
-     * @param cols the number of columns.
+     * Initialize the board based on \p rows and \p cols.
      */
-    void init(int rows, int cols);
+    void init();
 
     /**
      * Reflect the elements along its main diagonal.

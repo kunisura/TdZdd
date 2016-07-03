@@ -25,7 +25,9 @@
 #include <iomanip>
 #include <stdexcept>
 
-void Board::init(int rows, int cols) {
+void Board::init() {
+    top_level = rows * (cols - 1);
+
     number.clear();
     number.resize(rows);
     for (int i = 0; i < rows; ++i) {
@@ -68,11 +70,11 @@ void Board::transpose() {
     typeof(vlink) tmp = transposed_matrix(hlink);
     hlink = transposed_matrix(vlink);
     vlink = tmp;
+    std::swap(rows, cols);
+    top_level = rows * (cols - 1);
 }
 
 void Board::readNumbers(std::istream& is) {
-    int rows;
-    int cols;
     int c;
 
     for (;;) {
@@ -104,7 +106,7 @@ void Board::readNumbers(std::istream& is) {
 
     if (cols < 1 || rows < 1) throw std::runtime_error("illegal size");
 
-    init(rows, cols);
+    init();
 
     int i = -1;
     int j = 0;
@@ -129,9 +131,6 @@ void Board::readNumbers(std::istream& is) {
 }
 
 void Board::writeNumbers(std::ostream& os) const {
-    int rows = getRows();
-    int cols = getCols();
-
     os << cols << " " << rows << "\n";
 
     for (int i = 0; i < rows; ++i) {
@@ -147,9 +146,6 @@ void Board::printNumlin(std::ostream& os) const {
     static char const* connector[] = {"  ", "  ", "  ", "──", "  ", "─┘", " └",
                                       "─┴", "  ", "─┐", " ┌", "─┬", " │", "─┤",
                                       " ├", "─┼"};
-    int rows = getRows();
-    int cols = getCols();
-
     os << "┏";
     for (int j = 0; j < cols; ++j) {
         os << "━━";
@@ -186,9 +182,6 @@ void Board::printNumlin(std::ostream& os) const {
 }
 
 void Board::makeVerticalLinks() {
-    int rows = getRows();
-    int cols = getCols();
-
     std::vector<std::vector<int> > degree(rows);
     for (int i = 0; i < rows; ++i) {
         degree[i].resize(cols);
@@ -214,8 +207,8 @@ void Board::makeVerticalLinks() {
 }
 
 void Board::fillNumbers() {
-    for (int i = 0; i < getRows(); ++i) {
-        for (int j = 0; j < getCols(); ++j) {
+    for (int i = 0; i < rows; ++i) {
+        for (int j = 0; j < cols; ++j) {
             fillNumbersFrom(i, j);
         }
     }
@@ -239,12 +232,12 @@ int Board::fillNumbersFrom(int i, int j) {
         if (num > 0) return num;
     }
 
-    if (j < getCols() - 1 && hlink[i][j]) {
+    if (j < cols - 1 && hlink[i][j]) {
         num = fillNumbersFrom(i, j + 1);
         if (num > 0) return num;
     }
 
-    if (i < getRows() - 1 && vlink[i][j]) {
+    if (i < rows - 1 && vlink[i][j]) {
         num = fillNumbersFrom(i + 1, j);
         if (num > 0) return num;
     }

@@ -90,8 +90,8 @@ ddnumlin.o: ../../include/tdzdd/DdStructure.hpp \
  ../../include/tdzdd/eval/../util/BigNumber.hpp \
  ../../include/tdzdd/op/Lookahead.hpp \
  ../../include/tdzdd/op/Unreduction.hpp ../../include/tdzdd/DdSpecOp.hpp \
- ../../include/tdzdd/op/BinaryOperation.hpp Board.hpp DdBuilderDF.hpp \
- DegreeZdd.hpp NoUTurnZdd.hpp NumlinZdd.hpp
+ ../../include/tdzdd/op/BinaryOperation.hpp Board.hpp DegreeZdd.hpp \
+ NoUTurnZdd.hpp NumlinZdd.hpp
 ddnumlin-debug.o: ../../include/tdzdd/DdStructure.hpp \
  ../../include/tdzdd/DdEval.hpp ../../include/tdzdd/DdSpec.hpp \
  ../../include/tdzdd/dd/DdBuilder.hpp \
@@ -110,5 +110,5 @@ ddnumlin-debug.o: ../../include/tdzdd/DdStructure.hpp \
  ../../include/tdzdd/eval/../util/BigNumber.hpp \
  ../../include/tdzdd/op/Lookahead.hpp \
  ../../include/tdzdd/op/Unreduction.hpp ../../include/tdzdd/DdSpecOp.hpp \
- ../../include/tdzdd/op/BinaryOperation.hpp Board.hpp DdBuilderDF.hpp \
- DegreeZdd.hpp NoUTurnZdd.hpp NumlinZdd.hpp
+ ../../include/tdzdd/op/BinaryOperation.hpp Board.hpp DegreeZdd.hpp \
+ NoUTurnZdd.hpp NumlinZdd.hpp

@@ -29,38 +29,14 @@
 #include "Board.hpp"
 
 class DegreeZdd: public tdzdd::PodArrayDdSpec<DegreeZdd,int,2> {
-    Board const& quiz_;
-    bool kansai;
-    int rows;
-    int cols;
-    int maxLevel;
-    int finalNumRow;
-    int finalNumCol;
+    Board const& quiz;
 
 public:
     /**
      * Constructor.
      * @param quiz matrix of number pairs.
-     * @param kansai true if unused box is allowed.
      */
-    DegreeZdd(Board const& quiz, bool kansai);
-
-    /**
-     * Gets the row and column positions of a given level.
-     * @param level decision level.
-     * @return row and column positions (quot, rem).
-     */
-    std::div_t level2pos(int level) const {
-        return std::div(maxLevel - level, cols - 1);
-    }
-
-    /**
-     * Returns the quiz.
-     * @return quiz.
-     */
-    Board const& quiz() const {
-        return quiz_;
-    }
+    DegreeZdd(Board const& quiz);
 
     /**
      * Gets a root configuration.
