@@ -7,3 +7,4 @@
 *.bak
 *.BAK
 .*.md.html
+/BAK/
