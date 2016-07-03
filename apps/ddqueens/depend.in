@@ -5,9 +5,9 @@ ddqueens.o: ../../include/tdzdd/DdStructure.hpp \
  ../../include/tdzdd/dd/NodeTable.hpp \
  ../../include/tdzdd/dd/DataTable.hpp \
  ../../include/tdzdd/dd/../util/MyVector.hpp \
- ../../include/tdzdd/dd/../util/MemoryPool.hpp \
  ../../include/tdzdd/dd/../util/MessageHandler.hpp \
  ../../include/tdzdd/dd/../util/ResourceUsage.hpp \
+ ../../include/tdzdd/dd/../util/MemoryPool.hpp \
  ../../include/tdzdd/dd/../util/MyHashTable.hpp \
  ../../include/tdzdd/dd/../util/MyList.hpp \
  ../../include/tdzdd/util/demangle.hpp \
@@ -24,9 +24,9 @@ ddqueens-debug.o: ../../include/tdzdd/DdStructure.hpp \
  ../../include/tdzdd/dd/NodeTable.hpp \
  ../../include/tdzdd/dd/DataTable.hpp \
  ../../include/tdzdd/dd/../util/MyVector.hpp \
- ../../include/tdzdd/dd/../util/MemoryPool.hpp \
  ../../include/tdzdd/dd/../util/MessageHandler.hpp \
  ../../include/tdzdd/dd/../util/ResourceUsage.hpp \
+ ../../include/tdzdd/dd/../util/MemoryPool.hpp \
  ../../include/tdzdd/dd/../util/MyHashTable.hpp \
  ../../include/tdzdd/dd/../util/MyList.hpp \
  ../../include/tdzdd/util/demangle.hpp \

@@ -104,6 +104,10 @@ public:
         spec.destructLevel(level);
     }
 
+    int merge_states(void* p1, void* p2) {
+        return spec.merge_states(state(p1), state(p2));
+    }
+
     size_t hash_code(void const* p, int i) const {
         size_t h = size_t(level(p)) * 314159257;
         if (level(p) > 0) h += spec.hash_code(state(p), level(p)) * 271828171;
@@ -116,10 +120,10 @@ public:
         return true;
     }
 
-    void print_state(std::ostream& os, void const* p) const {
+    void print_state(std::ostream& os, void const* p, int l) const {
         Word const* q = static_cast<Word const*>(p);
         os << "<" << level(q) << ",";
-        spec.print_state(os, state(q));
+        spec.print_state(os, state(q), l);
         os << ">";
     }
 };

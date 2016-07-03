@@ -63,7 +63,7 @@ class DdReducer {
         }
 
         friend std::ostream& operator<<(std::ostream& os,
-                ReducNodeInfo const& o) {
+                                        ReducNodeInfo const& o) {
             return os << "(" << o.children << " -> " << o.column << ")";
         }
     };
@@ -84,22 +84,28 @@ class DdReducer {
     bool readyForSequentialReduction;
 
 public:
-    DdReducer(NodeTableHandler<ARITY>& diagram, bool useMP = false)
-            : input(diagram.privateEntity()), oldDiagram(diagram),
-              newDiagram(input.numRows()), output(newDiagram.privateEntity()),
-              newIdTable(input.numRows()), rootPtr(input.numRows()),
+    DdReducer(NodeTableHandler<ARITY>& diagram, bool useMP = false) :
+            input(diagram.privateEntity()),
+            oldDiagram(diagram),
+            newDiagram(input.numRows()),
+            output(newDiagram.privateEntity()),
+            newIdTable(input.numRows()),
+            rootPtr(input.numRows()),
 #ifdef _OPENMP
-              threads(omp_get_max_threads()),
-              tasks(MyHashConstant::primeSize(TASKS_PER_THREAD * threads)),
-              taskMatrix(threads), baseColumn(tasks + 1),
+            threads(omp_get_max_threads()),
+            tasks(MyHashConstant::primeSize(TASKS_PER_THREAD * threads)),
+            taskMatrix(threads),
+            baseColumn(tasks + 1),
 #endif
-              readyForSequentialReduction(false) {
+            readyForSequentialReduction(false) {
+#ifdef _OPENMP
 #ifdef DEBUG
         if (useMP) {
             MessageHandler mh;
             mh << "#thread = " << threads << ", #task = " << tasks;
         }
         etcS0.start();
+#endif
 #endif
         diagram = newDiagram;
 
@@ -159,12 +165,13 @@ private:
                     if (f.row() == 0) continue;
 
                     NodeId f0 = input.child(f, 0);
+                    NodeId deletable = BDD ? f0 : 0;
                     bool del = true;
 
-                    for (int bb = 1; bb < ARITY; ++bb) {
-                        NodeId& ff = input.child(f, bb);
-                        if (!((BDD && ff == f0) || (ZDD && ff == 0))) del =
-                                false;
+                    for (int bb = (BDD || ZDD) ? 1 : 0; bb < ARITY; ++bb) {
+                        if (input.child(f, bb) != deletable) {
+                            del = false;
+                        }
                     }
 
                     if (del) {
@@ -345,11 +352,12 @@ private:
                 // make f canonical
                 NodeId& f0 = f.branch[0];
                 f0 = newIdTable[f0.row()][f0.col()];
-                bool del = true;
+                NodeId deletable = BDD ? f0 : 0;
+                bool del = BDD || ZDD || (f0 == 0);
                 for (int b = 1; b < ARITY; ++b) {
                     NodeId& ff = f.branch[b];
                     ff = newIdTable[ff.row()][ff.col()];
-                    if (!((BDD && ff == f0) || (ZDD && ff == 0))) del = false;
+                    if (ff != deletable) del = false;
                 }
 
                 if (del) { // f is redundant
@@ -420,12 +428,14 @@ private:
                 // make f canonical
                 NodeId& f0 = f.branch[0];
                 f0 = newIdTable[f0.row()][f0.col()];
-                bool del = true;
+                NodeId deletable = BDD ? f0 : 0;
+                bool del = BDD || ZDD || (f0 == 0);
                 for (int b = 1; b < ARITY; ++b) {
                     NodeId& ff = f.branch[b];
                     ff = newIdTable[ff.row()][ff.col()];
-                    if (!((BDD && ff == f0) || (ZDD && ff == 0))) del = false;
+                    if (ff != deletable) del = false;
                 }
+
                 if (del) { // f is redundant
                     newIdTable[i][j] = f0;
                     continue;
@@ -471,14 +481,16 @@ private:
                 for (int yy = 0; yy < threads; ++yy) {
                     MyList<ReducNodeInfo>& taskq = taskMatrix[yy][x];
 
-                    for (typeof(taskq.begin()) t = taskq.begin();
-                            t != taskq.end(); ++t) {
+                    for (typename MyList<ReducNodeInfo>::iterator t =
+                            taskq.begin(); t != taskq.end(); ++t) {
                         ReducNodeInfo const* p = *t;
                         ReducNodeInfo const* pp = uniq.add(p);
 
                         if (pp == p) {
-                            newIdTable[i][p->column] = NodeId(i + x, j++,
-                                    p->children.branch[0].hasEmpty()); // row += task ID
+                            newIdTable[i][p->column] =
+                                    NodeId(i + x,
+                                           j++,
+                                           p->children.branch[0].hasEmpty()); // row += task ID
                         }
                         else {
                             newIdTable[i][p->column] =
@@ -525,8 +537,9 @@ private:
             for (size_t j = 0; j < m; ++j) {
                 NodeId& ff = newIdTable[i][j];
                 if (ff.row() >= i) {
-                    ff = NodeId(i, ff.col() + baseColumn[ff.row() - i],
-                            ff.getAttr());
+                    ff = NodeId(i,
+                                ff.col() + baseColumn[ff.row() - i],
+                                ff.getAttr());
                     output[i][ff.col()] = input[i][j];
                 }
             }
@@ -561,9 +574,8 @@ public:
             }
             if (r >= 2) {
                 std::sort(roots.begin(), roots.end());
-                roots.resize(
-                        std::unique(roots.begin(), roots.end())
-                                - roots.begin());
+                roots.resize(std::unique(roots.begin(), roots.end())
+                        - roots.begin());
             }
             roots.push_back(m);
 

@@ -199,20 +199,20 @@ Class `S` must implement the following member functions:
 You can find an example in [apps/test/example2.cpp](../apps/test/example2.cpp).
 
 
-PodHybridDdSpec
+HybridDdSpec
 ---------------------------------------------------------------------------
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~{.cpp}
 #include <tdzdd/DdSpec.hpp>
-class S: public tdzdd::PodHybridDdSpec<S,TS,TA,N> { ... };
+class S: public tdzdd::HybridDdSpec<S,TS,TA,N> { ... };
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 is an *N*-ary DD specification using a combination of type `TS` and an array
 of type `TA` to store state information.
 The size of the array must be fixed to some positive integer *m* by calling
 predefined function `setArraySize(m)` in the constructor of `S`.
-The library handles the state information just as
-(`sizeof(TS)` + `sizeof(TA)` × *m*)-byte raw data for efficiency;
-therefore, both `TS` and `TA` must be data structures without object-oriented
+The library handles the state information of the array just as
+(`sizeof(TA)` × *m*)-byte raw data for efficiency;
+therefore, `TA` must be a data structure without object-oriented
 features (user-defined constructor, destructor, copy-assignment, etc.).
 Class `S` must implement the following member functions:
 
@@ -288,7 +288,7 @@ function that prints text on each DD nodes.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~{.cpp}
 void tdzdd::DdSpecBase<S,N>::printState(std::ostream& os, T const& state) const; // for DdSpec
 void tdzdd::DdSpecBase<S,N>::printState(std::ostream& os, T const* array) const; // for PodArrayDdSpec
-void tdzdd::DdSpecBase<S,N>::printState(std::ostream& os, TS const& scalar, TA const* array) const; // for PodHybridDdSpec
+void tdzdd::DdSpecBase<S,N>::printState(std::ostream& os, TS const& scalar, TA const* array) const; // for HybridDdSpec
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Text of each level can also be customized by overriding `printLevel`

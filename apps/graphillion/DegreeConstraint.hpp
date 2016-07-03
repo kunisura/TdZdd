@@ -42,6 +42,7 @@ class DegreeConstraint: public tdzdd::PodArrayDdSpec<DegreeConstraint,int16_t,2>
     std::vector<IntSubset const*> constraints;
     int const n;
     int const mateSize;
+    bool const lookahead;
 
     void shiftMate(Mate* mate, int d) const {
         assert(d >= 0);
@@ -65,9 +66,9 @@ class DegreeConstraint: public tdzdd::PodArrayDdSpec<DegreeConstraint,int16_t,2>
     }
 
 public:
-    DegreeConstraint(Graph const& graph, IntSubset const* c = 0)
+    DegreeConstraint(Graph const& graph, IntSubset const* c = 0, bool lookahead = true)
             : graph(graph), n(graph.edgeSize()),
-              mateSize(graph.maxFrontierSize()) {
+              mateSize(graph.maxFrontierSize()), lookahead(lookahead) {
         setArraySize(mateSize);
 
         int m = graph.vertexSize();
@@ -121,7 +122,7 @@ public:
         if (++i == n) return -1;
         shiftMate(mate, graph.edgeInfo(i).v0 - e.v0);
 
-        while (true) {
+        while (lookahead) {
             Graph::EdgeInfo const& e = graph.edgeInfo(i);
             Mate& w1 = mate[e.v1 - e.v0];
             Mate& w2 = mate[e.v2 - e.v0];

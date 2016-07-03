@@ -38,8 +38,20 @@
 struct FrontierBasedSearchCount {
     int16_t uec; ///< uncolored edge component counter.
 
+    FrontierBasedSearchCount()
+            : uec(0) {
+    }
+
     FrontierBasedSearchCount(int16_t uncoloredEdgeComponents)
             : uec(uncoloredEdgeComponents) {
+    }
+
+    size_t hash() const {
+        return uec;
+    }
+
+    bool operator==(FrontierBasedSearchCount const& o) const {
+        return uec == o.uec;
     }
 
     friend std::ostream& operator<<(std::ostream& os,
@@ -250,7 +262,7 @@ public:
     }
 };
 
-class FrontierBasedSearch: public tdzdd::PodHybridDdSpec<FrontierBasedSearch,
+class FrontierBasedSearch: public tdzdd::HybridDdSpec<FrontierBasedSearch,
         FrontierBasedSearchCount,FrontierBasedSearchMate,2> {
     typedef FrontierBasedSearchCount Count;
     typedef FrontierBasedSearchMate Mate;
@@ -261,7 +273,8 @@ class FrontierBasedSearch: public tdzdd::PodHybridDdSpec<FrontierBasedSearch,
     int const mateSize;
     std::vector<Mate> initialMate;
     int numUEC;
-    bool noLoop;
+    bool const noLoop;
+    bool const lookahead;
 
     int takable(Count& c, Mate const* mate, Graph::EdgeInfo const& e) const {
         Mate const& w1 = mate[e.v1 - e.v0];
@@ -401,10 +414,10 @@ class FrontierBasedSearch: public tdzdd::PodHybridDdSpec<FrontierBasedSearch,
 
 public:
     FrontierBasedSearch(Graph const& graph, int numUEC = -1,
-            bool noLoop = false)
+            bool noLoop = false, bool lookahead = true)
             : graph(graph), m(graph.vertexSize()), n(graph.edgeSize()),
               mateSize(graph.maxFrontierSize()), initialMate(1 + m + mateSize),
-              numUEC(numUEC), noLoop(noLoop) {
+              numUEC(numUEC), noLoop(noLoop), lookahead(lookahead) {
         this->setArraySize(mateSize);
 
         std::vector<int> rootOfColor(graph.numColor() + 1);
@@ -447,7 +460,7 @@ public:
         Graph::EdgeInfo const* ee = &graph.edgeInfo(i);
         update(mate, *e, *ee);
 
-        while (true) {
+        while (lookahead) {
             e = ee;
 
             Count c = count;
@@ -462,5 +475,9 @@ public:
 
         assert(i < n);
         return n - i;
+    }
+
+    size_t hashCode(Count const& count) const {
+        return count.hash();
     }
 };

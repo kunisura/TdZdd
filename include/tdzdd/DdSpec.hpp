@@ -29,6 +29,7 @@
 #include <stdexcept>
 
 #include "dd/DdBuilder.hpp"
+#include "dd/DepthFirstSearcher.hpp"
 #include "util/demangle.hpp"
 #include "util/MessageHandler.hpp"
 
@@ -42,18 +43,23 @@ namespace tdzdd {
  * - int get_root(void* p)
  * - int get_child(void* p, int level, int value)
  * - void get_copy(void* to, void const* from)
+ * - int merge_states(void* p1, void* p2)
  * - void destruct(void* p)
  * - void destructLevel(int level)
  * - size_t hash_code(void const* p, int level) const
  * - bool equal_to(void const* p, void const* q, int level) const
- * - void print_state(std::ostream& os, void const* p) const
+ * - void print_state(std::ostream& os, void const* p, int level) const
  *
  * Optionally, the following functions can be overloaded:
- * - void print_level(std::ostream& os, int level) const
+ * - void printLevel(std::ostream& os, int level) const
  *
- * A return code of get_root(void*) or get_child(void*, int, bool)
- * is 0 when the node is forwarded to the 0-terminal
- * and is -1 when the node is forwarded to the 1-terminal.
+ * A return code of get_root(void*) or get_child(void*, int, bool) is:
+ * 0 when the node is the 0-terminal, -1 when it is the 1-terminal, or
+ * the node level when it is a non-terminal.
+ * A return code of merge_states(void*, void*) is: 0 when the states are
+ * merged into the first one, 1 when they cannot be merged and the first
+ * one should be forwarded to the 0-terminal, 2 when they cannot be merged
+ * and the second one should be forwarded to the 0-terminal.
  *
  * @tparam S the class implementing this class.
  * @tparam AR arity of the nodes.
@@ -75,29 +81,28 @@ public:
         os << level;
     }
 
-    void print_level(std::ostream& os, int level) const {
-        entity().printLevel(os, level);
+    /**
+     * Returns a random instance using simple depth-first search
+     * without caching.
+     * It does not guarantee that the selection is uniform.
+     * merge_states(void*, void*) is not supported.
+     * @return a collection of (item, value) pairs.
+     * @exception std::runtime_error no instance exists.
+     */
+    std::vector<std::pair<int,int> > findOneInstance() const {
+        return DepthFirstSearcher<S>(entity()).findOneInstance();
     }
 
+public:
     /**
      * Dumps the node table in Graphviz (dot) format.
      * @param os the output stream.
      * @param title title label.
      */
     void dumpDot(std::ostream& os = std::cout, std::string title =
-            typenameof<S>()) const {
-        dumpDot_(os, false, title);
-    }
-
-    /**
-     * Dumps the node table in Graphviz (dot) format.
-     * Cuts 0-paths form the root and duplicates the 1-terminal.
-     * @param os the output stream.
-     * @param title title label.
-     */
-    void dumpDotCut(std::ostream& os = std::cout, std::string title =
-            typenameof<S>()) const {
-        dumpDot_(os, true, title);
+                         typenameof<S>()) const {
+        DdDumper<S> dumper(entity());
+        dumper.dump(os, title);
     }
 
     /**
@@ -112,64 +117,54 @@ public:
     }
 
 private:
-    /**
-     * Dumps the node table in Graphviz (dot) format.
-     * @param os the output stream.
-     * @param cut flag to cut 0-paths form the root and to duplicate the 1-terminal.
-     * @param title title label.
-     */
-    void dumpDot_(std::ostream& os, bool cut, std::string title) const {
-        NodeTableHandler<S::ARITY> diagram;
-        InstantDdBuilder<S,true> idb(entity(), diagram, os, cut);
-        NodeId root;
-        idb.initialize(root);
+    template<typename T, typename I>
+    static size_t rawHashCode_(void const* p) {
+        size_t h = 0;
+        I const* a = static_cast<I const*>(p);
+        for (size_t i = 0; i < sizeof(T) / sizeof(I); ++i) {
+            h += a[i];
+            h *= 314159257;
+        }
+        return h;
+    }
 
-        os << "digraph \"" << title << "\" {\n";
-        for (int i = root.row(); i >= 1; --i) {
-            os << "  " << i << " [shape=none,label=\"";
-            entity().print_level(os, i);
-            os << "\"];\n";
+    template<typename T, typename I>
+    static size_t rawEqualTo_(void const* p1, void const* p2) {
+        I const* a1 = static_cast<I const*>(p1);
+        I const* a2 = static_cast<I const*>(p2);
+        for (size_t i = 0; i < sizeof(T) / sizeof(I); ++i) {
+            if (a1[i] != a2[i]) return false;
         }
-        for (int i = root.row() - 1; i >= 1; --i) {
-            os << "  " << (i + 1) << " -> " << i << " [style=invis];\n";
-        }
+        return true;
+    }
 
-        if (root == 1) {
-            os << "  \"^\" [shape=none,label=\"" << title << "\"];\n";
-            os << "  \"^\" -> \"" << root << "\" [style=dashed";
-            if (root.getAttr()) os << ",arrowtail=dot";
-            os << "];\n";
-            if (cut) os << "  \"" << root
-                    << "\" [shape=square,fixedsize=true,width=0.2,label=\"\"];\n";
+protected:
+    template<typename T>
+    static size_t rawHashCode(T const& o) {
+        if (sizeof(T) % sizeof(size_t) == 0) {
+            return rawHashCode_<T,size_t>(&o);
         }
-        else if (!cut && root != 0) {
-            os << "  \"^\" [shape=none,label=\"" << title << "\"];\n";
-            os << "  \"^\" -> \"" << root << "\" [style=dashed";
-            if (root.getAttr()) os << ",arrowtail=dot";
-            os << "];\n";
+        if (sizeof(T) % sizeof(unsigned int) == 0) {
+            return rawHashCode_<T,unsigned int>(&o);
         }
-        else if (!title.empty()) {
-            os << "  labelloc=\"t\";\n";
-            os << "  label=\"" << title << "\";\n";
+        if (sizeof(T) % sizeof(unsigned short) == 0) {
+            return rawHashCode_<T,unsigned short>(&o);
         }
+        return rawHashCode_<T,unsigned char>(&o);
+    }
 
-        for (int i = root.row(); i >= 1; --i) {
-            idb.construct(i);
-            diagram.derefLevel(i);
+    template<typename T>
+    static size_t rawEqualTo(T const& o1, T const& o2) {
+        if (sizeof(T) % sizeof(size_t) == 0) {
+            return rawEqualTo_<T,size_t>(&o1, &o2);
         }
-
-        if (!cut && root != 0) {
-            os << "  \"" << NodeId(1) << "\" ";
-            if (cut) {
-                os << "[shape=square,fixedsize=true,width=0.2,label=\"\"];\n";
-            }
-            else {
-                os << "[shape=square,label=\"⊤\"];\n";
-            }
+        if (sizeof(T) % sizeof(unsigned int) == 0) {
+            return rawEqualTo_<T,unsigned int>(&o1, &o2);
         }
-
-        os << "}\n";
-        os.flush();
+        if (sizeof(T) % sizeof(unsigned short) == 0) {
+            return rawEqualTo_<T,unsigned short>(&o1, &o2);
+        }
+        return rawEqualTo_<T,unsigned char>(&o1, &o2);
     }
 };
 
@@ -179,6 +174,9 @@ private:
  * Every implementation must have the following functions:
  * - int getRoot()
  * - int getChild(int level, int value)
+ *
+ * Optionally, the following functions can be overloaded:
+ * - void printLevel(std::ostream& os, int level) const
  *
  * @tparam S the class implementing this class.
  * @tparam AR arity of the nodes.
@@ -202,6 +200,10 @@ public:
     void get_copy(void* to, void const* from) {
     }
 
+    int merge_states(void* p1, void* p2) {
+        return 0;
+    }
+
     void destruct(void* p) {
     }
 
@@ -216,7 +218,7 @@ public:
         return true;
     }
 
-    void print_state(std::ostream& os, void const* p) const {
+    void print_state(std::ostream& os, void const* p, int level) const {
         os << "＊";
     }
 };
@@ -231,6 +233,7 @@ public:
  * Optionally, the following functions can be overloaded:
  * - void construct(void* p)
  * - void getCopy(void* p, T const& state)
+ * - void mergeStates(T& state1, T& state2)
  * - size_t hashCode(T const& state) const
  * - bool equalTo(T const& state1, T const& state2) const
  * - void printLevel(std::ostream& os, int level) const
@@ -281,6 +284,14 @@ public:
         this->entity().getCopy(to, state(from));
     }
 
+    int mergeStates(State& s1, State& s2) {
+        return 0;
+    }
+
+    int merge_states(void* p1, void* p2) {
+        return this->entity().mergeStates(state(p1), state(p2));
+    }
+
     void destruct(void* p) {
         state(p).~State();
     }
@@ -289,8 +300,7 @@ public:
     }
 
     size_t hashCode(State const& s) const {
-        //return std::hash<State>()(s);
-        return static_cast<size_t>(s);
+        return this->rawHashCode(s);
     }
 
     size_t hashCodeAtLevel(State const& s, int level) const {
@@ -302,7 +312,7 @@ public:
     }
 
     bool equalTo(State const& s1, State const& s2) const {
-        return std::equal_to<State>()(s1, s2);
+        return this->rawEqualTo(s1, s2);
     }
 
     bool equalToAtLevel(State const& s1, State const& s2, int level) const {
@@ -317,8 +327,12 @@ public:
         os << s;
     }
 
-    void print_state(std::ostream& os, void const* p) const {
-        this->entity().printState(os, state(p));
+    void printStateAtLevel(std::ostream& os, State const& s, int level) const {
+        this->entity().printState(os, s);
+    }
+
+    void print_state(std::ostream& os, void const* p, int level) const {
+        this->entity().printStateAtLevel(os, state(p), level);
     }
 };
 
@@ -334,8 +348,9 @@ public:
  * - int getChild(T* array, int level, int value)
  *
  * Optionally, the following functions can be overloaded:
+ * - void mergeStates(T* array1, T* array2)
  * - void printLevel(std::ostream& os, int level) const
- * - void printState(std::ostream& os, State const& s) const
+ * - void printState(std::ostream& os, State const* array) const
  *
  * @tparam S the class implementing this class.
  * @tparam T data type of array elements.
@@ -363,8 +378,9 @@ private:
 protected:
     void setArraySize(int n) {
         assert(0 <= n);
-        if (arraySize >= 0) throw std::runtime_error(
-                "Cannot set array size twice; use setArraySize(int) only once in the constructor of DD spec.");
+        if (arraySize >= 0)
+            throw std::runtime_error(
+                    "Cannot set array size twice; use setArraySize(int) only once in the constructor of DD spec.");
         arraySize = n;
         dataWords = (n * sizeof(State) + sizeof(Word) - 1) / sizeof(Word);
     }
@@ -374,13 +390,14 @@ protected:
     }
 
 public:
-    PodArrayDdSpec()
-            : arraySize(-1), dataWords(-1) {
+    PodArrayDdSpec() :
+            arraySize(-1), dataWords(-1) {
     }
 
     int datasize() const {
-        if (dataWords < 0) throw std::runtime_error(
-                "Array size is unknown; please set it by setArraySize(int) in the constructor of DD spec.");
+        if (dataWords < 0)
+            throw std::runtime_error(
+                    "Array size is unknown; please set it by setArraySize(int) in the constructor of DD spec.");
         return dataWords * sizeof(Word);
     }
 
@@ -400,6 +417,14 @@ public:
         while (pa != pz) {
             *qa++ = *pa++;
         }
+    }
+
+    int mergeStates(T* a1, T* a2) {
+        return 0;
+    }
+
+    int merge_states(void* p1, void* p2) {
+        return this->entity().mergeStates(state(p1), state(p2));
     }
 
     void destruct(void* p) {
@@ -438,19 +463,28 @@ public:
         os << "]";
     }
 
-    void print_state(std::ostream& os, void const* p) const {
-        this->entity().printState(os, state(p));
+    void printStateAtLevel(std::ostream& os, State const* a, int level) const {
+        this->entity().printState(os, a);
+    }
+
+    void print_state(std::ostream& os, void const* p, int level) const {
+        this->entity().printStateAtLevel(os, state(p), level);
     }
 };
 
 /**
- * Abstract class of DD specifications using both POD scalar and POD array states.
+ * Abstract class of DD specifications using both scalar and POD array states.
  *
  * Every implementation must have the following functions:
  * - int getRoot(TS& scalar, TA* array)
  * - int getChild(TS& scalar, TA* array, int level, int value)
  *
  * Optionally, the following functions can be overloaded:
+ * - void construct(void* p)
+ * - void getCopy(void* p, TS const& state)
+ * - void mergeStates(TS& s1, TA* a1, TS& s2, TA* a2)
+ * - size_t hashCode(TS const& state) const
+ * - bool equalTo(TS const& state1, TS const& state2) const
  * - void printLevel(std::ostream& os, int level) const
  * - void printState(std::ostream& os, TS const& s, TA const* a) const
  *
@@ -460,56 +494,63 @@ public:
  * @tparam AR arity of the nodes.
  */
 template<typename S, typename TS, typename TA, int AR>
-class PodHybridDdSpec: public DdSpecBase<S,AR> {
+class HybridDdSpec: public DdSpecBase<S,AR> {
 public:
     typedef TS S_State;
     typedef TA A_State;
 
 private:
     typedef size_t Word;
-
-    struct States {
-        S_State s;
-        A_State a[1];
-    };
+    static int const S_WORDS = (sizeof(S_State) + sizeof(Word) - 1)
+                               / sizeof(Word);
 
     int arraySize;
     int dataWords;
 
     static S_State& s_state(void* p) {
-        return static_cast<States*>(p)->s;
+        return *static_cast<S_State*>(p);
     }
 
     static S_State const& s_state(void const* p) {
-        return static_cast<States const*>(p)->s;
+        return *static_cast<S_State const*>(p);
     }
 
     static A_State* a_state(void* p) {
-        return static_cast<States*>(p)->a;
+        return reinterpret_cast<A_State*>(static_cast<Word*>(p) + S_WORDS);
     }
 
     static A_State const* a_state(void const* p) {
-        return static_cast<States const*>(p)->a;
+        return reinterpret_cast<A_State const*>(static_cast<Word const*>(p)
+                                                + S_WORDS);
     }
 
 protected:
     void setArraySize(int n) {
         assert(0 <= n);
         arraySize = n;
-        dataWords = (sizeof(States) + (n - 1) * sizeof(A_State) + sizeof(Word)
-                - 1) / sizeof(Word);
+        dataWords = S_WORDS
+                    + (n * sizeof(A_State) + sizeof(Word) - 1) / sizeof(Word);
+    }
+
+    int getArraySize() const {
+        return arraySize;
     }
 
 public:
-    PodHybridDdSpec()
-            : arraySize(-1), dataWords(-1) {
+    HybridDdSpec() :
+            arraySize(-1), dataWords(-1) {
     }
 
     int datasize() const {
         return dataWords * sizeof(Word);
     }
 
+    void construct(void* p) {
+        new (p) S_State();
+    }
+
     int get_root(void* p) {
+        this->entity().construct(p);
         return this->entity().getRoot(s_state(p), a_state(p));
     }
 
@@ -518,13 +559,29 @@ public:
         return this->entity().getChild(s_state(p), a_state(p), level, value);
     }
 
+    void getCopy(void* p, S_State const& s) {
+        new (p) S_State(s);
+    }
+
     void get_copy(void* to, void const* from) {
+        this->entity().getCopy(to, s_state(from));
         Word const* pa = static_cast<Word const*>(from);
         Word const* pz = pa + dataWords;
         Word* qa = static_cast<Word*>(to);
+        pa += S_WORDS;
+        qa += S_WORDS;
         while (pa != pz) {
             *qa++ = *pa++;
         }
+    }
+
+    int mergeStates(S_State& s1, A_State* a1, S_State& s2, A_State* a2) {
+        return 0;
+    }
+
+    int merge_states(void* p1, void* p2) {
+        return this->entity().mergeStates(s_state(p1), a_state(p1), s_state(p2),
+                a_state(p2));
     }
 
     void destruct(void* p) {
@@ -533,10 +590,20 @@ public:
     void destructLevel(int level) {
     }
 
+    size_t hashCode(S_State const& s) const {
+        return this->rawHashCode(s);
+    }
+
+    size_t hashCodeAtLevel(S_State const& s, int level) const {
+        return this->entity().hashCode(s);
+    }
+
     size_t hash_code(void const* p, int level) const {
+        size_t h = this->entity().hashCodeAtLevel(s_state(p), level);
+        h *= 271828171;
         Word const* pa = static_cast<Word const*>(p);
         Word const* pz = pa + dataWords;
-        size_t h = 0;
+        pa += S_WORDS;
         while (pa != pz) {
             h += *pa++;
             h *= 314159257;
@@ -544,20 +611,32 @@ public:
         return h;
     }
 
+    bool equalTo(S_State const& s1, S_State const& s2) const {
+        return this->rawEqualTo(s1, s2);
+    }
+
+    bool equalToAtLevel(S_State const& s1, S_State const& s2, int level) const {
+        return this->entity().equalTo(s1, s2);
+    }
+
     bool equal_to(void const* p, void const* q, int level) const {
+        if (!this->entity().equalToAtLevel(s_state(p), s_state(q), level))
+            return false;
         Word const* pa = static_cast<Word const*>(p);
         Word const* qa = static_cast<Word const*>(q);
         Word const* pz = pa + dataWords;
+        pa += S_WORDS;
+        qa += S_WORDS;
         while (pa != pz) {
             if (*pa++ != *qa++) return false;
         }
         return true;
     }
 
-    void printState(std::ostream& os, S_State const& s,
-            A_State const* a) const {
-        os << "[";
-        os << s << ":";
+    void printState(std::ostream& os,
+                    S_State const& s,
+                    A_State const* a) const {
+        os << "[" << s << ":";
         for (int i = 0; i < arraySize; ++i) {
             if (i > 0) os << ",";
             os << a[i];
@@ -565,8 +644,14 @@ public:
         os << "]";
     }
 
-    void print_state(std::ostream& os, void const* p) const {
-        this->entity().printState(os, s_state(p), a_state(p));
+    void printStateAtLevel(std::ostream& os,
+                           S_State const& s,
+                           A_State const* a, int level) const {
+        this->entity().printState(os, s, a);
+    }
+
+    void print_state(std::ostream& os, void const* p, int level) const {
+        this->entity().printStateAtLevel(os, s_state(p), a_state(p), level);
     }
 };
 

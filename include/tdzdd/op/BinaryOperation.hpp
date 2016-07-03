@@ -39,7 +39,7 @@ protected:
     typedef size_t Word;
 
     static size_t const levelWords = (sizeof(int[2]) + sizeof(Word) - 1)
-            / sizeof(Word);
+                                     / sizeof(Word);
 
     Spec1 spec1;
     Spec2 spec2;
@@ -83,9 +83,11 @@ protected:
     }
 
 public:
-    BinaryOperation(S1 const& s1, S2 const& s2)
-            : spec1(s1), spec2(s2), stateWords1(wordSize(spec1.datasize())),
-              stateWords2(wordSize(spec2.datasize())) {
+    BinaryOperation(S1 const& s1, S2 const& s2) :
+            spec1(s1),
+            spec2(s2),
+            stateWords1(wordSize(spec1.datasize())),
+            stateWords2(wordSize(spec2.datasize())) {
         BinaryOperation::setArraySize(levelWords + stateWords1 + stateWords2);
     }
 
@@ -94,6 +96,11 @@ public:
         setLevel2(to, level2(from));
         spec1.get_copy(state1(to), state1(from));
         spec2.get_copy(state2(to), state2(from));
+    }
+
+    int merge_states(void* p1, void* p2) {
+        return spec1.merge_states(state1(p1), state1(p2))
+               | spec2.merge_states(state2(p1), state2(p2));
     }
 
     void destruct(void* p) {
@@ -108,19 +115,21 @@ public:
 
     size_t hash_code(void const* p, int level) const {
         size_t h = size_t(level1(p)) * 314159257
-                + size_t(level2(p)) * 271828171;
-        if (level1(p) > 0) h += spec1.hash_code(state1(p), level1(p))
-                * 171828143;
-        if (level2(p) > 0) h += spec2.hash_code(state2(p), level2(p))
-                * 141421333;
+                   + size_t(level2(p)) * 271828171;
+        if (level1(p) > 0)
+            h += spec1.hash_code(state1(p), level1(p)) * 171828143;
+        if (level2(p) > 0)
+            h += spec2.hash_code(state2(p), level2(p)) * 141421333;
         return h;
     }
 
     bool equal_to(void const* p, void const* q, int level) const {
         if (level1(p) != level1(q)) return false;
         if (level2(p) != level2(q)) return false;
-        if (level1(p) > 0 && !spec1.equal_to(state1(p), state1(q), level1(p))) return false;
-        if (level2(p) > 0 && !spec2.equal_to(state2(p), state2(q), level2(p))) return false;
+        if (level1(p) > 0 && !spec1.equal_to(state1(p), state1(q), level1(p)))
+            return false;
+        if (level2(p) > 0 && !spec2.equal_to(state2(p), state2(q), level2(p)))
+            return false;
         return true;
     }
 };
@@ -130,8 +139,8 @@ struct BddAnd: public BinaryOperation<BddAnd<S1,S2>,S1,S2> {
     typedef BinaryOperation<BddAnd,S1,S2> base;
     typedef typename base::Word Word;
 
-    BddAnd(S1 const& s1, S2 const& s2)
-            : base(s1, s2) {
+    BddAnd(S1 const& s1, S2 const& s2) :
+            base(s1, s2) {
     }
 
     int getRoot(Word* p) {
@@ -159,12 +168,12 @@ struct BddAnd: public BinaryOperation<BddAnd<S1,S2>,S1,S2> {
         return std::max(base::level1(p), base::level2(p));
     }
 
-    void print_state(std::ostream& os, void const* p) const {
+    void print_state(std::ostream& os, void const* p, int level) const {
         Word const* q = static_cast<Word const*>(p);
         os << "<" << level1(q) << ",";
-        base::spec1.print_state(os, base::state1(q));
+        base::spec1.print_state(os, base::state1(q), level);
         os << ">∧<" << level2(q) << ",";
-        base::spec2.print_state(os, base::state2(q));
+        base::spec2.print_state(os, base::state2(q), level);
         os << ">";
     }
 };
@@ -174,8 +183,8 @@ struct BddOr: public BinaryOperation<BddOr<S1,S2>,S1,S2> {
     typedef BinaryOperation<BddOr,S1,S2> base;
     typedef typename base::Word Word;
 
-    BddOr(S1 const& s1, S2 const& s2)
-            : base(s1, s2) {
+    BddOr(S1 const& s1, S2 const& s2) :
+            base(s1, s2) {
     }
 
     int getRoot(Word* p) {
@@ -206,12 +215,12 @@ struct BddOr: public BinaryOperation<BddOr<S1,S2>,S1,S2> {
         return std::max(base::level1(p), base::level2(p));
     }
 
-    void print_state(std::ostream& os, void const* p) const {
+    void print_state(std::ostream& os, void const* p, int level) const {
         Word const* q = static_cast<Word const*>(p);
         os << "<" << base::level1(q) << ",";
-        base::spec1.print_state(os, base::state1(q));
+        base::spec1.print_state(os, base::state1(q), level);
         os << ">∨<" << base::level2(q) << ",";
-        base::spec2.print_state(os, base::state2(q));
+        base::spec2.print_state(os, base::state2(q), level);
         os << ">";
     }
 };
@@ -248,9 +257,11 @@ class ZddIntersection: public PodArrayDdSpec<ZddIntersection<S1,S2>,size_t,2> {
     }
 
 public:
-    ZddIntersection(S1 const& s1, S2 const& s2)
-            : spec1(s1), spec2(s2), stateWords1(wordSize(spec1.datasize())),
-              stateWords2(wordSize(spec2.datasize())) {
+    ZddIntersection(S1 const& s1, S2 const& s2) :
+            spec1(s1),
+            spec2(s2),
+            stateWords1(wordSize(spec1.datasize())),
+            stateWords2(wordSize(spec2.datasize())) {
         ZddIntersection::setArraySize(stateWords1 + stateWords2);
     }
 
@@ -299,6 +310,11 @@ public:
         spec2.get_copy(state2(to), state2(from));
     }
 
+    int merge_states(void* p1, void* p2) {
+        return spec1.merge_states(state1(p1), state1(p2))
+               | spec2.merge_states(state2(p1), state2(p2));
+    }
+
     void destruct(void* p) {
         spec1.destruct(state1(p));
         spec2.destruct(state2(p));
@@ -311,20 +327,20 @@ public:
 
     size_t hash_code(void const* p, int level) const {
         return spec1.hash_code(state1(p), level) * 314159257
-                + spec2.hash_code(state2(p), level) * 271828171;
+               + spec2.hash_code(state2(p), level) * 271828171;
     }
 
     bool equal_to(void const* p, void const* q, int level) const {
         return spec1.equal_to(state1(p), state1(q), level)
-                && spec2.equal_to(state2(p), state2(q), level);
+               && spec2.equal_to(state2(p), state2(q), level);
     }
 
-    void print_state(std::ostream& os, void const* p) const {
+    void print_state(std::ostream& os, void const* p, int level) const {
         Word const* q = static_cast<Word const*>(p);
         os << "<";
-        spec1.print_state(os, state1(q));
+        spec1.print_state(os, state1(q), level);
         os << ">∩<";
-        spec2.print_state(os, state2(q));
+        spec2.print_state(os, state2(q), level);
         os << ">";
     }
 };
@@ -334,8 +350,8 @@ struct ZddUnion: public BinaryOperation<ZddUnion<S1,S2>,S1,S2> {
     typedef BinaryOperation<ZddUnion,S1,S2> base;
     typedef typename base::Word Word;
 
-    ZddUnion(S1 const& s1, S2 const& s2)
-            : base(s1, s2) {
+    ZddUnion(S1 const& s1, S2 const& s2) :
+            base(s1, s2) {
     }
 
     int getRoot(Word* p) {
@@ -372,12 +388,12 @@ struct ZddUnion: public BinaryOperation<ZddUnion<S1,S2>,S1,S2> {
         return std::max(base::level1(p), base::level2(p));
     }
 
-    void print_state(std::ostream& os, void const* p) const {
+    void print_state(std::ostream& os, void const* p, int level) const {
         Word const* q = static_cast<Word const*>(p);
         os << "<" << base::level1(q) << ",";
-        base::spec1.print_state(os, base::state1(q));
+        base::spec1.print_state(os, base::state1(q), level);
         os << ">∪<" << base::level2(q) << ",";
-        base::spec2.print_state(os, base::state2(q));
+        base::spec2.print_state(os, base::state2(q), level);
         os << ">";
     }
 };

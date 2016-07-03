@@ -89,6 +89,10 @@ public:
         spec.get_copy(to, from);
     }
 
+    int merge_states(void* p1, void* p2) {
+        return spec.merge_states(p1, p2);
+    }
+
     void destruct(void* p) {
         spec.destruct(p);
     }
@@ -105,8 +109,8 @@ public:
         return spec.equal_to(p, q, level);
     }
 
-    void print_state(std::ostream& os, void const* p) const {
-        spec.print_state(os, p);
+    void print_state(std::ostream& os, void const* p, int level) const {
+        spec.print_state(os, p, level);
     }
 
     void print_level(std::ostream& os, int level) const {
@@ -159,6 +163,10 @@ public:
         spec.get_copy(to, from);
     }
 
+    int merge_states(void* p1, void* p2) {
+        return spec.merge_states(p1, p2);
+    }
+
     void destruct(void* p) {
         spec.destruct(p);
     }
@@ -175,8 +183,8 @@ public:
         return spec.equal_to(p, q, level);
     }
 
-    void print_state(std::ostream& os, void const* p) const {
-        spec.print_state(os, p);
+    void print_state(std::ostream& os, void const* p, int level) const {
+        spec.print_state(os, p, level);
     }
 
     void print_level(std::ostream& os, int level) const {

@@ -1,40 +1,50 @@
 graphillion_example.o: \
+ ../../include/tdzdd/DdSpecOp.hpp \
+ ../../include/tdzdd/op/BinaryOperation.hpp \
+ ../../include/tdzdd/op/../DdSpec.hpp \
+ ../../include/tdzdd/op/../dd/DdBuilder.hpp \
+ ../../include/tdzdd/op/../dd/DdSweeper.hpp \
+ ../../include/tdzdd/op/../dd/Node.hpp \
+ ../../include/tdzdd/op/../dd/NodeTable.hpp \
+ ../../include/tdzdd/op/../dd/DataTable.hpp \
+ ../../include/tdzdd/op/../dd/../util/MyVector.hpp \
+ ../../include/tdzdd/op/../dd/../util/MessageHandler.hpp \
+ ../../include/tdzdd/op/../dd/../util/ResourceUsage.hpp \
+ ../../include/tdzdd/op/../dd/../util/MemoryPool.hpp \
+ ../../include/tdzdd/op/../dd/../util/MyHashTable.hpp \
+ ../../include/tdzdd/op/../dd/../util/MyList.hpp \
+ ../../include/tdzdd/op/../dd/DepthFirstSearcher.hpp \
+ ../../include/tdzdd/op/../util/demangle.hpp \
+ ../../include/tdzdd/op/Lookahead.hpp \
+ ../../include/tdzdd/op/Unreduction.hpp \
  ../../include/tdzdd/DdStructure.hpp ../../include/tdzdd/DdEval.hpp \
- ../../include/tdzdd/DdSpec.hpp ../../include/tdzdd/dd/DdBuilder.hpp \
- ../../include/tdzdd/dd/DdSweeper.hpp ../../include/tdzdd/dd/Node.hpp \
- ../../include/tdzdd/dd/NodeTable.hpp \
- ../../include/tdzdd/dd/DataTable.hpp \
- ../../include/tdzdd/dd/../util/MyVector.hpp \
- ../../include/tdzdd/dd/../util/MessageHandler.hpp \
- ../../include/tdzdd/dd/../util/ResourceUsage.hpp \
- ../../include/tdzdd/dd/../util/MemoryPool.hpp \
- ../../include/tdzdd/dd/../util/MyHashTable.hpp \
- ../../include/tdzdd/dd/../util/MyList.hpp \
- ../../include/tdzdd/util/demangle.hpp \
  ../../include/tdzdd/dd/DdReducer.hpp \
  ../../include/tdzdd/eval/Cardinality.hpp \
- ../../include/tdzdd/eval/../util/BigNumber.hpp \
- ../../include/tdzdd/op/Lookahead.hpp \
- ../../include/tdzdd/op/Unreduction.hpp DegreeConstraint.hpp Graph.hpp \
- IntSubset.hpp FrontierBasedSearch.hpp GraphillionZdd.hpp SapporoZdd.hpp \
- SizeConstraint.hpp ToZBDD.hpp
+ ../../include/tdzdd/eval/../util/BigNumber.hpp DegreeConstraint.hpp \
+ Graph.hpp IntSubset.hpp FrontierBasedSearch.hpp GraphillionZdd.hpp \
+ SapporoZdd.hpp SizeConstraint.hpp ToZBDD.hpp
 graphillion_example-debug.o: \
+ ../../include/tdzdd/DdSpecOp.hpp \
+ ../../include/tdzdd/op/BinaryOperation.hpp \
+ ../../include/tdzdd/op/../DdSpec.hpp \
+ ../../include/tdzdd/op/../dd/DdBuilder.hpp \
+ ../../include/tdzdd/op/../dd/DdSweeper.hpp \
+ ../../include/tdzdd/op/../dd/Node.hpp \
+ ../../include/tdzdd/op/../dd/NodeTable.hpp \
+ ../../include/tdzdd/op/../dd/DataTable.hpp \
+ ../../include/tdzdd/op/../dd/../util/MyVector.hpp \
+ ../../include/tdzdd/op/../dd/../util/MessageHandler.hpp \
+ ../../include/tdzdd/op/../dd/../util/ResourceUsage.hpp \
+ ../../include/tdzdd/op/../dd/../util/MemoryPool.hpp \
+ ../../include/tdzdd/op/../dd/../util/MyHashTable.hpp \
+ ../../include/tdzdd/op/../dd/../util/MyList.hpp \
+ ../../include/tdzdd/op/../dd/DepthFirstSearcher.hpp \
+ ../../include/tdzdd/op/../util/demangle.hpp \
+ ../../include/tdzdd/op/Lookahead.hpp \
+ ../../include/tdzdd/op/Unreduction.hpp \
  ../../include/tdzdd/DdStructure.hpp ../../include/tdzdd/DdEval.hpp \
- ../../include/tdzdd/DdSpec.hpp ../../include/tdzdd/dd/DdBuilder.hpp \
- ../../include/tdzdd/dd/DdSweeper.hpp ../../include/tdzdd/dd/Node.hpp \
- ../../include/tdzdd/dd/NodeTable.hpp \
- ../../include/tdzdd/dd/DataTable.hpp \
- ../../include/tdzdd/dd/../util/MyVector.hpp \
- ../../include/tdzdd/dd/../util/MessageHandler.hpp \
- ../../include/tdzdd/dd/../util/ResourceUsage.hpp \
- ../../include/tdzdd/dd/../util/MemoryPool.hpp \
- ../../include/tdzdd/dd/../util/MyHashTable.hpp \
- ../../include/tdzdd/dd/../util/MyList.hpp \
- ../../include/tdzdd/util/demangle.hpp \
  ../../include/tdzdd/dd/DdReducer.hpp \
  ../../include/tdzdd/eval/Cardinality.hpp \
- ../../include/tdzdd/eval/../util/BigNumber.hpp \
- ../../include/tdzdd/op/Lookahead.hpp \
- ../../include/tdzdd/op/Unreduction.hpp DegreeConstraint.hpp Graph.hpp \
- IntSubset.hpp FrontierBasedSearch.hpp GraphillionZdd.hpp SapporoZdd.hpp \
- SizeConstraint.hpp ToZBDD.hpp
+ ../../include/tdzdd/eval/../util/BigNumber.hpp DegreeConstraint.hpp \
+ Graph.hpp IntSubset.hpp FrontierBasedSearch.hpp GraphillionZdd.hpp \
+ SapporoZdd.hpp SizeConstraint.hpp ToZBDD.hpp
