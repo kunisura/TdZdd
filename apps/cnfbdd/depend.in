@@ -9,6 +9,7 @@ CnfToBdd.o: CnfToBdd.hpp ../../include/tdzdd/DdSpec.hpp \
  ../../include/tdzdd/dd/../util/MemoryPool.hpp \
  ../../include/tdzdd/dd/../util/MyHashTable.hpp \
  ../../include/tdzdd/dd/../util/MyList.hpp \
+ ../../include/tdzdd/dd/DepthFirstSearcher.hpp \
  ../../include/tdzdd/util/demangle.hpp ../../include/tdzdd/util/MySet.hpp \
  Cudd.hpp
 CnfToBdd-debug.o: CnfToBdd.hpp ../../include/tdzdd/DdSpec.hpp \
@@ -22,6 +23,7 @@ CnfToBdd-debug.o: CnfToBdd.hpp ../../include/tdzdd/DdSpec.hpp \
  ../../include/tdzdd/dd/../util/MemoryPool.hpp \
  ../../include/tdzdd/dd/../util/MyHashTable.hpp \
  ../../include/tdzdd/dd/../util/MyList.hpp \
+ ../../include/tdzdd/dd/DepthFirstSearcher.hpp \
  ../../include/tdzdd/util/demangle.hpp ../../include/tdzdd/util/MySet.hpp \
  Cudd.hpp
 cnfbdd.o: ../../include/tdzdd/DdStructure.hpp \
@@ -36,6 +38,7 @@ cnfbdd.o: ../../include/tdzdd/DdStructure.hpp \
  ../../include/tdzdd/dd/../util/MemoryPool.hpp \
  ../../include/tdzdd/dd/../util/MyHashTable.hpp \
  ../../include/tdzdd/dd/../util/MyList.hpp \
+ ../../include/tdzdd/dd/DepthFirstSearcher.hpp \
  ../../include/tdzdd/util/demangle.hpp \
  ../../include/tdzdd/dd/DdReducer.hpp \
  ../../include/tdzdd/eval/Cardinality.hpp \
@@ -55,6 +58,7 @@ cnfbdd-debug.o: ../../include/tdzdd/DdStructure.hpp \
  ../../include/tdzdd/dd/../util/MemoryPool.hpp \
  ../../include/tdzdd/dd/../util/MyHashTable.hpp \
  ../../include/tdzdd/dd/../util/MyList.hpp \
+ ../../include/tdzdd/dd/DepthFirstSearcher.hpp \
  ../../include/tdzdd/util/demangle.hpp \
  ../../include/tdzdd/dd/DdReducer.hpp \
  ../../include/tdzdd/eval/Cardinality.hpp \

@@ -28,6 +28,7 @@
 #include <cassert>
 #include <climits>
 #include <ostream>
+#include <set>
 #include <stdexcept>
 #include <vector>
 
@@ -61,8 +62,8 @@ public:
     /**
      * Default constructor.
      */
-    DdStructure()
-            : root_(0), useMP(false) {
+    DdStructure() :
+            root_(0), useMP(false) {
     }
 
 //    /*
@@ -78,8 +79,8 @@ public:
      * @param n the number of variables.
      * @param useMP use algorithms for multiple processors.
      */
-    DdStructure(int n, bool useMP = false)
-            : diagram(n + 1), root_(1), useMP(useMP) {
+    DdStructure(int n, bool useMP = false) :
+            diagram(n + 1), root_(1), useMP(useMP) {
         assert(n >= 0);
         NodeTableEntity<ARITY>& table = diagram.privateEntity();
         NodeId f(1);
@@ -101,8 +102,8 @@ public:
      * @param useMP use algorithms for multiple processors.
      */
     template<typename SPEC>
-    DdStructure(DdSpecBase<SPEC,ARITY> const& spec, bool useMP = false)
-            : useMP(useMP) {
+    DdStructure(DdSpecBase<SPEC,ARITY> const& spec, bool useMP = false) :
+            useMP(useMP) {
 #ifdef _OPENMP
         if (useMP) constructMP_(spec.entity());
         else
@@ -554,12 +555,12 @@ public:
             NodeId node;
             bool val;
 
-            Selection()
-                    : val(false) {
+            Selection() :
+                    val(false) {
             }
 
-            Selection(NodeId node, bool val)
-                    : node(node), val(val) {
+            Selection(NodeId node, bool val) :
+                    node(node), val(val) {
             }
 
             bool operator==(Selection const& o) const {
@@ -570,11 +571,11 @@ public:
         DdStructure const& dd;
         int cursor;
         std::vector<Selection> path;
-        std::vector<int> itemset;
+        std::set<int> itemset;
 
     public:
-        const_iterator(DdStructure const& dd, bool begin)
-                : dd(dd), cursor(begin ? -1 : -2), path(), itemset() {
+        const_iterator(DdStructure const& dd, bool begin) :
+                dd(dd), cursor(begin ? -1 : -2), path(), itemset() {
             if (begin) next(dd.root_);
         }
 
@@ -583,11 +584,11 @@ public:
             return *this;
         }
 
-        std::vector<int> const& operator*() const {
+        std::set<int> const& operator*() const {
             return itemset;
         }
 
-        std::vector<int> const* operator->() const {
+        std::set<int> const* operator->() const {
             return &itemset;
         }
 
@@ -601,9 +602,10 @@ public:
 
     private:
         void next(NodeId f) {
+            itemset.clear();
+
             for (;;) {
-                while (f != 0) { /* down */
-                    if (f == 1) return;
+                while (f > 1) { /* down */
                     Node<ARITY> const& s = (*dd.diagram)[f.row()][f.col()];
 
                     if (s.branch[0] != 0) {
@@ -612,11 +614,12 @@ public:
                         f = s.branch[0];
                     }
                     else {
-                        itemset.push_back(f.row());
                         path.push_back(Selection(f, true));
                         f = s.branch[1];
                     }
                 }
+
+                if (f == 1) break; /* found */
 
                 for (; cursor >= 0; --cursor) { /* up */
                     Selection& sel = path[cursor];
@@ -625,12 +628,7 @@ public:
                     if (sel.val == false && ss.branch[1] != 0) {
                         f = sel.node;
                         sel.val = true;
-                        int i = f.row();
                         path.resize(cursor + 1);
-                        while (!itemset.empty() && itemset.back() <= i) {
-                            itemset.pop_back();
-                        }
-                        itemset.push_back(i);
                         f = dd.diagram->child(f, 1);
                         break;
                     }
@@ -639,8 +637,13 @@ public:
                 if (cursor < 0) { /* end() state */
                     cursor = -2;
                     path.clear();
-                    itemset.clear();
                     return;
+                }
+            }
+
+            for (size_t i = 0; i < path.size(); ++i) {
+                if (path[i].val) {
+                    itemset.insert(path[i].node.row());
                 }
             }
         }

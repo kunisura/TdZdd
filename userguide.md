@@ -95,7 +95,7 @@ dd.dumpDot(std::cout);
 A DD structure can be evaluated from the bottom to the top.
 The following code from
 [apps/test/testSizeConstraint.cpp](../apps/test/testSizeConstraint.cpp) is a
-*DD evaluator* to find the size of the largest item set represented by a ZDD.
+*DD evaluator* to find the size of the largest itemset represented by a ZDD.
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~{.cpp}
 class MaxNumItems: public tdzdd::DdEval<MaxNumItems,int> {
@@ -521,4 +521,18 @@ counts the number of minterms of the function represented by this BDD.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~{.cpp}
 std::string tdzdd::DdStructure<N>::zddCardinality() const;
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-counts the number of sets in the family of sets represented by this ZDD.
+counts the number of itemsets in the family of itemsets represented
+by this ZDD.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~{.cpp}
+tdzdd::DdStructure<N>::const_iterator tdzdd::DdStructure<N>::begin() const;
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+returns an iterator to the first element of the family of itemsets
+represented by this ZDD.
+Each itemset is represented by `std::set<int>` of item levels.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~{.cpp}
+tdzdd::DdStructure<N>::const_iterator tdzdd::DdStructure<N>::end() const;
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+returns an iterator to the element following the last element of
+the family of itemsets represented by this ZDD.

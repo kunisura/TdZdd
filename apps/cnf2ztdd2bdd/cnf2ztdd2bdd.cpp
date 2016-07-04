@@ -64,10 +64,10 @@ void usage(char const* cmd) {
 }
 
 void output(std::ostream& os, DdStructure<2> const& f, CnfToZtdd const& cnf) {
-    for (typeof(f.begin()) t = f.begin(); t != f.end(); ++t) {
-        for (size_t i = 0; i < t->size(); ++i) {
-            if (i != 0) std::cout << " ";
-            os << cnf.varAtLevel((*t)[i]);
+    for (DdStructure<2>::const_iterator t = f.begin(); t != f.end(); ++t) {
+        for (int i = 1; i <= cnf.numVars(); ++i) {
+            if (i != 1) os << " ";
+            os << (t->count(cnf.levelOfVar(i)) ? "+" : "-") << i;
         }
         os << "\n";
     }
@@ -105,19 +105,17 @@ void run() {
             << f.countMinterm(cnf.numVars());
 
     if (!outfile.empty()) {
-        mh << "\nOUTPUT: " << outfile;
-        mh.begin("writing") << " ...";
-
+        DdStructure<2> dd(f);
+        DdStructure<2> zdd = dd.bdd2zdd(cnf.numVars());
+        mh << "\nOUTPUT: " << outfile << "\n";
         if (outfile == "-") {
-            output(std::cout, f, cnf);
+            output(std::cout, zdd, cnf);
         }
         else {
             std::ofstream ofs(outfile.c_str());
             if (!ofs) throw std::runtime_error(strerror(errno));
-            output(ofs, f, cnf);
+            output(ofs, zdd, cnf);
         }
-
-        mh.end();
     }
 }
 
