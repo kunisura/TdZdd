@@ -529,7 +529,7 @@ tdzdd::DdStructure<N>::const_iterator tdzdd::DdStructure<N>::begin() const;
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 returns an iterator to the first element of the family of itemsets
 represented by this ZDD.
-Each itemset is represented by `std::set<int>` of item levels.
+Each itemset is represented by `std::set<int>` of levels of selected items.
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~{.cpp}
 tdzdd::DdStructure<N>::const_iterator tdzdd::DdStructure<N>::end() const;
