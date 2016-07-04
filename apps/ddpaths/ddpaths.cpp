@@ -69,7 +69,7 @@ std::string termFileName;
 
 void usage(char const* cmd) {
     std::cerr << "usage: " << cmd
-            << " [ <option>... ] <graph_file> [ <terminal_pair_file> ]\n";
+              << " [ <option>... ] <graph_file> [ <terminal_pair_file> ]\n";
     std::cerr << "options\n";
     for (unsigned i = 0; i < sizeof(options) / sizeof(options[0]); ++i) {
         std::cerr << "  -" << options[i][0];
@@ -80,11 +80,18 @@ void usage(char const* cmd) {
     }
 }
 
-struct EdgeDecorator {
-    std::vector<bool> selected;
+class EdgeDecorator {
+    int const n;
+    std::set<int> const& levels;
+
+public:
+    EdgeDecorator(int n, std::set<int> const& levels) :
+            n(n), levels(levels) {
+    }
 
     std::string operator()(Graph::EdgeNumber a) const {
-        return selected[a] ? "[style=bold]" : "[style=dotted,color=gray]";
+        return levels.count(n - a) ?
+                "[style=bold]" : "[style=dotted,color=gray]";
     }
 };
 
@@ -161,8 +168,8 @@ int main(int argc, char *argv[]) {
         }
 
         m0 << "\n#vertex = " << graph.vertexSize() << ", #edge = "
-                << graph.edgeSize() << ", max_frontier_size = "
-                << graph.maxFrontierSize();
+           << graph.edgeSize() << ", max_frontier_size = "
+           << graph.maxFrontierSize();
         if (optStr["t"] == "cycle") {
             graph.clearColors();
         }
@@ -171,12 +178,13 @@ int main(int argc, char *argv[]) {
         }
         m0 << "\n";
 
-        if (graph.edgeSize() == 0) throw std::runtime_error(
-                "ERROR: The graph is empty!!!");
+        if (graph.edgeSize() == 0)
+            throw std::runtime_error("ERROR: The graph is empty!!!");
 //        if (optStr["t"] != "cycle" && graph.numColor() == 0) throw std::runtime_error(
 //                "ERROR: No vertex is colored!!!");
-        if (optStr["t"] == "path" && !graph.hasColorPairs()) throw std::runtime_error(
-                "ERROR: Colored vertices are not paired!!!");
+        if (optStr["t"] == "path" && !graph.hasColorPairs())
+            throw std::runtime_error(
+                    "ERROR: Colored vertices are not paired!!!");
 
         if (opt["graph"]) {
             graph.dump(std::cout);
@@ -297,7 +305,7 @@ int main(int argc, char *argv[]) {
         }
         else if (optStr["t"] == "cc" || optStr["t"] == "forest") {
             FrontierBasedSearch fbs(graph, optNum["uec"],
-                                    optStr["t"] == "forest");
+                    optStr["t"] == "forest");
             if (opt["lb"] || opt["ub"]) {
 //                f.zddSubset(fbs, opt["p"]);
                 DdStructure<2> g = f;
@@ -331,16 +339,9 @@ int main(int argc, char *argv[]) {
         }
 
         if (opt["all"]) {
-            int const n = graph.edgeSize();
-
-            for (typeof(f.begin()) t = f.begin(); t != f.end(); ++t) {
-                EdgeDecorator edges;
-
-                edges.selected.resize(n);
-                for (size_t i = 0; i < t->size(); ++i) {
-                    edges.selected[n - (*t)[i]] = true;
-                }
-
+            for (DdStructure<2>::const_iterator t = f.begin(); t != f.end();
+                    ++t) {
+                EdgeDecorator edges(n, *t);
                 graph.dump(std::cout, edges);
             }
         }

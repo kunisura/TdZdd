@@ -88,7 +88,7 @@ An example of binary DD</div></div>
 </div><!-- fragment --><p>A DD structrue can be reduced as a BDD or ZDD using its <code>void bddReduce()</code> or <code>void zddReduce()</code> member function, and also can be dumped in "dot" format.</p>
 <div class="fragment"><div class="line">dd.<a class="code" href="classtdzdd_1_1DdStructure.html#a4bb6b7ebb872ca622b10ca3b02c3bd07">zddReduce</a>();</div>
 <div class="line">dd.<a class="code" href="classtdzdd_1_1DdSpecBase.html#ab77ef493d44d50ae0ffbd571c62c77af">dumpDot</a>(std::cout);</div>
-</div><!-- fragment --><p>A DD structure can be evaluated from the bottom to the top. The following code from <a href="../apps/test/testSizeConstraint.cpp">apps/test/testSizeConstraint.cpp</a> is a <em>DD evaluator</em> to find the size of the largest item set represented by a ZDD.</p>
+</div><!-- fragment --><p>A DD structure can be evaluated from the bottom to the top. The following code from <a href="../apps/test/testSizeConstraint.cpp">apps/test/testSizeConstraint.cpp</a> is a <em>DD evaluator</em> to find the size of the largest itemset represented by a ZDD.</p>
 <div class="fragment"><div class="line"><span class="keyword">class </span>MaxNumItems: <span class="keyword">public</span> <a class="code" href="classtdzdd_1_1DdEval.html">tdzdd::DdEval</a>&lt;MaxNumItems,int&gt; {</div>
 <div class="line"><span class="keyword">public</span>:</div>
 <div class="line">    <span class="keywordtype">void</span> evalTerminal(<span class="keywordtype">int</span>&amp; n, <span class="keywordtype">bool</span> one)<span class="keyword"> const </span>{</div>
@@ -257,11 +257,15 @@ An example of binary DD</div></div>
 <div class="fragment"><div class="line">std::string <a class="code" href="classtdzdd_1_1DdStructure.html#a43c2949a18453056af1b967ca3931b94">tdzdd::DdStructure&lt;N&gt;::bddCardinality</a>(<span class="keywordtype">int</span> numVars) <span class="keyword">const</span>;</div>
 </div><!-- fragment --><p> counts the number of minterms of the function represented by this BDD.</p>
 <div class="fragment"><div class="line">std::string <a class="code" href="classtdzdd_1_1DdStructure.html#a54f85cde2031c53a29ff4f2873196418">tdzdd::DdStructure&lt;N&gt;::zddCardinality</a>() <span class="keyword">const</span>;</div>
-</div><!-- fragment --><p> counts the number of sets in the family of sets represented by this ZDD. </p>
+</div><!-- fragment --><p> counts the number of itemsets in the family of itemsets represented by this ZDD.</p>
+<div class="fragment"><div class="line"><a class="code" href="classtdzdd_1_1DdStructure_1_1const__iterator.html">tdzdd::DdStructure&lt;N&gt;::const_iterator</a> <a class="code" href="classtdzdd_1_1DdStructure.html#ad68919761e9fbbcb471147c565f1ba78">tdzdd::DdStructure&lt;N&gt;::begin</a>() <span class="keyword">const</span>;</div>
+</div><!-- fragment --><p> returns an iterator to the first element of the family of itemsets represented by this ZDD. Each itemset is represented by <code>std::set&lt;int&gt;</code> of levels of selected items.</p>
+<div class="fragment"><div class="line"><a class="code" href="classtdzdd_1_1DdStructure_1_1const__iterator.html">tdzdd::DdStructure&lt;N&gt;::const_iterator</a> <a class="code" href="classtdzdd_1_1DdStructure.html#a8a635dd78162f07c06fe9c55312c17a9">tdzdd::DdStructure&lt;N&gt;::end</a>() <span class="keyword">const</span>;</div>
+</div><!-- fragment --><p> returns an iterator to the element following the last element of the family of itemsets represented by this ZDD. </p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Jul 3 2016 17:35:22 for TdZdd by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Jul 4 2016 14:23:15 for TdZdd by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.7
 </small></address>

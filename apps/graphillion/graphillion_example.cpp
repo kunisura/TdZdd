@@ -41,24 +41,23 @@
 using namespace tdzdd;
 
 std::string options[][2] = { //
-                { "path", "Restrict to paths and cycles" }, //
-                { "matching", "Restrict to matchings" }, //
-                { "spanning", "Restrict to make no isolated vertices" }, //
-                { "noloop", "Restrict to forests" }, //
-                { "uec <n>", "Number of the uncolored edge components" }, //
-                { "lb <n>", "Lower bound of the number of edges" }, //
-                { "ub <n>", "Upper bound of the number of edges" }, //
-                { "st", "Color the first vertex and the last vertex" }, //
-                { "nola", "Do not use lookahead" }, //
-                { "a", "Read <graph_file> as an adjacency list" }, //
-                { "count", "Report the number of solutions" }, //
-                { "graph", "Dump input graph to STDOUT in DOT format" }, //
-                { "solutions <n>",
-                        "Dump at most <n> solutions to STDOUT in DOT format" }, //
-                { "zdd", "Dump result ZDD to STDOUT in DOT format" }, //
-                { "sapporo", "Translate to Sapporo ZBDD" }, //
-                { "import", "Read constraint ZDD from STDIN" }, //
-                { "export", "Dump result ZDD to STDOUT" } }; //
+        {"path", "Restrict to paths and cycles"}, //
+        {"matching", "Restrict to matchings"}, //
+        {"spanning", "Restrict to make no isolated vertices"}, //
+        {"noloop", "Restrict to forests"}, //
+        {"uec <n>", "Number of the uncolored edge components"}, //
+        {"lb <n>", "Lower bound of the number of edges"}, //
+        {"ub <n>", "Upper bound of the number of edges"}, //
+        {"st", "Color the first vertex and the last vertex"}, //
+        {"nola", "Do not use lookahead"}, //
+        {"a", "Read <graph_file> as an adjacency list"}, //
+        {"count", "Report the number of solutions"}, //
+        {"graph", "Dump input graph to STDOUT in DOT format"}, //
+        {"solutions <n>", "Dump at most <n> solutions to STDOUT in DOT format"}, //
+        {"zdd", "Dump result ZDD to STDOUT in DOT format"}, //
+        {"sapporo", "Translate to Sapporo ZBDD"}, //
+        {"import", "Read constraint ZDD from STDIN"}, //
+        {"export", "Dump result ZDD to STDOUT"}}; //
 
 std::map<std::string,bool> opt;
 std::map<std::string,int> optNum;
@@ -66,7 +65,7 @@ std::map<std::string,std::string> optStr;
 
 void usage(char const* cmd) {
     std::cerr << "usage: " << cmd
-            << " [ <option>... ] [ <graph_file> [ <vertex_group_file> ]]\n";
+              << " [ <option>... ] [ <graph_file> [ <vertex_group_file> ]]\n";
     std::cerr << "options\n";
     for (unsigned i = 0; i < sizeof(options) / sizeof(options[0]); ++i) {
         std::cerr << "  -" << options[i][0];
@@ -77,11 +76,18 @@ void usage(char const* cmd) {
     }
 }
 
-struct EdgeDecorator {
-    std::vector<bool> selected;
+class EdgeDecorator {
+    int const n;
+    std::set<int> const& levels;
+
+public:
+    EdgeDecorator(int n, std::set<int> const& levels) :
+            n(n), levels(levels) {
+    }
 
     std::string operator()(Graph::EdgeNumber a) const {
-        return selected[a] ? "[style=bold]" : "[style=dotted,color=gray]";
+        return levels.count(n - a) ?
+                "[style=bold]" : "[style=dotted,color=gray]";
     }
 };
 
@@ -185,10 +191,10 @@ int main(int argc, char *argv[]) {
         }
 
         mh << "#vertex = " << m << ", #edge = " << n << ", #color = "
-                << g.numColor() << "\n";
+           << g.numColor() << "\n";
 
-        if (g.edgeSize() == 0) throw std::runtime_error(
-                "ERROR: The graph is empty!!!");
+        if (g.edgeSize() == 0)
+            throw std::runtime_error("ERROR: The graph is empty!!!");
 
         if (opt["graph"]) {
             g.dump(std::cout);
@@ -257,8 +263,8 @@ int main(int argc, char *argv[]) {
         }
 
         mh << "\n#node = " << dd.size() << ", #solution = "
-                << std::setprecision(10) << dd.evaluate(ZddCardinality<double>())
-                << "\n";
+                << std::setprecision(10)
+                << dd.evaluate(ZddCardinality<double>()) << "\n";
 
         if (opt["count"]) {
             MessageHandler mh;
@@ -282,14 +288,9 @@ int main(int argc, char *argv[]) {
             int const n = g.edgeSize();
             int count = optNum["solutions"];
 
-            for (typeof(dd.begin()) t = dd.begin(); t != dd.end(); ++t) {
-                EdgeDecorator edges;
-
-                edges.selected.resize(n);
-                for (size_t i = 0; i < t->size(); ++i) {
-                    edges.selected[n - (*t)[i]] = true;
-                }
-
+            for (DdStructure<2>::const_iterator t = dd.begin(); t != dd.end();
+                    ++t) {
+                EdgeDecorator edges(n, *t);
                 g.dump(std::cout, edges);
                 if (--count == 0) break;
             }

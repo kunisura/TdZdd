@@ -11,6 +11,7 @@ DegreeZdd.o: DegreeZdd.hpp ../../include/tdzdd/DdSpec.hpp \
  ../../include/tdzdd/dd/../util/MemoryPool.hpp \
  ../../include/tdzdd/dd/../util/MyHashTable.hpp \
  ../../include/tdzdd/dd/../util/MyList.hpp \
+ ../../include/tdzdd/dd/DepthFirstSearcher.hpp \
  ../../include/tdzdd/util/demangle.hpp Board.hpp
 DegreeZdd-debug.o: DegreeZdd.hpp ../../include/tdzdd/DdSpec.hpp \
  ../../include/tdzdd/dd/DdBuilder.hpp \
@@ -23,6 +24,7 @@ DegreeZdd-debug.o: DegreeZdd.hpp ../../include/tdzdd/DdSpec.hpp \
  ../../include/tdzdd/dd/../util/MemoryPool.hpp \
  ../../include/tdzdd/dd/../util/MyHashTable.hpp \
  ../../include/tdzdd/dd/../util/MyList.hpp \
+ ../../include/tdzdd/dd/DepthFirstSearcher.hpp \
  ../../include/tdzdd/util/demangle.hpp Board.hpp
 NoUTurnZdd.o: NoUTurnZdd.hpp \
  ../../include/tdzdd/DdSpec.hpp ../../include/tdzdd/dd/DdBuilder.hpp \
@@ -35,6 +37,7 @@ NoUTurnZdd.o: NoUTurnZdd.hpp \
  ../../include/tdzdd/dd/../util/MemoryPool.hpp \
  ../../include/tdzdd/dd/../util/MyHashTable.hpp \
  ../../include/tdzdd/dd/../util/MyList.hpp \
+ ../../include/tdzdd/dd/DepthFirstSearcher.hpp \
  ../../include/tdzdd/util/demangle.hpp Board.hpp
 NoUTurnZdd-debug.o: NoUTurnZdd.hpp \
  ../../include/tdzdd/DdSpec.hpp ../../include/tdzdd/dd/DdBuilder.hpp \
@@ -47,6 +50,7 @@ NoUTurnZdd-debug.o: NoUTurnZdd.hpp \
  ../../include/tdzdd/dd/../util/MemoryPool.hpp \
  ../../include/tdzdd/dd/../util/MyHashTable.hpp \
  ../../include/tdzdd/dd/../util/MyList.hpp \
+ ../../include/tdzdd/dd/DepthFirstSearcher.hpp \
  ../../include/tdzdd/util/demangle.hpp Board.hpp
 NumlinZdd.o: NumlinZdd.hpp ../../include/tdzdd/DdSpec.hpp \
  ../../include/tdzdd/dd/DdBuilder.hpp \
@@ -59,6 +63,7 @@ NumlinZdd.o: NumlinZdd.hpp ../../include/tdzdd/DdSpec.hpp \
  ../../include/tdzdd/dd/../util/MemoryPool.hpp \
  ../../include/tdzdd/dd/../util/MyHashTable.hpp \
  ../../include/tdzdd/dd/../util/MyList.hpp \
+ ../../include/tdzdd/dd/DepthFirstSearcher.hpp \
  ../../include/tdzdd/util/demangle.hpp Board.hpp
 NumlinZdd-debug.o: NumlinZdd.hpp ../../include/tdzdd/DdSpec.hpp \
  ../../include/tdzdd/dd/DdBuilder.hpp \
@@ -71,6 +76,7 @@ NumlinZdd-debug.o: NumlinZdd.hpp ../../include/tdzdd/DdSpec.hpp \
  ../../include/tdzdd/dd/../util/MemoryPool.hpp \
  ../../include/tdzdd/dd/../util/MyHashTable.hpp \
  ../../include/tdzdd/dd/../util/MyList.hpp \
+ ../../include/tdzdd/dd/DepthFirstSearcher.hpp \
  ../../include/tdzdd/util/demangle.hpp Board.hpp
 ddnumlin.o: ../../include/tdzdd/DdStructure.hpp \
  ../../include/tdzdd/DdEval.hpp ../../include/tdzdd/DdSpec.hpp \
@@ -84,6 +90,7 @@ ddnumlin.o: ../../include/tdzdd/DdStructure.hpp \
  ../../include/tdzdd/dd/../util/MemoryPool.hpp \
  ../../include/tdzdd/dd/../util/MyHashTable.hpp \
  ../../include/tdzdd/dd/../util/MyList.hpp \
+ ../../include/tdzdd/dd/DepthFirstSearcher.hpp \
  ../../include/tdzdd/util/demangle.hpp \
  ../../include/tdzdd/dd/DdReducer.hpp \
  ../../include/tdzdd/eval/Cardinality.hpp \
@@ -104,6 +111,7 @@ ddnumlin-debug.o: ../../include/tdzdd/DdStructure.hpp \
  ../../include/tdzdd/dd/../util/MemoryPool.hpp \
  ../../include/tdzdd/dd/../util/MyHashTable.hpp \
  ../../include/tdzdd/dd/../util/MyList.hpp \
+ ../../include/tdzdd/dd/DepthFirstSearcher.hpp \
  ../../include/tdzdd/util/demangle.hpp \
  ../../include/tdzdd/dd/DdReducer.hpp \
  ../../include/tdzdd/eval/Cardinality.hpp \
