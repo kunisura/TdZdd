@@ -23,35 +23,34 @@
 #include <cerrno>
 #include <iostream>
 #include <map>
+#include <set>
 #include <stdexcept>
 
 #include <tdzdd/DdStructure.hpp>
 #include <tdzdd/DdSpecOp.hpp>
 #include "Board.hpp"
+#include "ConstraintZdd.hpp"
 #include "DegreeZdd.hpp"
-#include "NoUTurnZdd.hpp"
 #include "NumlinZdd.hpp"
 
 using namespace tdzdd;
 
 std::string options[][2] = //
-        {{"k <n>", "Allow at most <k> blank boxes (default=infinity)"}, //
-         {"u", "Allow U-turn paths"}, //
+        {{"k <n>", "Allow at most <n> blank boxes (default=infinity)"}, //
+         {"a", "Enumerate all solutions"}, //
          {"p", "Use parallel processing"}, //
-         {"print <n>", "Print <n> solutions at most"}};
+         {"m <n>", "Output <n> solutions at most (default=10)"}};
 
 std::map<std::string,bool> opt;
 std::map<std::string,long> optNum;
 std::string infile;
-std::string outfile;
 
 void usage(char const* cmd) {
-    std::cerr << "usage: " << cmd
-              << " [ <option>... ] <input_file> [ <output_file> ]\n";
+    std::cerr << "usage: " << cmd << " [ <option>... ] <input_file>\n";
     std::cerr << "options\n";
     for (unsigned i = 0; i < sizeof(options) / sizeof(options[0]); ++i) {
         std::cerr << "  -" << options[i][0];
-        for (unsigned j = options[i][0].length(); j < 10; ++j) {
+        for (unsigned j = options[i][0].length(); j < 6; ++j) {
             std::cerr << " ";
         }
         std::cerr << ": " << options[i][1] << "\n";
@@ -59,22 +58,21 @@ void usage(char const* cmd) {
     std::cerr << "\n";
 }
 
-void output(std::ostream& os, DdStructure<2> const& dd, Board const& quiz, bool transposed) {
-    Board answer = quiz;
+void output(std::ostream& os, DdStructure<2> const& dd, Board const& quiz,
+        bool transposed) {
+    int top_level = quiz.rows * (quiz.cols - 1);
     int count = 0;
 
-    for (typeof(dd.begin()) ans = dd.begin(); ans != dd.end(); ++ans) {
+    for (DdStructure<2>::const_iterator edges = dd.begin();
+            edges != dd.end() && count <= optNum["m"]; ++edges) {
+        os << "#" << ++count << "\n";
+        Board answer = quiz;
+
         for (int i = 0; i < quiz.rows; ++i) {
             for (int j = 0; j < quiz.cols - 1; ++j) {
-                answer.hlink[i][j] = false;
+                int level = top_level - i * (quiz.cols - 1) - j;
+                answer.hlink[i][j] = edges->count(level);
             }
-        }
-
-        for (typeof(ans->begin()) lev = ans->begin(); lev != ans->end();
-                ++lev) {
-            int i = quiz.level2row(*lev);
-            int j = quiz.level2col(*lev);
-            answer.hlink[i][j] = true;
         }
 
         answer.makeVerticalLinks();
@@ -85,7 +83,13 @@ void output(std::ostream& os, DdStructure<2> const& dd, Board const& quiz, bool 
         answer.printNumlin(os);
         os << "\n";
 
-        if (++count == optNum["print"]) break;
+        if (count == optNum["m"]) break;
+    }
+
+    double n = dd.evaluate(ZddCardinality<double,2>()) - count;
+    if (n >= 1) {
+        os << "  .\n  .\n  .\n\n";
+        os << n << " more solution" << (n == 1 ? "" : "s") << "\n\n";
     }
 }
 
@@ -113,9 +117,9 @@ void run() {
     }
 
     DdStructure<2> dd;
-    NumlinZdd numlin(quiz, optNum["k"]);        //, !opt["u"]);
+    NumlinZdd numlin(quiz, optNum["k"]);
 
-    if (opt["u"]) {
+    if (opt["a"]) {
         DegreeZdd degree(quiz);
         dd = DdStructure<2>(zddLookahead(degree), opt["p"]);
         dd.zddReduce();
@@ -130,19 +134,9 @@ void run() {
     dd.zddReduce();
     mh << "\n#solution = " << dd.zddCardinality();
 
-    if (!outfile.empty()) {
-        mh << "\nOUTPUT: " << outfile;
+    if (optNum["m"]) {
         mh.begin("writing") << " ...\n";
-
-        if (outfile == "-") {
-            output(std::cout, dd, quiz, transposed);
-        }
-        else {
-            std::ofstream ofs(outfile.c_str());
-            if (!ofs) throw std::runtime_error(strerror(errno));
-            output(ofs, dd, quiz, transposed);
-        }
-
+        output(std::cout, dd, quiz, transposed);
         mh.end();
     }
 }
@@ -172,9 +166,6 @@ int main(int argc, char *argv[]) {
             else if (infile.empty()) {
                 infile = argv[i];
             }
-            else if (outfile.empty()) {
-                outfile = argv[i];
-            }
             else {
                 throw std::exception();
             }
@@ -188,7 +179,7 @@ int main(int argc, char *argv[]) {
     }
 
     if (!opt["k"]) optNum["k"] = -1;
-    if (opt["print"] && outfile.empty()) outfile = "-";
+    if (!opt["m"]) optNum["m"] = 10;
 
     MessageHandler::showMessages();
     MessageHandler mh;

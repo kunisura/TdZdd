@@ -24,21 +24,16 @@
 #include <cassert>
 #include <cstdlib>
 
-DegreeZdd::DegreeZdd(Board const& quiz) :
-        quiz(quiz) {
-    setArraySize(quiz.cols);
-}
-
 int DegreeZdd::getRoot(State* degree) const {
     for (int j = 0; j < quiz.cols; ++j) {
         degree[j] = (quiz.number[0][j] > 0 ? 1 : 0);
     }
-    return quiz.top_level;
+    return top_level;
 }
 
 int DegreeZdd::getChild(State* degree, int level, int take) const {
-    int i = quiz.level2row(level);
-    int j = quiz.level2col(level);
+  int i = (top_level - level) / (quiz.cols - 1);
+  int j = (top_level - level) % (quiz.cols - 1);
 
     // horizontal line
     if (take) {

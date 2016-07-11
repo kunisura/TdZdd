@@ -29,52 +29,9 @@ class Board {
 public:
     int rows;
     int cols;
-    int top_level;
     std::vector<std::vector<int> > number;
     std::vector<std::vector<bool> > hlink;
     std::vector<std::vector<bool> > vlink;
-
-    /**
-     * Gets the row position of a given level.
-     * @param level decision level.
-     * @return row position.
-     */
-    int level2row(int level) const {
-        return (top_level - level) / (cols - 1);
-    }
-
-    /**
-     * Gets the column position of a given level.
-     * @param level decision level.
-     * @return column position.
-     */
-    int level2col(int level) const {
-        return (top_level - level) % (cols - 1);
-    }
-
-    /**
-     * Get the row number of the final hint.
-     */
-    int getFinalNumRow() const {
-        for (int i = rows - 1; i >= 0; --i) {
-            for (int j = cols - 1; j >= 0; --j) {
-                if (number[i][j] > 0) return i;
-            }
-        }
-        return 0;
-    }
-
-    /**
-     * Get the column number of the final hint.
-     */
-    int getFinalNumCol() const {
-        for (int i = rows - 1; i >= 0; --i) {
-            for (int j = cols - 1; j >= 0; --j) {
-                if (number[i][j] > 0) return j;
-            }
-        }
-        return 0;
-    }
 
     /**
      * Initialize the board based on \p rows and \p cols.

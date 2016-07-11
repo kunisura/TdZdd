@@ -28,70 +28,50 @@
 #include <tdzdd/DdSpec.hpp>
 #include "Board.hpp"
 
-class NumlinZdd: public tdzdd::HybridDdSpec<NumlinZdd,int,uint8_t,2> {
+class NumlinZdd: public tdzdd::HybridDdSpec<NumlinZdd,uint16_t,uint8_t,2> {
     Board const& quiz;
-    int const maxBlank;
-    bool const noRoundabout;
-    int finalHintRow;
-    int finalHintCol;
+    int const max_blank;
+    int const m, n, top_level;
 
 public:
     /**
      * Constructor.
      * @param quiz matrix of number pairs.
-     * @param maxBlank maximum number of unused boxes.
-     * @param noRoundabout flag to prune roundabout ways.
+     * @param max_blank maximum number of unused boxes.
      */
-    NumlinZdd(Board const& quiz, int maxBlank, bool noRoundabout = false);
+    NumlinZdd(Board const& quiz, int max_blank = -1) :
+                    quiz(quiz),
+                    max_blank(max_blank),
+                    m(quiz.rows),
+                    n(quiz.cols),
+                    top_level(m * (n - 1)) {
+        setArraySize(quiz.cols);
+    }
 
     /**
      * Gets a root configuration.
+     * @param blank_count total count of blank cells.
      * @param mate mate array.
      * @return root level.
      */
-    int getRoot(S_State& k, A_State* mate) const;
+    int getRoot(S_State& blank_count, A_State* mate) const;
 
     /**
      * Gets a child configuration.
+     * @param blank_count total count of blank cells.
      * @param mate mate array.
      * @param level decision level.
      * @param take 1 to take the edge; 0 otherwise.
      * @return next decision level.
      */
-    int getChild(S_State& k, A_State* mate, int level, int take) const;
+    int getChild(S_State& blank_count, A_State* mate, int level, int take) const;
 
     /**
      * Prints a state.
      * @param os output stream.
-     * @param a state array.
-     */
-    void printState(std::ostream& os, S_State const& k, A_State const* mate) const;
-
-private:
-    /**
-     * Take a horizontal line (i, j)-(i, j+1).
+     * @param blank_count total count of blank cells.
      * @param mate mate array.
-     * @param i row position.
-     * @param j column position.
-     * @return -1/0 when jumping to the 1/0-terminal.
      */
-    int linkHoriz(A_State* mate, int i, int j) const;
-
-    /**
-     * Take a vertical line (i, j)-(i+1, j).
-     * @param mate mate array.
-     * @param i row position.
-     * @param j column position.
-     * @return -1/0 when jumping to the 1/0-terminal.
-     */
-    int linkVert(A_State* mate, int i, int j) const;
-
-    /**
-     * Check if the puzzle is completed.
-     * @param mate mate array.
-     * @param i row position of the last decision.
-     * @param j column position of the last decision.
-     * @return -1/0 when jumping to the 1/0-terminal.
-     */
-    int checkCompletion(A_State const* mate, int i, int j) const;
+    void printState(std::ostream& os, S_State const& blank_count,
+            A_State const* mate) const;
 };

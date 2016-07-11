@@ -26,8 +26,6 @@
 #include <stdexcept>
 
 void Board::init() {
-    top_level = rows * (cols - 1);
-
     number.clear();
     number.resize(rows);
     for (int i = 0; i < rows; ++i) {
@@ -67,11 +65,10 @@ M transposed_matrix(M& a) {
 
 void Board::transpose() {
     number = transposed_matrix(number);
-    typeof(vlink) tmp = transposed_matrix(hlink);
+    std::vector<std::vector<bool> > tmp = transposed_matrix(hlink);
     hlink = transposed_matrix(vlink);
     vlink = tmp;
     std::swap(rows, cols);
-    top_level = rows * (cols - 1);
 }
 
 void Board::readNumbers(std::istream& is) {

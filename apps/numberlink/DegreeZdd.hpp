@@ -28,36 +28,40 @@
 #include <tdzdd/DdSpec.hpp>
 #include "Board.hpp"
 
-class DegreeZdd: public tdzdd::PodArrayDdSpec<DegreeZdd,int,2> {
-    Board const& quiz;
+class DegreeZdd: public tdzdd::PodArrayDdSpec<DegreeZdd,uint8_t,2> {
+  Board const& quiz;
+  int const top_level;
 
 public:
-    /**
-     * Constructor.
-     * @param quiz matrix of number pairs.
-     */
-    DegreeZdd(Board const& quiz);
+  /**
+   * Constructor.
+   * @param quiz matrix of number pairs.
+   */
+  DegreeZdd(Board const& quiz) :
+      quiz(quiz), top_level(quiz.rows * (quiz.cols - 1)) {
+    setArraySize(quiz.cols);
+  }
 
-    /**
-     * Gets a root configuration.
-     * @param degree degree array.
-     * @return root level.
-     */
-    int getRoot(State* degree) const;
+  /**
+   * Gets a root configuration.
+   * @param degree degree array.
+   * @return root level.
+   */
+  int getRoot(State* degree) const;
 
-    /**
-     * Gets a child configuration.
-     * @param degree degree array.
-     * @param level decision level.
-     * @param take 1 to take the edge; 0 otherwise.
-     * @return next decision level.
-     */
-    int getChild(State* degree, int level, int take) const;
+  /**
+   * Gets a child configuration.
+   * @param degree degree array.
+   * @param level decision level.
+   * @param take 1 to take the edge; 0 otherwise.
+   * @return next decision level.
+   */
+  int getChild(State* degree, int level, int take) const;
 
-    /**
-     * Prints a state.
-     * @param os output stream.
-     * @param degree degree array.
-     */
-    void printState(std::ostream& os, State const* degree) const;
+  /**
+   * Prints a state.
+   * @param os output stream.
+   * @param degree degree array.
+   */
+  void printState(std::ostream& os, State const* degree) const;
 };

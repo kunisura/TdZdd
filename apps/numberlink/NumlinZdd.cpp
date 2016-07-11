@@ -24,153 +24,91 @@
 #include <cassert>
 #include <cstdlib>
 
-/* mate values (0 <= j < cols)
- *  mate[j] = j          degree=0
- *  mate[j] = cols       degree=2
- *  mate[j] > cols       connected to number (mate[j]-cols)
- *  other                connected to mate[j]
+/* mate values (0 <= j < n)
+ *  mate[j] = j  degree=0
+ *  mate[j] = n  degree=2
+ *  mate[j] > n  connected to number (mate[j]-cols)
+ *  other        connected to mate[j]
  */
 
-NumlinZdd::NumlinZdd(Board const& quiz, int maxBlank, bool noRoundabout) :
-        quiz(quiz), maxBlank(maxBlank), noRoundabout(noRoundabout) {
-    setArraySize(quiz.cols);
-
-    for (finalHintRow = quiz.rows - 1; finalHintRow >= 0; --finalHintRow) {
-        for (finalHintCol = quiz.cols - 1; finalHintCol >= 0; --finalHintCol) {
-            if (quiz.number[finalHintRow][finalHintCol] > 0) return;
-        }
-    }
-}
-
-int NumlinZdd::getRoot(S_State& k, A_State* mate) const {
-    k = 0;
-    for (int j = 0; j < quiz.cols; ++j) {
+int NumlinZdd::getRoot(S_State& blank_count, A_State* mate) const {
+    blank_count = 0;
+    for (int j = 0; j < n; ++j) {
         int t = quiz.number[0][j];
-        mate[j] = (t > 0) ? quiz.cols + t : j;
+        mate[j] = (t > 0) ? n + t : j;
     }
-    return quiz.top_level;
+    return top_level;
 }
 
-int NumlinZdd::getChild(S_State& k, A_State* mate, int level, int take) const {
-    int i = quiz.level2row(level);
-    int j = quiz.level2col(level);
+int NumlinZdd::getChild(S_State& blank_count, A_State* mate, int level,
+        int take) const {
+    int i = (top_level - level) / (n - 1);
+    int j = (top_level - level) % (n - 1);
 
-    // horizontal line
-    if (take) {
-        int ret = linkHoriz(mate, i, j);
-        if (ret <= 0) return ret;
-        if (noRoundabout && j < quiz.cols - 2 && mate[j + 1] == j + 2) {
-            return 0;
+    if (take) { // $\HEdge{i}{j}$ を採用
+        int k = j + 1;
+        int mj = mate[j];
+        int mk = mate[k];
+
+        if (mj == n || mk == n) return 0;  // 分岐
+        if (mj == k) return 0; // サイクル
+
+        mate[j] = mate[k] = n;
+
+        if (mj > n && mk > n) { // パスが完成
+            if (mj != mk) return 0; // ラベルが異なる
+        }
+        else { // 接続関係を更新
+            if (mj < n) mate[mj] = mk;
+            if (mk < n) mate[mk] = mj;
         }
     }
-    else if (noRoundabout && mate[j] > quiz.cols && mate[j] == mate[j + 1]) {
-        return 0;
-    }
 
-    // vertical line
-    do {
-        if (mate[j] == j) { // degree=0
-            if (k == maxBlank) return 0;
-            if (maxBlank > 0) ++k;
-        }
+    // 列 $\mathit{j}$ から列 $\mathit{jj}$ まで決定
+    int jj = (j < n - 2) ? j : n - 1;
 
-        if (i < quiz.rows - 1) { // not bottom
-            if (mate[j] != j && mate[j] != quiz.cols) { // degree=1
-                int ret = linkVert(mate, i, j);
-                if (ret <= 0) return ret;
-                if (noRoundabout && j >= 1 && mate[j] == j - 1) {
-                    return 0;
-                }
+    if (i < m - 1) { // 最終行でないとき
+        for (int k = j; k <= jj; ++k) { // $\VEdge{i}{k}$
+            int mk = mate[k];
+            if (mk == k) { // degree=0
+                if (blank_count == max_blank) return 0;
+                if (max_blank > 0) ++blank_count;
             }
-            else {
-                int t = quiz.number[i + 1][j];
-                if (t > 0) {
-                    if (noRoundabout && mate[j] == quiz.cols + t) {
-                        return 0;
+            int t = quiz.number[i + 1][k];
+            if (mk != k && mk != n) { // 採用
+                if (t > 0) { // $\Vertex{i+1}{k}$ はラベル付き
+                    mate[k] = n;
+                    if (mk > n) { // パスが完成
+                        if (mk != n + t) return 0; // ラベルが異なる
                     }
-                    mate[j] = quiz.cols + t;
-                }
-                else {
-                    mate[j] = j;
+                    else {
+                        mate[mk] = n + t;
+                    }
                 }
             }
+            else { // 不採用
+                mate[k] = (t > 0) ? n + t : k;
+            }
         }
-        else { // bottom
-            if (mate[j] != j && mate[j] != quiz.cols) return 0; // degree=1
-            mate[j] = quiz.cols;
-        }
-    } while (++j == quiz.cols - 1); // repeat for the rightmost column
-
-    return level - 1;
-}
-
-int NumlinZdd::linkHoriz(A_State* mate, int i, int j) const {
-    int k = j + 1;
-    int mj = mate[j];
-    int mk = mate[k];
-
-    if (mj == quiz.cols || mk == quiz.cols) return 0;  // degree=2
-    if (mj == k) return 0; // cycle
-
-    mate[j] = mate[k] = quiz.cols;
-
-    if (mj < quiz.cols || mk < quiz.cols) { // not connecting two numbers
-        if (mj < quiz.cols) mate[mj] = mk;
-        if (mk < quiz.cols) mate[mk] = mj;
-        return 1;
     }
-
-    // connecting two numbers
-    assert(mj > quiz.cols && mk > quiz.cols);
-    if (mj != mk) return 0; // connecting incompatible numbers
-
-    return checkCompletion(mate, i + 1, j - 1); // touched previously
-}
-
-int NumlinZdd::linkVert(A_State* mate, int i, int j) const {
-    int mj = mate[j];
-    int t = quiz.number[i + 1][j];
-    assert(mj != quiz.cols);
-
-    if (t == 0) { // no number at (i+1, j)
-        return 1;
-    }
-
-    // number at (i+1, j)
-    if (mj < quiz.cols) { // no number at (i, j)
-        mate[j] = quiz.cols;
-        mate[mj] = quiz.cols + t;
-        return 1;
-    }
-
-    // connecting two numbers
-    assert(mj > quiz.cols);
-    if (mj != quiz.cols + t) return 0; // connecting incompatible numbers
-
-    mate[j] = quiz.cols;
-    return checkCompletion(mate, i + 1, j);
-}
-
-int NumlinZdd::checkCompletion(A_State const* mate, int i, int j) const {
-    if (i < finalHintRow || (i == finalHintRow && j < finalHintCol)) return 1;
-
-    bool acceptable = true;
-    bool completed = true;
-
-    for (int k = 0; k < quiz.cols; ++k) {
-        if (mate[k] < quiz.cols && mate[k] != k) { // garbage found
-            acceptable = false;
-        }
-        else if (mate[k] > quiz.cols) { // incomplete path found
-            completed = false;
-            break;
+    else { // 最終行のとき
+        for (int k = j; k <= jj; ++k) { // $\Vertex{i}{k}$
+            int mk = mate[k];
+            if (mk == k) { // degree=0
+                if (blank_count == max_blank) return 0;
+                if (max_blank > 0) ++blank_count;
+            }
+            else if (mk != n) {
+                return 0;
+            }
+            mate[k] = n;
         }
     }
 
-    return completed ? (acceptable ? -1 : 0) : 1;
+    return (--level >= 1) ? level : -1;
 }
 
-void NumlinZdd::printState(std::ostream& os, S_State const& k,
+void NumlinZdd::printState(std::ostream& os, S_State const& blank_count,
         A_State const* mate) const {
     for (int j = 0; j < quiz.cols; ++j) {
         int mj = mate[j];
@@ -178,6 +116,6 @@ void NumlinZdd::printState(std::ostream& os, S_State const& k,
         else if (mj == quiz.cols) os << " * ";
         else if (mj > quiz.cols) os << "[" << mj << "]";
         else os << " " << mj << " ";
-        os << "(" << k << ")";
+        os << "(" << blank_count << ")";
     }
 }

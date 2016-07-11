@@ -22,48 +22,53 @@
 
 #pragma once
 
-#include <iostream>
-#include <vector>
-
 #include <tdzdd/DdSpec.hpp>
 #include "Board.hpp"
 
-struct NoTurnZddState {
-    bool hline;  ///< Horizontal line on the upside
-    bool vline;  ///< Vertical line on the left
-    bool filled; ///< Upper-left corner is not blank
+struct VertexState {
+    bool to_east;
+    bool to_south;
+    bool used;
 };
 
-class ConstraintZdd: public tdzdd::PodArrayDdSpec<ConstraintZdd,NoTurnZddState,2> {
+class ConstraintZdd: public tdzdd::PodHybridDdSpec<ConstraintZdd,bool,
+        VertexState,2> {
     Board const& quiz;
+    int const m, n, top_level;
 
 public:
     /**
      * Constructor.
      * @param quiz matrix of number pairs.
      */
-    ConstraintZdd(Board const& quiz);
+    ConstraintZdd(Board const& quiz) :
+            quiz(quiz), m(quiz.rows), n(quiz.cols), top_level(m * (n - 1)) {
+        setArraySize(quiz.cols);
+    }
 
     /**
      * Gets a root configuration.
-     * @param a state array.
+     * @param s flag showing if a roof without support is growing.
+     * @param a array of vertex connection states.
      * @return root level.
      */
-    int getRoot(State* a) const;
+    int getRoot(S_State& s, A_State* a) const;
 
     /**
      * Gets a child configuration.
-     * @param a state array.
+     * @param s flag showing if a roof without support is growing.
+     * @param a array of vertex connection states.
      * @param level decision level.
      * @param take 1 to take the edge; 0 otherwise.
      * @return next decision level.
      */
-    int getChild(State* a, int level, int take) const;
+    int getChild(S_State& s, A_State* a, int level, int take) const;
 
     /**
      * Prints a state.
      * @param os output stream.
-     * @param a state array.
+     * @param s flag showing if a roof without support is growing.
+     * @param a array of vertex connection states.
      */
-    void printState(std::ostream& os, State const* a) const;
+    void printState(std::ostream& os, S_State const& s, A_State const* a) const;
 };
