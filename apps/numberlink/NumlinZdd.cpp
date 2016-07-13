@@ -45,54 +45,54 @@ int NumlinZdd::getChild(S_State& blank_count, A_State* mate, int level,
     int i = (top_level - level) / (n - 1);
     int j = (top_level - level) % (n - 1);
 
-    if (take) { // $\HEdge{i}{j}$ を採用
+    if (take) { // use e_h(i, j)
         int k = j + 1;
         int mj = mate[j];
         int mk = mate[k];
 
-        if (mj == n || mk == n) return 0;  // 分岐
-        if (mj == k) return 0; // サイクル
+        if (mj == n || mk == n) return 0;  // branch
+        if (mj == k) return 0; // cycle
 
         mate[j] = mate[k] = n;
 
-        if (mj > n && mk > n) { // パスが完成
-            if (mj != mk) return 0; // ラベルが異なる
+        if (mj > n && mk > n) { // path between labeled vertices
+            if (mj != mk) return 0; // different labels
         }
-        else { // 接続関係を更新
+        else { // update connections
             if (mj < n) mate[mj] = mk;
             if (mk < n) mate[mk] = mj;
         }
     }
 
-    // 列 $\mathit{j}$ から列 $\mathit{jj}$ まで決定
+    // from column j to column jj
     int jj = (j < n - 2) ? j : n - 1;
 
-    if (i < m - 1) { // 最終行でないとき
-        for (int k = j; k <= jj; ++k) { // $\VEdge{i}{k}$
+    if (i < m - 1) { // not the bottom row
+        for (int k = j; k <= jj; ++k) { // e_v(i, k)
             int mk = mate[k];
             if (mk == k) { // degree=0
                 if (blank_count == max_blank) return 0;
                 if (max_blank > 0) ++blank_count;
             }
             int t = quiz.number[i + 1][k];
-            if (mk != k && mk != n) { // 採用
-                if (t > 0) { // $\Vertex{i+1}{k}$ はラベル付き
+            if (mk != k && mk != n) { // use e_v(i, k)
+                if (t > 0) { // v(i+1, k) is labeled
                     mate[k] = n;
-                    if (mk > n) { // パスが完成
-                        if (mk != n + t) return 0; // ラベルが異なる
+                    if (mk > n) { // path between labeled vertices
+                        if (mk != n + t) return 0; // different labels
                     }
                     else {
                         mate[mk] = n + t;
                     }
                 }
             }
-            else { // 不採用
+            else { // don't use e_v(i, k)
                 mate[k] = (t > 0) ? n + t : k;
             }
         }
     }
-    else { // 最終行のとき
-        for (int k = j; k <= jj; ++k) { // $\Vertex{i}{k}$
+    else { // the bottom row
+        for (int k = j; k <= jj; ++k) { // e_v(i, k)
             int mk = mate[k];
             if (mk == k) { // degree=0
                 if (blank_count == max_blank) return 0;

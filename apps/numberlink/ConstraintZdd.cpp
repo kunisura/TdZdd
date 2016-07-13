@@ -38,34 +38,33 @@ int ConstraintZdd::getChild(S_State& s, A_State* a, int level, int take) const {
     int i = (top_level - level) / (quiz.cols - 1);
     int j = (top_level - level) % (quiz.cols - 1);
 
-    // horizontal line v(i,j)-v(i,j+1)
-    if (take) {
-        if (a[j].to_south + a[j].to_east + a[j + 1].to_south >= 2) return 0; // U-turn
-        if (a[j].to_south && !a[j + 1].used) return 0; // ┗
-        if (!a[j].used && a[j + 1].to_south) return 0; // ┛
+    if (take) {// use e_h(i,j)
+        if (a[j].to_south + a[j].to_east + a[j + 1].to_south >= 2) return 0; // ⊐, ⊔, ⊏
+        if (a[j].to_south && !a[j + 1].used) return 0; // ⸤
+        if (!a[j].used && a[j + 1].to_south) return 0; // ⸥
     }
 
-    // ⎡˙˙˙⎤
+    // check ⸢˙˙˙⸣
     if (!a[j].to_east || take) s = false;
     else if (a[j].to_south) s = true;
     else if (quiz.number[i][j] != 0) s = false;
     if (s && a[j + 1].to_south) return 0;
 
-    // a degree of v(i,j)
+    // degree of v(i,j)
     int d = (quiz.number[i][j] != 0) + a[j].to_south + take;
     if (j >= 1) d += a[j - 1].to_east;
     a[j].to_east = take;
     a[j].to_south = (d == 1);
     a[j].used = (d >= 1);
     if (j >= 1 && a[j - 1].to_east && a[j - 1].to_south && a[j].to_south)
-        return 0; // U-turn
+        return 0; // ⊓
 
     if (++j == quiz.cols - 1) { // for the rightmost column
         int d = (quiz.number[i][j] != 0) + a[j].to_south + a[j - 1].to_east;
         s = false;
         a[j].to_south = (d == 1);
         a[j].used = (d >= 1);
-        if (a[j - 1].to_east && a[j - 1].to_south && a[j].to_south) return 0; // U-turn
+        if (a[j - 1].to_east && a[j - 1].to_south && a[j].to_south) return 0; // ⊓
     }
 
     return (--level > 0) ? level : -1;
