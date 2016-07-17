@@ -1,10 +1,3 @@
-gtest-all.o: /usr/src/gtest/src/gtest-all.cc /usr/src/gtest/src/gtest.cc \
- /usr/src/gtest/src/gtest-internal-inl.h \
- /usr/src/gtest/src/gtest-death-test.cc \
- /usr/src/gtest/src/gtest-filepath.cc /usr/src/gtest/src/gtest-port.cc \
- /usr/src/gtest/src/gtest-printers.cc \
- /usr/src/gtest/src/gtest-test-part.cc \
- /usr/src/gtest/src/gtest-typed-test.cc
 example1.o: example1.cpp ../../include/tdzdd/DdStructure.hpp \
  ../../include/tdzdd/DdEval.hpp ../../include/tdzdd/DdSpec.hpp \
  ../../include/tdzdd/dd/DdBuilder.hpp \

@@ -62,7 +62,6 @@ clean:
 
 define make-depend
 	$(RM) depend.in
-	$(CPP) $(CPPFLAGS) -I$(GTEST_DIR) -MM $(GTEST_SRC) > depend.in;
 	for i in $(SRCS); do\
 	    $(CPP) $(CPPFLAGS) -MM $$i | perl -n0 -e\
 	        'print;\
