@@ -23,10 +23,14 @@
 TARGET   = graphillion_example
 CXX      = g++
 CPP      = $(CXX) -E
-CPPFLAGS = -I../../include
-CXXFLAGS = -fopenmp -Wall -fmessage-length=0
-LDFLAGS  = -fopenmp
-LDLIBS   = /usr/local/lib/BDD.a
+CPPFLAGS += -I../../include
+CXXFLAGS += -fopenmp -Wall -fmessage-length=0
+LDFLAGS  += -fopenmp
+LDLIBS   += -lsapporo
+
+ifeq ($(OS),Windows_NT)
+	LDLIBS += -lpsapi
+endif
 
 SRCS     = $(wildcard *.cpp)
 OBJS     = $(SRCS:%.cpp=%.o)

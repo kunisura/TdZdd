@@ -21,15 +21,31 @@
 # DEALINGS IN THE SOFTWARE.
 
 TARGET    = test
-GTEST_DIR = /usr/src/gtest
+
+UNAME_S = $(shell uname -s)
+ifneq ($(filter MINGW%,$(UNAME_S)),)
+	ifneq ($(filter MINGW32%,$(UNAME_S)),)
+		GTEST_DIR = /mingw32/src/gtest
+	endif
+	ifneq ($(filter MINGW64%,$(UNAME_S)),)
+		GTEST_DIR = /mingw64/src/gtest
+	endif
+else
+	GTEST_DIR = /usr/src/gtest
+endif
+
 GTEST_SRC =  $(GTEST_DIR)/src/gtest-all.cc
 GTEST_LIB =  gtest.a
 CXX       = g++
 CPP       = $(CXX) -E
-CPPFLAGS  = -I../../include
-CXXFLAGS  = -fopenmp -Wall -fmessage-length=0
-LDFLAGS   = -fopenmp
-LDLIBS    = $(GTEST_LIB)
+CPPFLAGS  += -I../../include
+CXXFLAGS  += -fopenmp -Wall -fmessage-length=0
+LDFLAGS   += -fopenmp
+LDLIBS    += $(GTEST_LIB)
+
+ifeq ($(OS),Windows_NT)
+	LDLIBS += -lpsapi
+endif
 
 SRCS      = $(wildcard *.cpp)
 OBJS      = $(SRCS:%.cpp=%.o)

@@ -23,10 +23,14 @@
 TARGET   = cnf2ztdd2bdd
 CXX      = g++
 CPP      = $(CXX) -E
-CPPFLAGS = -I../../include
-CXXFLAGS = -fopenmp -Wall -fmessage-length=0
-LDFLAGS  = -fopenmp
-LDLIBS   = -lcudd
+CPPFLAGS += -I../../include
+CXXFLAGS += -fopenmp -Wall -fmessage-length=0
+LDFLAGS  += -fopenmp
+LDLIBS   += -lcudd
+
+ifeq ($(OS),Windows_NT)
+	LDLIBS += -lpsapi
+endif
 
 SRCS     = $(wildcard *.cpp)
 OBJS     = $(SRCS:%.cpp=%.o)

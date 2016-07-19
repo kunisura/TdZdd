@@ -96,6 +96,52 @@ public:
     }
 
 private:
+    struct VarCmp {
+        bool& tautology;
+
+        VarCmp(bool& tautology) :
+                tautology(tautology) {
+        }
+
+        bool operator()(int a, int b) {
+            if (a == -b) tautology = true;
+            return std::abs(a) < std::abs(b);
+        }
+    };
+
+    struct ClauseCmp {
+        bool operator()(Clause const& a, Clause const& b) const {
+            int n = std::min(a.size(), b.size());
+            for (int i = 0; i < n; ++i) {
+                if (a[i] == -b[i]) return a[i] < b[i];
+                if (std::abs(a[i]) != std::abs(b[i]))
+                    return std::abs(a[i]) > std::abs(b[i]);
+            }
+            return a.size() < b.size();
+        }
+    };
+
+    struct ClauseEq {
+        bool operator()(Clause const& a, Clause const& b) const {
+            return a == b;
+        }
+    };
+
+    class ClauseSearcher {
+        size_t pos;
+
+    public:
+        ClauseSearcher(int pos) :
+                pos(pos) {
+        }
+
+        bool operator()(Clause const& a, int b) const {
+            if (a.size() <= size_t(pos)) return true;
+            if (a[pos] == -b) return a[pos] < b;
+            return std::abs(a[pos]) > std::abs(b);
+        }
+    };
+
     void readDimacs(std::istream& is);
     void sortClauses();
 

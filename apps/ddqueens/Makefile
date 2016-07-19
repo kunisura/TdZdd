@@ -23,10 +23,14 @@
 TARGET   = ddqueens
 CXX      = g++
 CPP      = $(CXX) -E
-CPPFLAGS = -I../../include
-CXXFLAGS = -fopenmp -Wall -fmessage-length=0
-LDFLAGS  = -fopenmp
-LDLIBS   =
+CPPFLAGS += -I../../include
+CXXFLAGS += -fopenmp -Wall -fmessage-length=0
+LDFLAGS  += -fopenmp
+LDLIBS   +=
+
+ifeq ($(OS),Windows_NT)
+	LDLIBS += -lpsapi
+endif
 
 SRCS     = $(wildcard *.cpp)
 OBJS     = $(SRCS:%.cpp=%.o)

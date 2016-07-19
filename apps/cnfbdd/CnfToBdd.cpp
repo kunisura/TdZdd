@@ -26,66 +26,6 @@
 
 typedef std::vector<int> Clause;
 
-namespace {
-
-struct VarCmp {
-    bool& tautology;
-
-    VarCmp(bool& tautology)
-            : tautology(tautology) {
-    }
-
-    bool operator()(int a, int b) {
-        if (a == -b) tautology = true;
-        return std::abs(a) < std::abs(b);
-    }
-};
-
-struct ClauseCmpForOrdering {
-    bool operator()(Clause const& a, Clause const& b) const {
-        int n = std::min(a.size(), b.size());
-        for (int i = 0; i < n; ++i) {
-            int const v = std::abs(a[i]);
-            int const w = std::abs(b[i]);
-            if (v != w) return v < w;
-        }
-        return a.size() < b.size();
-    }
-
-    bool operator()(Clause const* a, Clause const* b) const {
-        return operator()(*a, *b);
-    }
-};
-
-struct ClauseCmpForRelaxing {
-    bool operator()(Clause const& a, Clause const& b) const {
-        int n = std::min(a.size(), b.size());
-        for (int i = 0; i < n; ++i) {
-            int const v = std::abs(a[i]);
-            int const w = std::abs(b[i]);
-            if (v != w) return v > w;
-            if (a[i] != b[i]) return a[i] > b[i];
-        }
-        return a.size() > b.size();
-    }
-
-    bool operator()(Clause const* a, Clause const* b) const {
-        return operator()(*a, *b);
-    }
-};
-
-struct ClauseEq {
-    bool operator()(Clause const& a, Clause const& b) const {
-        return a == b;
-    }
-
-    bool operator()(Clause const* a, Clause const* b) const {
-        return *a == *b;
-    }
-};
-
-} // namespace
-
 void CnfToBdd::readDimacs(std::istream& is) {
     tdzdd::MessageHandler mh;
     mh.begin("reading CNF") << " ...";

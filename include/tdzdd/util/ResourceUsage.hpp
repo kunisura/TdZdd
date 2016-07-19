@@ -29,7 +29,12 @@
 #include <iostream>
 #include <sstream>
 #include <sys/time.h>
+#ifdef WIN32
+#include <windows.h>
+#include <psapi.h>
+#else
 #include <sys/resource.h>
+#endif
 
 namespace tdzdd {
 
@@ -43,8 +48,8 @@ struct ResourceUsage {
         update();
     }
 
-    ResourceUsage(double etime, double utime, double stime, long maxrss)
-            : etime(etime), utime(utime), stime(stime), maxrss(maxrss) {
+    ResourceUsage(double etime, double utime, double stime, long maxrss) :
+            etime(etime), utime(utime), stime(stime), maxrss(maxrss) {
     }
 
     ResourceUsage& update() {
@@ -52,13 +57,31 @@ struct ResourceUsage {
         gettimeofday(&t, 0);
         etime = double(t.tv_sec) + double(t.tv_usec) / 1000000;
 
+#ifdef WIN32
+        HANDLE h = GetCurrentProcess();
+        FILETIME ft_creat, ft_exit, ft_kernel, ft_user;
+        if (GetProcessTimes(h, &ft_creat, &ft_exit, &ft_kernel, &ft_user)) {
+            ULARGE_INTEGER ul_kernel, ul_user;
+            ul_kernel.LowPart = ft_kernel.dwLowDateTime;
+            ul_kernel.HighPart = ft_kernel.dwHighDateTime;
+            ul_user.LowPart = ft_user.dwLowDateTime;
+            ul_user.HighPart = ft_user.dwHighDateTime;
+            stime = ul_kernel.QuadPart * 1e-7;
+            utime = ul_user.QuadPart * 1e-7;
+        }
+
+        PROCESS_MEMORY_COUNTERS pmc;
+        if (GetProcessMemoryInfo(h, &pmc, sizeof(pmc))) {
+            maxrss = pmc.WorkingSetSize / 1024;
+        }
+#else
         struct rusage s;
         getrusage(RUSAGE_SELF, &s);
         utime = s.ru_utime.tv_sec + s.ru_utime.tv_usec * 1e-6;
         stime = s.ru_stime.tv_sec + s.ru_stime.tv_usec * 1e-6;
         maxrss = s.ru_maxrss;
-
 //        if (maxrss == 0) maxrss = readMemoryStatus("VmHWM:");
+#endif
         return *this;
     }
 
@@ -157,8 +180,8 @@ class ElapsedTimeCounter {
     double startTime;
 
 public:
-    ElapsedTimeCounter()
-            : totalTime(0), startTime(0) {
+    ElapsedTimeCounter() :
+            totalTime(0), startTime(0) {
     }
 
     ElapsedTimeCounter& reset() {
@@ -184,7 +207,8 @@ public:
         return totalTime;
     }
 
-    friend std::ostream& operator<<(std::ostream& os, ElapsedTimeCounter const& o) {
+    friend std::ostream& operator<<(std::ostream& os,
+            ElapsedTimeCounter const& o) {
         std::ios_base::fmtflags backup = os.flags(std::ios::fixed);
         os.setf(std::ios::fixed);
         os << std::setprecision(2) << o.totalTime << "s";
