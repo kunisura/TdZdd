@@ -39,7 +39,7 @@ protected:
     typedef size_t Word;
 
     static size_t const levelWords = (sizeof(int[2]) + sizeof(Word) - 1)
-                                     / sizeof(Word);
+            / sizeof(Word);
 
     Spec1 spec1;
     Spec2 spec2;
@@ -84,10 +84,10 @@ protected:
 
 public:
     BinaryOperation(S1 const& s1, S2 const& s2) :
-            spec1(s1),
-            spec2(s2),
-            stateWords1(wordSize(spec1.datasize())),
-            stateWords2(wordSize(spec2.datasize())) {
+                    spec1(s1),
+                    spec2(s2),
+                    stateWords1(wordSize(spec1.datasize())),
+                    stateWords2(wordSize(spec2.datasize())) {
         BinaryOperation::setArraySize(levelWords + stateWords1 + stateWords2);
     }
 
@@ -100,7 +100,7 @@ public:
 
     int merge_states(void* p1, void* p2) {
         return spec1.merge_states(state1(p1), state1(p2))
-               | spec2.merge_states(state2(p1), state2(p2));
+                | spec2.merge_states(state2(p1), state2(p2));
     }
 
     void destruct(void* p) {
@@ -115,7 +115,7 @@ public:
 
     size_t hash_code(void const* p, int level) const {
         size_t h = size_t(level1(p)) * 314159257
-                   + size_t(level2(p)) * 271828171;
+                + size_t(level2(p)) * 271828171;
         if (level1(p) > 0)
             h += spec1.hash_code(state1(p), level1(p)) * 171828143;
         if (level2(p) > 0)
@@ -134,12 +134,38 @@ public:
     }
 };
 
-template<typename S1, typename S2>
-struct BddAnd: public BinaryOperation<BddAnd<S1,S2>,S1,S2> {
-    typedef BinaryOperation<BddAnd,S1,S2> base;
+#if __cplusplus >= 201103L
+template<typename ... SS> struct BddAnd;
+
+template<typename S, typename S1, typename ... SS>
+struct BddAnd_: public BddAnd_<S,S1,BddAnd<SS...>> {
+    typedef BddAnd_<S,S1,BddAnd<SS...>> base;
     typedef typename base::Word Word;
 
-    BddAnd(S1 const& s1, S2 const& s2) :
+    BddAnd_(S1 const& s1, SS const&... ss) :
+            base(s1, BddAnd<SS...>(ss...)) {
+    }
+
+    void print_state(std::ostream& os, void const* p, int level) const {
+        Word const* q = static_cast<Word const*>(p);
+        os << "<" << base::level1(q) << ",";
+        base::spec1.print_state(os, base::state1(q), level);
+        os << ">∧";
+        base::spec2.print_state(os, base::state2(q), level);
+    }
+};
+#endif
+
+template<typename S, typename S1, typename S2>
+struct BddAnd_
+#if __cplusplus >= 201103L
+<S,S1,S2>
+#endif
+        : public BinaryOperation<S,S1,S2> {
+    typedef BinaryOperation<S,S1,S2> base;
+    typedef typename base::Word Word;
+
+    BddAnd_(S1 const& s1, S2 const& s2) :
             base(s1, s2) {
     }
 
@@ -170,20 +196,46 @@ struct BddAnd: public BinaryOperation<BddAnd<S1,S2>,S1,S2> {
 
     void print_state(std::ostream& os, void const* p, int level) const {
         Word const* q = static_cast<Word const*>(p);
-        os << "<" << level1(q) << ",";
+        os << "<" << base::level1(q) << ",";
         base::spec1.print_state(os, base::state1(q), level);
-        os << ">∧<" << level2(q) << ",";
+        os << ">∧<" << base::level2(q) << ",";
         base::spec2.print_state(os, base::state2(q), level);
         os << ">";
     }
 };
 
-template<typename S1, typename S2>
-struct BddOr: public BinaryOperation<BddOr<S1,S2>,S1,S2> {
-    typedef BinaryOperation<BddOr,S1,S2> base;
+#if __cplusplus >= 201103L
+template<typename ... SS> struct BddOr;
+
+template<typename S, typename S1, typename ... SS>
+struct BddOr_: public BddOr_<S,S1,BddOr<SS...>> {
+    typedef BddOr_<S,S1,BddOr<SS...>> base;
     typedef typename base::Word Word;
 
-    BddOr(S1 const& s1, S2 const& s2) :
+    BddOr_(S1 const& s1, SS const&... ss) :
+            base(s1, BddOr<SS...>(ss...)) {
+    }
+
+    void print_state(std::ostream& os, void const* p, int level) const {
+        Word const* q = static_cast<Word const*>(p);
+        os << "<" << base::level1(q) << ",";
+        base::spec1.print_state(os, base::state1(q), level);
+        os << ">∨";
+        base::spec2.print_state(os, base::state2(q), level);
+    }
+};
+#endif
+
+template<typename S, typename S1, typename S2>
+struct BddOr_
+#if __cplusplus >= 201103L
+<S,S1,S2>
+#endif
+        : public BinaryOperation<S,S1,S2> {
+    typedef BinaryOperation<S,S1,S2> base;
+    typedef typename base::Word Word;
+
+    BddOr_(S1 const& s1, S2 const& s2) :
             base(s1, s2) {
     }
 
@@ -225,8 +277,34 @@ struct BddOr: public BinaryOperation<BddOr<S1,S2>,S1,S2> {
     }
 };
 
-template<typename S1, typename S2>
-class ZddIntersection: public PodArrayDdSpec<ZddIntersection<S1,S2>,size_t,2> {
+#if __cplusplus >= 201103L
+template<typename ... SS> struct ZddIntersection;
+
+template<typename S, typename S1, typename ... SS>
+struct ZddIntersection_: public ZddIntersection_<S,S1,ZddIntersection<SS...>> {
+    typedef ZddIntersection_<S,S1,ZddIntersection<SS...>> base;
+    typedef typename base::Word Word;
+
+    ZddIntersection_(S1 const& s1, SS const&... ss) :
+            base(s1, ZddIntersection<SS...>(ss...)) {
+    }
+
+    void print_state(std::ostream& os, void const* p, int level) const {
+        Word const* q = static_cast<Word const*>(p);
+        os << "<" << base::level1(q) << ",";
+        base::spec1.print_state(os, base::state1(q), level);
+        os << ">∩";
+        base::spec2.print_state(os, base::state2(q), level);
+    }
+};
+#endif
+
+template<typename S, typename S1, typename S2>
+struct ZddIntersection_
+#if __cplusplus >= 201103L
+<S,S1,S2>
+#endif
+        : public PodArrayDdSpec<S,size_t,2> {
     typedef S1 Spec1;
     typedef S2 Spec2;
     typedef size_t Word;
@@ -257,12 +335,12 @@ class ZddIntersection: public PodArrayDdSpec<ZddIntersection<S1,S2>,size_t,2> {
     }
 
 public:
-    ZddIntersection(S1 const& s1, S2 const& s2) :
-            spec1(s1),
-            spec2(s2),
-            stateWords1(wordSize(spec1.datasize())),
-            stateWords2(wordSize(spec2.datasize())) {
-        ZddIntersection::setArraySize(stateWords1 + stateWords2);
+    ZddIntersection_(S1 const& s1, S2 const& s2) :
+                    spec1(s1),
+                    spec2(s2),
+                    stateWords1(wordSize(spec1.datasize())),
+                    stateWords2(wordSize(spec2.datasize())) {
+        ZddIntersection_::setArraySize(stateWords1 + stateWords2);
     }
 
     int getRoot(Word* p) {
@@ -312,7 +390,7 @@ public:
 
     int merge_states(void* p1, void* p2) {
         return spec1.merge_states(state1(p1), state1(p2))
-               | spec2.merge_states(state2(p1), state2(p2));
+                | spec2.merge_states(state2(p1), state2(p2));
     }
 
     void destruct(void* p) {
@@ -327,12 +405,12 @@ public:
 
     size_t hash_code(void const* p, int level) const {
         return spec1.hash_code(state1(p), level) * 314159257
-               + spec2.hash_code(state2(p), level) * 271828171;
+                + spec2.hash_code(state2(p), level) * 271828171;
     }
 
     bool equal_to(void const* p, void const* q, int level) const {
         return spec1.equal_to(state1(p), state1(q), level)
-               && spec2.equal_to(state2(p), state2(q), level);
+                && spec2.equal_to(state2(p), state2(q), level);
     }
 
     void print_state(std::ostream& os, void const* p, int level) const {
@@ -345,12 +423,38 @@ public:
     }
 };
 
-template<typename S1, typename S2>
-struct ZddUnion: public BinaryOperation<ZddUnion<S1,S2>,S1,S2> {
-    typedef BinaryOperation<ZddUnion,S1,S2> base;
+#if __cplusplus >= 201103L
+template<typename ... SS> struct ZddUnion;
+
+template<typename S, typename S1, typename ... SS>
+struct ZddUnion_: public ZddUnion_<S,S1,ZddUnion<SS...>> {
+    typedef ZddUnion_<S,S1,ZddUnion<SS...>> base;
     typedef typename base::Word Word;
 
-    ZddUnion(S1 const& s1, S2 const& s2) :
+    ZddUnion_(S1 const& s1, SS const&... ss) :
+            base(s1, ZddUnion<SS...>(ss...)) {
+    }
+
+    void print_state(std::ostream& os, void const* p, int level) const {
+        Word const* q = static_cast<Word const*>(p);
+        os << "<" << base::level1(q) << ",";
+        base::spec1.print_state(os, base::state1(q), level);
+        os << ">∪";
+        base::spec2.print_state(os, base::state2(q), level);
+    }
+};
+#endif
+
+template<typename S, typename S1, typename S2>
+struct ZddUnion_
+#if __cplusplus >= 201103L
+<S,S1,S2>
+#endif
+        : public BinaryOperation<S,S1,S2> {
+    typedef BinaryOperation<S,S1,S2> base;
+    typedef typename base::Word Word;
+
+    ZddUnion_(S1 const& s1, S2 const& s2) :
             base(s1, s2) {
     }
 
@@ -398,4 +502,65 @@ struct ZddUnion: public BinaryOperation<ZddUnion<S1,S2>,S1,S2> {
     }
 };
 
-} // namespace tdzdd
+#if __cplusplus >= 201103L
+template<typename ... SS>
+struct BddAnd: public BddAnd_<BddAnd<SS...>,SS...> {
+    BddAnd(SS const&... ss) :
+            BddAnd_<BddAnd,SS...>(ss...) {
+    }
+};
+
+template<typename ... SS>
+struct BddOr: public BddOr_<BddOr<SS...>,SS...> {
+    BddOr(SS const&... ss) :
+            BddOr_<BddOr,SS...>(ss...) {
+    }
+};
+
+template<typename ... SS>
+struct ZddIntersection: public ZddIntersection_<ZddIntersection<SS...>,SS...> {
+    ZddIntersection(SS const&... ss) :
+            ZddIntersection_<ZddIntersection,SS...>(ss...) {
+    }
+};
+
+template<typename ... SS>
+struct ZddUnion: public ZddUnion_<ZddUnion<SS...>,SS...> {
+    ZddUnion(SS const&... ss) :
+            ZddUnion_<ZddUnion,SS...>(ss...) {
+    }
+};
+
+#else
+
+template<typename S1, typename S2>
+struct BddAnd: public BddAnd_<BddAnd<S1,S2>,S1,S2> {
+    BddAnd(S1 const& s1, S2 const& s2) :
+    BddAnd_<BddAnd,S1,S2>(s1, s2) {
+    }
+};
+
+template<typename S1, typename S2>
+struct BddOr: public BddOr_<BddOr<S1,S2>,S1,S2> {
+    BddOr(S1 const& s1, S2 const& s2) :
+    BddOr_<BddOr,S1,S2>(s1, s2) {
+    }
+};
+
+template<typename S1, typename S2>
+struct ZddIntersection: public ZddIntersection_<ZddIntersection<S1,S2>,S1,S2> {
+    ZddIntersection(S1 const& s1, S2 const& s2) :
+    ZddIntersection_<ZddIntersection,S1,S2>(s1, s2) {
+    }
+};
+
+template<typename S1, typename S2>
+struct ZddUnion: public ZddUnion_<ZddUnion<S1,S2>,S1,S2> {
+    ZddUnion(S1 const& s1, S2 const& s2) :
+    ZddUnion_<ZddUnion,S1,S2>(s1, s2) {
+    }
+};
+#endif
+
+}
+ // namespace tdzdd

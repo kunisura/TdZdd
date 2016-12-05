@@ -317,10 +317,24 @@ tdzdd::BddAnd<S1,S2> tdzdd::bddAnd(S1 const& spec1, S2 const& spec2);
 returns a BDD specification for logical AND of two BDD specifications.
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~{.cpp}
+template<typename... SS>
+tdzdd::BddAnd<SS...> tdzdd::bddAnd(SS const&... specs);
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+returns a BDD specification for logical AND of two or more BDD specifications.
+(since C++11)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~{.cpp}
 template<typename S1, typename S2>
 tdzdd::BddOr<S1,S2> tdzdd::bddOr(S1 const& spec1, S2 const& spec2);
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 returns a BDD specification for logical OR of two BDD specifications.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~{.cpp}
+template<typename... SS>
+tdzdd::BddOr<SS...> tdzdd::bddOr(S const&... specs);
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+returns a BDD specification for logical OR of two or more BDD specifications.
+(since C++11)
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~{.cpp}
 template<typename S1, typename S2>
@@ -329,10 +343,24 @@ tdzdd::ZddIntersection<S1,S2> tdzdd::zddIntersection(S1 const& spec1, S2 const& 
 returns a ZDD specification for set intersection of two ZDD specifications.
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~{.cpp}
+template<typename... SS>
+tdzdd::ZddIntersection<SS...> tdzdd::zddIntersection(SS const&... specs);
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+returns a ZDD specification for set intersection of two or more ZDD specifications.
+(since C++11)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~{.cpp}
 template<typename S1, typename S2>
 tdzdd::ZddUnion<S1,S2> tdzdd::zddUnion(S1 const& spec1, S2 const& spec2);
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 returns a ZDD specification for set union of two ZDD specifications.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~{.cpp}
+template<typename... SS>
+tdzdd::ZddUnion<SS...> tdzdd::zddUnion(SS const&... specs);
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+returns a ZDD specification for set union of two or more ZDD specifications.
+(since C++11)
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~{.cpp}
 template<typename S>

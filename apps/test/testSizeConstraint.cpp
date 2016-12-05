@@ -81,9 +81,23 @@ TEST(SizeConstraintTest, BDD) {
     ASSERT_EQ(511, bq.evaluate(BddCardinality<int>(10)));
     ASSERT_EQ(1024 - 11 - 511,br.evaluate(BddCardinality<int>(10)));
 
-    DdStructure<2> pqr(bddOr(bddOr(bp, bq), br), useMP);
-    pqr.bddReduce();
-    ASSERT_EQ(DdStructure<2>(0), pqr);
+#if __cplusplus >= 201103L
+    DdStructure<2> pqr_and(bddAnd(bp, bq, br), useMP);
+#else
+    DdStructure<2> pqr_and(bddAnd(bddAnd(bp, bq), br), useMP);
+#endif
+    ASSERT_EQ(16, pqr_and.size());
+    pqr_and.bddReduce();
+    ASSERT_EQ(DdStructure<2>(), pqr_and);
+
+#if __cplusplus >= 201103L
+    DdStructure<2> pqr_or(bddOr(bp, bq, br), useMP);
+#else
+    DdStructure<2> pqr_or(bddOr(bddOr(bp, bq), br), useMP);
+#endif
+    ASSERT_EQ(33, pqr_or.size());
+    pqr_or.bddReduce();
+    ASSERT_EQ(DdStructure<2>(0), pqr_or);
 }
 
 TEST(SizeConstraintTest, ZDD) {
@@ -107,9 +121,23 @@ TEST(SizeConstraintTest, ZDD) {
     ASSERT_EQ(511, zq.evaluate(ZddCardinality<int>()));
     ASSERT_EQ(1024 - 11 - 511, zr.evaluate(ZddCardinality<int>()));
 
-    DdStructure<2> pqr(zddUnion(zddUnion(zp, zq), zr), useMP);
-    pqr.zddReduce();
-    ASSERT_EQ(DdStructure<2>(10), pqr);
+#if __cplusplus >= 201103L
+    DdStructure<2> pqr_int(zddIntersection(zp, zq, zr), useMP);
+#else
+    DdStructure<2> pqr_int(zddIntersection(zddIntersection(zp, zq), zr), useMP);
+#endif
+    ASSERT_EQ(0, pqr_int.size());
+    pqr_int.zddReduce();
+    ASSERT_EQ(DdStructure<2>(), pqr_int);
+
+#if __cplusplus >= 201103L
+    DdStructure<2> pqr_uni(zddUnion(zp, zq, zr), useMP);
+#else
+    DdStructure<2> pqr_uni(zddUnion(zddUnion(zp, zq), zr), useMP);
+#endif
+    ASSERT_EQ(34, pqr_uni.size());
+    pqr_uni.zddReduce();
+    ASSERT_EQ(DdStructure<2>(10), pqr_uni);
 
     ASSERT_EQ(0, zp.evaluate(MinNumItems()));
     ASSERT_EQ(1, zp.evaluate(MaxNumItems()));

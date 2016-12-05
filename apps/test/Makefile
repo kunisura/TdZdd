@@ -52,8 +52,11 @@ OBJS      = $(SRCS:%.cpp=%.o)
 
 .PONY: all debug clean depend
 
-all:	$(GTEST_LIB) $(TARGET)
-debug:	$(GTEST_LIB) $(TARGET:%=%-debug)
+all: $(GTEST_LIB) $(TARGET)
+debug: $(GTEST_LIB) $(TARGET:%=%-debug)
+
+11: $(GTEST_LIB) $(TARGET:%=%-11)
+11-debug: $(GTEST_LIB) $(TARGET:%=%-11-debug)
 
 gtest.o: $(GTEST_SRC)
 	$(CXX) $(CXXFLAGS) $(CPPFLAGS) -I$(GTEST_DIR) $(TARGET_ARCH) -c -o $@ $<
@@ -67,22 +70,36 @@ gtest.o: $(GTEST_SRC)
 %-debug.o: %.cpp
 	$(CXX) $(CXXFLAGS) -g $(CPPFLAGS) -DDEBUG $(TARGET_ARCH) -c -o $@ $<
 
+%-11.o: %.cpp
+	$(CXX) $(CXXFLAGS) -std=c++11 -O3 $(CPPFLAGS) -DNDEBUG $(TARGET_ARCH) -c -o $@ $<
+
+%-11-debug.o: %.cpp
+	$(CXX) $(CXXFLAGS) -std=c++11 -g $(CPPFLAGS) -DDEBUG $(TARGET_ARCH) -c -o $@ $<
+
 $(TARGET): $(OBJS)
 	$(CXX) $(LDFLAGS) $(TARGET_ARCH) $^ $(LDLIBS) -o $@
 
 $(TARGET:%=%-debug): $(OBJS:%.o=%-debug.o)
 	$(CXX) $(LDFLAGS) $(TARGET_ARCH) $^ $(LDLIBS) -o $@
 
+$(TARGET:%=%-11): $(OBJS:%.o=%-11.o)
+	$(CXX) $(LDFLAGS) $(TARGET_ARCH) $^ $(LDLIBS) -o $@
+
+$(TARGET:%=%-11-debug): $(OBJS:%.o=%-11-debug.o)
+	$(CXX) $(LDFLAGS) $(TARGET_ARCH) $^ $(LDLIBS) -o $@
+
 clean:
-	$(RM) $(TARGET) $(TARGET:%=%-debug) *.o *.a
+	$(RM) $(TARGET) $(TARGET:%=%-debug) $(TARGET:%=%-11) $(TARGET:%=%-11-debug) *.o *.a
 
 define make-depend
 	$(RM) depend.in
 	for i in $(SRCS); do\
 	    $(CPP) $(CPPFLAGS) -MM $$i | perl -n0 -e\
 	        'print;\
-	         s!^(\S+).o:!$$1-debug.o:!;\
-	         print' >> depend.in;\
+	         s!^(\S+).o:!$$1-debug.o:!;print;\
+	         s!^(\S+)-debug.o:!$$1-11.o:!;print;\
+	         s!^(\S+)-11.o:!$$1-11-debug.o:!;print;\
+	         ' >> depend.in;\
 	done
 endef
 
