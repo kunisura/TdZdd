@@ -36,15 +36,21 @@ namespace tdzdd {
  * @param spec2 the second BDD specification.
  * @return BDD specification for logical AND of @p spec1 and @p spec2.
  */
-#if __cplusplus >= 201103L
-template<typename... SS>
-BddAnd<SS...> bddAnd(SS const&... specs) {
-    return BddAnd<SS...>(specs...);
-}
-#else
 template<typename S1, typename S2>
 BddAnd<S1,S2> bddAnd(S1 const& spec1, S2 const& spec2) {
     return BddAnd<S1,S2>(spec1, spec2);
+}
+
+#if __cplusplus >= 201103L
+/**
+ * Returns a BDD specification for logical AND of two or more BDD specifications.
+ * (since C++11)
+ * @param specs BDD specifications.
+ * @return BDD specification for logical AND of @p specs.
+ */
+template<typename... SS>
+BddAnd<SS...> bddAnd(SS const&... specs) {
+    return BddAnd<SS...>(specs...);
 }
 #endif
 
@@ -54,15 +60,21 @@ BddAnd<S1,S2> bddAnd(S1 const& spec1, S2 const& spec2) {
  * @param spec2 the second BDD specification.
  * @return BDD specification for logical OR of @p spec1 and @p spec2.
  */
-#if __cplusplus >= 201103L
-template<typename... SS>
-BddOr<SS...> bddOr(SS const&... specs) {
-    return BddOr<SS...>(specs...);
-}
-#else
 template<typename S1, typename S2>
 BddOr<S1,S2> bddOr(S1 const& spec1, S2 const& spec2) {
     return BddOr<S1,S2>(spec1, spec2);
+}
+
+#if __cplusplus >= 201103L
+/**
+ * Returns a BDD specification for logical OR of two or more BDD specifications.
+ * (since C++11)
+ * @param specs BDD specifications.
+ * @return BDD specification for logical OR of @p specs.
+ */
+template<typename... SS>
+BddOr<SS...> bddOr(SS const&... specs) {
+    return BddOr<SS...>(specs...);
 }
 #endif
 
@@ -72,15 +84,21 @@ BddOr<S1,S2> bddOr(S1 const& spec1, S2 const& spec2) {
  * @param spec2 the second ZDD specification.
  * @return ZDD specification for set intersection of @p spec1 and @p spec2.
  */
-#if __cplusplus >= 201103L
-template<typename... SS>
-ZddIntersection<SS...> zddIntersection(SS const&... specs) {
-    return ZddIntersection<SS...>(specs...);
-}
-#else
 template<typename S1, typename S2>
 ZddIntersection<S1,S2> zddIntersection(S1 const& spec1, S2 const& spec2) {
     return ZddIntersection<S1,S2>(spec1, spec2);
+}
+
+#if __cplusplus >= 201103L
+/**
+ * Returns a ZDD specification for set intersection of two or more ZDD specifications.
+ * (since C++11)
+ * @param specs ZDD specifications.
+ * @return ZDD specification for set intersection of @p specs.
+ */
+template<typename... SS>
+ZddIntersection<SS...> zddIntersection(SS const&... specs) {
+    return ZddIntersection<SS...>(specs...);
 }
 #endif
 
@@ -90,15 +108,21 @@ ZddIntersection<S1,S2> zddIntersection(S1 const& spec1, S2 const& spec2) {
  * @param spec2 the second ZDD specification.
  * @return ZDD specification for set union of @p spec1 and @p spec2.
  */
-#if __cplusplus >= 201103L
-template<typename... SS>
-ZddUnion<SS...> zddUnion(SS const&... specs) {
-    return ZddUnion<SS...>(specs...);
-}
-#else
 template<typename S1, typename S2>
 ZddUnion<S1,S2> zddUnion(S1 const& spec1, S2 const& spec2) {
     return ZddUnion<S1,S2>(spec1, spec2);
+}
+
+#if __cplusplus >= 201103L
+/**
+ * Returns a ZDD specification for set union of two or more ZDD specifications.
+ * (since C++11)
+ * @param specs specifications.
+ * @return ZDD specification for set union of @p specs.
+ */
+template<typename... SS>
+ZddUnion<SS...> zddUnion(SS const&... specs) {
+    return ZddUnion<SS...>(specs...);
 }
 #endif
 
