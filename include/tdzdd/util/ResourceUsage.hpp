@@ -28,15 +28,32 @@
 #include <iomanip>
 #include <iostream>
 #include <sstream>
+#ifndef _MSC_VER
 #include <sys/time.h>
-#ifdef WIN32
+#endif
+#ifndef _WIN32
+#include <sys/resource.h>
+#else
+#define NOMINMAX
 #include <windows.h>
 #include <psapi.h>
-#else
-#include <sys/resource.h>
 #endif
 
 namespace tdzdd {
+
+#ifndef _MSC_VER
+inline double getWallClockTime() {
+    struct timeval t;
+    gettimeofday(&t, 0);
+    return double(t.tv_sec) + double(t.tv_usec) / 1000000;
+}
+#else
+inline double getWallClockTime() {
+    FILETIME t;
+    GetSystemTimeAsFileTime(&t);
+    return double(t.dwHighDateTime) / 10 + double(t.dwLowDateTime) / 10000000;
+}
+#endif
 
 struct ResourceUsage {
     double etime;
@@ -53,11 +70,9 @@ struct ResourceUsage {
     }
 
     ResourceUsage& update() {
-        struct timeval t;
-        gettimeofday(&t, 0);
-        etime = double(t.tv_sec) + double(t.tv_usec) / 1000000;
+        etime = getWallClockTime();
 
-#ifdef WIN32
+#ifdef _WIN32
         HANDLE h = GetCurrentProcess();
         FILETIME ft_creat, ft_exit, ft_kernel, ft_user;
         if (GetProcessTimes(h, &ft_creat, &ft_exit, &ft_kernel, &ft_user)) {
@@ -80,7 +95,6 @@ struct ResourceUsage {
         utime = s.ru_utime.tv_sec + s.ru_utime.tv_usec * 1e-6;
         stime = s.ru_stime.tv_sec + s.ru_stime.tv_usec * 1e-6;
         maxrss = s.ru_maxrss;
-//        if (maxrss == 0) maxrss = readMemoryStatus("VmHWM:");
 #endif
         return *this;
     }
@@ -140,39 +154,6 @@ struct ResourceUsage {
         os.flags(backup);
         return os;
     }
-
-private:
-//    long readMemoryStatus(std::string key) {
-//        std::ifstream ifs("/proc/self/status");
-//        std::string buf;
-//
-//        while (ifs.good()) {
-//            getline(ifs, buf);
-//            if (buf.compare(0, key.length(), key) == 0) {
-//                std::istringstream iss(buf.substr(key.length()));
-//                double size;
-//                std::string unit;
-//                iss >> size >> unit;
-//                switch (tolower(unit[0])) {
-//                case 'b':
-//                    size *= 1.0 / 1024.0;
-//                    break;
-//                case 'm':
-//                    size *= 1024.0;
-//                    break;
-//                case 'g':
-//                    size *= 1024.0 * 1024.0;
-//                    break;
-//                case 't':
-//                    size *= 1024.0 * 1024.0 * 1024.0;
-//                    break;
-//                }
-//                return long(size);
-//            }
-//        }
-//
-//        return 0;
-//    }
 };
 
 class ElapsedTimeCounter {
@@ -190,16 +171,12 @@ public:
     }
 
     ElapsedTimeCounter& start() {
-        timeval t;
-        gettimeofday(&t, 0);
-        startTime = t.tv_sec + t.tv_usec * 1e-6;
+        startTime = getWallClockTime();
         return *this;
     }
 
     ElapsedTimeCounter& stop() {
-        timeval t;
-        gettimeofday(&t, 0);
-        totalTime += t.tv_sec + t.tv_usec * 1e-6 - startTime;
+        totalTime += getWallClockTime() - startTime;
         return *this;
     }
 
@@ -208,7 +185,7 @@ public:
     }
 
     friend std::ostream& operator<<(std::ostream& os,
-            ElapsedTimeCounter const& o) {
+                                    ElapsedTimeCounter const& o) {
         std::ios_base::fmtflags backup = os.flags(std::ios::fixed);
         os.setf(std::ios::fixed);
         os << std::setprecision(2) << o.totalTime << "s";
