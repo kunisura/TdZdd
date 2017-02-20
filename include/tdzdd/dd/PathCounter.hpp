@@ -29,6 +29,7 @@
 #include <stdexcept>
 #include <string>
 #include <utility>
+#include <vector>
 
 #include "../util/BigNumber.hpp"
 #include "../util/demangle.hpp"
@@ -37,7 +38,7 @@
 #include "../util/MyHashTable.hpp"
 #include "../util/MyList.hpp"
 #include "../util/MyVector.hpp"
-#include "DdSpec.hpp"
+#include "../DdSpec.hpp"
 
 namespace tdzdd {
 
@@ -111,8 +112,8 @@ public:
             return (n == 0) ? "0" : "1";
         }
 
-        uint64_t totalStorage[n / 63 + 1];
-        BigNumber total(totalStorage);
+        std::vector<uint64_t> totalStorage(n / 63 + 1);
+        BigNumber total(totalStorage.data());
         total.store(0);
         size_t maxWidth = 0;
         //std::cerr << "\nLevel,Width\n";
@@ -150,7 +151,7 @@ public:
 
             for (; !vnodes.empty(); vnodes.pop_front()) {
                 Word* p = vnodes.front();
-                if (number(p).equals(0)) {
+                if (number(p) == 0) {
                     spec.destruct(state(p));
                     continue;
                 }
@@ -230,8 +231,8 @@ public:
             return (n == 0) ? "0" : "1";
         }
 
-        uint64_t totalStorage[n / 63 + 1];
-        BigNumber total(totalStorage);
+        std::vector<uint64_t> totalStorage(n / 63 + 1);
+        BigNumber total(totalStorage.data());
         total.store(0);
         size_t maxWidth = 0;
         //std::cerr << "\nLevel,Width\n";
@@ -280,7 +281,7 @@ public:
 
             for (; !vnodes.empty(); vnodes.pop_front()) {
                 Word* p = vnodes.front();
-                if (number(p).equals(0)) {
+                if (number(p) == 0) {
                     spec.destruct(state(p));
                     continue;
                 }

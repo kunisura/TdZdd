@@ -108,13 +108,13 @@ public:
         pools.resize(topLevel + 1);
 
         int max = ceil(double(topLevel) * log2(double(ARITY)) / 63.0) + 1;
-        tmp1.setArray(pools[topLevel].allocate<uint64_t>(max));
-        tmp2.setArray(pools[topLevel].allocate<uint64_t>(max));
-        tmp3.setArray(pools[topLevel].allocate<uint64_t>(max));
+        tmp1.setArray(pools[topLevel].template allocate<uint64_t>(max));
+        tmp2.setArray(pools[topLevel].template allocate<uint64_t>(max));
+        tmp3.setArray(pools[topLevel].template allocate<uint64_t>(max));
     }
 
     void evalTerminal(BigNumber& n, int value) {
-        n.setArray(pools[0].allocate<uint64_t>(1));
+        n.setArray(pools[0].template allocate<uint64_t>(1));
         n.store(value);
     }
 
@@ -140,7 +140,7 @@ public:
                 }
                 w = tmp1.add(tmp2);
             }
-            n.setArray(pools[i].allocate<uint64_t>(w));
+            n.setArray(pools[i].template allocate<uint64_t>(w));
             n.store(tmp1);
         }
         else {
@@ -154,7 +154,7 @@ public:
                     w = tmp1.add(values.get(b));
                 }
             }
-            n.setArray(pools[i].allocate<uint64_t>(w));
+            n.setArray(pools[i].template allocate<uint64_t>(w));
             n.store(tmp1);
         }
     }
