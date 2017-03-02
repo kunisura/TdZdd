@@ -32,8 +32,11 @@
 #define B_64
 #endif
 #endif
+#include <ZBDD.h>
 
 #include "../DdSpec.hpp"
+
+namespace tdzdd {
 
 /**
  * ZBDD wrapper.
@@ -87,3 +90,5 @@ public:
         return const_cast<ZBDD*>(&f)->GetID();
     }
 };
+
+} // namespace tdzdd

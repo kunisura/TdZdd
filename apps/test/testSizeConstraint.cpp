@@ -28,7 +28,7 @@
 
 #include <tdzdd/DdStructure.hpp>
 #include <tdzdd/DdSpecOp.hpp>
-#include "../graphillion/SizeConstraint.hpp"
+#include <tdzdd/spec/SizeConstraint.hpp>
 
 using namespace tdzdd;
 

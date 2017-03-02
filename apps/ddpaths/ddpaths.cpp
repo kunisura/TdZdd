@@ -30,13 +30,16 @@
 #include <string>
 
 #include <tdzdd/DdStructure.hpp>
+#include <tdzdd/spec/PathZdd.hpp>
+#include <tdzdd/spec/PathZddByStdMap.hpp>
+#include <tdzdd/spec/DegreeConstraint.hpp>
+#include <tdzdd/spec/FrontierBasedSearch.hpp>
+#include <tdzdd/spec/SizeConstraint.hpp>
+#include <tdzdd/util/Graph.hpp>
 
-#include "PathZdd.hpp"
-#include "PathZddByStdMap.hpp"
-#include "../graphillion/DegreeConstraint.hpp"
-#include "../graphillion/FrontierBasedSearch.hpp"
-#include "../graphillion/Graph.hpp"
-#include "../graphillion/SizeConstraint.hpp"
+#ifdef SAPPORO
+#include <tdzdd/eval/ToZBDD.hpp>
+#endif
 
 using namespace tdzdd;
 
@@ -59,7 +62,7 @@ std::string options[][2] = { //
         {"all", "Dump all solutions to STDOUT in DOT format"}, //
         {"zdd", "Dump result ZDD to STDOUT in DOT format"}, //
         {"zdd1", "Dump intermediate ZDD to STDOUT in DOT format"}, //
-        {"export", "Dump result ZDD to STDOUT in Sapporo BDD format"}}; //
+        {"export", "Dump result ZDD to STDOUT in SAPPOROBDD format"}}; //
 
 std::map<std::string,bool> opt;
 std::map<std::string,int> optNum;
@@ -325,9 +328,6 @@ int main(int argc, char *argv[]) {
 
         m1.end();
 
-        if (opt["zdd"]) f.dumpDot(std::cout, "Result ZDD");
-        if (opt["export"]) f.dumpSapporo(std::cout);
-
         m0 << "\n#node = " << f.size() << ", #solution = "
                 << std::setprecision(10) << f.evaluate(ZddCardinality<double>())
                 << "\n";
@@ -338,6 +338,9 @@ int main(int argc, char *argv[]) {
             m1.end();
         }
 
+        if (opt["zdd"]) f.dumpDot(std::cout, "Result ZDD");
+        if (opt["export"]) f.dumpSapporo(std::cout);
+
         if (opt["all"]) {
             for (DdStructure<2>::const_iterator t = f.begin(); t != f.end();
                     ++t) {
@@ -345,12 +348,21 @@ int main(int argc, char *argv[]) {
                 graph.dump(std::cout, edges);
             }
         }
+
+#ifdef SAPPORO
+        m1.begin("Converting to SAPPOROBDD") << " ...";
+        ZBDD sapporo = f.evaluate(ToZBDD());
+        m1.end();
+#endif
+        m0.end("finished");
+#ifdef SAPPORO
+        sapporo.Print();
+#endif
     }
     catch (std::exception& e) {
         m0 << e.what() << "\n";
         return 1;
     }
 
-    m0.end("finished");
     return 0;
 }

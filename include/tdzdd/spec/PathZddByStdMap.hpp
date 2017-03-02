@@ -27,9 +27,10 @@
 #include <cassert>
 #include <map>
 
-#include <tdzdd/DdSpec.hpp>
+#include "../DdSpec.hpp"
+#include "../util/Graph.hpp"
 
-#include "../graphillion/Graph.hpp"
+namespace tdzdd {
 
 struct PathZddByStdMap: public tdzdd::DdSpec<PathZddByStdMap,
         std::map<int16_t,int16_t>,2> {
@@ -103,3 +104,5 @@ public:
         return h;
     }
 };
+
+} // namespace tdzdd

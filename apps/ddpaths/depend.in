@@ -16,10 +16,14 @@ ddpaths.o: ../../include/tdzdd/DdStructure.hpp \
  ../../include/tdzdd/eval/Cardinality.hpp \
  ../../include/tdzdd/eval/../util/BigNumber.hpp \
  ../../include/tdzdd/op/Lookahead.hpp \
- ../../include/tdzdd/op/Unreduction.hpp PathZdd.hpp \
- ../graphillion/Graph.hpp PathZddByStdMap.hpp \
- ../graphillion/DegreeConstraint.hpp ../graphillion/IntSubset.hpp \
- ../graphillion/FrontierBasedSearch.hpp ../graphillion/SizeConstraint.hpp
+ ../../include/tdzdd/op/Unreduction.hpp \
+ ../../include/tdzdd/spec/PathZdd.hpp \
+ ../../include/tdzdd/spec/../util/Graph.hpp \
+ ../../include/tdzdd/spec/PathZddByStdMap.hpp \
+ ../../include/tdzdd/spec/DegreeConstraint.hpp \
+ ../../include/tdzdd/spec/../util/IntSubset.hpp \
+ ../../include/tdzdd/spec/FrontierBasedSearch.hpp \
+ ../../include/tdzdd/spec/SizeConstraint.hpp
 ddpaths-debug.o: ../../include/tdzdd/DdStructure.hpp \
  ../../include/tdzdd/DdEval.hpp ../../include/tdzdd/DdSpec.hpp \
  ../../include/tdzdd/dd/DdBuilder.hpp \
@@ -38,7 +42,11 @@ ddpaths-debug.o: ../../include/tdzdd/DdStructure.hpp \
  ../../include/tdzdd/eval/Cardinality.hpp \
  ../../include/tdzdd/eval/../util/BigNumber.hpp \
  ../../include/tdzdd/op/Lookahead.hpp \
- ../../include/tdzdd/op/Unreduction.hpp PathZdd.hpp \
- ../graphillion/Graph.hpp PathZddByStdMap.hpp \
- ../graphillion/DegreeConstraint.hpp ../graphillion/IntSubset.hpp \
- ../graphillion/FrontierBasedSearch.hpp ../graphillion/SizeConstraint.hpp
+ ../../include/tdzdd/op/Unreduction.hpp \
+ ../../include/tdzdd/spec/PathZdd.hpp \
+ ../../include/tdzdd/spec/../util/Graph.hpp \
+ ../../include/tdzdd/spec/PathZddByStdMap.hpp \
+ ../../include/tdzdd/spec/DegreeConstraint.hpp \
+ ../../include/tdzdd/spec/../util/IntSubset.hpp \
+ ../../include/tdzdd/spec/FrontierBasedSearch.hpp \
+ ../../include/tdzdd/spec/SizeConstraint.hpp

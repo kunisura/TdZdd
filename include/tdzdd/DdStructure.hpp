@@ -454,6 +454,7 @@ public:
     template<typename S, typename T, typename R>
     R evaluate(DdEval<S,T,R> const& evaluator) const {
         S eval(evaluator.entity()); // copied
+        bool useMP = this->useMP && eval.isThreadSafe();
         bool msg = eval.showMessages();
         int n = root_.row();
 

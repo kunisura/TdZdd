@@ -26,9 +26,10 @@
 
 #include <vector>
 
-#include <tdzdd/DdSpec.hpp>
+#include "../DdSpec.hpp"
+#include "../util/Graph.hpp"
 
-#include "../graphillion/Graph.hpp"
+namespace tdzdd {
 
 enum SimpathBasedImplType {
     Path, Cycle
@@ -237,3 +238,5 @@ struct HamiltonCycleZdd: public SimpathBasedImpl<HamiltonCycleZdd,Cycle,true> {
             : SimpathBasedImpl<HamiltonCycleZdd,Cycle,true>(graph, lookahead) {
     }
 };
+
+} // namespace tdzdd

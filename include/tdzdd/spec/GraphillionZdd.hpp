@@ -32,7 +32,9 @@
 #include <string>
 #include <vector>
 
-#include <tdzdd/DdSpec.hpp>
+#include "../DdSpec.hpp"
+
+namespace tdzdd {
 
 class GraphillionZdd: public tdzdd::DdSpec<GraphillionZdd,uint64_t,2> {
     struct Node {
@@ -143,3 +145,5 @@ public:
         return maxIndex - table.at(f).index + 1;
     }
 };
+
+} // namespace tdzdd

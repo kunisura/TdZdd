@@ -29,14 +29,13 @@
 
 #include <tdzdd/DdSpecOp.hpp>
 #include <tdzdd/DdStructure.hpp>
-
-#include "DegreeConstraint.hpp"
-#include "FrontierBasedSearch.hpp"
-#include "Graph.hpp"
-#include "GraphillionZdd.hpp"
-#include "SapporoZdd.hpp"
-#include "SizeConstraint.hpp"
-#include "ToZBDD.hpp"
+#include <tdzdd/spec/DegreeConstraint.hpp>
+#include <tdzdd/spec/FrontierBasedSearch.hpp>
+#include <tdzdd/spec/GraphillionZdd.hpp>
+#include <tdzdd/spec/SapporoZdd.hpp>
+#include <tdzdd/spec/SizeConstraint.hpp>
+#include <tdzdd/eval/ToZBDD.hpp>
+#include <tdzdd/util/Graph.hpp>
 
 using namespace tdzdd;
 

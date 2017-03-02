@@ -39,6 +39,7 @@ OBJS     = $(SRCS:%.cpp=%.o)
 
 all:	$(TARGET)
 debug:	$(TARGET:%=%-debug)
+sapporo: $(TARGET:%=%-sapporo)
 
 %.o: %.cpp
 	$(CXX) $(CXXFLAGS) -O3 $(CPPFLAGS) -DNDEBUG $(TARGET_ARCH) -c -o $@ $<
@@ -46,14 +47,20 @@ debug:	$(TARGET:%=%-debug)
 %-debug.o: %.cpp
 	$(CXX) $(CXXFLAGS) -g $(CPPFLAGS) -DDEBUG $(TARGET_ARCH) -c -o $@ $<
 
+%-sapporo.o: %.cpp
+	$(CXX) $(CXXFLAGS) -O3 $(CPPFLAGS) -DNDEBUG -DSAPPORO $(TARGET_ARCH) -c -o $@ $<
+
 $(TARGET): $(OBJS)
 	$(CXX) $(LDFLAGS) $(TARGET_ARCH) $^ $(LDLIBS) -o $@
 
 $(TARGET:%=%-debug): $(OBJS:%.o=%-debug.o)
 	$(CXX) $(LDFLAGS) $(TARGET_ARCH) $^ $(LDLIBS) -o $@
 
+$(TARGET:%=%-sapporo): $(OBJS:%.o=%-sapporo.o)
+	$(CXX) $(LDFLAGS) $(TARGET_ARCH) $^ $(LDLIBS) -lsapporo -o $@
+
 clean:
-	$(RM) $(TARGET) $(OBJS) $(TARGET:%=%-debug) $(OBJS:%.o=%-debug.o)
+	$(RM) $(TARGET) $(OBJS) $(TARGET:%=%-debug) $(OBJS:%.o=%-debug.o) $(TARGET:%=%-sapporo) $(OBJS:%.o=%-sapporo.o)
 
 define make-depend
 	$(RM) depend.in
