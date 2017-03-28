@@ -352,7 +352,7 @@ int main(int argc, char *argv[]) {
 #ifdef SAPPORO
         m1.begin("Converting to SAPPOROBDD") << " ...";
         ZBDD sapporo = f.evaluate(ToZBDD());
-        m1.end();
+        m1.end(sapporo.Size());
 #endif
         m0.end("finished");
 #ifdef SAPPORO
