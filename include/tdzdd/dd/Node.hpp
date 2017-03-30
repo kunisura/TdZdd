@@ -47,7 +47,7 @@ class NodeId {
     uint64_t code_;
 
 public:
-    NodeId() { // 'code_' is not initialized in the default constructor for SPEED.
+    NodeId() { // 'code_' is not initialized in the default constructor for SPEED. @suppress("Class members should be properly initialized")
     }
 
     NodeId(uint64_t code) :
@@ -136,7 +136,7 @@ struct NodeBranchId {
     int row;
     int val;
 
-    NodeBranchId() {
+    NodeBranchId() { // @suppress("Class members should be properly initialized")
     }
 
     NodeBranchId(int row, size_t col, int val) :
