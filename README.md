@@ -36,6 +36,7 @@ Documents
 * [User Guide and Reference](http://kunisura.github.io/TdZdd/doc/index.html)
 * [Efficient Top-Down ZDD Construction Techniques Using Recursive Specifications](http://www-alg.ist.hokudai.ac.jp/~thomas/TCSTR/tcstr_13_69/tcstr_13_69.pdf)
 * [TdZdd: フロンティア法のための効率的なトップダウンZDD構築を実現するC++ライブラリ](http://www-erato.ist.hokudai.ac.jp/docs/autumn2013/iwashita.pdf)
+* [ZDDと列挙問題―最新の技法とプログラミングツール](http://doi.org/10.11309/jssst.34.3_97)
 
 See also
 ---------------------------------------------------------------------------
