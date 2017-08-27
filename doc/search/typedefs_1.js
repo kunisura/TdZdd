@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['s_5fstate',['S_State',['../classtdzdd_1_1HybridDdSpec.html#a450db99c55ba1a206928b8b8b2d4ea3a',1,'tdzdd::HybridDdSpec']]],
-  ['state',['State',['../classtdzdd_1_1DdSpec.html#a1c1a1e71201a1500e6c2be431302b2d8',1,'tdzdd::DdSpec::State()'],['../classtdzdd_1_1PodArrayDdSpec.html#a09e69dc5681d4954ee24484f739f5433',1,'tdzdd::PodArrayDdSpec::State()']]]
+  ['base',['base',['../structtdzdd_1_1BddAnd__.html#a303a038e664184747202a99f67787728',1,'tdzdd::BddAnd_::base()'],['../structtdzdd_1_1BddAnd___3_01S_00_01S1_00_01S2_01_4.html#aa0445082b5832061c44afbacc6ec4b0e',1,'tdzdd::BddAnd_&lt; S, S1, S2 &gt;::base()'],['../structtdzdd_1_1BddOr__.html#a937aae7828d8b9274e85cff93c0810b5',1,'tdzdd::BddOr_::base()'],['../structtdzdd_1_1BddOr___3_01S_00_01S1_00_01S2_01_4.html#a1f34e83712bdd7835cf9816c867d5a2e',1,'tdzdd::BddOr_&lt; S, S1, S2 &gt;::base()'],['../structtdzdd_1_1ZddIntersection__.html#abb40808036f5cbf5bcb04dd7508bbf70',1,'tdzdd::ZddIntersection_::base()'],['../structtdzdd_1_1ZddUnion__.html#a0d323cc8a5f6613e9dc71d37ae668be0',1,'tdzdd::ZddUnion_::base()'],['../structtdzdd_1_1ZddUnion___3_01S_00_01S1_00_01S2_01_4.html#aedbfc7bf58410d0df3ef4d72a0aaa61e',1,'tdzdd::ZddUnion_&lt; S, S1, S2 &gt;::base()']]]
 ];

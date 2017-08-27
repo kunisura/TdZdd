@@ -1,0 +1,18 @@
+<map id="tdzdd::DdReducer::algorithmR" name="tdzdd::DdReducer::algorithmR">
+<area shape="rect" id="node2" href="$classtdzdd_1_1MyVector.html#a7dfd73cc9c6fe8a31273d78b6545984d" title="Gets a pointer to the first element. " alt="" coords="277,37,434,63"/>
+<area shape="rect" id="node3" href="$classtdzdd_1_1NodeTableEntity.html#a2f27f25d72a6ff3e8a48d16eee165346" title="Gets a child node ID. " alt="" coords="510,5,669,47"/>
+<area shape="rect" id="node4" href="$classtdzdd_1_1MyVector.html#a0c5ed5128517117d2c8aad0942a0f46e" title="Initializes the array to be empty. " alt="" coords="278,306,433,333"/>
+<area shape="rect" id="node5" href="$classtdzdd_1_1NodeId.html#aa84398a693abc0f8ba9e9a5d80490241" title="tdzdd::NodeId::col" alt="" coords="291,357,420,383"/>
+<area shape="rect" id="node6" href="$classtdzdd_1_1MyVector.html#a8f487f0d1dbf956a8d07e2dc30473b1a" title="Gets a pointer to the end of elements. " alt="" coords="282,407,429,434"/>
+<area shape="rect" id="node7" href="$classtdzdd_1_1NodeId.html#a1f66fc2bba23c16936d02a555e034e32" title="tdzdd::NodeId::hasEmpty" alt="" coords="270,458,441,485"/>
+<area shape="rect" id="node9" href="$classtdzdd_1_1DataTable.html#a2d5e76fe552f987e2cd9524a4dd8e3a4" title="Clears and initializes a row. " alt="" coords="273,509,438,551"/>
+<area shape="rect" id="node10" href="$classtdzdd_1_1NodeTableEntity.html#a35c66b30f664b0ee319ea81e4c30db99" title="Returns a collection of the lower levels that are referred by the given level and that are not referr..." alt="" coords="276,575,435,616"/>
+<area shape="rect" id="node11" href="$classtdzdd_1_1DdReducer.html#a8182f59cc97ec6dd895ddd34da59f889" title="Applies the node deletion rules. " alt="" coords="252,139,459,180"/>
+<area shape="rect" id="node13" href="$classtdzdd_1_1NodeTableEntity.html#a27c35d15eb2c09be9bb23379c0e89fd8" title="Gets the variable ID at a given level. " alt="" coords="510,201,669,243"/>
+<area shape="rect" id="node14" href="$classtdzdd_1_1NodeId.html#a8cd0a4e685c91f9ac09f1f2e46e18851" title="tdzdd::NodeId::row" alt="" coords="523,267,656,294"/>
+<area shape="rect" id="node16" href="$classtdzdd_1_1MyVector.html#a174ab16542ec6acd810771772ec3982f" title="Resizes the array. " alt="" coords="275,641,436,667"/>
+<area shape="rect" id="node17" href="$classtdzdd_1_1MyVector.html#a9c4a114cfc4bd722b41b74a75a83a072" title="Gets the number of elements. " alt="" coords="280,691,431,718"/>
+<area shape="rect" id="node8" href="$classtdzdd_1_1NodeId.html#a85033597e003a7e27518498444db51de" title="tdzdd::NodeId::getAttr" alt="" coords="514,458,665,485"/>
+<area shape="rect" id="node12" href="$classtdzdd_1_1DataTable.html#ab6865dc6b97cb2ca6bc9ea4583a6ef52" title="Gets the number of rows. " alt="" coords="507,71,672,112"/>
+<area shape="rect" id="node15" href="$classtdzdd_1_1NodeTableEntity.html#a46e3afe2839a9e0837ae5c7f9d78bc62" title="Makes index information. " alt="" coords="510,136,669,177"/>
+</map>

@@ -1,0 +1,42 @@
+<map id="tdzdd::DdStructure::reduce" name="tdzdd::DdStructure::reduce">
+<area shape="rect" id="node2" href="$classtdzdd_1_1MessageHandler__.html#a84cd6b1134b9d5a0a4852577733a9a12" title="tdzdd::MessageHandler\l_::begin" alt="" coords="197,543,357,584"/>
+<area shape="rect" id="node3" href="$classtdzdd_1_1MessageHandler__.html#ac9dfac6d9aa0919ee7fbb4e426fe544f" title="tdzdd::MessageHandler\l_::end" alt="" coords="437,425,597,467"/>
+<area shape="rect" id="node7" href="$classtdzdd_1_1MessageHandler__.html#ac65e558a24f095c0ba1c07c05de14cb7" title="tdzdd::MessageHandler\l_::setSteps" alt="" coords="437,543,597,584"/>
+<area shape="rect" id="node8" href="$classtdzdd_1_1DdReducer.html#aeb1a931dc713fcb94c1af19349b5c528" title="Reduces one level. " alt="" coords="189,698,364,725"/>
+<area shape="rect" id="node22" href="$classtdzdd_1_1NodeId.html#a8cd0a4e685c91f9ac09f1f2e46e18851" title="tdzdd::NodeId::row" alt="" coords="1184,963,1317,990"/>
+<area shape="rect" id="node36" href="$classtdzdd_1_1DdReducer.html#afc2e84d4940ae085589674aef58e6a24" title="Sets a root node. " alt="" coords="185,1323,368,1350"/>
+<area shape="rect" id="node38" href="$classtdzdd_1_1DdStructure.html#a632c559161fb9af5e24ceeb275c870a9" title="Gets the number of nonterminal nodes. " alt="" coords="211,1375,343,1416"/>
+<area shape="rect" id="node39" href="$classtdzdd_1_1MessageHandler__.html#a7094cdba054254b246ba354e186d3aab" title="tdzdd::MessageHandler\l_::step" alt="" coords="197,1440,357,1481"/>
+<area shape="rect" id="node4" href="$namespacetdzdd.html#a32340538e1b4355af1a59dadb357d9bd" title="tdzdd::capitalize" alt="" coords="707,97,825,123"/>
+<area shape="rect" id="node5" href="$structtdzdd_1_1ResourceUsage.html#ac9052fe0579438ad4f4fa290d29da52d" title="tdzdd::ResourceUsage\l::update" alt="" coords="439,963,595,1004"/>
+<area shape="rect" id="node6" href="$namespacetdzdd.html#a7bb266156583a60592d485afcd15e049" title="tdzdd::getWallClockTime" alt="" coords="932,1113,1101,1139"/>
+<area shape="rect" id="node9" href="$classtdzdd_1_1DdReducer.html#aac62caf878c4aedc157ebdc1b9c2246c" title="Reduces one level using Algorithm&#45;R. " alt="" coords="667,314,865,341"/>
+<area shape="rect" id="node26" href="$classtdzdd_1_1DdReducer.html#a2b780c1295bd9bb644b4db63fa244c5f" title="Reduces one level. " alt="" coords="675,466,857,493"/>
+<area shape="rect" id="node28" href="$classtdzdd_1_1DdReducer.html#a375a231a24ca0141f5285d644f36553a" title="Reduces one level using OpenMP. " alt="" coords="416,710,619,737"/>
+<area shape="rect" id="node10" href="$classtdzdd_1_1MyVector.html#a7dfd73cc9c6fe8a31273d78b6545984d" title="Gets a pointer to the first element. " alt="" coords="938,603,1095,630"/>
+<area shape="rect" id="node11" href="$classtdzdd_1_1NodeTableEntity.html#a2f27f25d72a6ff3e8a48d16eee165346" title="Gets a child node ID. " alt="" coords="1171,5,1330,47"/>
+<area shape="rect" id="node12" href="$classtdzdd_1_1MyVector.html#a0c5ed5128517117d2c8aad0942a0f46e" title="Initializes the array to be empty. " alt="" coords="939,249,1094,275"/>
+<area shape="rect" id="node13" href="$classtdzdd_1_1NodeId.html#aa84398a693abc0f8ba9e9a5d80490241" title="tdzdd::NodeId::col" alt="" coords="952,451,1081,478"/>
+<area shape="rect" id="node14" href="$classtdzdd_1_1MyVector.html#a8f487f0d1dbf956a8d07e2dc30473b1a" title="Gets a pointer to the end of elements. " alt="" coords="943,654,1090,681"/>
+<area shape="rect" id="node15" href="$classtdzdd_1_1NodeId.html#a1f66fc2bba23c16936d02a555e034e32" title="tdzdd::NodeId::hasEmpty" alt="" coords="931,350,1102,377"/>
+<area shape="rect" id="node17" href="$classtdzdd_1_1DataTable.html#a2d5e76fe552f987e2cd9524a4dd8e3a4" title="Clears and initializes a row. " alt="" coords="934,756,1099,797"/>
+<area shape="rect" id="node18" href="$classtdzdd_1_1NodeTableEntity.html#a35c66b30f664b0ee319ea81e4c30db99" title="Returns a collection of the lower levels that are referred by the given level and that are not referr..." alt="" coords="937,821,1096,863"/>
+<area shape="rect" id="node19" href="$classtdzdd_1_1DdReducer.html#a8182f59cc97ec6dd895ddd34da59f889" title="Applies the node deletion rules. " alt="" coords="913,81,1120,123"/>
+<area shape="rect" id="node23" href="$classtdzdd_1_1NodeTableEntity.html#a27c35d15eb2c09be9bb23379c0e89fd8" title="Gets the variable ID at a given level. " alt="" coords="1171,201,1330,243"/>
+<area shape="rect" id="node24" href="$classtdzdd_1_1MyVector.html#a174ab16542ec6acd810771772ec3982f" title="Resizes the array. " alt="" coords="936,299,1097,326"/>
+<area shape="rect" id="node25" href="$classtdzdd_1_1MyVector.html#a9c4a114cfc4bd722b41b74a75a83a072" title="Gets the number of elements. " alt="" coords="941,502,1092,529"/>
+<area shape="rect" id="node16" href="$classtdzdd_1_1NodeId.html#a85033597e003a7e27518498444db51de" title="tdzdd::NodeId::getAttr" alt="" coords="1175,502,1326,529"/>
+<area shape="rect" id="node20" href="$classtdzdd_1_1NodeTableEntity.html#a46e3afe2839a9e0837ae5c7f9d78bc62" title="Makes index information. " alt="" coords="1171,71,1330,112"/>
+<area shape="rect" id="node21" href="$classtdzdd_1_1DataTable.html#ab6865dc6b97cb2ca6bc9ea4583a6ef52" title="Gets the number of rows. " alt="" coords="1168,136,1333,177"/>
+<area shape="rect" id="node27" href="$classtdzdd_1_1MyHashTable.html#a039d45626f817874ba4f91695532093b" title="Insert an element if no other equivalent element is registered. " alt="" coords="931,887,1103,914"/>
+<area shape="rect" id="node29" href="$classtdzdd_1_1MyList.html#aeb893c54b3a8bb5fe9b0f7257ed1cb33" title="Returns an iterator to the beginning. " alt="" coords="696,517,836,543"/>
+<area shape="rect" id="node30" href="$classtdzdd_1_1MyList.html#a616711980698dd6dc3a50027332fe2d9" title="Returns an iterator to the end. " alt="" coords="701,567,831,594"/>
+<area shape="rect" id="node31" href="$structtdzdd_1_1Node.html#a6bf98de6f8e401dba57404172ad7163a" title="tdzdd::Node::hash" alt="" coords="701,989,831,1015"/>
+<area shape="rect" id="node33" href="$classtdzdd_1_1MyHashTable.html#aa1589ac8514a617fb2e689a758d65e8b" title="Initialize the table to be empty. " alt="" coords="695,619,837,660"/>
+<area shape="rect" id="node34" href="$classtdzdd_1_1ElapsedTimeCounter.html#ac1cbd1f0d5cac7da40894f3fb85f9686" title="tdzdd::ElapsedTimeCounter\l::start" alt="" coords="674,1040,858,1081"/>
+<area shape="rect" id="node35" href="$classtdzdd_1_1ElapsedTimeCounter.html#a3bab961a340b27e056bd86a3ed147231" title="tdzdd::ElapsedTimeCounter\l::stop" alt="" coords="674,1105,858,1147"/>
+<area shape="rect" id="node32" href="$classtdzdd_1_1NodeId.html#a1a426b2a8fc1bd506539ebd97e1d26de" title="tdzdd::NodeId::code" alt="" coords="947,989,1087,1015"/>
+<area shape="rect" id="node37" href="$classtdzdd_1_1MyVector.html#acb92d503a925d9e3295b3bf9119b4078" title="Adds an element to the end of the array. " alt="" coords="423,1374,612,1401"/>
+<area shape="rect" id="node40" href="$structtdzdd_1_1ResourceUsage.html#a2343b279e529571d332a1cf27c406669" title="tdzdd::ResourceUsage\l::elapsedTime" alt="" coords="439,1432,595,1473"/>
+<area shape="rect" id="node41" href="$structtdzdd_1_1ResourceUsage.html#aaccdd844c2c277416d4852e19174d718" title="tdzdd::ResourceUsage\l::memory" alt="" coords="439,1497,595,1539"/>
+</map>

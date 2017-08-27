@@ -1,0 +1,7 @@
+<map id="tdzdd::DdReducer::makeReadyForSequentialReduction" name="tdzdd::DdReducer::makeReadyForSequentialReduction">
+<area shape="rect" id="node2" href="$classtdzdd_1_1NodeTableEntity.html#a2f27f25d72a6ff3e8a48d16eee165346" title="Gets a child node ID. " alt="" coords="263,5,422,47"/>
+<area shape="rect" id="node3" href="$classtdzdd_1_1NodeTableEntity.html#a46e3afe2839a9e0837ae5c7f9d78bc62" title="Makes index information. " alt="" coords="263,71,422,112"/>
+<area shape="rect" id="node4" href="$classtdzdd_1_1DataTable.html#ab6865dc6b97cb2ca6bc9ea4583a6ef52" title="Gets the number of rows. " alt="" coords="260,136,425,177"/>
+<area shape="rect" id="node5" href="$classtdzdd_1_1NodeId.html#a8cd0a4e685c91f9ac09f1f2e46e18851" title="tdzdd::NodeId::row" alt="" coords="276,202,409,229"/>
+<area shape="rect" id="node6" href="$classtdzdd_1_1NodeTableEntity.html#a27c35d15eb2c09be9bb23379c0e89fd8" title="Gets the variable ID at a given level. " alt="" coords="263,253,422,295"/>
+</map>

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['level',['level',['../classtdzdd_1_1DdValues.html#a7df9b3327244cec18e19a0963fbf71aa',1,'tdzdd::DdValues']]]
+  ['key',['Key',['../structtdzdd_1_1MyHashMapEntry.html#a716369988470839c8a5549838825e100',1,'tdzdd::MyHashMapEntry::Key()'],['../structtdzdd_1_1MyHashMapEntry.html#ad29ad012027cf27d5cf24f97e1b0a986',1,'tdzdd::MyHashMapEntry::key()']]]
 ];

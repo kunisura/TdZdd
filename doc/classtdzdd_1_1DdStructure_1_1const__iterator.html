@@ -64,7 +64,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="annotated.html"><span>Class&#160;List</span></a></li>
       <li><a href="classes.html"><span>Class&#160;Index</span></a></li>
-      <li><a href="hierarchy.html"><span>Class&#160;Hierarchy</span></a></li>
+      <li><a href="inherits.html"><span>Class&#160;Hierarchy</span></a></li>
       <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
     </ul>
   </div>
@@ -108,9 +108,10 @@ Collaboration diagram for tdzdd::DdStructure&lt; ARITY &gt;::const_iterator:</di
 <div class="dyncontent">
 <div class="center"><img src="classtdzdd_1_1DdStructure_1_1const__iterator__coll__graph.png" border="0" usemap="#tdzdd_1_1DdStructure_3_01ARITY_01_4_1_1const__iterator_coll__map" alt="Collaboration graph"/></div>
 <map name="tdzdd_1_1DdStructure_3_01ARITY_01_4_1_1const__iterator_coll__map" id="tdzdd_1_1DdStructure_3_01ARITY_01_4_1_1const__iterator_coll__map">
-<area shape="rect" id="node2" href="classtdzdd_1_1DdStructure.html" title="Ordered n&#45;ary decision diagram structure. " alt="" coords="37,201,169,243"/>
+<area shape="rect" id="node2" href="classtdzdd_1_1DdStructure.html" title="Ordered n&#45;ary decision diagram structure. " alt="" coords="168,215,300,256"/>
 <area shape="rect" id="node3" href="classtdzdd_1_1DdSpec.html" title="tdzdd::DdSpec\&lt; DdStructure\l\&lt; ARITY \&gt;, NodeId, ARITY \&gt;" alt="" coords="5,111,201,152"/>
 <area shape="rect" id="node4" href="classtdzdd_1_1DdSpecBase.html" title="tdzdd::DdSpecBase\&lt;\l DdStructure\&lt; ARITY\l \&gt;, AR \&gt;" alt="" coords="29,5,177,61"/>
+<area shape="rect" id="node5" href="classtdzdd_1_1NodeId.html" title="tdzdd::NodeId" alt="" coords="226,118,330,145"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
@@ -136,7 +137,7 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
-<tr class="memitem:abfec4314a763c6514cb5201c5877c39f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtdzdd_1_1DdStructure_1_1const__iterator.html#abfec4314a763c6514cb5201c5877c39f">next</a> (NodeId f)</td></tr>
+<tr class="memitem:abfec4314a763c6514cb5201c5877c39f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtdzdd_1_1DdStructure_1_1const__iterator.html#abfec4314a763c6514cb5201c5877c39f">next</a> (<a class="el" href="classtdzdd_1_1NodeId.html">NodeId</a> f)</td></tr>
 <tr class="separator:abfec4314a763c6514cb5201c5877c39f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
@@ -156,7 +157,7 @@ class tdzdd::DdStructure&lt; ARITY &gt;::const_iterator</h3>
 
 <p>Iterator on a set of integer vectors represented by a DD. </p>
 
-<p>Definition at line <a class="el" href="DdStructure_8hpp_source.html#l00553">553</a> of file <a class="el" href="DdStructure_8hpp_source.html">DdStructure.hpp</a>.</p>
+<p>Definition at line <a class="el" href="DdStructure_8hpp_source.html#l00554">554</a> of file <a class="el" href="DdStructure_8hpp_source.html">DdStructure.hpp</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a449d7f9137d9e7d218765bf9721e12ea"></a>
 <div class="memitem">
@@ -192,11 +193,24 @@ template&lt;int ARITY&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="DdStructure_8hpp_source.html#l00577">577</a> of file <a class="el" href="DdStructure_8hpp_source.html">DdStructure.hpp</a>.</p>
+<p>Definition at line <a class="el" href="DdStructure_8hpp_source.html#l00578">578</a> of file <a class="el" href="DdStructure_8hpp_source.html">DdStructure.hpp</a>.</p>
 
-<p>References <a class="el" href="DdStructure_8hpp_source.html#l00604">tdzdd::DdStructure&lt; ARITY &gt;::const_iterator::next()</a>, and <a class="el" href="DdStructure_8hpp_source.html#l00058">tdzdd::DdStructure&lt; ARITY &gt;::root_</a>.</p>
+<p>References <a class="el" href="DdStructure_8hpp_source.html#l00605">tdzdd::DdStructure&lt; ARITY &gt;::const_iterator::next()</a>, and <a class="el" href="DdStructure_8hpp_source.html#l00058">tdzdd::DdStructure&lt; ARITY &gt;::root_</a>.</p>
 
-<p>Referenced by <a class="el" href="DdStructure_8hpp_source.html#l00658">tdzdd::DdStructure&lt; ARITY &gt;::begin()</a>, and <a class="el" href="DdStructure_8hpp_source.html#l00667">tdzdd::DdStructure&lt; ARITY &gt;::end()</a>.</p>
+<p>Referenced by <a class="el" href="DdStructure_8hpp_source.html#l00659">tdzdd::DdStructure&lt; ARITY &gt;::begin()</a>, and <a class="el" href="DdStructure_8hpp_source.html#l00668">tdzdd::DdStructure&lt; ARITY &gt;::end()</a>.</p>
+
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classtdzdd_1_1DdStructure_1_1const__iterator_a449d7f9137d9e7d218765bf9721e12ea_cgraph.png" border="0" usemap="#classtdzdd_1_1DdStructure_1_1const__iterator_a449d7f9137d9e7d218765bf9721e12ea_cgraph" alt=""/></div>
+<map name="classtdzdd_1_1DdStructure_1_1const__iterator_a449d7f9137d9e7d218765bf9721e12ea_cgraph" id="classtdzdd_1_1DdStructure_1_1const__iterator_a449d7f9137d9e7d218765bf9721e12ea_cgraph">
+<area shape="rect" id="node2" href="classtdzdd_1_1DdStructure_1_1const__iterator.html#abfec4314a763c6514cb5201c5877c39f" title="tdzdd::DdStructure\l::const_iterator::next" alt="" coords="203,49,345,90"/>
+<area shape="rect" id="node3" href="classtdzdd_1_1NodeId.html#a8cd0a4e685c91f9ac09f1f2e46e18851" title="tdzdd::NodeId::row" alt="" coords="412,5,545,32"/>
+<area shape="rect" id="node4" href="classtdzdd_1_1NodeId.html#aa84398a693abc0f8ba9e9a5d80490241" title="tdzdd::NodeId::col" alt="" coords="414,56,543,83"/>
+<area shape="rect" id="node5" href="structtdzdd_1_1DdStructure_1_1const__iterator_1_1Selection.html#a3398dfed8165bb168611ebf55dbcaef8" title="tdzdd::DdStructure\l::const_iterator::Selection\l::Selection" alt="" coords="393,107,564,163"/>
+</map>
+</div>
+</p>
 
 </div>
 </div>
@@ -213,7 +227,7 @@ template&lt;int ARITY&gt; </div>
         <tr>
           <td class="memname">void <a class="el" href="classtdzdd_1_1DdStructure.html">tdzdd::DdStructure</a>&lt; <a class="el" href="classtdzdd_1_1DdSpecBase.html#a591ed102645d3dbe3eabe70fa6ad0463">ARITY</a> &gt;::const_iterator::next </td>
           <td>(</td>
-          <td class="paramtype">NodeId&#160;</td>
+          <td class="paramtype"><a class="el" href="classtdzdd_1_1NodeId.html">NodeId</a>&#160;</td>
           <td class="paramname"><em>f</em></td><td>)</td>
           <td></td>
         </tr>
@@ -225,11 +239,23 @@ template&lt;int ARITY&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="DdStructure_8hpp_source.html#l00604">604</a> of file <a class="el" href="DdStructure_8hpp_source.html">DdStructure.hpp</a>.</p>
+<p>Definition at line <a class="el" href="DdStructure_8hpp_source.html#l00605">605</a> of file <a class="el" href="DdStructure_8hpp_source.html">DdStructure.hpp</a>.</p>
 
-<p>References <a class="el" href="DdStructure_8hpp_source.html#l00572">tdzdd::DdStructure&lt; ARITY &gt;::const_iterator::cursor</a>, <a class="el" href="DdStructure_8hpp_source.html#l00057">tdzdd::DdStructure&lt; ARITY &gt;::diagram</a>, <a class="el" href="DdStructure_8hpp_source.html#l00555">tdzdd::DdStructure&lt; ARITY &gt;::const_iterator::Selection::node</a>, <a class="el" href="DdStructure_8hpp_source.html#l00558">tdzdd::DdStructure&lt; ARITY &gt;::const_iterator::Selection::Selection()</a>, and <a class="el" href="DdStructure_8hpp_source.html#l00556">tdzdd::DdStructure&lt; ARITY &gt;::const_iterator::Selection::val</a>.</p>
+<p>References <a class="el" href="Node_8hpp_source.html#l00149">tdzdd::Node&lt; ARITY &gt;::branch</a>, <a class="el" href="Node_8hpp_source.html#l00070">tdzdd::NodeId::col()</a>, <a class="el" href="DdStructure_8hpp_source.html#l00573">tdzdd::DdStructure&lt; ARITY &gt;::const_iterator::cursor</a>, <a class="el" href="DdStructure_8hpp_source.html#l00057">tdzdd::DdStructure&lt; ARITY &gt;::diagram</a>, <a class="el" href="DdStructure_8hpp_source.html#l00556">tdzdd::DdStructure&lt; ARITY &gt;::const_iterator::Selection::node</a>, <a class="el" href="Node_8hpp_source.html#l00066">tdzdd::NodeId::row()</a>, <a class="el" href="DdStructure_8hpp_source.html#l00559">tdzdd::DdStructure&lt; ARITY &gt;::const_iterator::Selection::Selection()</a>, and <a class="el" href="DdStructure_8hpp_source.html#l00557">tdzdd::DdStructure&lt; ARITY &gt;::const_iterator::Selection::val</a>.</p>
 
-<p>Referenced by <a class="el" href="DdStructure_8hpp_source.html#l00577">tdzdd::DdStructure&lt; ARITY &gt;::const_iterator::const_iterator()</a>, and <a class="el" href="DdStructure_8hpp_source.html#l00582">tdzdd::DdStructure&lt; ARITY &gt;::const_iterator::operator++()</a>.</p>
+<p>Referenced by <a class="el" href="DdStructure_8hpp_source.html#l00578">tdzdd::DdStructure&lt; ARITY &gt;::const_iterator::const_iterator()</a>, and <a class="el" href="DdStructure_8hpp_source.html#l00583">tdzdd::DdStructure&lt; ARITY &gt;::const_iterator::operator++()</a>.</p>
+
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classtdzdd_1_1DdStructure_1_1const__iterator_abfec4314a763c6514cb5201c5877c39f_cgraph.png" border="0" usemap="#classtdzdd_1_1DdStructure_1_1const__iterator_abfec4314a763c6514cb5201c5877c39f_cgraph" alt=""/></div>
+<map name="classtdzdd_1_1DdStructure_1_1const__iterator_abfec4314a763c6514cb5201c5877c39f_cgraph" id="classtdzdd_1_1DdStructure_1_1const__iterator_abfec4314a763c6514cb5201c5877c39f_cgraph">
+<area shape="rect" id="node2" href="classtdzdd_1_1NodeId.html#aa84398a693abc0f8ba9e9a5d80490241" title="tdzdd::NodeId::col" alt="" coords="217,5,346,32"/>
+<area shape="rect" id="node3" href="classtdzdd_1_1NodeId.html#a8cd0a4e685c91f9ac09f1f2e46e18851" title="tdzdd::NodeId::row" alt="" coords="215,56,348,83"/>
+<area shape="rect" id="node4" href="structtdzdd_1_1DdStructure_1_1const__iterator_1_1Selection.html#a3398dfed8165bb168611ebf55dbcaef8" title="tdzdd::DdStructure\l::const_iterator::Selection\l::Selection" alt="" coords="196,107,367,163"/>
+</map>
+</div>
+</p>
 
 </div>
 </div>
@@ -257,9 +283,19 @@ template&lt;int ARITY&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="DdStructure_8hpp_source.html#l00599">599</a> of file <a class="el" href="DdStructure_8hpp_source.html">DdStructure.hpp</a>.</p>
+<p>Definition at line <a class="el" href="DdStructure_8hpp_source.html#l00600">600</a> of file <a class="el" href="DdStructure_8hpp_source.html">DdStructure.hpp</a>.</p>
 
-<p>References <a class="el" href="DdStructure_8hpp_source.html#l00566">tdzdd::DdStructure&lt; ARITY &gt;::const_iterator::Selection::operator==()</a>.</p>
+<p>References <a class="el" href="DdStructure_8hpp_source.html#l00567">tdzdd::DdStructure&lt; ARITY &gt;::const_iterator::Selection::operator==()</a>.</p>
+
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classtdzdd_1_1DdStructure_1_1const__iterator_a262d206c164cd1d9e3cf38beea8eb88d_cgraph.png" border="0" usemap="#classtdzdd_1_1DdStructure_1_1const__iterator_a262d206c164cd1d9e3cf38beea8eb88d_cgraph" alt=""/></div>
+<map name="classtdzdd_1_1DdStructure_1_1const__iterator_a262d206c164cd1d9e3cf38beea8eb88d_cgraph" id="classtdzdd_1_1DdStructure_1_1const__iterator_a262d206c164cd1d9e3cf38beea8eb88d_cgraph">
+<area shape="rect" id="node2" href="structtdzdd_1_1DdStructure_1_1const__iterator_1_1Selection.html#a76d91ce17d35bd4383d6122a6b2cc2d7" title="tdzdd::DdStructure\l::const_iterator::Selection\l::operator==" alt="" coords="229,5,400,61"/>
+</map>
+</div>
+</p>
 
 </div>
 </div>
@@ -286,9 +322,9 @@ template&lt;int ARITY&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="DdStructure_8hpp_source.html#l00587">587</a> of file <a class="el" href="DdStructure_8hpp_source.html">DdStructure.hpp</a>.</p>
+<p>Definition at line <a class="el" href="DdStructure_8hpp_source.html#l00588">588</a> of file <a class="el" href="DdStructure_8hpp_source.html">DdStructure.hpp</a>.</p>
 
-<p>References <a class="el" href="DdStructure_8hpp_source.html#l00574">tdzdd::DdStructure&lt; ARITY &gt;::const_iterator::itemset</a>.</p>
+<p>References <a class="el" href="DdStructure_8hpp_source.html#l00575">tdzdd::DdStructure&lt; ARITY &gt;::const_iterator::itemset</a>.</p>
 
 </div>
 </div>
@@ -315,9 +351,22 @@ template&lt;int ARITY&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="DdStructure_8hpp_source.html#l00582">582</a> of file <a class="el" href="DdStructure_8hpp_source.html">DdStructure.hpp</a>.</p>
+<p>Definition at line <a class="el" href="DdStructure_8hpp_source.html#l00583">583</a> of file <a class="el" href="DdStructure_8hpp_source.html">DdStructure.hpp</a>.</p>
 
-<p>References <a class="el" href="DdStructure_8hpp_source.html#l00604">tdzdd::DdStructure&lt; ARITY &gt;::const_iterator::next()</a>.</p>
+<p>References <a class="el" href="DdStructure_8hpp_source.html#l00605">tdzdd::DdStructure&lt; ARITY &gt;::const_iterator::next()</a>.</p>
+
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classtdzdd_1_1DdStructure_1_1const__iterator_a205335171d9aee35d0f486f3a87cbbc4_cgraph.png" border="0" usemap="#classtdzdd_1_1DdStructure_1_1const__iterator_a205335171d9aee35d0f486f3a87cbbc4_cgraph" alt=""/></div>
+<map name="classtdzdd_1_1DdStructure_1_1const__iterator_a205335171d9aee35d0f486f3a87cbbc4_cgraph" id="classtdzdd_1_1DdStructure_1_1const__iterator_a205335171d9aee35d0f486f3a87cbbc4_cgraph">
+<area shape="rect" id="node2" href="classtdzdd_1_1DdStructure_1_1const__iterator.html#abfec4314a763c6514cb5201c5877c39f" title="tdzdd::DdStructure\l::const_iterator::next" alt="" coords="233,49,376,90"/>
+<area shape="rect" id="node3" href="classtdzdd_1_1NodeId.html#aa84398a693abc0f8ba9e9a5d80490241" title="tdzdd::NodeId::col" alt="" coords="445,5,574,32"/>
+<area shape="rect" id="node4" href="classtdzdd_1_1NodeId.html#a8cd0a4e685c91f9ac09f1f2e46e18851" title="tdzdd::NodeId::row" alt="" coords="443,56,576,83"/>
+<area shape="rect" id="node5" href="structtdzdd_1_1DdStructure_1_1const__iterator_1_1Selection.html#a3398dfed8165bb168611ebf55dbcaef8" title="tdzdd::DdStructure\l::const_iterator::Selection\l::Selection" alt="" coords="424,107,595,163"/>
+</map>
+</div>
+</p>
 
 </div>
 </div>
@@ -344,9 +393,9 @@ template&lt;int ARITY&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="DdStructure_8hpp_source.html#l00591">591</a> of file <a class="el" href="DdStructure_8hpp_source.html">DdStructure.hpp</a>.</p>
+<p>Definition at line <a class="el" href="DdStructure_8hpp_source.html#l00592">592</a> of file <a class="el" href="DdStructure_8hpp_source.html">DdStructure.hpp</a>.</p>
 
-<p>References <a class="el" href="DdStructure_8hpp_source.html#l00574">tdzdd::DdStructure&lt; ARITY &gt;::const_iterator::itemset</a>.</p>
+<p>References <a class="el" href="DdStructure_8hpp_source.html#l00575">tdzdd::DdStructure&lt; ARITY &gt;::const_iterator::itemset</a>.</p>
 
 </div>
 </div>
@@ -374,9 +423,9 @@ template&lt;int ARITY&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="DdStructure_8hpp_source.html#l00595">595</a> of file <a class="el" href="DdStructure_8hpp_source.html">DdStructure.hpp</a>.</p>
+<p>Definition at line <a class="el" href="DdStructure_8hpp_source.html#l00596">596</a> of file <a class="el" href="DdStructure_8hpp_source.html">DdStructure.hpp</a>.</p>
 
-<p>References <a class="el" href="DdStructure_8hpp_source.html#l00572">tdzdd::DdStructure&lt; ARITY &gt;::const_iterator::cursor</a>, and <a class="el" href="DdStructure_8hpp_source.html#l00573">tdzdd::DdStructure&lt; ARITY &gt;::const_iterator::path</a>.</p>
+<p>References <a class="el" href="DdStructure_8hpp_source.html#l00573">tdzdd::DdStructure&lt; ARITY &gt;::const_iterator::cursor</a>, and <a class="el" href="DdStructure_8hpp_source.html#l00574">tdzdd::DdStructure&lt; ARITY &gt;::const_iterator::path</a>.</p>
 
 </div>
 </div>
@@ -401,9 +450,9 @@ template&lt;int ARITY&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="DdStructure_8hpp_source.html#l00572">572</a> of file <a class="el" href="DdStructure_8hpp_source.html">DdStructure.hpp</a>.</p>
+<p>Definition at line <a class="el" href="DdStructure_8hpp_source.html#l00573">573</a> of file <a class="el" href="DdStructure_8hpp_source.html">DdStructure.hpp</a>.</p>
 
-<p>Referenced by <a class="el" href="DdStructure_8hpp_source.html#l00604">tdzdd::DdStructure&lt; ARITY &gt;::const_iterator::next()</a>, and <a class="el" href="DdStructure_8hpp_source.html#l00595">tdzdd::DdStructure&lt; ARITY &gt;::const_iterator::operator==()</a>.</p>
+<p>Referenced by <a class="el" href="DdStructure_8hpp_source.html#l00605">tdzdd::DdStructure&lt; ARITY &gt;::const_iterator::next()</a>, and <a class="el" href="DdStructure_8hpp_source.html#l00596">tdzdd::DdStructure&lt; ARITY &gt;::const_iterator::operator==()</a>.</p>
 
 </div>
 </div>
@@ -427,7 +476,7 @@ template&lt;int ARITY&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="DdStructure_8hpp_source.html#l00571">571</a> of file <a class="el" href="DdStructure_8hpp_source.html">DdStructure.hpp</a>.</p>
+<p>Definition at line <a class="el" href="DdStructure_8hpp_source.html#l00572">572</a> of file <a class="el" href="DdStructure_8hpp_source.html">DdStructure.hpp</a>.</p>
 
 </div>
 </div>
@@ -451,9 +500,9 @@ template&lt;int ARITY&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="DdStructure_8hpp_source.html#l00574">574</a> of file <a class="el" href="DdStructure_8hpp_source.html">DdStructure.hpp</a>.</p>
+<p>Definition at line <a class="el" href="DdStructure_8hpp_source.html#l00575">575</a> of file <a class="el" href="DdStructure_8hpp_source.html">DdStructure.hpp</a>.</p>
 
-<p>Referenced by <a class="el" href="DdStructure_8hpp_source.html#l00587">tdzdd::DdStructure&lt; ARITY &gt;::const_iterator::operator*()</a>, and <a class="el" href="DdStructure_8hpp_source.html#l00591">tdzdd::DdStructure&lt; ARITY &gt;::const_iterator::operator-&gt;()</a>.</p>
+<p>Referenced by <a class="el" href="DdStructure_8hpp_source.html#l00588">tdzdd::DdStructure&lt; ARITY &gt;::const_iterator::operator*()</a>, and <a class="el" href="DdStructure_8hpp_source.html#l00592">tdzdd::DdStructure&lt; ARITY &gt;::const_iterator::operator-&gt;()</a>.</p>
 
 </div>
 </div>
@@ -477,9 +526,9 @@ template&lt;int ARITY&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="DdStructure_8hpp_source.html#l00573">573</a> of file <a class="el" href="DdStructure_8hpp_source.html">DdStructure.hpp</a>.</p>
+<p>Definition at line <a class="el" href="DdStructure_8hpp_source.html#l00574">574</a> of file <a class="el" href="DdStructure_8hpp_source.html">DdStructure.hpp</a>.</p>
 
-<p>Referenced by <a class="el" href="DdStructure_8hpp_source.html#l00595">tdzdd::DdStructure&lt; ARITY &gt;::const_iterator::operator==()</a>.</p>
+<p>Referenced by <a class="el" href="DdStructure_8hpp_source.html#l00596">tdzdd::DdStructure&lt; ARITY &gt;::const_iterator::operator==()</a>.</p>
 
 </div>
 </div>
@@ -489,7 +538,7 @@ template&lt;int ARITY&gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Dec 5 2016 15:51:12 for TdZdd by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Aug 27 2017 12:37:37 for TdZdd by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.11
 </small></address>

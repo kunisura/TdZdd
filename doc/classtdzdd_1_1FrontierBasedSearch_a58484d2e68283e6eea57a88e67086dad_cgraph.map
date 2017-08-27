@@ -1,0 +1,11 @@
+<map id="tdzdd::FrontierBasedSearch::doNotTake" name="tdzdd::FrontierBasedSearch::doNotTake">
+<area shape="rect" id="node2" href="$classtdzdd_1_1FrontierBasedSearchMate.html#a4c5c6cfd3f0920037e475c4574f7b242" title="tdzdd::FrontierBasedSearch\lMate::findColorPredecessor" alt="" coords="258,64,442,105"/>
+<area shape="rect" id="node3" href="$classtdzdd_1_1FrontierBasedSearchMate.html#ac2353860bc242c8f6c2e8bf64b1ade0b" title="tdzdd::FrontierBasedSearch\lMate::isColoredTail" alt="" coords="511,5,695,47"/>
+<area shape="rect" id="node5" href="$classtdzdd_1_1FrontierBasedSearchMate.html#a2ec5f746e1adc6f7386004481fa3b6a2" title="tdzdd::FrontierBasedSearch\lMate::isColored" alt="" coords="258,129,442,171"/>
+<area shape="rect" id="node6" href="$classtdzdd_1_1FrontierBasedSearchMate.html#a5191051d6060286dd3dc81810398aa43" title="tdzdd::FrontierBasedSearch\lMate::isHead" alt="" coords="258,195,442,236"/>
+<area shape="rect" id="node7" href="$classtdzdd_1_1FrontierBasedSearchMate.html#ae251d78a1b9142c1b0daf8fc430193be" title="tdzdd::FrontierBasedSearch\lMate::isIsolated" alt="" coords="258,260,442,301"/>
+<area shape="rect" id="node8" href="$classtdzdd_1_1FrontierBasedSearchMate.html#aea18ee7f91e4f7d9a22d0362137f7bfc" title="tdzdd::FrontierBasedSearch\lMate::isTail" alt="" coords="258,325,442,367"/>
+<area shape="rect" id="node9" href="$classtdzdd_1_1FrontierBasedSearchMate.html#a3e55a8751d68846b5cce3f058296858f" title="tdzdd::FrontierBasedSearch\lMate::isUncoloredEdgeComponent" alt="" coords="237,391,463,432"/>
+<area shape="rect" id="node10" href="$classtdzdd_1_1FrontierBasedSearchMate.html#a6181fd23a1c4392988c15174b810026e" title="tdzdd::FrontierBasedSearch\lMate::next" alt="" coords="258,456,442,497"/>
+<area shape="rect" id="node4" href="$classtdzdd_1_1FrontierBasedSearchMate.html#af114b1481f1232c77ad60c2767a1a88a" title="tdzdd::FrontierBasedSearch\lMate::head" alt="" coords="511,71,695,112"/>
+</map>

@@ -1,0 +1,7 @@
+<map id="tdzdd::FrontierBasedSearch::update" name="tdzdd::FrontierBasedSearch::update">
+<area shape="rect" id="node2" href="$classtdzdd_1_1FrontierBasedSearchMate.html#a79dfab81b9e95d3bb68c0c3219bcc941" title="tdzdd::FrontierBasedSearch\lMate::clear" alt="" coords="237,5,421,47"/>
+<area shape="rect" id="node3" href="$classtdzdd_1_1FrontierBasedSearchMate.html#a6181fd23a1c4392988c15174b810026e" title="tdzdd::FrontierBasedSearch\lMate::next" alt="" coords="237,71,421,112"/>
+<area shape="rect" id="node4" href="$classtdzdd_1_1FrontierBasedSearchMate.html#aac943232ac4d2c4a224bd697abeaa999" title="tdzdd::FrontierBasedSearch\lMate::removeFromList" alt="" coords="237,136,421,177"/>
+<area shape="rect" id="node6" href="$classtdzdd_1_1FrontierBasedSearchMate.html#abacda962d1917b43ff0449046e15ee34" title="tdzdd::FrontierBasedSearch\lMate::replaceHeadWith" alt="" coords="237,201,421,243"/>
+<area shape="rect" id="node5" href="$classtdzdd_1_1FrontierBasedSearchMate.html#ac2353860bc242c8f6c2e8bf64b1ade0b" title="tdzdd::FrontierBasedSearch\lMate::isColoredTail" alt="" coords="469,136,653,177"/>
+</map>

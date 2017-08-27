@@ -64,7 +64,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="annotated.html"><span>Class&#160;List</span></a></li>
       <li><a href="classes.html"><span>Class&#160;Index</span></a></li>
-      <li><a href="hierarchy.html"><span>Class&#160;Hierarchy</span></a></li>
+      <li><a href="inherits.html"><span>Class&#160;Hierarchy</span></a></li>
       <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
     </ul>
   </div>
@@ -116,7 +116,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ad62b02638f79b2ad9de09dc21c062de4"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::pair&lt; int, int &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtdzdd_1_1DdSpecBase.html#ad62b02638f79b2ad9de09dc21c062de4">findOneInstance</a> () const </td></tr>
 <tr class="memdesc:ad62b02638f79b2ad9de09dc21c062de4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a random instance using simple depth-first search without caching.  <a href="#ad62b02638f79b2ad9de09dc21c062de4">More...</a><br /></td></tr>
 <tr class="separator:ad62b02638f79b2ad9de09dc21c062de4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab77ef493d44d50ae0ffbd571c62c77af"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtdzdd_1_1DdSpecBase.html#ab77ef493d44d50ae0ffbd571c62c77af">dumpDot</a> (std::ostream &amp;os=std::cout, std::string title=typenameof&lt; S &gt;()) const </td></tr>
+<tr class="memitem:ab77ef493d44d50ae0ffbd571c62c77af"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtdzdd_1_1DdSpecBase.html#ab77ef493d44d50ae0ffbd571c62c77af">dumpDot</a> (std::ostream &amp;os=std::cout, std::string title=<a class="el" href="namespacetdzdd.html#a9318194ae9ce289b4c6c1c91efdb1798">typenameof</a>&lt; S &gt;()) const </td></tr>
 <tr class="memdesc:ab77ef493d44d50ae0ffbd571c62c77af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Dumps the node table in Graphviz (dot) format.  <a href="#ab77ef493d44d50ae0ffbd571c62c77af">More...</a><br /></td></tr>
 <tr class="separator:ab77ef493d44d50ae0ffbd571c62c77af"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -199,7 +199,7 @@ template&lt;typename S, int AR&gt; </div>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">std::string&#160;</td>
-          <td class="paramname"><em>title</em> = <code>typenameof&lt;S&gt;()</code>&#160;</td>
+          <td class="paramname"><em>title</em> = <code><a class="el" href="namespacetdzdd.html#a9318194ae9ce289b4c6c1c91efdb1798">typenameof</a>&lt;S&gt;()</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -252,7 +252,7 @@ template&lt;typename S, int AR&gt; </div>
 
 <p>Definition at line <a class="el" href="DdSpec_8hpp_source.html#l00072">72</a> of file <a class="el" href="DdSpec_8hpp_source.html">DdSpec.hpp</a>.</p>
 
-<p>Referenced by <a class="el" href="DdStructure_8hpp_source.html#l00105">tdzdd::DdStructure&lt; ARITY &gt;::DdStructure()</a>, <a class="el" href="DdSpec_8hpp_source.html#l00102">tdzdd::DdSpecBase&lt; DdStructure&lt; ARITY &gt;, AR &gt;::dumpDot()</a>, <a class="el" href="DdSpec_8hpp_source.html#l00322">tdzdd::DdSpec&lt; DdStructure&lt; ARITY &gt;, NodeId, ARITY &gt;::equal_to()</a>, <a class="el" href="DdSpec_8hpp_source.html#l00622">tdzdd::HybridDdSpec&lt; S, TS, TA, AR &gt;::equal_to()</a>, <a class="el" href="DdSpec_8hpp_source.html#l00318">tdzdd::DdSpec&lt; DdStructure&lt; ARITY &gt;, NodeId, ARITY &gt;::equalToAtLevel()</a>, <a class="el" href="DdSpec_8hpp_source.html#l00618">tdzdd::HybridDdSpec&lt; S, TS, TA, AR &gt;::equalToAtLevel()</a>, <a class="el" href="DdSpec_8hpp_source.html#l00092">tdzdd::DdSpecBase&lt; DdStructure&lt; ARITY &gt;, AR &gt;::findOneInstance()</a>, <a class="el" href="DdSpec_8hpp_source.html#l00195">tdzdd::StatelessDdSpec&lt; S, AR &gt;::get_child()</a>, <a class="el" href="DdSpec_8hpp_source.html#l00274">tdzdd::DdSpec&lt; DdStructure&lt; ARITY &gt;, NodeId, ARITY &gt;::get_child()</a>, <a class="el" href="DdSpec_8hpp_source.html#l00408">tdzdd::PodArrayDdSpec&lt; S, T, AR &gt;::get_child()</a>, <a class="el" href="DdSpec_8hpp_source.html#l00557">tdzdd::HybridDdSpec&lt; S, TS, TA, AR &gt;::get_child()</a>, <a class="el" href="DdSpec_8hpp_source.html#l00283">tdzdd::DdSpec&lt; DdStructure&lt; ARITY &gt;, NodeId, ARITY &gt;::get_copy()</a>, <a class="el" href="DdSpec_8hpp_source.html#l00566">tdzdd::HybridDdSpec&lt; S, TS, TA, AR &gt;::get_copy()</a>, <a class="el" href="DdSpec_8hpp_source.html#l00191">tdzdd::StatelessDdSpec&lt; S, AR &gt;::get_root()</a>, <a class="el" href="DdSpec_8hpp_source.html#l00269">tdzdd::DdSpec&lt; DdStructure&lt; ARITY &gt;, NodeId, ARITY &gt;::get_root()</a>, <a class="el" href="DdSpec_8hpp_source.html#l00404">tdzdd::PodArrayDdSpec&lt; S, T, AR &gt;::get_root()</a>, <a class="el" href="DdSpec_8hpp_source.html#l00552">tdzdd::HybridDdSpec&lt; S, TS, TA, AR &gt;::get_root()</a>, <a class="el" href="DdSpec_8hpp_source.html#l00310">tdzdd::DdSpec&lt; DdStructure&lt; ARITY &gt;, NodeId, ARITY &gt;::hash_code()</a>, <a class="el" href="DdSpec_8hpp_source.html#l00601">tdzdd::HybridDdSpec&lt; S, TS, TA, AR &gt;::hash_code()</a>, <a class="el" href="DdSpec_8hpp_source.html#l00306">tdzdd::DdSpec&lt; DdStructure&lt; ARITY &gt;, NodeId, ARITY &gt;::hashCodeAtLevel()</a>, <a class="el" href="DdSpec_8hpp_source.html#l00597">tdzdd::HybridDdSpec&lt; S, TS, TA, AR &gt;::hashCodeAtLevel()</a>, <a class="el" href="DdSpec_8hpp_source.html#l00291">tdzdd::DdSpec&lt; DdStructure&lt; ARITY &gt;, NodeId, ARITY &gt;::merge_states()</a>, <a class="el" href="DdSpec_8hpp_source.html#l00426">tdzdd::PodArrayDdSpec&lt; S, T, AR &gt;::merge_states()</a>, <a class="el" href="DdSpec_8hpp_source.html#l00582">tdzdd::HybridDdSpec&lt; S, TS, TA, AR &gt;::merge_states()</a>, <a class="el" href="DdSpec_8hpp_source.html#l00334">tdzdd::DdSpec&lt; DdStructure&lt; ARITY &gt;, NodeId, ARITY &gt;::print_state()</a>, <a class="el" href="DdSpec_8hpp_source.html#l00470">tdzdd::PodArrayDdSpec&lt; S, T, AR &gt;::print_state()</a>, <a class="el" href="DdSpec_8hpp_source.html#l00651">tdzdd::HybridDdSpec&lt; S, TS, TA, AR &gt;::print_state()</a>, <a class="el" href="DdSpec_8hpp_source.html#l00330">tdzdd::DdSpec&lt; DdStructure&lt; ARITY &gt;, NodeId, ARITY &gt;::printStateAtLevel()</a>, <a class="el" href="DdSpec_8hpp_source.html#l00466">tdzdd::PodArrayDdSpec&lt; S, T, AR &gt;::printStateAtLevel()</a>, <a class="el" href="DdSpec_8hpp_source.html#l00646">tdzdd::HybridDdSpec&lt; S, TS, TA, AR &gt;::printStateAtLevel()</a>, and <a class="el" href="DdStructure_8hpp_source.html#l00166">tdzdd::DdStructure&lt; ARITY &gt;::zddSubset()</a>.</p>
+<p>Referenced by <a class="el" href="DdStructure_8hpp_source.html#l00105">tdzdd::DdStructure&lt; ARITY &gt;::DdStructure()</a>, <a class="el" href="DdSpec_8hpp_source.html#l00102">tdzdd::DdSpecBase&lt; HamiltonCycleZdd, AR &gt;::dumpDot()</a>, <a class="el" href="DdSpec_8hpp_source.html#l00322">tdzdd::DdSpec&lt; DdStructure&lt; ARITY &gt;, NodeId, ARITY &gt;::equal_to()</a>, <a class="el" href="DdSpec_8hpp_source.html#l00622">tdzdd::HybridDdSpec&lt; FrontierBasedSearch, FrontierBasedSearchCount, FrontierBasedSearchMate, 2 &gt;::equal_to()</a>, <a class="el" href="DdSpec_8hpp_source.html#l00318">tdzdd::DdSpec&lt; DdStructure&lt; ARITY &gt;, NodeId, ARITY &gt;::equalToAtLevel()</a>, <a class="el" href="DdSpec_8hpp_source.html#l00618">tdzdd::HybridDdSpec&lt; FrontierBasedSearch, FrontierBasedSearchCount, FrontierBasedSearchMate, 2 &gt;::equalToAtLevel()</a>, <a class="el" href="DdSpec_8hpp_source.html#l00092">tdzdd::DdSpecBase&lt; HamiltonCycleZdd, AR &gt;::findOneInstance()</a>, <a class="el" href="DdSpec_8hpp_source.html#l00195">tdzdd::StatelessDdSpec&lt; S, AR &gt;::get_child()</a>, <a class="el" href="DdSpec_8hpp_source.html#l00274">tdzdd::DdSpec&lt; DdStructure&lt; ARITY &gt;, NodeId, ARITY &gt;::get_child()</a>, <a class="el" href="DdSpec_8hpp_source.html#l00408">tdzdd::PodArrayDdSpec&lt; PathZdd, int16_t, 2 &gt;::get_child()</a>, <a class="el" href="DdSpec_8hpp_source.html#l00557">tdzdd::HybridDdSpec&lt; FrontierBasedSearch, FrontierBasedSearchCount, FrontierBasedSearchMate, 2 &gt;::get_child()</a>, <a class="el" href="DdSpec_8hpp_source.html#l00283">tdzdd::DdSpec&lt; DdStructure&lt; ARITY &gt;, NodeId, ARITY &gt;::get_copy()</a>, <a class="el" href="DdSpec_8hpp_source.html#l00566">tdzdd::HybridDdSpec&lt; FrontierBasedSearch, FrontierBasedSearchCount, FrontierBasedSearchMate, 2 &gt;::get_copy()</a>, <a class="el" href="DdSpec_8hpp_source.html#l00191">tdzdd::StatelessDdSpec&lt; S, AR &gt;::get_root()</a>, <a class="el" href="DdSpec_8hpp_source.html#l00269">tdzdd::DdSpec&lt; DdStructure&lt; ARITY &gt;, NodeId, ARITY &gt;::get_root()</a>, <a class="el" href="DdSpec_8hpp_source.html#l00404">tdzdd::PodArrayDdSpec&lt; PathZdd, int16_t, 2 &gt;::get_root()</a>, <a class="el" href="DdSpec_8hpp_source.html#l00552">tdzdd::HybridDdSpec&lt; FrontierBasedSearch, FrontierBasedSearchCount, FrontierBasedSearchMate, 2 &gt;::get_root()</a>, <a class="el" href="DdSpec_8hpp_source.html#l00310">tdzdd::DdSpec&lt; DdStructure&lt; ARITY &gt;, NodeId, ARITY &gt;::hash_code()</a>, <a class="el" href="DdSpec_8hpp_source.html#l00601">tdzdd::HybridDdSpec&lt; FrontierBasedSearch, FrontierBasedSearchCount, FrontierBasedSearchMate, 2 &gt;::hash_code()</a>, <a class="el" href="DdSpec_8hpp_source.html#l00306">tdzdd::DdSpec&lt; DdStructure&lt; ARITY &gt;, NodeId, ARITY &gt;::hashCodeAtLevel()</a>, <a class="el" href="DdSpec_8hpp_source.html#l00597">tdzdd::HybridDdSpec&lt; FrontierBasedSearch, FrontierBasedSearchCount, FrontierBasedSearchMate, 2 &gt;::hashCodeAtLevel()</a>, <a class="el" href="DdSpec_8hpp_source.html#l00291">tdzdd::DdSpec&lt; DdStructure&lt; ARITY &gt;, NodeId, ARITY &gt;::merge_states()</a>, <a class="el" href="DdSpec_8hpp_source.html#l00426">tdzdd::PodArrayDdSpec&lt; PathZdd, int16_t, 2 &gt;::merge_states()</a>, <a class="el" href="DdSpec_8hpp_source.html#l00582">tdzdd::HybridDdSpec&lt; FrontierBasedSearch, FrontierBasedSearchCount, FrontierBasedSearchMate, 2 &gt;::merge_states()</a>, <a class="el" href="DdSpec_8hpp_source.html#l00334">tdzdd::DdSpec&lt; DdStructure&lt; ARITY &gt;, NodeId, ARITY &gt;::print_state()</a>, <a class="el" href="DdSpec_8hpp_source.html#l00470">tdzdd::PodArrayDdSpec&lt; PathZdd, int16_t, 2 &gt;::print_state()</a>, <a class="el" href="DdSpec_8hpp_source.html#l00651">tdzdd::HybridDdSpec&lt; FrontierBasedSearch, FrontierBasedSearchCount, FrontierBasedSearchMate, 2 &gt;::print_state()</a>, <a class="el" href="DdSpec_8hpp_source.html#l00330">tdzdd::DdSpec&lt; DdStructure&lt; ARITY &gt;, NodeId, ARITY &gt;::printStateAtLevel()</a>, <a class="el" href="DdSpec_8hpp_source.html#l00466">tdzdd::PodArrayDdSpec&lt; PathZdd, int16_t, 2 &gt;::printStateAtLevel()</a>, <a class="el" href="DdSpec_8hpp_source.html#l00646">tdzdd::HybridDdSpec&lt; FrontierBasedSearch, FrontierBasedSearchCount, FrontierBasedSearchMate, 2 &gt;::printStateAtLevel()</a>, and <a class="el" href="DdStructure_8hpp_source.html#l00166">tdzdd::DdStructure&lt; ARITY &gt;::zddSubset()</a>.</p>
 
 </div>
 </div>
@@ -317,7 +317,7 @@ template&lt;typename S, int AR&gt; </div>
 
 <p>Definition at line <a class="el" href="DdSpec_8hpp_source.html#l00092">92</a> of file <a class="el" href="DdSpec_8hpp_source.html">DdSpec.hpp</a>.</p>
 
-<p>Referenced by <a class="el" href="DdSpec_8hpp_source.html#l00092">tdzdd::DdSpecBase&lt; DdStructure&lt; ARITY &gt;, AR &gt;::findOneInstance()</a>.</p>
+<p>Referenced by <a class="el" href="DdSpec_8hpp_source.html#l00092">tdzdd::DdSpecBase&lt; HamiltonCycleZdd, AR &gt;::findOneInstance()</a>.</p>
 
 </div>
 </div>
@@ -397,7 +397,7 @@ template&lt;typename T &gt; </div>
 
 <p>Definition at line <a class="el" href="DdSpec_8hpp_source.html#l00157">157</a> of file <a class="el" href="DdSpec_8hpp_source.html">DdSpec.hpp</a>.</p>
 
-<p>Referenced by <a class="el" href="DdSpec_8hpp_source.html#l00314">tdzdd::DdSpec&lt; DdStructure&lt; ARITY &gt;, NodeId, ARITY &gt;::equalTo()</a>, and <a class="el" href="DdSpec_8hpp_source.html#l00614">tdzdd::HybridDdSpec&lt; S, TS, TA, AR &gt;::equalTo()</a>.</p>
+<p>Referenced by <a class="el" href="DdSpec_8hpp_source.html#l00314">tdzdd::DdSpec&lt; DdStructure&lt; ARITY &gt;, NodeId, ARITY &gt;::equalTo()</a>, and <a class="el" href="DdSpec_8hpp_source.html#l00614">tdzdd::HybridDdSpec&lt; FrontierBasedSearch, FrontierBasedSearchCount, FrontierBasedSearchMate, 2 &gt;::equalTo()</a>.</p>
 
 </div>
 </div>
@@ -469,7 +469,7 @@ template&lt;typename T &gt; </div>
 
 <p>Definition at line <a class="el" href="DdSpec_8hpp_source.html#l00143">143</a> of file <a class="el" href="DdSpec_8hpp_source.html">DdSpec.hpp</a>.</p>
 
-<p>Referenced by <a class="el" href="DdSpec_8hpp_source.html#l00302">tdzdd::DdSpec&lt; DdStructure&lt; ARITY &gt;, NodeId, ARITY &gt;::hashCode()</a>, and <a class="el" href="DdSpec_8hpp_source.html#l00593">tdzdd::HybridDdSpec&lt; S, TS, TA, AR &gt;::hashCode()</a>.</p>
+<p>Referenced by <a class="el" href="DdSpec_8hpp_source.html#l00302">tdzdd::DdSpec&lt; DdStructure&lt; ARITY &gt;, NodeId, ARITY &gt;::hashCode()</a>, and <a class="el" href="DdSpec_8hpp_source.html#l00593">tdzdd::HybridDdSpec&lt; FrontierBasedSearch, FrontierBasedSearchCount, FrontierBasedSearchMate, 2 &gt;::hashCode()</a>.</p>
 
 </div>
 </div>
@@ -583,7 +583,7 @@ template&lt;typename S, int AR&gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Dec 5 2016 15:51:12 for TdZdd by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Aug 27 2017 12:37:37 for TdZdd by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.11
 </small></address>

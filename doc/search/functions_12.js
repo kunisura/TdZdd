@@ -1,13 +1,8 @@
 var searchData=
 [
-  ['zdd2bdd',['zdd2bdd',['../classtdzdd_1_1DdStructure.html#a8a563c4b063b3e6d85403c42269d58d8',1,'tdzdd::DdStructure']]],
-  ['zddcardinality',['zddCardinality',['../classtdzdd_1_1DdStructure.html#a54f85cde2031c53a29ff4f2873196418',1,'tdzdd::DdStructure']]],
-  ['zddintersection',['zddIntersection',['../namespacetdzdd.html#a9e7b0051ec4796942c31f215d3f6f9f4',1,'tdzdd::zddIntersection(S1 const &amp;spec1, S2 const &amp;spec2)'],['../namespacetdzdd.html#af434d5564c4b8cd9381c59495c050a8d',1,'tdzdd::zddIntersection(SS const &amp;...specs)']]],
-  ['zddlookahead',['zddLookahead',['../namespacetdzdd.html#a7bf53d61e3a320798cd42ce3a3249e3d',1,'tdzdd']]],
-  ['zddreduce',['zddReduce',['../classtdzdd_1_1DdStructure.html#a4bb6b7ebb872ca622b10ca3b02c3bd07',1,'tdzdd::DdStructure']]],
-  ['zddsubset',['zddSubset',['../classtdzdd_1_1DdStructure.html#a1bf772295a1a856b4895948129241b07',1,'tdzdd::DdStructure']]],
-  ['zddsubset_5f',['zddSubset_',['../classtdzdd_1_1DdStructure.html#aa48b06db11e3ee10d743308346cba4d5',1,'tdzdd::DdStructure']]],
-  ['zddsubsetmp_5f',['zddSubsetMP_',['../classtdzdd_1_1DdStructure.html#acc38097c40a288802165b6b927f72d11',1,'tdzdd::DdStructure']]],
-  ['zddunion',['zddUnion',['../namespacetdzdd.html#a75dca1bfa26169b67a916b64b46400c8',1,'tdzdd::zddUnion(S1 const &amp;spec1, S2 const &amp;spec2)'],['../namespacetdzdd.html#aa6d7cef276b4cb3741e0b519d7ab1388',1,'tdzdd::zddUnion(SS const &amp;...specs)']]],
-  ['zddunreduction',['zddUnreduction',['../namespacetdzdd.html#a200a5f4ec299357e5352b621e2a0fe2c',1,'tdzdd']]]
+  ['unreduction_5f',['Unreduction_',['../classtdzdd_1_1Unreduction__.html#a0b03cf8485576cc23f132dd8e64afee9',1,'tdzdd::Unreduction_']]],
+  ['update',['update',['../classtdzdd_1_1DdSweeper.html#a295c6139226becedd470a12a67c5c051',1,'tdzdd::DdSweeper::update()'],['../classtdzdd_1_1FrontierBasedSearch.html#af0bd765776393d0b954c9d29c36b7a97',1,'tdzdd::FrontierBasedSearch::update()'],['../classtdzdd_1_1LinearConstraints.html#aca6f40841dfdb4065d851a91b1323542',1,'tdzdd::LinearConstraints::update()'],['../classtdzdd_1_1Graph.html#ab1960b717cb961ba9d0bdd59ead16965',1,'tdzdd::Graph::update()'],['../structtdzdd_1_1ResourceUsage.html#ac9052fe0579438ad4f4fa290d29da52d',1,'tdzdd::ResourceUsage::update()']]],
+  ['upperbound',['upperBound',['../structtdzdd_1_1IntSubset.html#aa93f32481b705a7929fa091f5aea827e',1,'tdzdd::IntSubset::upperBound()'],['../classtdzdd_1_1IntRange.html#a4f634d08f1b2da19d97bfb3a1cdf92d5',1,'tdzdd::IntRange::upperBound()']]],
+  ['usemultiprocessors',['useMultiProcessors',['../classtdzdd_1_1DdStructure.html#aac8355cd1802f62e5ab5b660183677be',1,'tdzdd::DdStructure']]],
+  ['usertime',['userTime',['../structtdzdd_1_1ResourceUsage.html#a4fbc6f3c42b07541057feda8cac7116e',1,'tdzdd::ResourceUsage']]]
 ];

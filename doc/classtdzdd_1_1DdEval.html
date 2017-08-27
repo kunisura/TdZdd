@@ -64,7 +64,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="annotated.html"><span>Class&#160;List</span></a></li>
       <li><a href="classes.html"><span>Class&#160;Index</span></a></li>
-      <li><a href="hierarchy.html"><span>Class&#160;Hierarchy</span></a></li>
+      <li><a href="inherits.html"><span>Class&#160;Hierarchy</span></a></li>
       <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
     </ul>
   </div>
@@ -107,8 +107,11 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:af6d1bf73965b1a4a2780bac9797efc52"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0e3563559e792097615cb437196ebfba"><td class="memItemLeft" align="right" valign="top">E const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtdzdd_1_1DdEval.html#a0e3563559e792097615cb437196ebfba">entity</a> () const </td></tr>
 <tr class="separator:a0e3563559e792097615cb437196ebfba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5081f60edcf4c91b82c9e96d37c91bca"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtdzdd_1_1DdEval.html#a5081f60edcf4c91b82c9e96d37c91bca">isThreadSafe</a> () const </td></tr>
+<tr class="memdesc:a5081f60edcf4c91b82c9e96d37c91bca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Declares thread-safety.  <a href="#a5081f60edcf4c91b82c9e96d37c91bca">More...</a><br /></td></tr>
+<tr class="separator:a5081f60edcf4c91b82c9e96d37c91bca"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a901d96e23edda6abbf166a6f6bb1c3f2"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtdzdd_1_1DdEval.html#a901d96e23edda6abbf166a6f6bb1c3f2">showMessages</a> () const </td></tr>
-<tr class="memdesc:a901d96e23edda6abbf166a6f6bb1c3f2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns preference to show messages.  <a href="#a901d96e23edda6abbf166a6f6bb1c3f2">More...</a><br /></td></tr>
+<tr class="memdesc:a901d96e23edda6abbf166a6f6bb1c3f2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Declares preference to show messages.  <a href="#a901d96e23edda6abbf166a6f6bb1c3f2">More...</a><br /></td></tr>
 <tr class="separator:a901d96e23edda6abbf166a6f6bb1c3f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a414addb349b73c5bb6da168125e18814"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtdzdd_1_1DdEval.html#a414addb349b73c5bb6da168125e18814">initialize</a> (int level)</td></tr>
 <tr class="memdesc:a414addb349b73c5bb6da168125e18814"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialization.  <a href="#a414addb349b73c5bb6da168125e18814">More...</a><br /></td></tr>
@@ -130,7 +133,7 @@ class tdzdd::DdEval&lt; E, T, R &gt;</h3>
 <li>void evalNode(T&amp; v, int level, DdValues&lt;T,ARITY&gt; const&amp; values)</li>
 </ul>
 <p>Optionally, the following functions can be overloaded:</p><ul>
-<li>bool <a class="el" href="classtdzdd_1_1DdEval.html#a901d96e23edda6abbf166a6f6bb1c3f2" title="Returns preference to show messages. ">showMessages()</a></li>
+<li>bool <a class="el" href="classtdzdd_1_1DdEval.html#a901d96e23edda6abbf166a6f6bb1c3f2" title="Declares preference to show messages. ">showMessages()</a></li>
 <li>void <a class="el" href="classtdzdd_1_1DdEval.html#a414addb349b73c5bb6da168125e18814" title="Initialization. ">initialize(int level)</a></li>
 <li>R <a class="el" href="classtdzdd_1_1DdEval.html#adede92a8638064d6c13ae21578b9f04d" title="Makes a result value. ">getValue(T const&amp; work)</a></li>
 <li>void <a class="el" href="classtdzdd_1_1DdEval.html#ae4cb5bd4791a0ab458db7f708b792776" title="Destructs i-th level of data storage. ">destructLevel(int i)</a></li>
@@ -178,7 +181,7 @@ template&lt;typename E, typename T, typename R = T&gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="DdEval_8hpp_source.html#l00140">140</a> of file <a class="el" href="DdEval_8hpp_source.html">DdEval.hpp</a>.</p>
+<p>Definition at line <a class="el" href="DdEval_8hpp_source.html#l00148">148</a> of file <a class="el" href="DdEval_8hpp_source.html">DdEval.hpp</a>.</p>
 
 </div>
 </div>
@@ -271,7 +274,7 @@ template&lt;typename E, typename T, typename R = T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>final value of the evaluation. </dd></dl>
 
-<p>Definition at line <a class="el" href="DdEval_8hpp_source.html#l00132">132</a> of file <a class="el" href="DdEval_8hpp_source.html">DdEval.hpp</a>.</p>
+<p>Definition at line <a class="el" href="DdEval_8hpp_source.html#l00140">140</a> of file <a class="el" href="DdEval_8hpp_source.html">DdEval.hpp</a>.</p>
 
 </div>
 </div>
@@ -307,7 +310,37 @@ template&lt;typename E, typename T, typename R = T&gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="DdEval_8hpp_source.html#l00124">124</a> of file <a class="el" href="DdEval_8hpp_source.html">DdEval.hpp</a>.</p>
+<p>Definition at line <a class="el" href="DdEval_8hpp_source.html#l00132">132</a> of file <a class="el" href="DdEval_8hpp_source.html">DdEval.hpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a5081f60edcf4c91b82c9e96d37c91bca"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename E, typename T, typename R = T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classtdzdd_1_1DdEval.html">tdzdd::DdEval</a>&lt; E, T, R &gt;::isThreadSafe </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Declares thread-safety. </p>
+<dl class="section return"><dt>Returns</dt><dd>true if this class is thread-safe. </dd></dl>
+
+<p>Definition at line <a class="el" href="DdEval_8hpp_source.html#l00116">116</a> of file <a class="el" href="DdEval_8hpp_source.html">DdEval.hpp</a>.</p>
 
 </div>
 </div>
@@ -334,10 +367,10 @@ template&lt;typename E, typename T, typename R = T&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Returns preference to show messages. </p>
+<p>Declares preference to show messages. </p>
 <dl class="section return"><dt>Returns</dt><dd>true if messages are preferred. </dd></dl>
 
-<p>Definition at line <a class="el" href="DdEval_8hpp_source.html#l00116">116</a> of file <a class="el" href="DdEval_8hpp_source.html">DdEval.hpp</a>.</p>
+<p>Definition at line <a class="el" href="DdEval_8hpp_source.html#l00124">124</a> of file <a class="el" href="DdEval_8hpp_source.html">DdEval.hpp</a>.</p>
 
 </div>
 </div>
@@ -347,7 +380,7 @@ template&lt;typename E, typename T, typename R = T&gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Dec 5 2016 15:51:12 for TdZdd by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Aug 27 2017 12:37:37 for TdZdd by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.11
 </small></address>
