@@ -1,6 +1,4 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classtdzdd_1_1DdSpecBase.html" title="tdzdd::DdSpecBase\&lt;\l HamiltonPathZdd, AR \&gt;" alt="" coords="5,13,172,54"/>
-<area shape="rect" id="node2" href="$classtdzdd_1_1PodArrayDdSpec.html" title="tdzdd::PodArrayDdSpec\l\&lt; HamiltonPathZdd, int16\l_t, 2 \&gt;" alt="" coords="220,5,391,61"/>
-<area shape="rect" id="node3" href="$classtdzdd_1_1SimpathBasedImpl.html" title="tdzdd::SimpathBasedImpl\l\&lt; HamiltonPathZdd, Path,\l true \&gt;" alt="" coords="439,5,613,61"/>
-<area shape="rect" id="node4" href="$structtdzdd_1_1HamiltonPathZdd.html" title="tdzdd::HamiltonPathZdd" alt="" coords="661,20,824,47"/>
+<area shape="rect" id="node1" href="$classtdzdd_1_1MyHashTable.html" title="tdzdd::MyHashTable\l\&lt; MyHashMapEntry\&lt; K,\l V \&gt;, MyHashMapHashWrapper\l\&lt; K, V, Hash, Equal \&gt;, MyHashMap\lHashWrapper\&lt; K, V, Hash, Equal \&gt; \&gt;" alt="" coords="5,5,249,91"/>
+<area shape="rect" id="node2" href="$structtdzdd_1_1MyHashMap.html" title="Closed hash map implementation. " alt="" coords="297,27,459,69"/>
 </map>

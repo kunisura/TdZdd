@@ -1,4 +1,4 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classtdzdd_1_1DdEval.html" title="tdzdd::DdEval\&lt; E, T \&gt;" alt="" coords="5,13,160,39"/>
-<area shape="rect" id="node2" href="$classtdzdd_1_1CardinalityBase.html" title="tdzdd::CardinalityBase\l\&lt; E, T, ARITY, BDD \&gt;" alt="" coords="208,5,364,47"/>
+<area shape="rect" id="node1" href="$classtdzdd_1_1DdSpecBase.html" title="tdzdd::DdSpecBase\&lt;\l PathZdd, AR \&gt;" alt="" coords="5,5,152,47"/>
+<area shape="rect" id="node2" href="$classtdzdd_1_1PodArrayDdSpec.html" title="tdzdd::PodArrayDdSpec\l\&lt; PathZdd, int16_t, 2 \&gt;" alt="" coords="200,5,363,47"/>
 </map>

@@ -1,23 +1,4 @@
 <map id="tdzdd::ZddSubsetter::subset" name="tdzdd::ZddSubsetter::subset">
-<area shape="rect" id="node2" href="$classtdzdd_1_1MyHashTable.html#a039d45626f817874ba4f91695532093b" title="Insert an element if no other equivalent element is registered. " alt="" coords="202,5,374,32"/>
-<area shape="rect" id="node3" href="$classtdzdd_1_1MyVector.html#afff7f2f41f494974b529b75a2bd07ede" title="Accesses to the last element. " alt="" coords="211,56,365,83"/>
-<area shape="rect" id="node4" href="$classtdzdd_1_1MyListOnPool.html#a87ab4c7e0c6037304223a333366400e0" title="Returns an iterator to the beginning. " alt="" coords="216,107,360,149"/>
-<area shape="rect" id="node5" href="$classtdzdd_1_1MyVector.html#a0c5ed5128517117d2c8aad0942a0f46e" title="Initializes the array to be empty. " alt="" coords="211,173,365,200"/>
-<area shape="rect" id="node6" href="$classtdzdd_1_1NodeId.html#aa84398a693abc0f8ba9e9a5d80490241" title="tdzdd::NodeId::col" alt="" coords="223,224,353,251"/>
-<area shape="rect" id="node7" href="$classtdzdd_1_1MyVector.html#a6a5885c2e81b0a363ba5efd8d4cd6043" title="Gets a pointer to the first element. " alt="" coords="213,275,363,301"/>
-<area shape="rect" id="node8" href="$classtdzdd_1_1MyVector.html#a647b5b844ce2c1e9c9b20ee82de844e4" title="Checks emptiness. " alt="" coords="207,325,369,352"/>
-<area shape="rect" id="node9" href="$classtdzdd_1_1MyListOnPool.html#a32fa152f646ec8f6c8a57b54b67db356" title="Returns an iterator to the end. " alt="" coords="201,376,375,403"/>
-<area shape="rect" id="node10" href="$classtdzdd_1_1MyListOnPool.html#a70e42b83448a1cf9501d7b9295e43aa5" title="Accesses the first element. " alt="" coords="216,427,360,469"/>
-<area shape="rect" id="node12" href="$classtdzdd_1_1DataTable.html#a2d5e76fe552f987e2cd9524a4dd8e3a4" title="Clears and initializes a row. " alt="" coords="201,493,375,520"/>
-<area shape="rect" id="node13" href="$classtdzdd_1_1DdBuilderBase.html#a08b438b559f1b5abf300231bdd08d62b" title="tdzdd::DdBuilderBase\l::nodeId" alt="" coords="213,545,363,586"/>
-<area shape="rect" id="node14" href="$classtdzdd_1_1DataTable.html#ab6865dc6b97cb2ca6bc9ea4583a6ef52" title="Gets the number of rows. " alt="" coords="193,611,383,637"/>
-<area shape="rect" id="node15" href="$classtdzdd_1_1MyVector.html#ac6bb8583b313f31eef6752e157092322" title="Removes the last element. " alt="" coords="197,661,379,688"/>
-<area shape="rect" id="node16" href="$classtdzdd_1_1MyVector.html#acb92d503a925d9e3295b3bf9119b4078" title="Adds an element to the end of the array. " alt="" coords="193,712,383,739"/>
-<area shape="rect" id="node17" href="$classtdzdd_1_1NodeId.html#a8cd0a4e685c91f9ac09f1f2e46e18851" title="tdzdd::NodeId::row" alt="" coords="221,763,355,789"/>
-<area shape="rect" id="node18" href="$classtdzdd_1_1NodeTableEntity.html#a27c35d15eb2c09be9bb23379c0e89fd8" title="Gets the variable ID at a given level. " alt="" coords="209,814,367,855"/>
-<area shape="rect" id="node19" href="$classtdzdd_1_1MyVector.html#a9c4a114cfc4bd722b41b74a75a83a072" title="Gets the number of elements. " alt="" coords="213,880,363,907"/>
-<area shape="rect" id="node20" href="$classtdzdd_1_1MyListOnPool.html#a45146a206d896aab5e5bc667c7b62f01" title="Returns the number of elements. " alt="" coords="216,931,360,973"/>
-<area shape="rect" id="node21" href="$classtdzdd_1_1DdBuilderBase.html#a18dea25444d3921d04528ac816398b3a" title="tdzdd::DdBuilderBase\l::state" alt="" coords="213,997,363,1038"/>
-<area shape="rect" id="node22" href="$classtdzdd_1_1DdSweeper.html#a295c6139226becedd470a12a67c5c051" title="Updates status and sweeps the DD if necessary. " alt="" coords="199,1063,377,1089"/>
-<area shape="rect" id="node11" href="$classtdzdd_1_1MyList.html#ad4f71a134131b0fada2c3cec1aa57571" title="tdzdd::MyList::dataStart" alt="" coords="431,435,593,461"/>
+<area shape="rect" id="node2" href="$classtdzdd_1_1MyHashTable.html#a039d45626f817874ba4f91695532093b" title="Insert an element if no other equivalent element is registered. " alt="" coords="196,5,368,32"/>
+<area shape="rect" id="node3" href="$classtdzdd_1_1DdSweeper.html#a295c6139226becedd470a12a67c5c051" title="Updates status and sweeps the DD if necessary. " alt="" coords="193,56,371,83"/>
 </map>

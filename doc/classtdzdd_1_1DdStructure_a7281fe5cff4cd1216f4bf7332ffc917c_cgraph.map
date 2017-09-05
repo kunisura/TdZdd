@@ -1,9 +1,6 @@
 <map id="tdzdd::DdStructure::operator!=" name="tdzdd::DdStructure::operator!=">
-<area shape="rect" id="node2" href="$classtdzdd_1_1DdStructure.html#ad00784e7df35d74edd733181cd150095" title="Checks structural equivalence with another DD. " alt="" coords="185,151,317,193"/>
-<area shape="rect" id="node3" href="$classtdzdd_1_1NodeId.html#a8cd0a4e685c91f9ac09f1f2e46e18851" title="tdzdd::NodeId::row" alt="" coords="416,5,549,32"/>
-<area shape="rect" id="node4" href="$classtdzdd_1_1DdStructure.html#a632c559161fb9af5e24ceeb275c870a9" title="Gets the number of nonterminal nodes. " alt="" coords="417,57,549,98"/>
-<area shape="rect" id="node5" href="$classtdzdd_1_1MyHashTable.html#aa1589ac8514a617fb2e689a758d65e8b" title="Initialize the table to be empty. " alt="" coords="365,122,600,222"/>
-<area shape="rect" id="node7" href="$classtdzdd_1_1NodeId.html#aa84398a693abc0f8ba9e9a5d80490241" title="tdzdd::NodeId::col" alt="" coords="418,247,547,273"/>
-<area shape="rect" id="node8" href="$structtdzdd_1_1MyHashMap.html#a26756217be35a12a3d963d43cbface04" title="Get the value that is already registered. " alt="" coords="385,297,580,324"/>
-<area shape="rect" id="node6" href="$classtdzdd_1_1MyHashConstant.html#aa585c920fb7931e16326a4bce33cfeac" title="tdzdd::MyHashConstant\l::primeSize" alt="" coords="648,151,812,193"/>
+<area shape="rect" id="node2" href="$classtdzdd_1_1DdStructure.html#ad00784e7df35d74edd733181cd150095" title="Checks structural equivalence with another DD. " alt="" coords="185,100,317,141"/>
+<area shape="rect" id="node3" href="$classtdzdd_1_1DdStructure.html#a632c559161fb9af5e24ceeb275c870a9" title="Gets the number of nonterminal nodes. " alt="" coords="417,5,549,47"/>
+<area shape="rect" id="node4" href="$classtdzdd_1_1MyHashTable.html#aa1589ac8514a617fb2e689a758d65e8b" title="Initialize the table to be empty. " alt="" coords="365,71,600,171"/>
+<area shape="rect" id="node5" href="$structtdzdd_1_1MyHashMap.html#a26756217be35a12a3d963d43cbface04" title="Get the value that is already registered. " alt="" coords="385,195,580,222"/>
 </map>

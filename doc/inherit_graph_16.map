@@ -1,3 +1,4 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$structtdzdd_1_1DdDumper_1_1Hasher.html" title="tdzdd::DdDumper\&lt; S\l \&gt;::Hasher\&lt; SPEC \&gt;" alt="" coords="5,5,152,47"/>
+<area shape="rect" id="node1" href="$classtdzdd_1_1DdSpecBase.html" title="tdzdd::DdSpecBase\&lt;\l GraphillionZdd, AR \&gt;" alt="" coords="5,5,153,47"/>
+<area shape="rect" id="node2" href="$classtdzdd_1_1DdSpec.html" title="tdzdd::DdSpec\&lt; Graphillion\lZdd, uint64_t, 2 \&gt;" alt="" coords="201,5,384,47"/>
 </map>

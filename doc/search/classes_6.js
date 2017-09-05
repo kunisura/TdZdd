@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['graph',['Graph',['../classtdzdd_1_1Graph.html',1,'tdzdd']]],
-  ['graphillionzdd',['GraphillionZdd',['../classtdzdd_1_1GraphillionZdd.html',1,'tdzdd']]]
+  ['sapporozdd',['SapporoZdd',['../classtdzdd_1_1SapporoZdd.html',1,'tdzdd']]],
+  ['statelessddspec',['StatelessDdSpec',['../classtdzdd_1_1StatelessDdSpec.html',1,'tdzdd']]]
 ];

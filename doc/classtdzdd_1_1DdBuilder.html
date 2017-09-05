@@ -39,7 +39,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
-      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li>
@@ -84,16 +83,12 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="namespacetdzdd.html">tdzdd</a></li><li class="navelem"><a class="el" href="classtdzdd_1_1DdBuilder.html">DdBuilder</a></li>  </ul>
+<li class="navelem"><b>tdzdd</b></li><li class="navelem"><a class="el" href="classtdzdd_1_1DdBuilder.html">DdBuilder</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pri-types">Private Types</a> &#124;
-<a href="#pri-methods">Private Member Functions</a> &#124;
-<a href="#pri-attribs">Private Attributes</a> &#124;
-<a href="#pri-static-attribs">Static Private Attributes</a> &#124;
 <a href="classtdzdd_1_1DdBuilder-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">tdzdd::DdBuilder&lt; S &gt; Class Template Reference</div>  </div>
@@ -104,99 +99,18 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
  <a href="classtdzdd_1_1DdBuilder.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="DdBuilder_8hpp_source.html">DdBuilder.hpp</a>&gt;</code></p>
-<div class="dynheader">
-Collaboration diagram for tdzdd::DdBuilder&lt; S &gt;:</div>
-<div class="dyncontent">
-<div class="center"><img src="classtdzdd_1_1DdBuilder__coll__graph.png" border="0" usemap="#tdzdd_1_1DdBuilder_3_01S_01_4_coll__map" alt="Collaboration graph"/></div>
-<map name="tdzdd_1_1DdBuilder_3_01S_01_4_coll__map" id="tdzdd_1_1DdBuilder_3_01S_01_4_coll__map">
-<area shape="rect" id="node2" href="classtdzdd_1_1DdBuilderBase.html" title="tdzdd::DdBuilderBase" alt="" coords="661,5,811,32"/>
-<area shape="rect" id="node3" href="classtdzdd_1_1MyVector.html" title="tdzdd::MyVector\&lt; tdzdd\l::MyList\&lt; SpecNode \&gt; \&gt;" alt="" coords="653,57,819,98"/>
-<area shape="rect" id="node4" href="classtdzdd_1_1MyList.html" title="tdzdd::MyList\&lt; SpecNode \&gt;" alt="" coords="312,64,499,91"/>
-<area shape="rect" id="node5" href="structtdzdd_1_1MyList_1_1Cell.html" title="tdzdd::MyList\&lt; T, BLOCK\l_ELEMENTS \&gt;::Cell" alt="" coords="27,57,201,98"/>
-<area shape="rect" id="node6" href="classtdzdd_1_1NodeTableEntity.html" title="tdzdd::NodeTableEntity\l\&lt; AR \&gt;" alt="" coords="657,122,815,163"/>
-<area shape="rect" id="node7" href="classtdzdd_1_1DataTable.html" title="tdzdd::DataTable\&lt; Node\l\&lt; ARITY \&gt; \&gt;" alt="" coords="323,122,488,163"/>
-<area shape="rect" id="node8" href="classtdzdd_1_1MyVector.html" title="tdzdd::MyVector\&lt; tdzdd\l::MyVector\&lt; Node\&lt; ARITY \&gt; \&gt; \&gt;" alt="" coords="5,122,223,163"/>
-<area shape="rect" id="node9" href="classtdzdd_1_1MyVector.html" title="tdzdd::MyVector\&lt; tdzdd\l::MyVector\&lt; int \&gt; \&gt;" alt="" coords="324,187,487,229"/>
-<area shape="rect" id="node10" href="classtdzdd_1_1MyVector.html" title="tdzdd::MyVector\&lt; char \&gt;" alt="" coords="653,188,819,215"/>
-<area shape="rect" id="node11" href="classtdzdd_1_1DdSweeper.html" title="tdzdd::DdSweeper\&lt; AR \&gt;" alt="" coords="649,311,823,337"/>
-<area shape="rect" id="node12" href="classtdzdd_1_1MyVector.html" title="tdzdd::MyVector\&lt; size_t \&gt;" alt="" coords="317,420,494,447"/>
-<area shape="rect" id="node13" href="classtdzdd_1_1MyVector.html" title="tdzdd::MyVector\&lt; tdzdd\l::NodeBranchId \&gt;" alt="" coords="324,253,487,294"/>
-<area shape="rect" id="node14" href="structtdzdd_1_1NodeBranchId.html" title="tdzdd::NodeBranchId" alt="" coords="41,260,187,287"/>
-<area shape="rect" id="node15" href="classtdzdd_1_1NodeId.html" title="tdzdd::NodeId" alt="" coords="353,369,457,396"/>
-<area shape="rect" id="node16" href="classtdzdd_1_1MyVector.html" title="tdzdd::MyVector\&lt; int \&gt;" alt="" coords="327,319,483,345"/>
-</map>
-<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aec36f985d72c208ca1550a7882e9b288"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtdzdd_1_1DdBuilder.html#aec36f985d72c208ca1550a7882e9b288">DdBuilder</a> (<a class="el" href="classtdzdd_1_1DdBuilder.html#a0cc8beddcce139de3ea18d007d4c51cb">Spec</a> const &amp;<a class="el" href="classtdzdd_1_1DdBuilder.html#ac88ff5b5c65ec5e467d40f10f40a1a2a">spec</a>, <a class="el" href="classtdzdd_1_1NodeTableHandler.html">NodeTableHandler</a>&lt; <a class="el" href="classtdzdd_1_1DdBuilder.html#ae3e5761748c45266c5a7b32b16128732">AR</a> &gt; &amp;<a class="el" href="classtdzdd_1_1DdBuilder.html#a048b303cfd3306cef4f209e7290109ad">output</a>, int n=0)</td></tr>
-<tr class="separator:aec36f985d72c208ca1550a7882e9b288"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac38b42a5c5621f397d395da8e6ba7752"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtdzdd_1_1DdBuilder.html#ac38b42a5c5621f397d395da8e6ba7752">~DdBuilder</a> ()</td></tr>
-<tr class="separator:ac38b42a5c5621f397d395da8e6ba7752"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa2f984f31a660acedd619e395e276637"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtdzdd_1_1DdBuilder.html#aa2f984f31a660acedd619e395e276637">schedule</a> (<a class="el" href="classtdzdd_1_1NodeId.html">NodeId</a> *fp, int level, void *s)</td></tr>
+<tr class="memitem:aa2f984f31a660acedd619e395e276637"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtdzdd_1_1DdBuilder.html#aa2f984f31a660acedd619e395e276637">schedule</a> (NodeId *fp, int level, void *s)</td></tr>
 <tr class="memdesc:aa2f984f31a660acedd619e395e276637"><td class="mdescLeft">&#160;</td><td class="mdescRight">Schedules a top-down event.  <a href="#aa2f984f31a660acedd619e395e276637">More...</a><br /></td></tr>
 <tr class="separator:aa2f984f31a660acedd619e395e276637"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a07e739141cecad2b065105c1dec72bc8"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtdzdd_1_1DdBuilder.html#a07e739141cecad2b065105c1dec72bc8">initialize</a> (<a class="el" href="classtdzdd_1_1NodeId.html">NodeId</a> &amp;root)</td></tr>
+<tr class="memitem:a07e739141cecad2b065105c1dec72bc8"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtdzdd_1_1DdBuilder.html#a07e739141cecad2b065105c1dec72bc8">initialize</a> (NodeId &amp;root)</td></tr>
 <tr class="memdesc:a07e739141cecad2b065105c1dec72bc8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the builder.  <a href="#a07e739141cecad2b065105c1dec72bc8">More...</a><br /></td></tr>
 <tr class="separator:a07e739141cecad2b065105c1dec72bc8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae0ae5b030beca64092340e4a01025585"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtdzdd_1_1DdBuilder.html#ae0ae5b030beca64092340e4a01025585">construct</a> (int i)</td></tr>
 <tr class="memdesc:ae0ae5b030beca64092340e4a01025585"><td class="mdescLeft">&#160;</td><td class="mdescRight">Builds one level.  <a href="#ae0ae5b030beca64092340e4a01025585">More...</a><br /></td></tr>
 <tr class="separator:ae0ae5b030beca64092340e4a01025585"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-types"></a>
-Private Types</h2></td></tr>
-<tr class="memitem:a0cc8beddcce139de3ea18d007d4c51cb"><td class="memItemLeft" align="right" valign="top">typedef S&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtdzdd_1_1DdBuilder.html#a0cc8beddcce139de3ea18d007d4c51cb">Spec</a></td></tr>
-<tr class="separator:a0cc8beddcce139de3ea18d007d4c51cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a81caac2e4becf3f2c5a13ceccbe06d72"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="classtdzdd_1_1MyHashTable.html">MyHashTable</a>&lt; <a class="el" href="uniontdzdd_1_1DdBuilderBase_1_1SpecNode.html">SpecNode</a> *, <a class="el" href="structtdzdd_1_1DdBuilderBase_1_1Hasher.html">Hasher</a>&lt; <a class="el" href="classtdzdd_1_1DdBuilder.html#a0cc8beddcce139de3ea18d007d4c51cb">Spec</a> &gt;, <a class="el" href="structtdzdd_1_1DdBuilderBase_1_1Hasher.html">Hasher</a>&lt; <a class="el" href="classtdzdd_1_1DdBuilder.html#a0cc8beddcce139de3ea18d007d4c51cb">Spec</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtdzdd_1_1DdBuilder.html#a81caac2e4becf3f2c5a13ceccbe06d72">UniqTable</a></td></tr>
-<tr class="separator:a81caac2e4becf3f2c5a13ceccbe06d72"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
-Private Member Functions</h2></td></tr>
-<tr class="memitem:a756c56790ee4099d2118fd84204d0fba"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtdzdd_1_1DdBuilder.html#a756c56790ee4099d2118fd84204d0fba">init</a> (int n)</td></tr>
-<tr class="separator:a756c56790ee4099d2118fd84204d0fba"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
-Private Attributes</h2></td></tr>
-<tr class="memitem:ac88ff5b5c65ec5e467d40f10f40a1a2a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtdzdd_1_1DdBuilder.html#a0cc8beddcce139de3ea18d007d4c51cb">Spec</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtdzdd_1_1DdBuilder.html#ac88ff5b5c65ec5e467d40f10f40a1a2a">spec</a></td></tr>
-<tr class="separator:ac88ff5b5c65ec5e467d40f10f40a1a2a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8c4d322309c468bd2d28c45564aeb7b8"><td class="memItemLeft" align="right" valign="top">int const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtdzdd_1_1DdBuilder.html#a8c4d322309c468bd2d28c45564aeb7b8">specNodeSize</a></td></tr>
-<tr class="separator:a8c4d322309c468bd2d28c45564aeb7b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a048b303cfd3306cef4f209e7290109ad"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtdzdd_1_1NodeTableEntity.html">NodeTableEntity</a>&lt; <a class="el" href="classtdzdd_1_1DdBuilder.html#ae3e5761748c45266c5a7b32b16128732">AR</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtdzdd_1_1DdBuilder.html#a048b303cfd3306cef4f209e7290109ad">output</a></td></tr>
-<tr class="separator:a048b303cfd3306cef4f209e7290109ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2efeae677d2658407868175c08ee2b71"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtdzdd_1_1DdSweeper.html">DdSweeper</a>&lt; <a class="el" href="classtdzdd_1_1DdBuilder.html#ae3e5761748c45266c5a7b32b16128732">AR</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtdzdd_1_1DdBuilder.html#a2efeae677d2658407868175c08ee2b71">sweeper</a></td></tr>
-<tr class="separator:a2efeae677d2658407868175c08ee2b71"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aab40070e3fed4a602bc4eb845a6555d8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtdzdd_1_1MyVector.html">MyVector</a>&lt; <a class="el" href="classtdzdd_1_1MyList.html">MyList</a>&lt; <a class="el" href="uniontdzdd_1_1DdBuilderBase_1_1SpecNode.html">SpecNode</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtdzdd_1_1DdBuilder.html#aab40070e3fed4a602bc4eb845a6555d8">snodeTable</a></td></tr>
-<tr class="separator:aab40070e3fed4a602bc4eb845a6555d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a82ff449a9cc5b7b6ab3af731007e5530"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtdzdd_1_1MyVector.html">MyVector</a>&lt; char &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtdzdd_1_1DdBuilder.html#a82ff449a9cc5b7b6ab3af731007e5530">oneStorage</a></td></tr>
-<tr class="separator:a82ff449a9cc5b7b6ab3af731007e5530"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad90064e5521176c798888f8f47b4282b"><td class="memItemLeft" align="right" valign="top">void *const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtdzdd_1_1DdBuilder.html#ad90064e5521176c798888f8f47b4282b">one</a></td></tr>
-<tr class="separator:ad90064e5521176c798888f8f47b4282b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a16ea17d6c8a6561a1ef8cc540a63680b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtdzdd_1_1MyVector.html">MyVector</a>&lt; <a class="el" href="structtdzdd_1_1NodeBranchId.html">NodeBranchId</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtdzdd_1_1DdBuilder.html#a16ea17d6c8a6561a1ef8cc540a63680b">oneSrcPtr</a></td></tr>
-<tr class="separator:a16ea17d6c8a6561a1ef8cc540a63680b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-static-attribs"></a>
-Static Private Attributes</h2></td></tr>
-<tr class="memitem:ae3e5761748c45266c5a7b32b16128732"><td class="memItemLeft" align="right" valign="top">static int const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtdzdd_1_1DdBuilder.html#ae3e5761748c45266c5a7b32b16128732">AR</a> = Spec::ARITY</td></tr>
-<tr class="separator:ae3e5761748c45266c5a7b32b16128732"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_static_attribs_classtdzdd_1_1DdBuilderBase"><td colspan="2" onclick="javascript:toggleInherit('pub_static_attribs_classtdzdd_1_1DdBuilderBase')"><img src="closed.png" alt="-"/>&#160;Static Private Attributes inherited from <a class="el" href="classtdzdd_1_1DdBuilderBase.html">tdzdd::DdBuilderBase</a></td></tr>
-<tr class="memitem:afd676d06a52e559e7188a2e86f21ca0b inherit pub_static_attribs_classtdzdd_1_1DdBuilderBase"><td class="memItemLeft" align="right" valign="top">static int const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtdzdd_1_1DdBuilderBase.html#afd676d06a52e559e7188a2e86f21ca0b">headerSize</a> = 1</td></tr>
-<tr class="separator:afd676d06a52e559e7188a2e86f21ca0b inherit pub_static_attribs_classtdzdd_1_1DdBuilderBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
-Additional Inherited Members</h2></td></tr>
-<tr class="inherit_header pub_static_methods_classtdzdd_1_1DdBuilderBase"><td colspan="2" onclick="javascript:toggleInherit('pub_static_methods_classtdzdd_1_1DdBuilderBase')"><img src="closed.png" alt="-"/>&#160;Static Private Member Functions inherited from <a class="el" href="classtdzdd_1_1DdBuilderBase.html">tdzdd::DdBuilderBase</a></td></tr>
-<tr class="memitem:a88be46004548588c2cd73c5aff265b86 inherit pub_static_methods_classtdzdd_1_1DdBuilderBase"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classtdzdd_1_1NodeId.html">NodeId</a> *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtdzdd_1_1DdBuilderBase.html#a88be46004548588c2cd73c5aff265b86">srcPtr</a> (<a class="el" href="uniontdzdd_1_1DdBuilderBase_1_1SpecNode.html">SpecNode</a> *p)</td></tr>
-<tr class="separator:a88be46004548588c2cd73c5aff265b86 inherit pub_static_methods_classtdzdd_1_1DdBuilderBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6d149a0a8010156b6cae096a1745c29c inherit pub_static_methods_classtdzdd_1_1DdBuilderBase"><td class="memItemLeft" align="right" valign="top">static int64_t &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtdzdd_1_1DdBuilderBase.html#a6d149a0a8010156b6cae096a1745c29c">code</a> (<a class="el" href="uniontdzdd_1_1DdBuilderBase_1_1SpecNode.html">SpecNode</a> *p)</td></tr>
-<tr class="separator:a6d149a0a8010156b6cae096a1745c29c inherit pub_static_methods_classtdzdd_1_1DdBuilderBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a08b438b559f1b5abf300231bdd08d62b inherit pub_static_methods_classtdzdd_1_1DdBuilderBase"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classtdzdd_1_1NodeId.html">NodeId</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtdzdd_1_1DdBuilderBase.html#a08b438b559f1b5abf300231bdd08d62b">nodeId</a> (<a class="el" href="uniontdzdd_1_1DdBuilderBase_1_1SpecNode.html">SpecNode</a> *p)</td></tr>
-<tr class="separator:a08b438b559f1b5abf300231bdd08d62b inherit pub_static_methods_classtdzdd_1_1DdBuilderBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a18dea25444d3921d04528ac816398b3a inherit pub_static_methods_classtdzdd_1_1DdBuilderBase"><td class="memItemLeft" align="right" valign="top">static void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtdzdd_1_1DdBuilderBase.html#a18dea25444d3921d04528ac816398b3a">state</a> (<a class="el" href="uniontdzdd_1_1DdBuilderBase_1_1SpecNode.html">SpecNode</a> *p)</td></tr>
-<tr class="separator:a18dea25444d3921d04528ac816398b3a inherit pub_static_methods_classtdzdd_1_1DdBuilderBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0eb579fbfd4aed8dfdb408362ff0f415 inherit pub_static_methods_classtdzdd_1_1DdBuilderBase"><td class="memItemLeft" align="right" valign="top">static void const *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtdzdd_1_1DdBuilderBase.html#a0eb579fbfd4aed8dfdb408362ff0f415">state</a> (<a class="el" href="uniontdzdd_1_1DdBuilderBase_1_1SpecNode.html">SpecNode</a> const *p)</td></tr>
-<tr class="separator:a0eb579fbfd4aed8dfdb408362ff0f415 inherit pub_static_methods_classtdzdd_1_1DdBuilderBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a53b78d870c4b286b54736317a80b054c inherit pub_static_methods_classtdzdd_1_1DdBuilderBase"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtdzdd_1_1DdBuilderBase.html#a53b78d870c4b286b54736317a80b054c">getSpecNodeSize</a> (int n)</td></tr>
-<tr class="separator:a53b78d870c4b286b54736317a80b054c inherit pub_static_methods_classtdzdd_1_1DdBuilderBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;typename S&gt;<br />
@@ -205,141 +119,7 @@ class tdzdd::DdBuilder&lt; S &gt;</h3>
 <p>Basic breadth-first DD builder. </p>
 
 <p>Definition at line <a class="el" href="DdBuilder_8hpp_source.html#l00175">175</a> of file <a class="el" href="DdBuilder_8hpp_source.html">DdBuilder.hpp</a>.</p>
-</div><h2 class="groupheader">Member Typedef Documentation</h2>
-<a class="anchor" id="a0cc8beddcce139de3ea18d007d4c51cb"></a>
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename S&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef S <a class="el" href="classtdzdd_1_1DdBuilder.html">tdzdd::DdBuilder</a>&lt; S &gt;::<a class="el" href="classtdzdd_1_1DdBuilder.html#a0cc8beddcce139de3ea18d007d4c51cb">Spec</a></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Definition at line <a class="el" href="DdBuilder_8hpp_source.html#l00176">176</a> of file <a class="el" href="DdBuilder_8hpp_source.html">DdBuilder.hpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a81caac2e4becf3f2c5a13ceccbe06d72"></a>
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename S&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="classtdzdd_1_1MyHashTable.html">MyHashTable</a>&lt;<a class="el" href="uniontdzdd_1_1DdBuilderBase_1_1SpecNode.html">SpecNode</a>*,<a class="el" href="structtdzdd_1_1DdBuilderBase_1_1Hasher.html">Hasher</a>&lt;<a class="el" href="classtdzdd_1_1DdBuilder.html#a0cc8beddcce139de3ea18d007d4c51cb">Spec</a>&gt;,<a class="el" href="structtdzdd_1_1DdBuilderBase_1_1Hasher.html">Hasher</a>&lt;<a class="el" href="classtdzdd_1_1DdBuilder.html#a0cc8beddcce139de3ea18d007d4c51cb">Spec</a>&gt; &gt; <a class="el" href="classtdzdd_1_1DdBuilder.html">tdzdd::DdBuilder</a>&lt; S &gt;::<a class="el" href="classtdzdd_1_1DdBuilder.html#a81caac2e4becf3f2c5a13ceccbe06d72">UniqTable</a></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Definition at line <a class="el" href="DdBuilder_8hpp_source.html#l00177">177</a> of file <a class="el" href="DdBuilder_8hpp_source.html">DdBuilder.hpp</a>.</p>
-
-</div>
-</div>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="aec36f985d72c208ca1550a7882e9b288"></a>
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename S&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classtdzdd_1_1DdBuilder.html">tdzdd::DdBuilder</a>&lt; S &gt;::<a class="el" href="classtdzdd_1_1DdBuilder.html">DdBuilder</a> </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classtdzdd_1_1DdBuilder.html#a0cc8beddcce139de3ea18d007d4c51cb">Spec</a> const &amp;&#160;</td>
-          <td class="paramname"><em>spec</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="classtdzdd_1_1NodeTableHandler.html">NodeTableHandler</a>&lt; <a class="el" href="classtdzdd_1_1DdBuilder.html#ae3e5761748c45266c5a7b32b16128732">AR</a> &gt; &amp;&#160;</td>
-          <td class="paramname"><em>output</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>n</em> = <code>0</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Definition at line <a class="el" href="DdBuilder_8hpp_source.html#l00198">198</a> of file <a class="el" href="DdBuilder_8hpp_source.html">DdBuilder.hpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="ac38b42a5c5621f397d395da8e6ba7752"></a>
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename S&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classtdzdd_1_1DdBuilder.html">tdzdd::DdBuilder</a>&lt; S &gt;::~<a class="el" href="classtdzdd_1_1DdBuilder.html">DdBuilder</a> </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Definition at line <a class="el" href="DdBuilder_8hpp_source.html#l00208">208</a> of file <a class="el" href="DdBuilder_8hpp_source.html">DdBuilder.hpp</a>.</p>
-
-<p>References <a class="el" href="MyVector_8hpp_source.html#l00290">tdzdd::MyVector&lt; T, Size &gt;::clear()</a>, and <a class="el" href="MyVector_8hpp_source.html#l00190">tdzdd::MyVector&lt; T, Size &gt;::empty()</a>.</p>
-
-<p><div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="classtdzdd_1_1DdBuilder_ac38b42a5c5621f397d395da8e6ba7752_cgraph.png" border="0" usemap="#classtdzdd_1_1DdBuilder_ac38b42a5c5621f397d395da8e6ba7752_cgraph" alt=""/></div>
-<map name="classtdzdd_1_1DdBuilder_ac38b42a5c5621f397d395da8e6ba7752_cgraph" id="classtdzdd_1_1DdBuilder_ac38b42a5c5621f397d395da8e6ba7752_cgraph">
-<area shape="rect" id="node2" href="classtdzdd_1_1MyVector.html#a0c5ed5128517117d2c8aad0942a0f46e" title="Initializes the array to be empty. " alt="" coords="184,5,339,32"/>
-<area shape="rect" id="node3" href="classtdzdd_1_1MyVector.html#a647b5b844ce2c1e9c9b20ee82de844e4" title="Checks emptiness. " alt="" coords="180,56,343,83"/>
-</map>
-</div>
-</p>
-
-</div>
-</div>
-<h2 class="groupheader">Member Function Documentation</h2>
+</div><h2 class="groupheader">Member Function Documentation</h2>
 <a class="anchor" id="ae0ae5b030beca64092340e4a01025585"></a>
 <div class="memitem">
 <div class="memproto">
@@ -374,68 +154,16 @@ template&lt;typename S&gt; </div>
 
 <p>Definition at line <a class="el" href="DdBuilder_8hpp_source.html#l00258">258</a> of file <a class="el" href="DdBuilder_8hpp_source.html">DdBuilder.hpp</a>.</p>
 
-<p>References <a class="el" href="MyVector_8hpp_source.html#l00338">tdzdd::MyVector&lt; T, Size &gt;::back()</a>, <a class="el" href="MyList_8hpp_source.html#l00263">tdzdd::MyList&lt; T, BLOCK_ELEMENTS &gt;::begin()</a>, <a class="el" href="Node_8hpp_source.html#l00149">tdzdd::Node&lt; ARITY &gt;::branch</a>, <a class="el" href="Node_8hpp_source.html#l00135">tdzdd::NodeBranchId::col</a>, <a class="el" href="MyVector_8hpp_source.html#l00190">tdzdd::MyVector&lt; T, Size &gt;::empty()</a>, <a class="el" href="DdBuilder_8hpp_source.html#l00071">tdzdd::DdBuilderBase::nodeId()</a>, <a class="el" href="MyVector_8hpp_source.html#l00317">tdzdd::MyVector&lt; T, Size &gt;::pop_back()</a>, <a class="el" href="MyVector_8hpp_source.html#l00308">tdzdd::MyVector&lt; T, Size &gt;::push_back()</a>, <a class="el" href="Node_8hpp_source.html#l00136">tdzdd::NodeBranchId::row</a>, <a class="el" href="NodeTable_8hpp_source.html#l00100">tdzdd::NodeTableEntity&lt; ARITY &gt;::size()</a>, <a class="el" href="MyVector_8hpp_source.html#l00182">tdzdd::MyVector&lt; T, Size &gt;::size()</a>, <a class="el" href="DdBuilder_8hpp_source.html#l00059">tdzdd::DdBuilderBase::SpecNode::srcPtr</a>, <a class="el" href="DdBuilder_8hpp_source.html#l00075">tdzdd::DdBuilderBase::state()</a>, <a class="el" href="DdSweeper_8hpp_source.html#l00092">tdzdd::DdSweeper&lt; ARITY &gt;::update()</a>, and <a class="el" href="Node_8hpp_source.html#l00137">tdzdd::NodeBranchId::val</a>.</p>
+<p>References <a class="el" href="DdSweeper_8hpp_source.html#l00092">tdzdd::DdSweeper&lt; ARITY &gt;::update()</a>.</p>
 
-<p>Referenced by <a class="el" href="DdStructure_8hpp_source.html#l00116">tdzdd::DdStructure&lt; ARITY &gt;::construct_()</a>.</p>
+<p>Referenced by <a class="el" href="DdStructure_8hpp_source.html#l00105">tdzdd::DdStructure&lt; ARITY &gt;::DdStructure()</a>.</p>
 
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classtdzdd_1_1DdBuilder_ae0ae5b030beca64092340e4a01025585_cgraph.png" border="0" usemap="#classtdzdd_1_1DdBuilder_ae0ae5b030beca64092340e4a01025585_cgraph" alt=""/></div>
 <map name="classtdzdd_1_1DdBuilder_ae0ae5b030beca64092340e4a01025585_cgraph" id="classtdzdd_1_1DdBuilder_ae0ae5b030beca64092340e4a01025585_cgraph">
-<area shape="rect" id="node2" href="classtdzdd_1_1MyVector.html#afff7f2f41f494974b529b75a2bd07ede" title="Accesses to the last element. " alt="" coords="252,5,407,32"/>
-<area shape="rect" id="node3" href="classtdzdd_1_1MyList.html#aeb893c54b3a8bb5fe9b0f7257ed1cb33" title="Returns an iterator to the beginning. " alt="" coords="259,56,399,83"/>
-<area shape="rect" id="node4" href="classtdzdd_1_1MyVector.html#a647b5b844ce2c1e9c9b20ee82de844e4" title="Checks emptiness. " alt="" coords="248,107,411,133"/>
-<area shape="rect" id="node5" href="classtdzdd_1_1DdBuilderBase.html#a08b438b559f1b5abf300231bdd08d62b" title="tdzdd::DdBuilderBase\l::nodeId" alt="" coords="255,158,404,199"/>
-<area shape="rect" id="node6" href="classtdzdd_1_1MyVector.html#ac6bb8583b313f31eef6752e157092322" title="Removes the last element. " alt="" coords="238,224,421,251"/>
-<area shape="rect" id="node7" href="classtdzdd_1_1MyVector.html#acb92d503a925d9e3295b3bf9119b4078" title="Adds an element to the end of the array. " alt="" coords="235,275,424,301"/>
-<area shape="rect" id="node8" href="classtdzdd_1_1NodeTableEntity.html#a27c35d15eb2c09be9bb23379c0e89fd8" title="Gets the variable ID at a given level. " alt="" coords="250,326,409,367"/>
-<area shape="rect" id="node9" href="classtdzdd_1_1MyVector.html#a9c4a114cfc4bd722b41b74a75a83a072" title="Gets the number of elements. " alt="" coords="254,392,405,419"/>
-<area shape="rect" id="node10" href="classtdzdd_1_1DdBuilderBase.html#a18dea25444d3921d04528ac816398b3a" title="tdzdd::DdBuilderBase\l::state" alt="" coords="255,443,404,485"/>
-<area shape="rect" id="node11" href="classtdzdd_1_1DdSweeper.html#a295c6139226becedd470a12a67c5c051" title="Updates status and sweeps the DD if necessary. " alt="" coords="241,509,418,536"/>
-</map>
-</div>
-</p>
-
-</div>
-</div>
-<a class="anchor" id="a756c56790ee4099d2118fd84204d0fba"></a>
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename S&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void <a class="el" href="classtdzdd_1_1DdBuilder.html">tdzdd::DdBuilder</a>&lt; S &gt;::init </td>
-          <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>n</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Definition at line <a class="el" href="DdBuilder_8hpp_source.html#l00191">191</a> of file <a class="el" href="DdBuilder_8hpp_source.html">DdBuilder.hpp</a>.</p>
-
-<p>References <a class="el" href="MyVector_8hpp_source.html#l00290">tdzdd::MyVector&lt; T, Size &gt;::clear()</a>, <a class="el" href="DataTable_8hpp_source.html#l00148">tdzdd::DataTable&lt; T &gt;::numRows()</a>, <a class="el" href="MyVector_8hpp_source.html#l00230">tdzdd::MyVector&lt; T, Size &gt;::resize()</a>, and <a class="el" href="DataTable_8hpp_source.html#l00100">tdzdd::DataTable&lt; T &gt;::setNumRows()</a>.</p>
-
-<p><div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="classtdzdd_1_1DdBuilder_a756c56790ee4099d2118fd84204d0fba_cgraph.png" border="0" usemap="#classtdzdd_1_1DdBuilder_a756c56790ee4099d2118fd84204d0fba_cgraph" alt=""/></div>
-<map name="classtdzdd_1_1DdBuilder_a756c56790ee4099d2118fd84204d0fba_cgraph" id="classtdzdd_1_1DdBuilder_a756c56790ee4099d2118fd84204d0fba_cgraph">
-<area shape="rect" id="node2" href="classtdzdd_1_1MyVector.html#a0c5ed5128517117d2c8aad0942a0f46e" title="Initializes the array to be empty. " alt="" coords="225,5,380,32"/>
-<area shape="rect" id="node3" href="classtdzdd_1_1DataTable.html#ab6865dc6b97cb2ca6bc9ea4583a6ef52" title="Gets the number of rows. " alt="" coords="208,56,397,83"/>
-<area shape="rect" id="node4" href="classtdzdd_1_1MyVector.html#a174ab16542ec6acd810771772ec3982f" title="Resizes the array. " alt="" coords="222,107,383,133"/>
-<area shape="rect" id="node5" href="classtdzdd_1_1DataTable.html#a6daa591ded7b5ce7abf24b543293cf70" title="Resizes the table rows. " alt="" coords="197,157,408,184"/>
+<area shape="rect" id="node2" href="classtdzdd_1_1DdSweeper.html#a295c6139226becedd470a12a67c5c051" title="Updates status and sweeps the DD if necessary. " alt="" coords="235,5,412,32"/>
 </map>
 </div>
 </p>
@@ -454,7 +182,7 @@ template&lt;typename S&gt; </div>
         <tr>
           <td class="memname">int <a class="el" href="classtdzdd_1_1DdBuilder.html">tdzdd::DdBuilder</a>&lt; S &gt;::initialize </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classtdzdd_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
+          <td class="paramtype">NodeId &amp;&#160;</td>
           <td class="paramname"><em>root</em></td><td>)</td>
           <td></td>
         </tr>
@@ -476,19 +204,16 @@ template&lt;typename S&gt; </div>
 
 <p>Definition at line <a class="el" href="DdBuilder_8hpp_source.html#l00231">231</a> of file <a class="el" href="DdBuilder_8hpp_source.html">DdBuilder.hpp</a>.</p>
 
-<p>References <a class="el" href="MyVector_8hpp_source.html#l00290">tdzdd::MyVector&lt; T, Size &gt;::clear()</a>, <a class="el" href="MyVector_8hpp_source.html#l00376">tdzdd::MyVector&lt; T, Size &gt;::data()</a>, <a class="el" href="MyVector_8hpp_source.html#l00190">tdzdd::MyVector&lt; T, Size &gt;::empty()</a>, and <a class="el" href="DdSweeper_8hpp_source.html#l00082">tdzdd::DdSweeper&lt; ARITY &gt;::setRoot()</a>.</p>
+<p>References <a class="el" href="DdSweeper_8hpp_source.html#l00082">tdzdd::DdSweeper&lt; ARITY &gt;::setRoot()</a>.</p>
 
-<p>Referenced by <a class="el" href="DdStructure_8hpp_source.html#l00116">tdzdd::DdStructure&lt; ARITY &gt;::construct_()</a>.</p>
+<p>Referenced by <a class="el" href="DdStructure_8hpp_source.html#l00105">tdzdd::DdStructure&lt; ARITY &gt;::DdStructure()</a>.</p>
 
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classtdzdd_1_1DdBuilder_a07e739141cecad2b065105c1dec72bc8_cgraph.png" border="0" usemap="#classtdzdd_1_1DdBuilder_a07e739141cecad2b065105c1dec72bc8_cgraph" alt=""/></div>
 <map name="classtdzdd_1_1DdBuilder_a07e739141cecad2b065105c1dec72bc8_cgraph" id="classtdzdd_1_1DdBuilder_a07e739141cecad2b065105c1dec72bc8_cgraph">
-<area shape="rect" id="node2" href="classtdzdd_1_1MyVector.html#a0c5ed5128517117d2c8aad0942a0f46e" title="Initializes the array to be empty. " alt="" coords="243,5,397,32"/>
-<area shape="rect" id="node3" href="classtdzdd_1_1MyVector.html#a6a5885c2e81b0a363ba5efd8d4cd6043" title="Gets a pointer to the first element. " alt="" coords="245,56,395,83"/>
-<area shape="rect" id="node4" href="classtdzdd_1_1MyVector.html#a647b5b844ce2c1e9c9b20ee82de844e4" title="Checks emptiness. " alt="" coords="239,107,401,133"/>
-<area shape="rect" id="node5" href="classtdzdd_1_1DdSweeper.html#a17f47e73ac3492145e4b354aafc1ab81" title="Set the root pointer. " alt="" coords="228,157,412,184"/>
+<area shape="rect" id="node2" href="classtdzdd_1_1DdSweeper.html#a17f47e73ac3492145e4b354aafc1ab81" title="Set the root pointer. " alt="" coords="228,5,412,32"/>
 </map>
 </div>
 </p>
@@ -507,7 +232,7 @@ template&lt;typename S&gt; </div>
         <tr>
           <td class="memname">void <a class="el" href="classtdzdd_1_1DdBuilder.html">tdzdd::DdBuilder</a>&lt; S &gt;::schedule </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classtdzdd_1_1NodeId.html">NodeId</a> *&#160;</td>
+          <td class="paramtype">NodeId *&#160;</td>
           <td class="paramname"><em>fp</em>, </td>
         </tr>
         <tr>
@@ -547,235 +272,6 @@ template&lt;typename S&gt; </div>
 
 <p>Definition at line <a class="el" href="DdBuilder_8hpp_source.html#l00221">221</a> of file <a class="el" href="DdBuilder_8hpp_source.html">DdBuilder.hpp</a>.</p>
 
-<p>References <a class="el" href="DdBuilder_8hpp_source.html#l00059">tdzdd::DdBuilderBase::SpecNode::srcPtr</a>, and <a class="el" href="DdBuilder_8hpp_source.html#l00075">tdzdd::DdBuilderBase::state()</a>.</p>
-
-<p><div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="classtdzdd_1_1DdBuilder_aa2f984f31a660acedd619e395e276637_cgraph.png" border="0" usemap="#classtdzdd_1_1DdBuilder_aa2f984f31a660acedd619e395e276637_cgraph" alt=""/></div>
-<map name="classtdzdd_1_1DdBuilder_aa2f984f31a660acedd619e395e276637_cgraph" id="classtdzdd_1_1DdBuilder_aa2f984f31a660acedd619e395e276637_cgraph">
-<area shape="rect" id="node2" href="classtdzdd_1_1DdBuilderBase.html#a18dea25444d3921d04528ac816398b3a" title="tdzdd::DdBuilderBase\l::state" alt="" coords="232,5,381,47"/>
-</map>
-</div>
-</p>
-
-</div>
-</div>
-<h2 class="groupheader">Member Data Documentation</h2>
-<a class="anchor" id="ae3e5761748c45266c5a7b32b16128732"></a>
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename S&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">int const <a class="el" href="classtdzdd_1_1DdBuilder.html">tdzdd::DdBuilder</a>&lt; S &gt;::AR = Spec::ARITY</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Definition at line <a class="el" href="DdBuilder_8hpp_source.html#l00178">178</a> of file <a class="el" href="DdBuilder_8hpp_source.html">DdBuilder.hpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="ad90064e5521176c798888f8f47b4282b"></a>
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename S&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void* const <a class="el" href="classtdzdd_1_1DdBuilder.html">tdzdd::DdBuilder</a>&lt; S &gt;::one</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Definition at line <a class="el" href="DdBuilder_8hpp_source.html#l00188">188</a> of file <a class="el" href="DdBuilder_8hpp_source.html">DdBuilder.hpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a16ea17d6c8a6561a1ef8cc540a63680b"></a>
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename S&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classtdzdd_1_1MyVector.html">MyVector</a>&lt;<a class="el" href="structtdzdd_1_1NodeBranchId.html">NodeBranchId</a>&gt; <a class="el" href="classtdzdd_1_1DdBuilder.html">tdzdd::DdBuilder</a>&lt; S &gt;::oneSrcPtr</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Definition at line <a class="el" href="DdBuilder_8hpp_source.html#l00189">189</a> of file <a class="el" href="DdBuilder_8hpp_source.html">DdBuilder.hpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a82ff449a9cc5b7b6ab3af731007e5530"></a>
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename S&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classtdzdd_1_1MyVector.html">MyVector</a>&lt;char&gt; <a class="el" href="classtdzdd_1_1DdBuilder.html">tdzdd::DdBuilder</a>&lt; S &gt;::oneStorage</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Definition at line <a class="el" href="DdBuilder_8hpp_source.html#l00187">187</a> of file <a class="el" href="DdBuilder_8hpp_source.html">DdBuilder.hpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a048b303cfd3306cef4f209e7290109ad"></a>
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename S&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classtdzdd_1_1NodeTableEntity.html">NodeTableEntity</a>&lt;<a class="el" href="classtdzdd_1_1DdBuilder.html#ae3e5761748c45266c5a7b32b16128732">AR</a>&gt;&amp; <a class="el" href="classtdzdd_1_1DdBuilder.html">tdzdd::DdBuilder</a>&lt; S &gt;::output</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Definition at line <a class="el" href="DdBuilder_8hpp_source.html#l00182">182</a> of file <a class="el" href="DdBuilder_8hpp_source.html">DdBuilder.hpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="aab40070e3fed4a602bc4eb845a6555d8"></a>
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename S&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classtdzdd_1_1MyVector.html">MyVector</a>&lt;<a class="el" href="classtdzdd_1_1MyList.html">MyList</a>&lt;<a class="el" href="uniontdzdd_1_1DdBuilderBase_1_1SpecNode.html">SpecNode</a>&gt; &gt; <a class="el" href="classtdzdd_1_1DdBuilder.html">tdzdd::DdBuilder</a>&lt; S &gt;::snodeTable</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Definition at line <a class="el" href="DdBuilder_8hpp_source.html#l00185">185</a> of file <a class="el" href="DdBuilder_8hpp_source.html">DdBuilder.hpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="ac88ff5b5c65ec5e467d40f10f40a1a2a"></a>
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename S&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classtdzdd_1_1DdBuilder.html#a0cc8beddcce139de3ea18d007d4c51cb">Spec</a> <a class="el" href="classtdzdd_1_1DdBuilder.html">tdzdd::DdBuilder</a>&lt; S &gt;::spec</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Definition at line <a class="el" href="DdBuilder_8hpp_source.html#l00180">180</a> of file <a class="el" href="DdBuilder_8hpp_source.html">DdBuilder.hpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a8c4d322309c468bd2d28c45564aeb7b8"></a>
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename S&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">int const <a class="el" href="classtdzdd_1_1DdBuilder.html">tdzdd::DdBuilder</a>&lt; S &gt;::specNodeSize</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Definition at line <a class="el" href="DdBuilder_8hpp_source.html#l00181">181</a> of file <a class="el" href="DdBuilder_8hpp_source.html">DdBuilder.hpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a2efeae677d2658407868175c08ee2b71"></a>
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename S&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classtdzdd_1_1DdSweeper.html">DdSweeper</a>&lt;<a class="el" href="classtdzdd_1_1DdBuilder.html#ae3e5761748c45266c5a7b32b16128732">AR</a>&gt; <a class="el" href="classtdzdd_1_1DdBuilder.html">tdzdd::DdBuilder</a>&lt; S &gt;::sweeper</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Definition at line <a class="el" href="DdBuilder_8hpp_source.html#l00183">183</a> of file <a class="el" href="DdBuilder_8hpp_source.html">DdBuilder.hpp</a>.</p>
-
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
@@ -784,7 +280,7 @@ template&lt;typename S&gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Aug 27 2017 12:37:36 for TdZdd by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Sep 5 2017 14:21:42 for TdZdd by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.11
 </small></address>

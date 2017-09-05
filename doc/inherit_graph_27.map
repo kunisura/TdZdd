@@ -1,6 +1,4 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classtdzdd_1_1DdSpecBase.html" title="tdzdd::DdSpecBase\&lt;\l BddUnreduction\&lt; S \&gt;\l, AR \&gt;" alt="" coords="5,5,157,61"/>
-<area shape="rect" id="node2" href="$classtdzdd_1_1PodArrayDdSpec.html" title="tdzdd::PodArrayDdSpec\l\&lt; BddUnreduction\&lt; S \&gt;\l, size_t, S::ARITY \&gt;" alt="" coords="205,5,368,61"/>
-<area shape="rect" id="node3" href="$classtdzdd_1_1Unreduction__.html" title="tdzdd::Unreduction\l_\&lt; BddUnreduction\&lt; S\l \&gt;, S, false \&gt;" alt="" coords="416,5,571,61"/>
-<area shape="rect" id="node4" href="$structtdzdd_1_1BddUnreduction.html" title="tdzdd::BddUnreduction\&lt; S \&gt;" alt="" coords="619,20,807,47"/>
+<area shape="rect" id="node1" href="$classtdzdd_1_1DdSpecBase.html" title="tdzdd::DdSpecBase\&lt;\l ZddUnreduction\&lt; S \&gt;\l, AR \&gt;" alt="" coords="5,5,156,61"/>
+<area shape="rect" id="node2" href="$classtdzdd_1_1PodArrayDdSpec.html" title="tdzdd::PodArrayDdSpec\l\&lt; ZddUnreduction\&lt; S \&gt;\l, size_t, S::ARITY \&gt;" alt="" coords="204,5,367,61"/>
 </map>

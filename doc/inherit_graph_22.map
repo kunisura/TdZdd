@@ -1,4 +1,9 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classtdzdd_1_1DdEval.html" title="tdzdd::DdEval\&lt; ToZBDD,\l ZBDD \&gt;" alt="" coords="5,5,179,47"/>
-<area shape="rect" id="node2" href="$structtdzdd_1_1ToZBDD.html" title="Exporter to ZBDD. " alt="" coords="227,13,341,39"/>
+<area shape="rect" id="node1" href="$classtdzdd_1_1DdSpecBase.html" title="Base class of DD specs. " alt="" coords="5,169,152,211"/>
+<area shape="rect" id="node2" href="$classtdzdd_1_1PodArrayDdSpec.html" title="tdzdd::PodArrayDdSpec\l\&lt; S, int16_t, 2 \&gt;" alt="" coords="201,5,363,47"/>
+<area shape="rect" id="node3" href="$classtdzdd_1_1PodArrayDdSpec.html" title="tdzdd::PodArrayDdSpec\l\&lt; S, size_t, 2 \&gt;" alt="" coords="201,71,363,112"/>
+<area shape="rect" id="node4" href="$classtdzdd_1_1DdSpec.html" title="Abstract class of DD specifications using scalar states. " alt="" coords="207,136,357,177"/>
+<area shape="rect" id="node5" href="$classtdzdd_1_1HybridDdSpec.html" title="Abstract class of DD specifications using both scalar and POD array states. " alt="" coords="209,201,355,243"/>
+<area shape="rect" id="node6" href="$classtdzdd_1_1PodArrayDdSpec.html" title="Abstract class of DD specifications using POD array states. " alt="" coords="201,267,363,308"/>
+<area shape="rect" id="node7" href="$classtdzdd_1_1StatelessDdSpec.html" title="Abstract class of DD specifications without states. " alt="" coords="200,332,364,373"/>
 </map>

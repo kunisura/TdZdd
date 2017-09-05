@@ -1,3 +1,4 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classtdzdd_1_1DdDumper.html" title="DD dumper. " alt="" coords="5,5,164,32"/>
+<area shape="rect" id="node1" href="$classtdzdd_1_1DdSpecBase.html" title="tdzdd::DdSpecBase\&lt;\l DegreeConstraint, AR \&gt;" alt="" coords="5,13,172,54"/>
+<area shape="rect" id="node2" href="$classtdzdd_1_1PodArrayDdSpec.html" title="tdzdd::PodArrayDdSpec\l\&lt; DegreeConstraint, int16\l_t, 2 \&gt;" alt="" coords="220,5,392,61"/>
 </map>
