@@ -350,8 +350,10 @@ int main(int argc, char *argv[]) {
         }
 
 #ifdef SAPPORO
+        BDD_Init(f.size() + 100, f.size() + 100);
         m1.begin("Converting to SAPPOROBDD") << " ...";
         ZBDD sapporo = f.evaluate(ToZBDD());
+        assert(sapporo != ZBDD(-1));
         m1.end(sapporo.Size());
 #endif
         m0.end("finished");
