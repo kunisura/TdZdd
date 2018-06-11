@@ -95,14 +95,25 @@ public:
 
 public:
     /**
-     * Dumps the node table in Graphviz (dot) format.
+     * Dumps the diagram in Graphviz (DOT) format.
      * @param os the output stream.
      * @param title title label.
      */
-    void dumpDot(std::ostream& os = std::cout, std::string title =
-            typenameof<S>()) const {
+    void dumpDot(std::ostream& os = std::cout,
+                 std::string title = typenameof<S>()) const {
         DdDumper<S> dumper(entity());
         dumper.dump(os, title);
+    }
+
+    /**
+     * Makes an input code for Graphviz.
+     * @param title title label.
+     * @return DOT code
+     */
+    std::string dot(std::string title = typenameof<S>()) const {
+        std::stringstream s;
+        dumpDot(s, title);
+        return s.str();
     }
 
     /**
@@ -581,7 +592,7 @@ public:
 
     int merge_states(void* p1, void* p2) {
         return this->entity().mergeStates(s_state(p1), a_state(p1), s_state(p2),
-                a_state(p2));
+                                          a_state(p2));
     }
 
     void destruct(void* p) {
@@ -633,8 +644,9 @@ public:
         return true;
     }
 
-    void printState(std::ostream& os, S_State const& s,
-            A_State const* a) const {
+    void printState(std::ostream& os,
+                    S_State const& s,
+                    A_State const* a) const {
         os << "[" << s << ":";
         for (int i = 0; i < arraySize; ++i) {
             if (i > 0) os << ",";
@@ -643,8 +655,10 @@ public:
         os << "]";
     }
 
-    void printStateAtLevel(std::ostream& os, S_State const& s, A_State const* a,
-            int level) const {
+    void printStateAtLevel(std::ostream& os,
+                           S_State const& s,
+                           A_State const* a,
+                           int level) const {
         this->entity().printState(os, s, a);
     }
 
