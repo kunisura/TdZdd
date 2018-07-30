@@ -1370,7 +1370,6 @@ public:
 
             snodeTable.init(n + 1);
             SpecNode* p = snodeTable[n].alloc_front(specNodeSize);
-            spec.destruct(oneState);
             spec.get_copy(state(p), oneState);
             nodeId(p) = root;
 
