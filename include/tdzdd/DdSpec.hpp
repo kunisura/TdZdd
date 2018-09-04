@@ -93,7 +93,6 @@ public:
         return DepthFirstSearcher<S>(entity()).findOneInstance();
     }
 
-public:
     /**
      * Dumps the diagram in Graphviz (DOT) format.
      * @param os the output stream.
@@ -323,7 +322,8 @@ public:
     }
 
     bool equalTo(State const& s1, State const& s2) const {
-        return this->rawEqualTo(s1, s2);
+        //return this->rawEqualTo(s1, s2);
+        return s1 == s2;
     }
 
     bool equalToAtLevel(State const& s1, State const& s2, int level) const {
@@ -360,6 +360,8 @@ public:
  *
  * Optionally, the following functions can be overloaded:
  * - void mergeStates(T* array1, T* array2)
+ * - size_t hashCode(T const* state) const
+ * - bool equalTo(T const* state1, T const* state2) const
  * - void printLevel(std::ostream& os, int level) const
  * - void printState(std::ostream& os, State const* array) const
  *
@@ -444,8 +446,8 @@ public:
     void destructLevel(int level) {
     }
 
-    size_t hash_code(void const* p, int level) const {
-        Word const* pa = static_cast<Word const*>(p);
+    size_t hashCode(State const* s) const {
+        Word const* pa = reinterpret_cast<Word const*>(s);
         Word const* pz = pa + dataWords;
         size_t h = 0;
         while (pa != pz) {
@@ -455,14 +457,30 @@ public:
         return h;
     }
 
-    bool equal_to(void const* p, void const* q, int level) const {
-        Word const* pa = static_cast<Word const*>(p);
-        Word const* qa = static_cast<Word const*>(q);
+    size_t hashCodeAtLevel(State const* s, int level) const {
+        return this->entity().hashCode(s);
+    }
+
+    size_t hash_code(void const* p, int level) const {
+        return this->entity().hashCodeAtLevel(state(p), level);
+    }
+
+    bool equalTo(State const* s1, State const* s2) const {
+        Word const* pa = reinterpret_cast<Word const*>(s1);
+        Word const* qa = reinterpret_cast<Word const*>(s1);
         Word const* pz = pa + dataWords;
         while (pa != pz) {
             if (*pa++ != *qa++) return false;
         }
         return true;
+    }
+
+    bool equalToAtLevel(State const* s1, State const* s2, int level) const {
+        return this->entity().equalTo(s1, s2);
+    }
+
+    bool equal_to(void const* p, void const* q, int level) const {
+        return this->entity().equalToAtLevel(state(p), state(q), level);
     }
 
     void printState(std::ostream& os, State const* a) const {

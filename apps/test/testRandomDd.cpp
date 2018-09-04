@@ -59,11 +59,15 @@ void do_test(int n, int w, double d) {
     ASSERT_EQ(zdd, zqd);
 
     DdStructure<A> zbd = bdd.bdd2zdd(n);
-    if (bdd != zdd) ASSERT_NE(bdd, zbd);
+    if (bdd != zdd) {
+        ASSERT_NE(bdd, zbd);
+    }
     ASSERT_EQ(zdd, zbd);
 
     DdStructure<A> bzd = zdd.zdd2bdd(n);
-    if (bdd != zdd) ASSERT_NE(zdd, bzd);
+    if (bdd != zdd) {
+        ASSERT_NE(zdd, bzd);
+    }
     ASSERT_EQ(bdd, bzd);
 }
 
