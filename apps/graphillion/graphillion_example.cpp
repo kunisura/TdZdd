@@ -234,14 +234,14 @@ int main(int argc, char *argv[]) {
         }
 
         FrontierBasedSearch fbs(g, optNum["uec"], opt["noloop"], !opt["nola"]);
-        ZddIntersection<typeof(dc),typeof(fbs)> dfbs(dc, fbs);
+        ZddIntersection<decltype(dc),decltype(fbs)> dfbs(dc, fbs);
 
         DdStructure<2> dd;
 
         if (opt["lb"] || opt["ub"]) {
             IntRange r(optNum["lb"], optNum["ub"]);
             SizeConstraint sc(g.edgeSize(), &r);
-            ZddIntersection<typeof(sc),typeof(dfbs)> sdfbs(sc, dfbs);
+            ZddIntersection<decltype(sc),decltype(dfbs)> sdfbs(sc, dfbs);
 
             if (opt["import"]) {
                 dd = DdStructure<2>(base);

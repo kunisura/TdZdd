@@ -150,6 +150,82 @@ example1-11-debug.o: example1.cpp ../../include/tdzdd/DdStructure.hpp \
  ../../include/tdzdd/eval/../util/BigNumber.hpp \
  ../../include/tdzdd/op/Lookahead.hpp \
  ../../include/tdzdd/op/Unreduction.hpp
+example2.o: example2.cpp ../../include/tdzdd/DdStructure.hpp \
+ ../../include/tdzdd/DdEval.hpp ../../include/tdzdd/DdSpec.hpp \
+ ../../include/tdzdd/dd/DdBuilder.hpp \
+ ../../include/tdzdd/dd/DdSweeper.hpp ../../include/tdzdd/dd/Node.hpp \
+ ../../include/tdzdd/dd/NodeTable.hpp \
+ ../../include/tdzdd/dd/DataTable.hpp \
+ ../../include/tdzdd/dd/../util/MyVector.hpp \
+ ../../include/tdzdd/dd/../util/MessageHandler.hpp \
+ ../../include/tdzdd/dd/../util/ResourceUsage.hpp \
+ ../../include/tdzdd/dd/../util/MemoryPool.hpp \
+ ../../include/tdzdd/dd/../util/MyHashTable.hpp \
+ ../../include/tdzdd/dd/../util/MyList.hpp \
+ ../../include/tdzdd/dd/DepthFirstSearcher.hpp \
+ ../../include/tdzdd/util/demangle.hpp \
+ ../../include/tdzdd/dd/DdReducer.hpp \
+ ../../include/tdzdd/eval/Cardinality.hpp \
+ ../../include/tdzdd/eval/../util/BigNumber.hpp \
+ ../../include/tdzdd/op/Lookahead.hpp \
+ ../../include/tdzdd/op/Unreduction.hpp
+example2-debug.o: example2.cpp ../../include/tdzdd/DdStructure.hpp \
+ ../../include/tdzdd/DdEval.hpp ../../include/tdzdd/DdSpec.hpp \
+ ../../include/tdzdd/dd/DdBuilder.hpp \
+ ../../include/tdzdd/dd/DdSweeper.hpp ../../include/tdzdd/dd/Node.hpp \
+ ../../include/tdzdd/dd/NodeTable.hpp \
+ ../../include/tdzdd/dd/DataTable.hpp \
+ ../../include/tdzdd/dd/../util/MyVector.hpp \
+ ../../include/tdzdd/dd/../util/MessageHandler.hpp \
+ ../../include/tdzdd/dd/../util/ResourceUsage.hpp \
+ ../../include/tdzdd/dd/../util/MemoryPool.hpp \
+ ../../include/tdzdd/dd/../util/MyHashTable.hpp \
+ ../../include/tdzdd/dd/../util/MyList.hpp \
+ ../../include/tdzdd/dd/DepthFirstSearcher.hpp \
+ ../../include/tdzdd/util/demangle.hpp \
+ ../../include/tdzdd/dd/DdReducer.hpp \
+ ../../include/tdzdd/eval/Cardinality.hpp \
+ ../../include/tdzdd/eval/../util/BigNumber.hpp \
+ ../../include/tdzdd/op/Lookahead.hpp \
+ ../../include/tdzdd/op/Unreduction.hpp
+example2-11.o: example2.cpp ../../include/tdzdd/DdStructure.hpp \
+ ../../include/tdzdd/DdEval.hpp ../../include/tdzdd/DdSpec.hpp \
+ ../../include/tdzdd/dd/DdBuilder.hpp \
+ ../../include/tdzdd/dd/DdSweeper.hpp ../../include/tdzdd/dd/Node.hpp \
+ ../../include/tdzdd/dd/NodeTable.hpp \
+ ../../include/tdzdd/dd/DataTable.hpp \
+ ../../include/tdzdd/dd/../util/MyVector.hpp \
+ ../../include/tdzdd/dd/../util/MessageHandler.hpp \
+ ../../include/tdzdd/dd/../util/ResourceUsage.hpp \
+ ../../include/tdzdd/dd/../util/MemoryPool.hpp \
+ ../../include/tdzdd/dd/../util/MyHashTable.hpp \
+ ../../include/tdzdd/dd/../util/MyList.hpp \
+ ../../include/tdzdd/dd/DepthFirstSearcher.hpp \
+ ../../include/tdzdd/util/demangle.hpp \
+ ../../include/tdzdd/dd/DdReducer.hpp \
+ ../../include/tdzdd/eval/Cardinality.hpp \
+ ../../include/tdzdd/eval/../util/BigNumber.hpp \
+ ../../include/tdzdd/op/Lookahead.hpp \
+ ../../include/tdzdd/op/Unreduction.hpp
+example2-11-debug.o: example2.cpp ../../include/tdzdd/DdStructure.hpp \
+ ../../include/tdzdd/DdEval.hpp ../../include/tdzdd/DdSpec.hpp \
+ ../../include/tdzdd/dd/DdBuilder.hpp \
+ ../../include/tdzdd/dd/DdSweeper.hpp ../../include/tdzdd/dd/Node.hpp \
+ ../../include/tdzdd/dd/NodeTable.hpp \
+ ../../include/tdzdd/dd/DataTable.hpp \
+ ../../include/tdzdd/dd/../util/MyVector.hpp \
+ ../../include/tdzdd/dd/../util/MessageHandler.hpp \
+ ../../include/tdzdd/dd/../util/ResourceUsage.hpp \
+ ../../include/tdzdd/dd/../util/MemoryPool.hpp \
+ ../../include/tdzdd/dd/../util/MyHashTable.hpp \
+ ../../include/tdzdd/dd/../util/MyList.hpp \
+ ../../include/tdzdd/dd/DepthFirstSearcher.hpp \
+ ../../include/tdzdd/util/demangle.hpp \
+ ../../include/tdzdd/dd/DdReducer.hpp \
+ ../../include/tdzdd/eval/Cardinality.hpp \
+ ../../include/tdzdd/eval/../util/BigNumber.hpp \
+ ../../include/tdzdd/op/Lookahead.hpp \
+ ../../include/tdzdd/op/Unreduction.hpp
 testSizeConstraint.o: testSizeConstraint.cpp \
  ../../include/tdzdd/DdStructure.hpp ../../include/tdzdd/DdEval.hpp \
  ../../include/tdzdd/DdSpec.hpp ../../include/tdzdd/dd/DdBuilder.hpp \
@@ -238,82 +314,6 @@ testSizeConstraint-11-debug.o: testSizeConstraint.cpp \
  ../../include/tdzdd/op/BinaryOperation.hpp \
  ../../include/tdzdd/spec/SizeConstraint.hpp \
  ../../include/tdzdd/spec/../util/IntSubset.hpp
-example2.o: example2.cpp ../../include/tdzdd/DdStructure.hpp \
- ../../include/tdzdd/DdEval.hpp ../../include/tdzdd/DdSpec.hpp \
- ../../include/tdzdd/dd/DdBuilder.hpp \
- ../../include/tdzdd/dd/DdSweeper.hpp ../../include/tdzdd/dd/Node.hpp \
- ../../include/tdzdd/dd/NodeTable.hpp \
- ../../include/tdzdd/dd/DataTable.hpp \
- ../../include/tdzdd/dd/../util/MyVector.hpp \
- ../../include/tdzdd/dd/../util/MessageHandler.hpp \
- ../../include/tdzdd/dd/../util/ResourceUsage.hpp \
- ../../include/tdzdd/dd/../util/MemoryPool.hpp \
- ../../include/tdzdd/dd/../util/MyHashTable.hpp \
- ../../include/tdzdd/dd/../util/MyList.hpp \
- ../../include/tdzdd/dd/DepthFirstSearcher.hpp \
- ../../include/tdzdd/util/demangle.hpp \
- ../../include/tdzdd/dd/DdReducer.hpp \
- ../../include/tdzdd/eval/Cardinality.hpp \
- ../../include/tdzdd/eval/../util/BigNumber.hpp \
- ../../include/tdzdd/op/Lookahead.hpp \
- ../../include/tdzdd/op/Unreduction.hpp
-example2-debug.o: example2.cpp ../../include/tdzdd/DdStructure.hpp \
- ../../include/tdzdd/DdEval.hpp ../../include/tdzdd/DdSpec.hpp \
- ../../include/tdzdd/dd/DdBuilder.hpp \
- ../../include/tdzdd/dd/DdSweeper.hpp ../../include/tdzdd/dd/Node.hpp \
- ../../include/tdzdd/dd/NodeTable.hpp \
- ../../include/tdzdd/dd/DataTable.hpp \
- ../../include/tdzdd/dd/../util/MyVector.hpp \
- ../../include/tdzdd/dd/../util/MessageHandler.hpp \
- ../../include/tdzdd/dd/../util/ResourceUsage.hpp \
- ../../include/tdzdd/dd/../util/MemoryPool.hpp \
- ../../include/tdzdd/dd/../util/MyHashTable.hpp \
- ../../include/tdzdd/dd/../util/MyList.hpp \
- ../../include/tdzdd/dd/DepthFirstSearcher.hpp \
- ../../include/tdzdd/util/demangle.hpp \
- ../../include/tdzdd/dd/DdReducer.hpp \
- ../../include/tdzdd/eval/Cardinality.hpp \
- ../../include/tdzdd/eval/../util/BigNumber.hpp \
- ../../include/tdzdd/op/Lookahead.hpp \
- ../../include/tdzdd/op/Unreduction.hpp
-example2-11.o: example2.cpp ../../include/tdzdd/DdStructure.hpp \
- ../../include/tdzdd/DdEval.hpp ../../include/tdzdd/DdSpec.hpp \
- ../../include/tdzdd/dd/DdBuilder.hpp \
- ../../include/tdzdd/dd/DdSweeper.hpp ../../include/tdzdd/dd/Node.hpp \
- ../../include/tdzdd/dd/NodeTable.hpp \
- ../../include/tdzdd/dd/DataTable.hpp \
- ../../include/tdzdd/dd/../util/MyVector.hpp \
- ../../include/tdzdd/dd/../util/MessageHandler.hpp \
- ../../include/tdzdd/dd/../util/ResourceUsage.hpp \
- ../../include/tdzdd/dd/../util/MemoryPool.hpp \
- ../../include/tdzdd/dd/../util/MyHashTable.hpp \
- ../../include/tdzdd/dd/../util/MyList.hpp \
- ../../include/tdzdd/dd/DepthFirstSearcher.hpp \
- ../../include/tdzdd/util/demangle.hpp \
- ../../include/tdzdd/dd/DdReducer.hpp \
- ../../include/tdzdd/eval/Cardinality.hpp \
- ../../include/tdzdd/eval/../util/BigNumber.hpp \
- ../../include/tdzdd/op/Lookahead.hpp \
- ../../include/tdzdd/op/Unreduction.hpp
-example2-11-debug.o: example2.cpp ../../include/tdzdd/DdStructure.hpp \
- ../../include/tdzdd/DdEval.hpp ../../include/tdzdd/DdSpec.hpp \
- ../../include/tdzdd/dd/DdBuilder.hpp \
- ../../include/tdzdd/dd/DdSweeper.hpp ../../include/tdzdd/dd/Node.hpp \
- ../../include/tdzdd/dd/NodeTable.hpp \
- ../../include/tdzdd/dd/DataTable.hpp \
- ../../include/tdzdd/dd/../util/MyVector.hpp \
- ../../include/tdzdd/dd/../util/MessageHandler.hpp \
- ../../include/tdzdd/dd/../util/ResourceUsage.hpp \
- ../../include/tdzdd/dd/../util/MemoryPool.hpp \
- ../../include/tdzdd/dd/../util/MyHashTable.hpp \
- ../../include/tdzdd/dd/../util/MyList.hpp \
- ../../include/tdzdd/dd/DepthFirstSearcher.hpp \
- ../../include/tdzdd/util/demangle.hpp \
- ../../include/tdzdd/dd/DdReducer.hpp \
- ../../include/tdzdd/eval/Cardinality.hpp \
- ../../include/tdzdd/eval/../util/BigNumber.hpp \
- ../../include/tdzdd/op/Lookahead.hpp \
- ../../include/tdzdd/op/Unreduction.hpp
 test.o: test.cpp
 test-debug.o: test.cpp
 test-11.o: test.cpp

@@ -133,7 +133,7 @@ void CnfToBdd::prepare() {
         int const leaveLevel = nv - std::abs(c.back()) + 1;
         assert(1 <= leaveLevel && leaveLevel <= enterLevel && enterLevel <= nv);
 
-        for (typeof(c.begin()) t = c.begin(); t != c.end(); ++t) {
+        for (Clause::const_iterator t = c.begin(); t != c.end(); ++t) {
             if (*t > 0) {
                 posiClauses[nv - *t + 1].push_back(j);
                 posiCube[nv - *t + 1] &= clauseVar[j];
@@ -332,7 +332,7 @@ void CnfToBdd::dumpCnf(std::ostream& os, std::string title) const {
         int from = std::abs(c[0]);
         int to = std::abs(c.back());
         std::vector<int> x(nv + 1);
-        for (typeof(c.begin()) t = c.begin(); t != c.end(); ++t) {
+        for (Clause::const_iterator t = c.begin(); t != c.end(); ++t) {
             x[std::abs(*t)] = *t;
         }
 
@@ -411,12 +411,12 @@ int CnfToBdd::getChild(State& s, int level, int take) {
     ClauseSet const& set = *s.set;
     ClauseList const& ent = enterClauses[level];
     ClauseList const& sat = take ? posiClauses[level] : negaClauses[level];
-    typeof(set.begin()) a = set.begin();
-    typeof(ent.begin()) b = ent.begin();
-    typeof(sat.begin()) c = sat.begin();
-    typeof(set.end()) az = set.end();
-    typeof(ent.end()) bz = ent.end();
-    typeof(sat.end()) cz = sat.end();
+    ClauseNumber const* a = set.begin();
+    Clause::const_iterator b = ent.begin();
+    Clause::const_iterator c = sat.begin();
+    ClauseNumber const* az = set.end();
+    Clause::const_iterator bz = ent.end();
+    Clause::const_iterator cz = sat.end();
     work.resize(0);
 
     // compute {a} + {b} - {c}
@@ -471,7 +471,7 @@ bool CnfToBdd::badState(std::vector<uint16_t>& clauses, int level) const {
     DdNode* zero = Cudd(0).ddNode();
     DdNode* g = frontierSet[level].ddNode();
     if (Cudd_IsConstant(g)) return g == zero;
-    typeof(clauses.rbegin()) t = clauses.rbegin();
+    std::reverse_iterator<std::vector<uint16_t>::iterator> t = clauses.rbegin();
 
     while (t != clauses.rend()) {
         if (Cudd_NodeReadIndex(g) == int(*t)) { // 1
