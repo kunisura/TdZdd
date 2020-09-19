@@ -1,5 +1,0 @@
-<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classtdzdd_1_1DdSpecBase.html" title="tdzdd::DdSpecBase\&lt;\l T, AR \&gt;" alt="" coords="5,5,152,47"/>
-<area shape="rect" id="node2" href="$classtdzdd_1_1PodArrayDdSpec.html" title="tdzdd::PodArrayDdSpec\l\&lt; T, size_t, S::ARITY \&gt;" alt="" coords="200,5,363,47"/>
-<area shape="rect" id="node3" href="$classtdzdd_1_1Unreduction__.html" title="tdzdd::Unreduction\l_\&lt; T, S, ZDD \&gt;" alt="" coords="411,5,543,47"/>
-</map>

@@ -3,9 +3,9 @@
 <area shape="rect" id="node4" href="$classtdzdd_1_1DdBuilderMP.html#a10804352f4d60f7165098197f25a4bd3" title="Builds one level. " alt="" coords="207,57,345,98"/>
 <area shape="rect" id="node7" href="$classtdzdd_1_1DdBuilder.html#a07e739141cecad2b065105c1dec72bc8" title="Initializes the builder. " alt="" coords="189,123,363,149"/>
 <area shape="rect" id="node9" href="$classtdzdd_1_1DdBuilderMP.html#a2472793422e1f5007ac2585bd5589462" title="Initializes the builder. " alt="" coords="207,174,345,215"/>
-<area shape="rect" id="node10" href="$classtdzdd_1_1DdStructure.html#a632c559161fb9af5e24ceeb275c870a9" title="Gets the number of nonterminal nodes. " alt="" coords="210,239,342,281"/>
-<area shape="rect" id="node3" href="$classtdzdd_1_1DdSweeper.html#a295c6139226becedd470a12a67c5c051" title="Updates status and sweeps the DD if necessary. " alt="" coords="418,8,595,35"/>
-<area shape="rect" id="node5" href="$classtdzdd_1_1MyHashTable.html#a039d45626f817874ba4f91695532093b" title="Insert an element if no other equivalent element is registered. " alt="" coords="421,63,593,89"/>
-<area shape="rect" id="node6" href="$classtdzdd_1_1MyHashTable.html#aa1589ac8514a617fb2e689a758d65e8b" title="Initialize the table to be empty. " alt="" coords="435,114,578,155"/>
-<area shape="rect" id="node8" href="$classtdzdd_1_1DdSweeper.html#a17f47e73ac3492145e4b354aafc1ab81" title="Set the root pointer. " alt="" coords="415,180,599,207"/>
+<area shape="rect" id="node10" href="$classtdzdd_1_1DdStructure.html#a01ccb266410bd40d5274cd4f05349f17" title="Gets the number of nonterminal nodes. " alt="" coords="210,239,342,281"/>
+<area shape="rect" id="node3" href="$classtdzdd_1_1DdSweeper.html#a295c6139226becedd470a12a67c5c051" title="Updates status and sweeps the DD if necessary. " alt="" coords="418,7,595,33"/>
+<area shape="rect" id="node5" href="$classtdzdd_1_1MyHashTable.html#a039d45626f817874ba4f91695532093b" title="Insert an element if no other equivalent element is registered. " alt="" coords="421,59,593,85"/>
+<area shape="rect" id="node6" href="$classtdzdd_1_1MyHashTable.html#aa1589ac8514a617fb2e689a758d65e8b" title="Initialize the table to be empty. " alt="" coords="435,110,578,151"/>
+<area shape="rect" id="node8" href="$classtdzdd_1_1DdSweeper.html#a17f47e73ac3492145e4b354aafc1ab81" title="Set the root pointer. " alt="" coords="415,177,599,204"/>
 </map>

@@ -1,7 +1,7 @@
 <map id="tdzdd::DdStructure::zddSubset" name="tdzdd::DdStructure::zddSubset">
 <area shape="rect" id="node2" href="$classtdzdd_1_1ZddSubsetter.html#a8b17375c63cfdb8683424d358c410341" title="Initializes the builder. " alt="" coords="195,71,335,112"/>
 <area shape="rect" id="node4" href="$classtdzdd_1_1ZddSubsetterMP.html#acb61295141f1fb0cd6f461c86e84779a" title="Initializes the builder. " alt="" coords="185,5,345,47"/>
-<area shape="rect" id="node5" href="$classtdzdd_1_1DdStructure.html#a632c559161fb9af5e24ceeb275c870a9" title="Gets the number of nonterminal nodes. " alt="" coords="199,136,331,177"/>
+<area shape="rect" id="node5" href="$classtdzdd_1_1DdStructure.html#a01ccb266410bd40d5274cd4f05349f17" title="Gets the number of nonterminal nodes. " alt="" coords="199,136,331,177"/>
 <area shape="rect" id="node6" href="$classtdzdd_1_1ZddSubsetter.html#a3ed424817cd849f21ca30a163d52d32e" title="Builds one level. " alt="" coords="195,201,335,243"/>
 <area shape="rect" id="node9" href="$classtdzdd_1_1ZddSubsetterMP.html#a6f2bacb5cbc1269657eb13aeafb40948" title="Builds one level. " alt="" coords="185,267,345,308"/>
 <area shape="rect" id="node3" href="$classtdzdd_1_1DdSweeper.html#a17f47e73ac3492145e4b354aafc1ab81" title="Set the root pointer. " alt="" coords="393,46,577,73"/>
