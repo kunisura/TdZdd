@@ -467,7 +467,7 @@ public:
 
     bool equalTo(State const* s1, State const* s2) const {
         Word const* pa = reinterpret_cast<Word const*>(s1);
-        Word const* qa = reinterpret_cast<Word const*>(s1);
+        Word const* qa = reinterpret_cast<Word const*>(s2);
         Word const* pz = pa + dataWords;
         while (pa != pz) {
             if (*pa++ != *qa++) return false;
