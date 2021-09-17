@@ -30,15 +30,29 @@ Features of TdZdd include:
 
 This software is released under the MIT License, see [LICENSE](LICENSE).
 
+Preparation
+---------------------------------------------------------------------------
+Add the absolute path of the "include" directory to your C++ include path,
+or copy the "include/tdzdd" directory into an existing directory in your C++
+include path (e.g. "/usr/local/include").
+
+The "apps" directory contains several applications, which are included as sample code;
+there is no need to compile them just to use TdZdd as a library.
+If you are interested in compiling apps/graphillion, you will need [SAPPOROBDD](http://www.lab2.kuis.kyoto-u.ac.jp/minato/SAPPOROBDD/).
+You need [CUDD](https://github.com/ivmai/cudd) to compile apps/cnfbdd and apps/cnf2ztdd2bdd.
+
 Documents
 ---------------------------------------------------------------------------
 
 * [User Guide and Reference](http://kunisura.github.io/TdZdd/doc/index.html)
 * [Efficient Top-Down ZDD Construction Techniques Using Recursive Specifications](http://www-alg.ist.hokudai.ac.jp/~thomas/TCSTR/tcstr_13_69/tcstr_13_69.pdf)
-* [TdZdd: フロンティア法のための効率的なトップダウンZDD構築を実現するC++ライブラリ](http://www-erato.ist.hokudai.ac.jp/docs/autumn2013/iwashita.pdf)
+<!-- * [TdZdd: フロンティア法のための効率的なトップダウンZDD構築を実現するC++ライブラリ](http://www-erato.ist.hokudai.ac.jp/docs/autumn2013/iwashita.pdf) -->
 * [ZDDと列挙問題―最新の技法とプログラミングツール](http://doi.org/10.11309/jssst.34.3_97)
 
-See also
+Related repositories
 ---------------------------------------------------------------------------
 
-* [Graphillion - Fast, lightweight library for a huge number of graphs](http://graphillion.org)
+* [Graphillion - Fast, lightweight library for a huge number of graphs](https://github.com/takemaru/graphillion)
+* [frontier_basic_tdzdd - An example implementation of the frontier-based search using TdZdd](https://github.com/junkawahara/frontier_basic_tdzdd)
+* [reliability_tdzdd - Program that computes network reliability using TdZdd library](https://github.com/junkawahara/reliability_tdzdd)
+* [SapporoTdZddApps - TdZdd と SAPPOROBDD の橋渡しライブラリ](https://github.com/hs-nazuna/SapporoTdZddApps)
