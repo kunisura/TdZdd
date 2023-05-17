@@ -34,6 +34,7 @@
 #ifndef _WIN32
 #include <sys/resource.h>
 #else
+#undef NOMINMAX
 #define NOMINMAX
 #include <windows.h>
 #include <psapi.h>
