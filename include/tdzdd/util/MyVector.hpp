@@ -52,9 +52,11 @@ class MyVector {
     }
 
     void moveElement(T& from, T& to) {
-        //new (&to) T(std::move(from));
-        new (&to) T(from);
-        from.~T();
+        if (&from != &to) {
+            //new (&to) T(std::move(from));
+            new (&to) T(from);
+            from.~T();
+        }
     }
 
 public:
