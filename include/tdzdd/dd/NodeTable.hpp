@@ -436,9 +436,9 @@ public:
     }
 
     NodeTableHandler& operator=(NodeTableHandler const& o) {
+        o.pointer->ref();
         pointer->deref();
         pointer = o.pointer;
-        pointer->ref();
         return *this;
     }
 
