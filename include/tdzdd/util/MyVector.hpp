@@ -108,7 +108,8 @@ public:
 
     template<typename U>
     MyVector(std::vector<U> const& o)
-            : capacity_(o.size()), size_(o.size()), array_(allocate(capacity_)) {
+            : capacity_(o.size()), size_(o.size()),
+              array_(capacity_ ? allocate(capacity_) : 0) {
         for (Size i = 0; i < size_; ++i) {
             new (array_ + i) T(o[i]);
         }
