@@ -51,6 +51,10 @@ public:
             : offset(offset) {
     }
 
+    bool isThreadSafe() const {
+        return false;
+    }
+
     void initialize(int topLevel) const {
         while (BDD_VarUsed() < topLevel + offset) {
             BDD_NewVar();
