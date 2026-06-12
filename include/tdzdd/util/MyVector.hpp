@@ -489,9 +489,7 @@ public:
      * @param pos iterator to the element to remove.
      */
     iterator erase(iterator pos) {
-        assert(begin() <= pos && pos < end());
-        std::memmove(pos, pos + 1, end() - pos - 1);
-        return pos;
+        return erase(pos, pos + 1);
     }
 
     /**
