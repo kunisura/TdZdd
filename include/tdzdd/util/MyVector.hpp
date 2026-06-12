@@ -273,10 +273,13 @@ public:
      */
     T* erase(T* first, T* last) {
         assert(array_ <= first && first <= last && last <= array_ + size_);
-        Size newSize = size_ - (last - first);
+        if (first == last) return first;
 
-        for (Size i = first - array_; i < newSize; ++i) {
-            array_[i] = last[i];
+        Size newSize = size_ - (last - first);
+        Size tailSize = array_ + size_ - last;
+
+        for (Size i = 0; i < tailSize; ++i) {
+            first[i] = last[i];
         }
 
         while (newSize < size_) {
