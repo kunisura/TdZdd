@@ -119,8 +119,9 @@ public:
     void pullout(size_t i) {
         size_t k = i / 64;
         uint64_t* p = &word(k);
-        uint64_t* q = p + numWords();
-        uint64_t m = mask(i % 64 + 1) - 1;
+        uint64_t* q = p + (numWords() - k);
+        size_t r = i % 64;
+        uint64_t m = (r == 63) ? ~uint64_t(0) : mask(r + 1) - 1;
         *p = (*p & ~m) | ((*p << 1) & m);
         while (++p < q) {
             *(p - 1) |= *p >> 63;
