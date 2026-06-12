@@ -25,6 +25,7 @@
 #pragma once
 
 #include <cmath>
+#include <stdexcept>
 #include <string>
 
 #include "../DdEval.hpp"
@@ -107,7 +108,13 @@ public:
         topLevel = level;
         pools.resize(topLevel + 1);
 
-        int max = ceil(double(topLevel) * log2(double(ARITY)) / 63.0) + 1;
+        if (BDD && numVars < topLevel) {
+            throw std::invalid_argument(
+                    "the number of BDD variables must be greater than or equal to the BDD root level");
+        }
+
+        int maxLevel = BDD ? numVars : topLevel;
+        int max = ceil(double(maxLevel) * log2(double(ARITY)) / 63.0) + 1;
         tmp1.setArray(pools[topLevel].template allocate<uint64_t>(max));
         tmp2.setArray(pools[topLevel].template allocate<uint64_t>(max));
         tmp3.setArray(pools[topLevel].template allocate<uint64_t>(max));
