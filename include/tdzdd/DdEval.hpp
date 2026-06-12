@@ -75,7 +75,7 @@ public:
         os << "(";
         for (int b = 0; b < ARITY; ++b) {
             if (b != 0) os << ",";
-            os << o.value(b) << "@" << o.level(b);
+            os << o.get(b) << "@" << o.getLevel(b);
         }
         return os << ")";
     }
