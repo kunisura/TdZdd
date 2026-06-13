@@ -25,7 +25,9 @@
 #pragma once
 
 #include <cassert>
+#include <cstddef>
 #include <cstring>
+#include <ostream>
 #include <stdexcept>
 
 namespace tdzdd {

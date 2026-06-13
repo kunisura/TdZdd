@@ -24,8 +24,12 @@
 
 #pragma once
 
+#include <algorithm>
 #include <cassert>
+#include <cstddef>
 #include <cstring>
+#include <memory>
+#include <ostream>
 #include <vector>
 
 namespace tdzdd {

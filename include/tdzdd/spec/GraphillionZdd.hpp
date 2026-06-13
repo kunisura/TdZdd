@@ -26,9 +26,14 @@
 
 #include <cassert>
 #include <cerrno>
+#include <cctype>
+#include <cstring>
 #include <climits>
+#include <fstream>
+#include <iostream>
 #include <ostream>
 #include <stdint.h>
+#include <stdexcept>
 #include <string>
 #include <vector>
 
@@ -63,7 +68,7 @@ public:
         else {
             mh << " \"" << filename << "\" ...";
             std::ifstream fin(filename.c_str(), std::ios::in);
-            if (!fin) throw std::runtime_error(strerror(errno));
+            if (!fin) throw std::runtime_error(std::strerror(errno));
             read(fin);
         }
 
@@ -86,7 +91,7 @@ public:
 private:
     void read(std::istream& is) {
         while (is) {
-            if (isdigit(skipSpace(is))) {
+            if (std::isdigit(skipSpace(is))) {
                 uint64_t id;
                 Node node;
 
@@ -104,9 +109,9 @@ private:
     static uint64_t readID(std::istream& is) {
         int c;
         uint64_t id;
-        while (isspace(c = is.get()))
+        while (std::isspace(c = is.get()))
             ;
-        if (isdigit(c)) {
+        if (std::isdigit(c)) {
             is.unget();
             is >> id;
             id += 2;
@@ -119,7 +124,7 @@ private:
 
     static int skipSpace(std::istream& is) {
         int c;
-        while (isspace(c = is.get()))
+        while (std::isspace(c = is.get()))
             ;
         is.unget();
         return c;
