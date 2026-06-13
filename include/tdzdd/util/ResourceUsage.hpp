@@ -52,7 +52,11 @@ inline double getWallClockTime() {
 inline double getWallClockTime() {
     FILETIME t;
     GetSystemTimeAsFileTime(&t);
-    return double(t.dwHighDateTime) / 10 + double(t.dwLowDateTime) / 10000000;
+
+    ULARGE_INTEGER u;
+    u.LowPart = t.dwLowDateTime;
+    u.HighPart = t.dwHighDateTime;
+    return u.QuadPart * 1e-7;
 }
 #endif
 
