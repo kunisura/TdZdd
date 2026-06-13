@@ -25,6 +25,7 @@
 #pragma once
 
 #include <cassert>
+#include <cmath>
 #include <ostream>
 #include <stdexcept>
 #include <string>
@@ -34,7 +35,6 @@
 #include "../util/BigNumber.hpp"
 #include "../util/demangle.hpp"
 #include "../util/MessageHandler.hpp"
-#include "../util/MemoryPool.hpp"
 #include "../util/MyHashTable.hpp"
 #include "../util/MyList.hpp"
 #include "../util/MyVector.hpp"
@@ -76,6 +76,14 @@ class PathCounter {
         return (n + sizeof(Word) - 1) / sizeof(Word);
     }
 
+    static int maxNumberWords(int n) {
+        if (n <= 0 || Spec::ARITY <= 1) return 1;
+
+        double const bits = double(n) * std::log(double(Spec::ARITY))
+                / std::log(2.0);
+        return static_cast<int>(std::ceil(bits / 63.0)) + 1;
+    }
+
     static void* state(Word* p) {
         return p;
     }
@@ -112,13 +120,18 @@ public:
             return (n == 0) ? "0" : "1";
         }
 
-        std::vector<uint64_t> totalStorage(n / 63 + 1);
+        // Allocate the full worst-case counter width up front. Path counts can
+        // grow after nodes have already been placed on skipped lower levels,
+        // so delayed widening would leave those nodes with too little storage.
+        int const numberWords = maxNumberWords(n);
+        int const nodeWords = stateWords + numberWords;
+
+        std::vector<uint64_t> totalStorage(numberWords);
         BigNumber total(totalStorage.data());
         total.store(0);
         size_t maxWidth = 0;
         //std::cerr << "\nLevel,Width\n";
 
-        MemoryPools pools(n + 1);
         MyVector<MyList<Word> > vnodeTable(n + 1);
         MyVector<UniqTable> uniqTable;
         MyVector<Hasher> hasher;
@@ -130,8 +143,7 @@ public:
             uniqTable.push_back(UniqTable(hasher.back(), hasher.back()));
         }
 
-        int numberWords = 1;
-        Word* p0 = vnodeTable[n].alloc_front(stateWords + 1);
+        Word* p0 = vnodeTable[n].alloc_front(nodeWords);
         spec.get_copy(state(p0), state(ptmp));
         spec.destruct(state(ptmp));
         number(p0).store(1);
@@ -145,8 +157,7 @@ public:
             maxWidth = std::max(maxWidth, m);
             MyList<Word>& nextVnodes = vnodeTable[i - 1];
             UniqTable& nextUniq = uniqTable[i - 1];
-            int const nextWords = stateWords + numberWords + 1;
-            Word* pp = nextVnodes.alloc_front(nextWords);
+            Word* pp = nextVnodes.alloc_front(nodeWords);
             //if (nextUniq.size() < m) nextUniq.rehash(m);
 
             for (; !vnodes.empty(); vnodes.pop_front()) {
@@ -167,8 +178,7 @@ public:
                         }
                     }
                     else if (ii < i - 1) {
-                        Word* qq = vnodeTable[ii].alloc_front(
-                                nextWords + (i - ii) / 63);
+                        Word* qq = vnodeTable[ii].alloc_front(nodeWords);
                         spec.get_copy(state(qq), state(pp));
                         spec.destruct(state(pp));
 
@@ -179,10 +189,7 @@ public:
                         }
                         else {
                             spec.destruct(state(qq));
-                            int w = number(qqq).add(number(p));
-                            if (numberWords < w) {
-                                numberWords = w; //FIXME might be broken at long skip
-                            }
+                            number(qqq).add(number(p));
                             vnodeTable[ii].pop_front();
                         }
                     }
@@ -192,14 +199,11 @@ public:
 
                         if (ppp == pp) {
                             number(ppp).store(number(p));
-                            pp = nextVnodes.alloc_front(nextWords);
+                            pp = nextVnodes.alloc_front(nodeWords);
                         }
                         else {
                             spec.destruct(state(pp));
-                            int w = number(ppp).add(number(p));
-                            if (numberWords < w) {
-                                numberWords = w; //FIXME might be broken at long skip
-                            }
+                            number(ppp).add(number(p));
                         }
                     }
                 }
@@ -209,7 +213,6 @@ public:
 
             nextVnodes.pop_front();
             nextUniq.clear();
-            pools[i].clear();
             spec.destructLevel(i);
             mh.step();
         }
@@ -231,17 +234,21 @@ public:
             return (n == 0) ? "0" : "1";
         }
 
-        std::vector<uint64_t> totalStorage(n / 63 + 1);
+        // Allocate the full worst-case counter width up front. Path counts can
+        // grow after nodes have already been placed on skipped lower levels,
+        // so delayed widening would leave those nodes with too little storage.
+        int const numberWords = maxNumberWords(n);
+        int const nodeWords = stateWords + numberWords;
+
+        std::vector<uint64_t> totalStorage(numberWords);
         BigNumber total(totalStorage.data());
         total.store(0);
         size_t maxWidth = 0;
         //std::cerr << "\nLevel,Width\n";
 
-        MemoryPools pools(n + 1);
         MyVector<MyList<Word> > vnodeTable(n + 1);
 
-        int numberWords = 1;
-        Word* p0 = vnodeTable[n].alloc_front(stateWords + 1);
+        Word* p0 = vnodeTable[n].alloc_front(nodeWords);
         spec.get_copy(state(p0), state(ptmp));
         spec.destruct(state(ptmp));
         number(p0).store(1);
@@ -264,10 +271,7 @@ public:
                         ++m;
                     }
                     else {
-                        int w = number(pp).add(number(p));
-                        if (numberWords < w) {
-                            numberWords = w; //FIXME might be broken at long skip
-                        }
+                        number(pp).add(number(p));
                         number(p).store(0);
                     }
                 }
@@ -276,8 +280,7 @@ public:
             //std::cerr << i << "," << m << "\n";
             maxWidth = std::max(maxWidth, m);
             MyList<Word>& nextVnodes = vnodeTable[i - 1];
-            int const nextWords = stateWords + numberWords + 1;
-            Word* pp = nextVnodes.alloc_front(nextWords);
+            Word* pp = nextVnodes.alloc_front(nodeWords);
 
             for (; !vnodes.empty(); vnodes.pop_front()) {
                 Word* p = vnodes.front();
@@ -297,8 +300,7 @@ public:
                         }
                     }
                     else if (ii < i - 1) {
-                        Word* ppp = vnodeTable[ii].alloc_front(
-                                nextWords + (i - ii) / 63);
+                        Word* ppp = vnodeTable[ii].alloc_front(nodeWords);
                         spec.get_copy(state(ppp), state(pp));
                         spec.destruct(state(pp));
                         number(ppp).store(number(p));
@@ -306,7 +308,7 @@ public:
                     else {
                         assert(ii == i - 1);
                         number(pp).store(number(p));
-                        pp = nextVnodes.alloc_front(nextWords);
+                        pp = nextVnodes.alloc_front(nodeWords);
                     }
                 }
 
@@ -314,7 +316,6 @@ public:
             }
 
             nextVnodes.pop_front();
-            pools[i].clear();
             spec.destructLevel(i);
             mh.step();
         }
@@ -340,7 +341,6 @@ public:
         size_t maxWidth = 0;
         //std::cerr << "\nLevel,Width\n";
 
-        MemoryPools pools(n + 1);
         MyVector<MyList<Word> > vnodeTable(n + 1);
         MyVector<UniqTable> uniqTable;
         MyVector<Hasher> hasher;
@@ -422,7 +422,6 @@ public:
 
             nextVnodes.pop_front();
             nextUniq.clear();
-            pools[i].clear();
             spec.destructLevel(i);
             mh.step();
         }

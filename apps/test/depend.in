@@ -242,6 +242,66 @@ testGraph-11.o: testGraph.cpp ../../include/tdzdd/util/MessageHandler.hpp \
 testGraph-11-debug.o: testGraph.cpp ../../include/tdzdd/util/MessageHandler.hpp \
  ../../include/tdzdd/util/ResourceUsage.hpp \
  ../../include/tdzdd/util/Graph.hpp
+testPathCounter.o: testPathCounter.cpp ../../include/tdzdd/DdSpec.hpp \
+ ../../include/tdzdd/dd/DdBuilder.hpp \
+ ../../include/tdzdd/dd/DdSweeper.hpp ../../include/tdzdd/dd/Node.hpp \
+ ../../include/tdzdd/dd/NodeTable.hpp \
+ ../../include/tdzdd/dd/DataTable.hpp \
+ ../../include/tdzdd/dd/../util/MyVector.hpp \
+ ../../include/tdzdd/dd/../util/MessageHandler.hpp \
+ ../../include/tdzdd/dd/../util/ResourceUsage.hpp \
+ ../../include/tdzdd/dd/../util/MemoryPool.hpp \
+ ../../include/tdzdd/dd/../util/MyHashTable.hpp \
+ ../../include/tdzdd/dd/../util/MyList.hpp \
+ ../../include/tdzdd/dd/DepthFirstSearcher.hpp \
+ ../../include/tdzdd/util/demangle.hpp \
+ ../../include/tdzdd/dd/PathCounter.hpp \
+ ../../include/tdzdd/dd/../util/BigNumber.hpp
+testPathCounter-debug.o: testPathCounter.cpp ../../include/tdzdd/DdSpec.hpp \
+ ../../include/tdzdd/dd/DdBuilder.hpp \
+ ../../include/tdzdd/dd/DdSweeper.hpp ../../include/tdzdd/dd/Node.hpp \
+ ../../include/tdzdd/dd/NodeTable.hpp \
+ ../../include/tdzdd/dd/DataTable.hpp \
+ ../../include/tdzdd/dd/../util/MyVector.hpp \
+ ../../include/tdzdd/dd/../util/MessageHandler.hpp \
+ ../../include/tdzdd/dd/../util/ResourceUsage.hpp \
+ ../../include/tdzdd/dd/../util/MemoryPool.hpp \
+ ../../include/tdzdd/dd/../util/MyHashTable.hpp \
+ ../../include/tdzdd/dd/../util/MyList.hpp \
+ ../../include/tdzdd/dd/DepthFirstSearcher.hpp \
+ ../../include/tdzdd/util/demangle.hpp \
+ ../../include/tdzdd/dd/PathCounter.hpp \
+ ../../include/tdzdd/dd/../util/BigNumber.hpp
+testPathCounter-11.o: testPathCounter.cpp ../../include/tdzdd/DdSpec.hpp \
+ ../../include/tdzdd/dd/DdBuilder.hpp \
+ ../../include/tdzdd/dd/DdSweeper.hpp ../../include/tdzdd/dd/Node.hpp \
+ ../../include/tdzdd/dd/NodeTable.hpp \
+ ../../include/tdzdd/dd/DataTable.hpp \
+ ../../include/tdzdd/dd/../util/MyVector.hpp \
+ ../../include/tdzdd/dd/../util/MessageHandler.hpp \
+ ../../include/tdzdd/dd/../util/ResourceUsage.hpp \
+ ../../include/tdzdd/dd/../util/MemoryPool.hpp \
+ ../../include/tdzdd/dd/../util/MyHashTable.hpp \
+ ../../include/tdzdd/dd/../util/MyList.hpp \
+ ../../include/tdzdd/dd/DepthFirstSearcher.hpp \
+ ../../include/tdzdd/util/demangle.hpp \
+ ../../include/tdzdd/dd/PathCounter.hpp \
+ ../../include/tdzdd/dd/../util/BigNumber.hpp
+testPathCounter-11-debug.o: testPathCounter.cpp ../../include/tdzdd/DdSpec.hpp \
+ ../../include/tdzdd/dd/DdBuilder.hpp \
+ ../../include/tdzdd/dd/DdSweeper.hpp ../../include/tdzdd/dd/Node.hpp \
+ ../../include/tdzdd/dd/NodeTable.hpp \
+ ../../include/tdzdd/dd/DataTable.hpp \
+ ../../include/tdzdd/dd/../util/MyVector.hpp \
+ ../../include/tdzdd/dd/../util/MessageHandler.hpp \
+ ../../include/tdzdd/dd/../util/ResourceUsage.hpp \
+ ../../include/tdzdd/dd/../util/MemoryPool.hpp \
+ ../../include/tdzdd/dd/../util/MyHashTable.hpp \
+ ../../include/tdzdd/dd/../util/MyList.hpp \
+ ../../include/tdzdd/dd/DepthFirstSearcher.hpp \
+ ../../include/tdzdd/util/demangle.hpp \
+ ../../include/tdzdd/dd/PathCounter.hpp \
+ ../../include/tdzdd/dd/../util/BigNumber.hpp
 testRandomDd.o: testRandomDd.cpp ../../include/tdzdd/DdStructure.hpp \
  ../../include/tdzdd/DdEval.hpp ../../include/tdzdd/DdSpec.hpp \
  ../../include/tdzdd/dd/DdBuilder.hpp \
