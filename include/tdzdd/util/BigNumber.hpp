@@ -165,6 +165,8 @@ public:
     }
 
     uint32_t divide(uint32_t n) {
+        if (n == 0) throw std::invalid_argument("BigNumber::divide by zero");
+
         uint64_t* p = array;
         if (p == 0) return 0;
 
@@ -176,18 +178,21 @@ public:
         do {
             --p;
             uint64_t q = cont ? MSB : 0;
+            // Use unsigned division: intermediate r can exceed LLONG_MAX
+            // when n is close to UINT32_MAX, so lldiv() is not suitable.
             r = (r << 31) | ((*p & ~MSB) >> 32);
-            lldiv_t d = lldiv(r, 10LL);
-            q += d.quot << 32;
-            r = (d.rem << 32) | (*p & ((uint64_t(1) << 32) - 1));
-            d = lldiv(r, 10LL);
-            q += d.quot;
-            r = d.rem;
+            uint64_t d = r / n;
+            q += d << 32;
+            r %= n;
+            r = (r << 32) | (*p & ((uint64_t(1) << 32) - 1));
+            d = r / n;
+            q += d;
+            r %= n;
             *p = q;
             if (q != 0) cont = true;
         } while (p != array);
 
-        return r;
+        return static_cast<uint32_t>(r);
     }
 
     size_t shiftLeft(int k) {
