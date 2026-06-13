@@ -106,6 +106,10 @@ public:
         nextUnit = BLOCK_UNITS;
     }
 
+    // NOTE: Prefer clear() instead of reuse(). This function keeps one existing
+    // block and assumes it has BLOCK_UNITS capacity, but the retained block may
+    // be a large-element block allocated with a different size. Reusing such a
+    // block can make later allocations write past the retained block.
     void reuse() {
         if (blockList == 0) return;
         while (blockList->next != 0) {
