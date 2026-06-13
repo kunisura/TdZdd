@@ -230,6 +230,18 @@ test.o: test.cpp
 test-debug.o: test.cpp
 test-11.o: test.cpp
 test-11-debug.o: test.cpp
+testGraph.o: testGraph.cpp ../../include/tdzdd/util/MessageHandler.hpp \
+ ../../include/tdzdd/util/ResourceUsage.hpp \
+ ../../include/tdzdd/util/Graph.hpp
+testGraph-debug.o: testGraph.cpp ../../include/tdzdd/util/MessageHandler.hpp \
+ ../../include/tdzdd/util/ResourceUsage.hpp \
+ ../../include/tdzdd/util/Graph.hpp
+testGraph-11.o: testGraph.cpp ../../include/tdzdd/util/MessageHandler.hpp \
+ ../../include/tdzdd/util/ResourceUsage.hpp \
+ ../../include/tdzdd/util/Graph.hpp
+testGraph-11-debug.o: testGraph.cpp ../../include/tdzdd/util/MessageHandler.hpp \
+ ../../include/tdzdd/util/ResourceUsage.hpp \
+ ../../include/tdzdd/util/Graph.hpp
 testRandomDd.o: testRandomDd.cpp ../../include/tdzdd/DdStructure.hpp \
  ../../include/tdzdd/DdEval.hpp ../../include/tdzdd/DdSpec.hpp \
  ../../include/tdzdd/dd/DdBuilder.hpp \

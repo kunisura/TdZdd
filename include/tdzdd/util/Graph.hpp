@@ -27,6 +27,7 @@
 #include <algorithm>
 #include <cassert>
 #include <cerrno>
+#include <cctype>
 #include <cstring>
 #include <climits>
 #include <fstream>
@@ -173,8 +174,9 @@ private:
 
         while (is) {
             char c = is.get();
+            if (!is) break;
 
-            if (isspace(c)) {
+            if (std::isspace(static_cast<unsigned char>(c))) {
                 if (!v.empty()) {
                     if (v1.empty()) {
                         v1 = v;
@@ -204,6 +206,19 @@ private:
             }
             else {
                 v += c;
+            }
+        }
+
+        if (!v.empty()) {
+            if (v1.empty()) {
+                v1 = v;
+            }
+            else if (v2.empty()) {
+                v2 = v;
+            }
+            else {
+                throw std::runtime_error(
+                        "ERROR: More than two tokens in a line");
             }
         }
 
