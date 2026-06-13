@@ -59,6 +59,12 @@ public:
 //                "MemoryPool can't be copied unless it is empty!"); //FIXME
     }
 
+    // NOTE: Copy assignment is intentionally not disabled here to preserve
+    // source compatibility with existing C++98 code. MemoryPool owns blockList,
+    // so compiler-generated copy assignment performs a shallow copy and is unsafe
+    // for non-empty pools. Current library code does not rely on copy assignment;
+    // use moveFrom() or splice() when ownership transfer is required.
+
 //    MemoryPool& operator=(MemoryPool const& o) {
 //        if (o.blockList != 0) throw std::runtime_error(
 //                "MemoryPool can't be copied unless it is empty!"); //FIXME
