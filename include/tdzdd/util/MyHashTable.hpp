@@ -188,14 +188,16 @@ public:
     MyHashTable(MyHashTable const& o, size_t n = 1)
             : hashFunc(o.hashFunc), eqFunc(o.eqFunc), tableCapacity_(0),
               tableSize_(0), maxSize_(0), size_(0), table(0), collisions_(0) {
-        initialize(std::max(o.tableSize_, n));
+        initialize(std::max(o.size_, n));
         for (const_iterator t = o.begin(); t != o.end(); ++t) {
             add(*t);
         }
     }
 
     MyHashTable& operator=(MyHashTable const& o) {
-        initialize(o.tableSize_);
+        if (this == &o) return *this;
+
+        initialize(o.size_);
         for (const_iterator t = o.begin(); t != o.end(); ++t) {
             add(*t);
         }
