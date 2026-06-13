@@ -27,6 +27,7 @@
 #include <algorithm>
 #include <cassert>
 #include <cstring>
+#include <stdexcept>
 #include <stdint.h>
 
 #include "MemoryPool.hpp"
@@ -337,10 +338,22 @@ public:
 //        ++size_;
 //    }
     void add(T const& e) {
-        if (N > 0 && size_ >= N - 1) throw std::out_of_range("MySmallSet::add");
         T* pz = array_ + size_;
-        T* p = pz - 1;
-        while (array_ <= p && e <= *p) {
+
+        if (N > 0 && size_ >= N) {
+            // The set is full, so search without shifting into array_[N].
+            // Re-adding an existing element must remain a no-op.
+            T* p = pz;
+            while (p != array_ && !(*(p - 1) < e)) {
+                --p;
+                if (e == *p) return;
+            }
+            throw std::out_of_range("MySmallSet::add");
+        }
+
+        T* p = pz;
+        while (p != array_ && !(*(p - 1) < e)) {
+            --p;
             if (e == *p) {
                 while (++p < pz) {
                     *p = *(p + 1);
@@ -348,9 +361,8 @@ public:
                 return;
             }
             *(p + 1) = *p;
-            --p;
         }
-        *(p + 1) = e;
+        *p = e;
         ++size_;
     }
 
