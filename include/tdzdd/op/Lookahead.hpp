@@ -113,8 +113,8 @@ public:
         spec.print_state(os, p, level);
     }
 
-    void print_level(std::ostream& os, int level) const {
-        spec.print_level(os, level);
+    void printLevel(std::ostream& os, int level) const {
+        spec.printLevel(os, level);
     }
 };
 
@@ -187,8 +187,8 @@ public:
         spec.print_state(os, p, level);
     }
 
-    void print_level(std::ostream& os, int level) const {
-        spec.print_level(os, level);
+    void printLevel(std::ostream& os, int level) const {
+        spec.printLevel(os, level);
     }
 };
 

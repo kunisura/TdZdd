@@ -23,6 +23,8 @@
  */
 
 #include <gtest/gtest.h>
+#include <string>
+
 #include <tdzdd/DdStructure.hpp>
 
 extern bool useMP;
@@ -50,6 +52,22 @@ public:
     }
 };
 
+class LookaheadLevelLabels: public tdzdd::StatelessDdSpec<LookaheadLevelLabels,2> {
+public:
+    int getRoot() const {
+        return 2;
+    }
+
+    int getChild(int level, int value) const {
+        if (level == 2) return 1;
+        return value ? -1 : 0;
+    }
+
+    void printLevel(std::ostream& os, int level) const {
+        os << "L" << level;
+    }
+};
+
 using namespace tdzdd;
 
 TEST(Example1, Combination) {
@@ -71,4 +89,16 @@ TEST(Example1, Combination) {
             ASSERT_EQ(answer, dd.evaluate(ZddCardinality<uint64_t>()));
         }
     }
+}
+
+TEST(Example1, BddLookaheadPrintLevel) {
+    LookaheadLevelLabels spec;
+    std::string const dot = BddLookahead<LookaheadLevelLabels>(spec).dot();
+    ASSERT_NE(std::string::npos, dot.find("label=\"L1\""));
+}
+
+TEST(Example1, ZddLookaheadPrintLevel) {
+    LookaheadLevelLabels spec;
+    std::string const dot = ZddLookahead<LookaheadLevelLabels>(spec).dot();
+    ASSERT_NE(std::string::npos, dot.find("label=\"L2\""));
 }
