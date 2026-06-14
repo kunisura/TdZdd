@@ -33,6 +33,14 @@
 #include "util/demangle.hpp"
 #include "util/MessageHandler.hpp"
 
+#if defined(__cplusplus) && __cplusplus >= 201103L
+#define TDZDD_STATIC_ASSERT_STATE_ALIGNMENT(T) \
+    static_assert(alignof(T) <= alignof(size_t) || alignof(T) <= alignof(void*), \
+                  "tdzdd state types must not require alignment stricter than size_t or pointer")
+#else
+#define TDZDD_STATIC_ASSERT_STATE_ALIGNMENT(T)
+#endif
+
 namespace tdzdd {
 
 /**
@@ -235,6 +243,8 @@ public:
 
 /**
  * Abstract class of DD specifications using scalar states.
+ * The state type must not require alignment stricter than size_t or pointer.
+ * If you need over-aligned storage, keep a pointer to it in the state.
  *
  * Every implementation must have the following functions:
  * - int getRoot(T& state)
@@ -257,6 +267,7 @@ template<typename S, typename T, int AR>
 class DdSpec: public DdSpecBase<S,AR> {
 public:
     typedef T State;
+    TDZDD_STATIC_ASSERT_STATE_ALIGNMENT(State);
 
 private:
     static State& state(void* p) {
@@ -351,6 +362,8 @@ public:
  * Abstract class of DD specifications using POD array states.
  * The size of array must be set by setArraySize(int n) in the constructor
  * and cannot be changed.
+ * The array element type must not require alignment stricter than size_t or
+ * pointer.
  * If you want some arbitrary-sized data storage for states,
  * use pointers to those storages in DdSpec instead.
  *
@@ -373,6 +386,7 @@ template<typename S, typename T, int AR>
 class PodArrayDdSpec: public DdSpecBase<S,AR> {
 public:
     typedef T State;
+    TDZDD_STATIC_ASSERT_STATE_ALIGNMENT(State);
 
 private:
     typedef size_t Word;
@@ -503,6 +517,8 @@ public:
 
 /**
  * Abstract class of DD specifications using both scalar and POD array states.
+ * The scalar and array element types must not require alignment stricter than
+ * size_t or pointer.
  *
  * Every implementation must have the following functions:
  * - int getRoot(TS& scalar, TA* array)
@@ -527,6 +543,8 @@ class HybridDdSpec: public DdSpecBase<S,AR> {
 public:
     typedef TS S_State;
     typedef TA A_State;
+    TDZDD_STATIC_ASSERT_STATE_ALIGNMENT(S_State);
+    TDZDD_STATIC_ASSERT_STATE_ALIGNMENT(A_State);
 
 private:
     typedef size_t Word;
@@ -691,3 +709,5 @@ class PodHybridDdSpec: public HybridDdSpec<S,TS,TA,AR> {
 };
 
 } // namespace tdzdd
+
+#undef TDZDD_STATIC_ASSERT_STATE_ALIGNMENT
