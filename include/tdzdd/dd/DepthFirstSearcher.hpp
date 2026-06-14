@@ -50,7 +50,8 @@ public:
 
     /**
      * Returns a random instance using simple depth-first search.
-     * It does not guarantee that the selection is uniform.
+     * Note: selection is not uniform, std::rand() is used without seeding,
+     * and recursion depth can be proportional to the number of variables.
      * merge_states(void*, void*) is not supported.
      * @return a collection of (item, value) pairs.
      * @exception std::runtime_error no instance exists.
