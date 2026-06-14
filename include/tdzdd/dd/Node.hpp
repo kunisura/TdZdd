@@ -100,6 +100,10 @@ public:
         return code_ & ~NODE_ATTR_MASK;
     }
 
+    uint64_t rawCode() const {
+        return code_;
+    }
+
     size_t hash() const {
         return code() * 314159257;
     }

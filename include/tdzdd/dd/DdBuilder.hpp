@@ -59,6 +59,7 @@ protected:
     union SpecNode {
         NodeId* srcPtr;
         int64_t code;
+        uint64_t nodeCode;
     };
 
     static NodeId*& srcPtr(SpecNode* p) {
@@ -69,8 +70,12 @@ protected:
         return p[0].code;
     }
 
-    static NodeId& nodeId(SpecNode* p) {
-        return *reinterpret_cast<NodeId*>(&p[0].code);
+    static void setNodeId(SpecNode* p, NodeId id) {
+        p[0].nodeCode = id.rawCode();
+    }
+
+    static NodeId nodeId(SpecNode const* p) {
+        return NodeId(p[0].nodeCode);
     }
 
     static void* state(SpecNode* p) {
@@ -118,6 +123,7 @@ protected:
     union SpecNode {
         NodeId* srcPtr;
         int64_t code;
+        uint64_t nodeCode;
     };
 
     static NodeId*& srcPtr(SpecNode* p) {
@@ -128,12 +134,12 @@ protected:
         return p[1].code;
     }
 
-    static NodeId& nodeId(SpecNode* p) {
-        return *reinterpret_cast<NodeId*>(&p[1].code);
+    static void setNodeId(SpecNode* p, NodeId id) {
+        p[1].nodeCode = id.rawCode();
     }
 
     static NodeId nodeId(SpecNode const* p) {
-        return *reinterpret_cast<NodeId const*>(&p[1].code);
+        return NodeId(p[1].nodeCode);
     }
 
     static void* state(SpecNode* p) {
@@ -275,22 +281,28 @@ public:
                 SpecNode*& p0 = uniq.add(p);
 
                 if (p0 == p) {
-                    nodeId(p) = *srcPtr(p) = NodeId(i, m++);
+                    NodeId id(i, m++);
+                    *srcPtr(p) = id;
+                    setNodeId(p, id);
                 }
                 else {
                     switch (spec.merge_states(state(p0), state(p))) {
                     case 1:
-                        nodeId(p0) = 0; // forward to 0-terminal
-                        nodeId(p) = *srcPtr(p) = NodeId(i, m++);
+                        setNodeId(p0, NodeId(0)); // forward to 0-terminal
+                        {
+                            NodeId id(i, m++);
+                            *srcPtr(p) = id;
+                            setNodeId(p, id);
+                        }
                         p0 = p;
                         break;
                     case 2:
                         *srcPtr(p) = 0;
-                        nodeId(p) = 1; // unused
+                        setNodeId(p, NodeId(1)); // unused
                         break;
                     default:
                         *srcPtr(p) = nodeId(p0);
-                        nodeId(p) = 1; // unused
+                        setNodeId(p, NodeId(1)); // unused
                         break;
                     }
                 }
@@ -797,22 +809,28 @@ public:
                     SpecNode*& p0 = uniq.add(p);
 
                     if (p0 == p) {
-                        nodeId(p) = *srcPtr(p) = NodeId(i, mm++);
+                        NodeId id(i, mm++);
+                        *srcPtr(p) = id;
+                        setNodeId(p, id);
                     }
                     else {
                         switch (spec.merge_states(state(p0), state(p))) {
                         case 1:
-                            nodeId(p0) = 0; // forward to 0-terminal
-                            nodeId(p) = *srcPtr(p) = NodeId(i, mm++);
+                            setNodeId(p0, NodeId(0)); // forward to 0-terminal
+                            {
+                                NodeId id(i, mm++);
+                                *srcPtr(p) = id;
+                                setNodeId(p, id);
+                            }
                             p0 = p;
                             break;
                         case 2:
                             *srcPtr(p) = 0;
-                            nodeId(p) = 1; // unused
+                            setNodeId(p, NodeId(1)); // unused
                             break;
                         default:
                             *srcPtr(p) = nodeId(p0);
-                            nodeId(p) = 1; // unused
+                            setNodeId(p, NodeId(1)); // unused
                             break;
                         }
                     }
@@ -820,7 +838,9 @@ public:
             }
             else if (n == 1) {
                 SpecNode* p = list.front();
-                nodeId(p) = *srcPtr(p) = NodeId(i, mm++);
+                NodeId id(i, mm++);
+                *srcPtr(p) = id;
+                setNodeId(p, id);
             }
         }
 
