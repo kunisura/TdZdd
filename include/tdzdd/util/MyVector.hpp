@@ -383,7 +383,15 @@ public:
      * Gets a pointer to the first element.
      * @return pointer to the first element.
      */
-    T* data() const {
+    T* data() {
+        return array_;
+    }
+
+    /**
+     * Gets a pointer to the first element.
+     * @return pointer to the first element.
+     */
+    T const* data() const {
         return array_;
     }
 

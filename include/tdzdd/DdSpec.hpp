@@ -206,37 +206,41 @@ public:
         return 0;
     }
 
-    int get_root(void* p) {
+    int get_root(void* /* p */) {
         return this->entity().getRoot();
     }
 
-    int get_child(void* p, int level, int value) {
+    int get_child(void* /* p */, int level, int value) {
         assert(0 <= value && value < S::ARITY);
         return this->entity().getChild(level, value);
     }
 
-    void get_copy(void* to, void const* from) {
+    void get_copy(void* /* to */, void const* /* from */) {
     }
 
-    int merge_states(void* p1, void* p2) {
+    int merge_states(void* /* p1 */, void* /* p2 */) {
         return 0;
     }
 
-    void destruct(void* p) {
+    void destruct(void* /* p */) {
     }
 
-    void destructLevel(int level) {
+    void destructLevel(int /* level */) {
     }
 
-    size_t hash_code(void const* p, int level) const {
+    size_t hash_code(void const* /* p */, int /* level */) const {
         return 0;
     }
 
-    bool equal_to(void const* p, void const* q, int level) const {
+    bool equal_to(void const* /* p */,
+                  void const* /* q */,
+                  int /* level */) const {
         return true;
     }
 
-    void print_state(std::ostream& os, void const* p, int level) const {
+    void print_state(std::ostream& os,
+                     void const* /* p */,
+                     int /* level */) const {
         os << "*";
     }
 };
@@ -305,7 +309,7 @@ public:
         this->entity().getCopy(to, state(from));
     }
 
-    int mergeStates(State& s1, State& s2) {
+    int mergeStates(State& /* s1 */, State& /* s2 */) {
         return 0;
     }
 
@@ -317,14 +321,14 @@ public:
         state(p).~State();
     }
 
-    void destructLevel(int level) {
+    void destructLevel(int /* level */) {
     }
 
     size_t hashCode(State const& s) const {
         return this->rawHashCode(s);
     }
 
-    size_t hashCodeAtLevel(State const& s, int level) const {
+    size_t hashCodeAtLevel(State const& s, int /* level */) const {
         return this->entity().hashCode(s);
     }
 
@@ -337,7 +341,9 @@ public:
         return s1 == s2;
     }
 
-    bool equalToAtLevel(State const& s1, State const& s2, int level) const {
+    bool equalToAtLevel(State const& s1,
+                        State const& s2,
+                        int /* level */) const {
         return this->entity().equalTo(s1, s2);
     }
 
@@ -349,7 +355,9 @@ public:
         os << s;
     }
 
-    void printStateAtLevel(std::ostream& os, State const& s, int level) const {
+    void printStateAtLevel(std::ostream& os,
+                           State const& s,
+                           int /* level */) const {
         this->entity().printState(os, s);
     }
 
@@ -446,7 +454,7 @@ public:
         }
     }
 
-    int mergeStates(T* a1, T* a2) {
+    int mergeStates(T* /* a1 */, T* /* a2 */) {
         return 0;
     }
 
@@ -454,10 +462,10 @@ public:
         return this->entity().mergeStates(state(p1), state(p2));
     }
 
-    void destruct(void* p) {
+    void destruct(void* /* p */) {
     }
 
-    void destructLevel(int level) {
+    void destructLevel(int /* level */) {
     }
 
     size_t hashCode(State const* s) const {
@@ -471,7 +479,7 @@ public:
         return h;
     }
 
-    size_t hashCodeAtLevel(State const* s, int level) const {
+    size_t hashCodeAtLevel(State const* s, int /* level */) const {
         return this->entity().hashCode(s);
     }
 
@@ -489,7 +497,9 @@ public:
         return true;
     }
 
-    bool equalToAtLevel(State const* s1, State const* s2, int level) const {
+    bool equalToAtLevel(State const* s1,
+                        State const* s2,
+                        int /* level */) const {
         return this->entity().equalTo(s1, s2);
     }
 
@@ -506,7 +516,9 @@ public:
         os << "]";
     }
 
-    void printStateAtLevel(std::ostream& os, State const* a, int level) const {
+    void printStateAtLevel(std::ostream& os,
+                           State const* a,
+                           int /* level */) const {
         this->entity().printState(os, a);
     }
 
@@ -622,7 +634,10 @@ public:
         }
     }
 
-    int mergeStates(S_State& s1, A_State* a1, S_State& s2, A_State* a2) {
+    int mergeStates(S_State& /* s1 */,
+                    A_State* /* a1 */,
+                    S_State& /* s2 */,
+                    A_State* /* a2 */) {
         return 0;
     }
 
@@ -631,17 +646,17 @@ public:
                                           a_state(p2));
     }
 
-    void destruct(void* p) {
+    void destruct(void* /* p */) {
     }
 
-    void destructLevel(int level) {
+    void destructLevel(int /* level */) {
     }
 
     size_t hashCode(S_State const& s) const {
         return this->rawHashCode(s);
     }
 
-    size_t hashCodeAtLevel(S_State const& s, int level) const {
+    size_t hashCodeAtLevel(S_State const& s, int /* level */) const {
         return this->entity().hashCode(s);
     }
 
@@ -662,7 +677,9 @@ public:
         return this->rawEqualTo(s1, s2);
     }
 
-    bool equalToAtLevel(S_State const& s1, S_State const& s2, int level) const {
+    bool equalToAtLevel(S_State const& s1,
+                        S_State const& s2,
+                        int /* level */) const {
         return this->entity().equalTo(s1, s2);
     }
 
@@ -694,7 +711,7 @@ public:
     void printStateAtLevel(std::ostream& os,
                            S_State const& s,
                            A_State const* a,
-                           int level) const {
+                           int /* level */) const {
         this->entity().printState(os, s, a);
     }
 

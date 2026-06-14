@@ -53,7 +53,7 @@ public:
             : blockList(0), nextUnit(BLOCK_UNITS) {
     }
 
-    MemoryPool(MemoryPool const& o)
+    MemoryPool(MemoryPool const& /* o */)
             : blockList(0), nextUnit(BLOCK_UNITS) {
 //        if (o.blockList != 0) throw std::runtime_error(
 //                "MemoryPool can't be copied unless it is empty!"); //FIXME

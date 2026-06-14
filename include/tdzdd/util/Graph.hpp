@@ -453,7 +453,7 @@ public:
             }
 
             std::vector<EdgeNumber> finalEdgeToColor(numColor_ + 1);
-            EdgeNumber fitstEdgeToFinalColor = 0;
+            EdgeNumber firstEdgeToFinalColor = 0;
             std::vector<bool> touched(numColor_ + 1);
             touched[0] = true;
             ColorNumber k = numColor_;
@@ -465,14 +465,14 @@ public:
                 finalEdgeToColor[n2] = a;
                 if (!touched[n1]) {
                     if (--k == 0) {
-                        fitstEdgeToFinalColor = a;
+                        firstEdgeToFinalColor = a;
                         break;
                     }
                     touched[n1] = true;
                 }
                 if (!touched[n2]) {
                     if (--k == 0) {
-                        fitstEdgeToFinalColor = a;
+                        firstEdgeToFinalColor = a;
                         break;
                     }
                     touched[n2] = true;
@@ -492,7 +492,7 @@ public:
                 e.v2final = (a == lastEdge[e.v2]);
                 e.v1final2 = (a == secondLastEdge[e.v1]);
                 e.v2final2 = (a == secondLastEdge[e.v2]);
-                e.allColorsSeen = (a >= fitstEdgeToFinalColor);
+                e.allColorsSeen = (a >= firstEdgeToFinalColor);
                 e.finalEdge = (a == edgeSize() - 1);
             }
         }
@@ -669,7 +669,7 @@ public:
 
 private:
     struct NoEdgeDecorator {
-        std::string operator()(EdgeNumber a) const {
+        std::string operator()(EdgeNumber /* a */) const {
             return "";
         }
     };
