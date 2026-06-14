@@ -27,6 +27,7 @@
 #include <algorithm>
 #include <cassert>
 #include <climits>
+#include <cstddef>
 #include <ostream>
 #include <set>
 #include <stdexcept>
@@ -505,7 +506,8 @@ public:
                 int k = omp_get_thread_num();
 
 #pragma omp for schedule(static)
-                for (intmax_t j = 0; j < intmax_t(m); ++j) {
+                for (ptrdiff_t jj = 0; jj < ptrdiff_t(m); ++jj) {
+                    size_t const j = static_cast<size_t>(jj);
                     DdValues<T,ARITY> values;
                     for (int b = 0; b < ARITY; ++b) {
                         NodeId f = node[j].branch[b];

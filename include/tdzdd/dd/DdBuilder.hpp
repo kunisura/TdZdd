@@ -25,6 +25,7 @@
 #pragma once
 
 #include <cassert>
+#include <cstddef>
 #include <cmath>
 #include <ostream>
 #include <stdexcept>
@@ -1073,7 +1074,8 @@ public:
 #ifdef _OPENMP
 #pragma omp for schedule(dynamic)
 #endif
-            for (intmax_t j = 0; j < intmax_t(m); ++j) {
+            for (ptrdiff_t jj = 0; jj < ptrdiff_t(m); ++jj) {
+                size_t const j = static_cast<size_t>(jj);
                 size_t mm = 0;
                 for (int y = 0; y < threads; ++y) {
                     if (snodeTables[y][i].empty()) continue;
@@ -1081,7 +1083,7 @@ public:
                     mm += snodes.size();
                 }
                 uniq.initialize(mm * 2);
-                size_t jj = 0;
+                size_t count = 0;
 
                 for (int y = 0; y < threads; ++y) {
                     if (snodeTables[y][i].empty()) continue;
@@ -1093,7 +1095,7 @@ public:
                         SpecNode* pp = uniq.add(p);
 
                         if (pp == p) {
-                            code(p) = ++jj; // code(p) >= 1
+                            code(p) = ++count; // code(p) >= 1
                         }
                         else {
                             code(p) = -code(pp);
@@ -1106,7 +1108,7 @@ public:
                     }
                 }
 
-                nodeColumn[j] = jj;
+                nodeColumn[j] = count;
             }
 
 #ifdef _OPENMP
@@ -1126,7 +1128,8 @@ public:
 #ifdef _OPENMP
 #pragma omp for schedule(dynamic)
 #endif
-            for (intmax_t j = 0; j < intmax_t(m); ++j) {
+            for (ptrdiff_t jj = 0; jj < ptrdiff_t(m); ++jj) {
+                size_t const j = static_cast<size_t>(jj);
                 size_t const jj0 = nodeColumn[j] - 1;   // code(p) >= 1
 
                 for (int y = 0; y < threads; ++y) {

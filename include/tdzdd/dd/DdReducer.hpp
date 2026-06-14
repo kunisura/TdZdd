@@ -25,6 +25,7 @@
 #pragma once
 
 #include <cassert>
+#include <cstddef>
 #include <cmath>
 #include <ostream>
 #include <stdexcept>
@@ -422,7 +423,8 @@ private:
             MyHashTable<ReducNodeInfo const*> uniq;
 
 #pragma omp for schedule(static)
-            for (size_t j = 0; j < m; ++j) {
+            for (ptrdiff_t jj = 0; jj < ptrdiff_t(m); ++jj) {
+                size_t const j = static_cast<size_t>(jj);
                 Node<ARITY>& f = input[i][j];
 
                 // make f canonical
@@ -534,7 +536,8 @@ private:
             }
 
 #pragma omp for schedule(static)
-            for (size_t j = 0; j < m; ++j) {
+            for (ptrdiff_t jj = 0; jj < ptrdiff_t(m); ++jj) {
+                size_t const j = static_cast<size_t>(jj);
                 NodeId& ff = newIdTable[i][j];
                 if (ff.row() >= i) {
                     ff = NodeId(i,
