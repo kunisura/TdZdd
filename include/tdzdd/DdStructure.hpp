@@ -47,6 +47,13 @@
 #include "util/MyHashTable.hpp"
 #include "util/MyVector.hpp"
 
+#if defined(__cplusplus) && __cplusplus >= 201103L
+#define TDZDD_STATIC_ASSERT_BINARY_SAPPORO_ARITY(A) \
+    static_assert((A) == 2, "dumpSapporo supports only binary DDs")
+#else
+#define TDZDD_STATIC_ASSERT_BINARY_SAPPORO_ARITY(A)
+#endif
+
 namespace tdzdd {
 
 /**
@@ -704,6 +711,11 @@ public:
      * @param os the output stream.
      */
     void dumpSapporo(std::ostream& os) const {
+        TDZDD_STATIC_ASSERT_BINARY_SAPPORO_ARITY(ARITY);
+        if (ARITY != 2) {
+            throw std::logic_error("dumpSapporo supports only binary DDs");
+        }
+
         int const n = diagram->numRows() - 1;
         size_t const l = size();
 
@@ -752,3 +764,5 @@ public:
 };
 
 } // namespace tdzdd
+
+#undef TDZDD_STATIC_ASSERT_BINARY_SAPPORO_ARITY

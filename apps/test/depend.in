@@ -230,6 +230,82 @@ test.o: test.cpp
 test-debug.o: test.cpp
 test-11.o: test.cpp
 test-11-debug.o: test.cpp
+testDumpSapporo.o: testDumpSapporo.cpp \
+ ../../include/tdzdd/DdStructure.hpp ../../include/tdzdd/DdEval.hpp \
+ ../../include/tdzdd/DdSpec.hpp ../../include/tdzdd/dd/DdBuilder.hpp \
+ ../../include/tdzdd/dd/DdSweeper.hpp ../../include/tdzdd/dd/Node.hpp \
+ ../../include/tdzdd/dd/NodeTable.hpp \
+ ../../include/tdzdd/dd/DataTable.hpp \
+ ../../include/tdzdd/dd/../util/MyVector.hpp \
+ ../../include/tdzdd/dd/../util/MessageHandler.hpp \
+ ../../include/tdzdd/dd/../util/ResourceUsage.hpp \
+ ../../include/tdzdd/dd/../util/MemoryPool.hpp \
+ ../../include/tdzdd/dd/../util/MyHashTable.hpp \
+ ../../include/tdzdd/dd/../util/MyList.hpp \
+ ../../include/tdzdd/dd/DepthFirstSearcher.hpp \
+ ../../include/tdzdd/util/demangle.hpp \
+ ../../include/tdzdd/dd/DdReducer.hpp \
+ ../../include/tdzdd/eval/Cardinality.hpp \
+ ../../include/tdzdd/eval/../util/BigNumber.hpp \
+ ../../include/tdzdd/op/Lookahead.hpp \
+ ../../include/tdzdd/op/Unreduction.hpp
+testDumpSapporo-debug.o: testDumpSapporo.cpp \
+ ../../include/tdzdd/DdStructure.hpp ../../include/tdzdd/DdEval.hpp \
+ ../../include/tdzdd/DdSpec.hpp ../../include/tdzdd/dd/DdBuilder.hpp \
+ ../../include/tdzdd/dd/DdSweeper.hpp ../../include/tdzdd/dd/Node.hpp \
+ ../../include/tdzdd/dd/NodeTable.hpp \
+ ../../include/tdzdd/dd/DataTable.hpp \
+ ../../include/tdzdd/dd/../util/MyVector.hpp \
+ ../../include/tdzdd/dd/../util/MessageHandler.hpp \
+ ../../include/tdzdd/dd/../util/ResourceUsage.hpp \
+ ../../include/tdzdd/dd/../util/MemoryPool.hpp \
+ ../../include/tdzdd/dd/../util/MyHashTable.hpp \
+ ../../include/tdzdd/dd/../util/MyList.hpp \
+ ../../include/tdzdd/dd/DepthFirstSearcher.hpp \
+ ../../include/tdzdd/util/demangle.hpp \
+ ../../include/tdzdd/dd/DdReducer.hpp \
+ ../../include/tdzdd/eval/Cardinality.hpp \
+ ../../include/tdzdd/eval/../util/BigNumber.hpp \
+ ../../include/tdzdd/op/Lookahead.hpp \
+ ../../include/tdzdd/op/Unreduction.hpp
+testDumpSapporo-11.o: testDumpSapporo.cpp \
+ ../../include/tdzdd/DdStructure.hpp ../../include/tdzdd/DdEval.hpp \
+ ../../include/tdzdd/DdSpec.hpp ../../include/tdzdd/dd/DdBuilder.hpp \
+ ../../include/tdzdd/dd/DdSweeper.hpp ../../include/tdzdd/dd/Node.hpp \
+ ../../include/tdzdd/dd/NodeTable.hpp \
+ ../../include/tdzdd/dd/DataTable.hpp \
+ ../../include/tdzdd/dd/../util/MyVector.hpp \
+ ../../include/tdzdd/dd/../util/MessageHandler.hpp \
+ ../../include/tdzdd/dd/../util/ResourceUsage.hpp \
+ ../../include/tdzdd/dd/../util/MemoryPool.hpp \
+ ../../include/tdzdd/dd/../util/MyHashTable.hpp \
+ ../../include/tdzdd/dd/../util/MyList.hpp \
+ ../../include/tdzdd/dd/DepthFirstSearcher.hpp \
+ ../../include/tdzdd/util/demangle.hpp \
+ ../../include/tdzdd/dd/DdReducer.hpp \
+ ../../include/tdzdd/eval/Cardinality.hpp \
+ ../../include/tdzdd/eval/../util/BigNumber.hpp \
+ ../../include/tdzdd/op/Lookahead.hpp \
+ ../../include/tdzdd/op/Unreduction.hpp
+testDumpSapporo-11-debug.o: testDumpSapporo.cpp \
+ ../../include/tdzdd/DdStructure.hpp ../../include/tdzdd/DdEval.hpp \
+ ../../include/tdzdd/DdSpec.hpp ../../include/tdzdd/dd/DdBuilder.hpp \
+ ../../include/tdzdd/dd/DdSweeper.hpp ../../include/tdzdd/dd/Node.hpp \
+ ../../include/tdzdd/dd/NodeTable.hpp \
+ ../../include/tdzdd/dd/DataTable.hpp \
+ ../../include/tdzdd/dd/../util/MyVector.hpp \
+ ../../include/tdzdd/dd/../util/MessageHandler.hpp \
+ ../../include/tdzdd/dd/../util/ResourceUsage.hpp \
+ ../../include/tdzdd/dd/../util/MemoryPool.hpp \
+ ../../include/tdzdd/dd/../util/MyHashTable.hpp \
+ ../../include/tdzdd/dd/../util/MyList.hpp \
+ ../../include/tdzdd/dd/DepthFirstSearcher.hpp \
+ ../../include/tdzdd/util/demangle.hpp \
+ ../../include/tdzdd/dd/DdReducer.hpp \
+ ../../include/tdzdd/eval/Cardinality.hpp \
+ ../../include/tdzdd/eval/../util/BigNumber.hpp \
+ ../../include/tdzdd/op/Lookahead.hpp \
+ ../../include/tdzdd/op/Unreduction.hpp
 testGraph.o: testGraph.cpp ../../include/tdzdd/util/MessageHandler.hpp \
  ../../include/tdzdd/util/ResourceUsage.hpp \
  ../../include/tdzdd/util/Graph.hpp
