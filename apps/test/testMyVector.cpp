@@ -89,3 +89,29 @@ TEST(MemoryPoolTest, MemoryPoolsResizeMovesPools) {
     *secondValue = 20;
     EXPECT_EQ(20, *secondValue);
 }
+
+TEST(MemoryPoolTest, CopyAssignEmptySourceClearsDestination) {
+    MemoryPool dst;
+    int* oldValue = dst.allocate<int>();
+    *oldValue = 10;
+
+    MemoryPool empty;
+    dst = empty;
+
+    EXPECT_TRUE(dst.empty());
+    EXPECT_TRUE(empty.empty());
+}
+
+TEST(MemoryPoolTest, CopyAssignNonEmptySourceThrows) {
+    MemoryPool src;
+    int* srcValue = src.allocate<int>();
+    *srcValue = 10;
+
+    MemoryPool dst;
+    int* dstValue = dst.allocate<int>();
+    *dstValue = 20;
+
+    EXPECT_THROW(dst = src, std::runtime_error);
+    EXPECT_FALSE(src.empty());
+    EXPECT_FALSE(dst.empty());
+}
