@@ -41,8 +41,8 @@
 using namespace tdzdd;
 
 std::string options[][2] = { //
-        {"colored", "Solve the coloed N-queen problem"}, //
-        {"colored1", "Solve the coloed N-queen problem by a single ZDD spec"}, //
+        {"colored", "Solve the colored N-queen problem"}, //
+        {"colored1", "Solve the colored N-queen problem by a single ZDD spec"}, //
         {"sat", "Try to find a single instance"}, //
         {"rook", "Solve the rook constraint at first"}, //
         {"p", "Use parallel algorithms"}, //
