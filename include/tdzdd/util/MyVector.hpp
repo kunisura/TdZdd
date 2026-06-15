@@ -101,6 +101,7 @@ public:
     }
 
     MyVector& operator=(MyVector const& o) {
+        if (this == &o) return *this;
         resize(0);
         reserve(o.size_);
         size_ = o.size_;
