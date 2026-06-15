@@ -508,7 +508,7 @@ public:
         assert(0 < i && i < output.numRows());
         assert(output.numRows() - snodeTables[0][0].size() == 0);
 
-        MyVector<size_t> nodeColumn(tasks);
+        MyVector<ptrdiff_t> nodeColumn(tasks);
         int lowestChild = i - 1;
         size_t deadCount = 0;
 
@@ -577,7 +577,7 @@ public:
                     }
                 }
 
-                nodeColumn[x] = j;
+                nodeColumn[x] = static_cast<ptrdiff_t>(j);
 //#ifdef DEBUG
 //                MessageHandler mh;
 //#ifdef _OPENMP
@@ -597,9 +597,9 @@ public:
 #endif
                 size_t m = output[i].size();
                 for (int x = 0; x < tasks; ++x) {
-                    size_t j = nodeColumn[x];
-                    nodeColumn[x] = (j >= 1) ? m : -1; // -1 for skip
-                    m += j;
+                    ptrdiff_t j = nodeColumn[x];
+                    nodeColumn[x] = (j >= 1) ? static_cast<ptrdiff_t>(m) : -1; // -1 for skip
+                    m += static_cast<size_t>(j);
                 }
 
                 output.initRow(i, m);
@@ -614,7 +614,7 @@ public:
 #endif
             for (int x = 0; x < tasks; ++x) {
                 if (nodeColumn[x] < 0) continue; // -1 for skip
-                size_t j0 = nodeColumn[x] - 1;   // code(p) >= 1
+                size_t j0 = static_cast<size_t>(nodeColumn[x]) - 1;   // code(p) >= 1
 
                 for (int y = 0; y < threads; ++y) {
                     MyList<SpecNode> &snodes = snodeTables[y][x][i];
