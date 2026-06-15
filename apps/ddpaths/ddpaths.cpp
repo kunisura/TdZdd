@@ -317,7 +317,7 @@ int main(int argc, char *argv[]) {
                 f.zddSubset(g);
             }
             else {
-                f = DdStructure<2>(fbs);
+                f = DdStructure<2>(fbs, opt["p"]);
             }
 
             if (!opt["nored"]) f.zddReduce();
