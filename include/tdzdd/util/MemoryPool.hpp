@@ -26,6 +26,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <new>
 #include <stdexcept>
 
 #include "MyVector.hpp"
@@ -84,9 +85,12 @@ public:
 //    }
 
     void moveFrom(MemoryPool& o) {
+        if (this == &o) return;
+        clear();
         blockList = o.blockList;
         nextUnit = o.nextUnit;
         o.blockList = 0;
+        o.nextUnit = BLOCK_UNITS;
     }
 
     virtual ~MemoryPool() {
@@ -242,7 +246,11 @@ typedef MyVector<MemoryPool> MemoryPools;
 template<>
 inline void MyVector<MemoryPool>::moveElement(MemoryPool& from,
         MemoryPool& to) {
-    to.moveFrom(from);
+    if (&from != &to) {
+        new (&to) MemoryPool();
+        to.moveFrom(from);
+        from.~MemoryPool();
+    }
 }
 
 } // namespace tdzdd

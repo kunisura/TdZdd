@@ -319,13 +319,17 @@ testGraph-11-debug.o: testGraph.cpp ../../include/tdzdd/util/MessageHandler.hpp 
  ../../include/tdzdd/util/ResourceUsage.hpp \
  ../../include/tdzdd/util/Graph.hpp
 testMyVector.o: testMyVector.cpp ../../include/tdzdd/dd/DataTable.hpp \
- ../../include/tdzdd/dd/../util/MyVector.hpp
+ ../../include/tdzdd/dd/../util/MyVector.hpp \
+ ../../include/tdzdd/util/MemoryPool.hpp
 testMyVector-debug.o: testMyVector.cpp ../../include/tdzdd/dd/DataTable.hpp \
- ../../include/tdzdd/dd/../util/MyVector.hpp
+ ../../include/tdzdd/dd/../util/MyVector.hpp \
+ ../../include/tdzdd/util/MemoryPool.hpp
 testMyVector-11.o: testMyVector.cpp ../../include/tdzdd/dd/DataTable.hpp \
- ../../include/tdzdd/dd/../util/MyVector.hpp
+ ../../include/tdzdd/dd/../util/MyVector.hpp \
+ ../../include/tdzdd/util/MemoryPool.hpp
 testMyVector-11-debug.o: testMyVector.cpp ../../include/tdzdd/dd/DataTable.hpp \
- ../../include/tdzdd/dd/../util/MyVector.hpp
+ ../../include/tdzdd/dd/../util/MyVector.hpp \
+ ../../include/tdzdd/util/MemoryPool.hpp
 testPathCounter.o: testPathCounter.cpp ../../include/tdzdd/DdSpec.hpp \
  ../../include/tdzdd/dd/DdBuilder.hpp \
  ../../include/tdzdd/dd/DdSweeper.hpp ../../include/tdzdd/dd/Node.hpp \

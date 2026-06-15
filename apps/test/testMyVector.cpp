@@ -25,6 +25,7 @@
 #include <gtest/gtest.h>
 
 #include <tdzdd/dd/DataTable.hpp>
+#include <tdzdd/util/MemoryPool.hpp>
 #include <tdzdd/util/MyVector.hpp>
 
 using namespace tdzdd;
@@ -55,4 +56,36 @@ TEST(DataTableTest, SelfAssignmentKeepsRows) {
     EXPECT_EQ(10, table[0][0]);
     EXPECT_EQ(20, table[1][0]);
     EXPECT_EQ(30, table[1][1]);
+}
+
+TEST(MemoryPoolTest, MoveFromClearsNonEmptyDestination) {
+    MemoryPool dst;
+    int* oldValue = dst.allocate<int>();
+    *oldValue = 10;
+
+    MemoryPool src;
+    int* srcValue = src.allocate<int>();
+    *srcValue = 20;
+
+    dst.moveFrom(src);
+
+    EXPECT_TRUE(src.empty());
+    EXPECT_FALSE(dst.empty());
+    int* newValue = dst.allocate<int>();
+    *newValue = 30;
+    EXPECT_EQ(30, *newValue);
+}
+
+TEST(MemoryPoolTest, MemoryPoolsResizeMovesPools) {
+    MemoryPools pools;
+    pools.resize(1);
+    int* firstValue = pools[0].allocate<int>();
+    *firstValue = 10;
+
+    pools.resize(4);
+
+    EXPECT_FALSE(pools[0].empty());
+    int* secondValue = pools[0].allocate<int>();
+    *secondValue = 20;
+    EXPECT_EQ(20, *secondValue);
 }
