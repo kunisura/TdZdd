@@ -265,19 +265,36 @@ public:
 
 #ifdef _OPENMP
             if (useMP) {
-#pragma omp parallel for schedule(static)
-                for (ptrdiff_t jj = 0; jj < ptrdiff_t(m); ++jj) {
-                    size_t const j = static_cast<size_t>(jj);
-                    for (int b = 0; b < ARITY; ++b) {
-                        int const ii = node[j].branch[b].row();
-                        if (ii == 0) continue;
-                        if (ii < lowest) {
-#pragma omp critical
-                            if (ii < lowest) lowest = ii;
+#pragma omp parallel
+                {
+                    int localLowest = i;
+                    MyVector<bool> localLowerMark(n + 1);
+                    MyVector<int> localLower;
+
+#pragma omp for schedule(static)
+                    for (ptrdiff_t jj = 0; jj < ptrdiff_t(m); ++jj) {
+                        size_t const j = static_cast<size_t>(jj);
+                        for (int b = 0; b < ARITY; ++b) {
+                            int const ii = node[j].branch[b].row();
+                            if (ii == 0) continue;
+                            if (ii < localLowest) localLowest = ii;
+                            if (!localLowerMark[ii]) {
+                                localLowerMark[ii] = true;
+                                localLower.push_back(ii);
+                            }
                         }
-                        if (!lowerMark[ii]) {
-                            myLower[ii] = true;
-                            lowerMark[ii] = true;
+                    }
+
+#pragma omp critical
+                    {
+                        if (localLowest < lowest) lowest = localLowest;
+                        for (int const* t = localLower.begin();
+                                t != localLower.end(); ++t) {
+                            int const ii = *t;
+                            if (!lowerMark[ii]) {
+                                myLower[ii] = true;
+                                lowerMark[ii] = true;
+                            }
                         }
                     }
                 }
