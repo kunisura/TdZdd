@@ -334,14 +334,17 @@ public:
     }
 
     uint32_t divide(uint32_t n) {
+        if (n == 0) throw std::invalid_argument("FixedBigNumber::divide by zero");
+
         uint64_t r = 0;
         for (int i = size - 1; i >= 0; --i) {
+            // Use unsigned division: intermediate r can exceed LLONG_MAX
+            // when n is close to UINT32_MAX, so lldiv() is not suitable.
             r = (r << 32) + val[i];
-            lldiv_t d = lldiv(r, n);
-            val[i] = d.quot;
-            r = d.rem;
+            val[i] = static_cast<uint32_t>(r / n);
+            r %= n;
         }
-        return r;
+        return static_cast<uint32_t>(r);
     }
 
     template<typename T>
