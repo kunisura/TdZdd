@@ -48,6 +48,11 @@ public:
 
     void initialize(int level) {
         topLevel = level;
+
+        if (BDD && numVars < topLevel) {
+            throw std::invalid_argument(
+                    "the number of BDD variables must be greater than or equal to the BDD root level");
+        }
     }
 
     void evalTerminal(T& n, bool one) const {
