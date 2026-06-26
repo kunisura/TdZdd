@@ -239,8 +239,8 @@ private:
         VertexNumber v2;
 
         while (is) {
-            char c;
-            while (isspace(c = is.get())) {
+            int c;
+            while (std::isspace(c = is.get())) {
                 if (c == '\n') ++v1;
             }
             if (!is) break;
@@ -258,8 +258,8 @@ private:
         name2color.clear();
 
         while (is) {
-            char c;
-            while (isspace(c = is.get())) {
+            int c;
+            while (std::isspace(c = is.get())) {
                 if (c == '\n') {
                     color = getColor(n++);
                 }

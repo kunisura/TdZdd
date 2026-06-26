@@ -26,6 +26,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <stdexcept>
 
 #include "../DdSpec.hpp"
 
@@ -99,8 +100,22 @@ public:
     }
 
     int merge_states(void* p1, void* p2) {
-        return spec1.merge_states(state1(p1), state1(p2))
+        int rc = spec1.merge_states(state1(p1), state1(p2))
                 | spec2.merge_states(state2(p1), state2(p2));
+        // rc == 3 means spec1 and spec2 disagree on the dominance direction
+        // (one returned 1, the other 2), so the two composed states are
+        // incomparable and must both be kept as separate nodes. That cannot
+        // be expressed through merge_states, which only collapses a collision
+        // into a single node. To support specs that both perform dominance
+        // pruning, write a dedicated combinator whose equal_to is redesigned
+        // so that incomparable pairs never collide in the first place.
+        if (rc == 3) {
+            throw std::runtime_error(
+                    "BinaryOperation::merge_states: conflicting dominance "
+                    "between operand specs (one returned 1, the other 2); "
+                    "the composed states are incomparable and cannot be merged");
+        }
+        return rc;
     }
 
     void destruct(void* p) {
@@ -171,9 +186,11 @@ struct BddAnd_
 
     int getRoot(Word* p) {
         int i1 = base::spec1.get_root(base::state1(p));
-        if (i1 == 0) return 0;
         int i2 = base::spec2.get_root(base::state2(p));
-        if (i2 == 0) return 0;
+        // Both operand states must be constructed before any early return:
+        // the framework calls destruct() unconditionally, and destructing an
+        // unconstructed state2 is UB for non-trivial state types.
+        if (i1 == 0 || i2 == 0) return 0;
         base::setLevel1(p, i1);
         base::setLevel2(p, i2);
         return std::max(base::level1(p), base::level2(p));
@@ -241,9 +258,11 @@ struct BddOr_
 
     int getRoot(Word* p) {
         int i1 = base::spec1.get_root(base::state1(p));
-        if (i1 < 0) return -1;
         int i2 = base::spec2.get_root(base::state2(p));
-        if (i2 < 0) return -1;
+        // Both operand states must be constructed before any early return:
+        // the framework calls destruct() unconditionally, and destructing an
+        // unconstructed state2 is UB for non-trivial state types.
+        if (i1 < 0 || i2 < 0) return -1;
         base::setLevel1(p, i1);
         base::setLevel2(p, i2);
         return std::max(base::level1(p), base::level2(p));
@@ -345,9 +364,11 @@ public:
 
     int getRoot(Word* p) {
         int i1 = spec1.get_root(state1(p));
-        if (i1 == 0) return 0;
         int i2 = spec2.get_root(state2(p));
-        if (i2 == 0) return 0;
+        // Both operand states must be constructed before any early return:
+        // the framework calls destruct() unconditionally, and destructing an
+        // unconstructed state2 is UB for non-trivial state types.
+        if (i1 == 0 || i2 == 0) return 0;
 
         while (i1 != i2) {
             if (i1 > i2) {
@@ -389,8 +410,22 @@ public:
     }
 
     int merge_states(void* p1, void* p2) {
-        return spec1.merge_states(state1(p1), state1(p2))
+        int rc = spec1.merge_states(state1(p1), state1(p2))
                 | spec2.merge_states(state2(p1), state2(p2));
+        // rc == 3 means spec1 and spec2 disagree on the dominance direction
+        // (one returned 1, the other 2), so the two composed states are
+        // incomparable and must both be kept as separate nodes. That cannot
+        // be expressed through merge_states, which only collapses a collision
+        // into a single node. To support specs that both perform dominance
+        // pruning, write a dedicated combinator whose equal_to is redesigned
+        // so that incomparable pairs never collide in the first place.
+        if (rc == 3) {
+            throw std::runtime_error(
+                    "ZddIntersection::merge_states: conflicting dominance "
+                    "between operand specs (one returned 1, the other 2); "
+                    "the composed states are incomparable and cannot be merged");
+        }
+        return rc;
     }
 
     void destruct(void* p) {

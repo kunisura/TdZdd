@@ -119,15 +119,23 @@ public:
      */
     void pullout(size_t i) {
         size_t k = i / 64;
-        uint64_t* p = &word(k);
-        uint64_t* q = p + (numWords() - k);
         size_t r = i % 64;
         uint64_t m = (r == 63) ? ~uint64_t(0) : mask(r + 1) - 1;
-        *p = (*p & ~m) | ((*p << 1) & m);
-        while (++p < q) {
-            *(p - 1) |= *p >> 63;
-            *p <<= 1;
+
+        // Words 0..k-1 hold only elements smaller than i: shift each up
+        // by one, carrying bit 63 of a lower word into bit 0 of the next.
+        uint64_t carry = 0;
+        for (size_t j = 0; j < k; ++j) {
+            uint64_t& w = word(j);
+            uint64_t next = w >> 63;
+            w = (w << 1) | carry;
+            carry = next;
         }
+
+        // Word k: shift its low part (bits 0..r) up by one to fill the slot
+        // left by element i (bit r is dropped); keep the high part intact.
+        uint64_t& wk = word(k);
+        wk = (wk & ~m) | (((wk << 1) | carry) & m);
     }
 
     /**

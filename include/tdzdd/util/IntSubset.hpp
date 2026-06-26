@@ -25,6 +25,7 @@
 #pragma once
 
 #include <climits>
+#include <stdexcept>
 
 namespace tdzdd {
 
@@ -51,11 +52,16 @@ class IntRange: public IntSubset {
 public:
     IntRange(int min = 0, int max = INT_MAX, int step = 1)
             : min(min), max(max), step(step) {
+        if (step < 1) {
+            throw std::invalid_argument("IntRange step must be positive");
+        }
     }
 
     bool contains(int x) const {
         if (x < min || max < x) return false;
-        return (x - min) % step == 0;
+        // Widen to avoid signed overflow when min is very negative; the bound
+        // check above guarantees x >= min, so the difference is non-negative.
+        return (static_cast<long long>(x) - min) % step == 0;
     }
 
     int lowerBound() const {
