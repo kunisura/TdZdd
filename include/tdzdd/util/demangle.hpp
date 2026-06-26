@@ -24,6 +24,7 @@
 
 #pragma once
 
+#include <cctype>
 #include <cstdlib>
 #include <string>
 #include <typeinfo>
@@ -47,8 +48,8 @@ inline std::string demangle(char const* name) {
 
     for (char c = *p++; c; c = *p++) {
         s += c;
-        if (!isalnum(c)) {
-            while (std::isspace(*p)) {
+        if (!std::isalnum(static_cast<unsigned char>(c))) {
+            while (std::isspace(static_cast<unsigned char>(*p))) {
                 ++p;
             }
         }
@@ -66,7 +67,7 @@ inline std::string demangleTypename(char const* name) {
     size_t j = 0;
 
     while (j + 1 < s.size()) {
-        if (std::isalnum(s[j])) {
+        if (std::isalnum(static_cast<unsigned char>(s[j]))) {
             ++j;
         }
         else if (s[j] == ':' && s[j + 1] == ':') {
