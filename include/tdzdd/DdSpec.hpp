@@ -264,6 +264,21 @@ public:
  * - void printLevel(std::ostream& os, int level) const
  * - void printState(std::ostream& os, State const& s) const
  *
+ * Hash values for any two states must be the same whenever they are
+ * equivalent.  The default equalTo is `state1 == state2` and the default
+ * hashCode is a raw-byte hash of the state, which is consistent only for
+ * types where value equality coincides with byte equality.  You must
+ * override hashCode so that it is consistent with operator== for types
+ * such as the following:
+ * - std::vector and other containers, whose bytes hold a heap pointer and
+ *   size rather than the contents, so two equal-valued states placed at
+ *   different addresses hash differently;
+ * - double and float, because +0.0 and -0.0 are equal under operator== but
+ *   have different bit patterns, so the raw-byte hash differs even though
+ *   the values are equivalent;
+ * - structs with padding, whose padding bytes are indeterminate and ignored
+ *   by a member-wise operator== but still mixed into the raw-byte hash.
+ *
  * @tparam S the class implementing this class.
  * @tparam T data type.
  * @tparam AR arity of the nodes.
@@ -325,6 +340,10 @@ public:
     void destructLevel(int /* level */) {
     }
 
+    // The default hashCode is a raw-byte hash, while the default equalTo is
+    // operator==.  These are consistent only for types where value equality
+    // coincides with byte equality; for std::vector, double (because of +0.0
+    // and -0.0), or padded structs, override hashCode to match operator==.
     size_t hashCode(State const& s) const {
         return this->rawHashCode(s);
     }

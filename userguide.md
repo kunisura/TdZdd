@@ -163,7 +163,18 @@ In addition, `S` may have to override the following member functions:
   The default implementation is `state1 == state2`.
 
 * `size_t hashCode(T const& state)` computes a hash value for `state`.
-  The default implementation is `static_cast<size_t>(state)`.
+  The default implementation is a raw-byte hash of `state`.
+  It is valid only for types where value equality coincides with byte equality.
+  You must override `hashCode` so that it is consistent with `operator==`
+  for types such as the following:
+    * `std::vector` and other containers, whose bytes hold a heap pointer and
+      size rather than the contents, so two equal-valued states placed at
+      different addresses hash differently;
+    * `double` and `float`, because `+0.0` and `-0.0` are equal under
+      `operator==` but have different bit patterns, so the raw-byte hash
+      differs even though the values are equivalent;
+    * structs with padding, whose padding bytes are indeterminate and ignored
+      by a member-wise `operator==` but still mixed into the raw-byte hash.
 
 Hash values for any two states must be the same whenever they are equivalent.
 As shown in [Overview](#overview), we can use the default implementations and
