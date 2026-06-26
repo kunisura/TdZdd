@@ -186,9 +186,11 @@ struct BddAnd_
 
     int getRoot(Word* p) {
         int i1 = base::spec1.get_root(base::state1(p));
-        if (i1 == 0) return 0;
         int i2 = base::spec2.get_root(base::state2(p));
-        if (i2 == 0) return 0;
+        // Both operand states must be constructed before any early return:
+        // the framework calls destruct() unconditionally, and destructing an
+        // unconstructed state2 is UB for non-trivial state types.
+        if (i1 == 0 || i2 == 0) return 0;
         base::setLevel1(p, i1);
         base::setLevel2(p, i2);
         return std::max(base::level1(p), base::level2(p));
@@ -256,9 +258,11 @@ struct BddOr_
 
     int getRoot(Word* p) {
         int i1 = base::spec1.get_root(base::state1(p));
-        if (i1 < 0) return -1;
         int i2 = base::spec2.get_root(base::state2(p));
-        if (i2 < 0) return -1;
+        // Both operand states must be constructed before any early return:
+        // the framework calls destruct() unconditionally, and destructing an
+        // unconstructed state2 is UB for non-trivial state types.
+        if (i1 < 0 || i2 < 0) return -1;
         base::setLevel1(p, i1);
         base::setLevel2(p, i2);
         return std::max(base::level1(p), base::level2(p));
@@ -360,9 +364,11 @@ public:
 
     int getRoot(Word* p) {
         int i1 = spec1.get_root(state1(p));
-        if (i1 == 0) return 0;
         int i2 = spec2.get_root(state2(p));
-        if (i2 == 0) return 0;
+        // Both operand states must be constructed before any early return:
+        // the framework calls destruct() unconditionally, and destructing an
+        // unconstructed state2 is UB for non-trivial state types.
+        if (i1 == 0 || i2 == 0) return 0;
 
         while (i1 != i2) {
             if (i1 > i2) {
