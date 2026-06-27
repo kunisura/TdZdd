@@ -758,7 +758,15 @@ public:
             }
         }
 
-        os << nodeId[root_.row()][root_.col()] << "\n";
+        if (root_ == 0) {
+            os << "F\n";
+        }
+        else if (root_ == 1) {
+            os << "T\n";
+        }
+        else {
+            os << nodeId[root_.row()][root_.col()] << "\n";
+        }
         assert(k == l * 2);
     }
 };

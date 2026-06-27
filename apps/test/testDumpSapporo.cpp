@@ -38,3 +38,21 @@ TEST(DumpSapporoTest, DumpsBinaryDd) {
 
     EXPECT_EQ("_i 1\n_o 1\n_n 1\n2 1 T T\n2\n", os.str());
 }
+
+TEST(DumpSapporoTest, DumpsConstantTrue) {
+    DdStructure<2> dd(0); // {∅}: root is the ⊤ terminal
+    std::ostringstream os;
+
+    dd.dumpSapporo(os);
+
+    EXPECT_EQ("_i 0\n_o 1\n_n 0\nT\n", os.str());
+}
+
+TEST(DumpSapporoTest, DumpsConstantFalse) {
+    DdStructure<2> dd; // ∅ (empty family): root is the ⊥ terminal
+    std::ostringstream os;
+
+    dd.dumpSapporo(os);
+
+    EXPECT_EQ("_i 0\n_o 1\n_n 0\nF\n", os.str());
+}
