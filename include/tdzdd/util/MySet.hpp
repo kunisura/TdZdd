@@ -474,32 +474,36 @@ public:
     }
 
     class const_reverse_iterator {
-        T const* ptr;
+        // The base pointer addresses the element one past the one this
+        // iterator logically refers to, just like std::reverse_iterator.
+        // This keeps every pointer within [array_, array_ + size_] and never
+        // forms the out-of-bounds pointer array_ - 1.
+        T const* base;
 
     public:
-        const_reverse_iterator(T const* ptr) :
-                ptr(ptr) {
+        const_reverse_iterator(T const* base) :
+                base(base) {
         }
 
         T const& operator*() const {
-            return *ptr;
+            return *(base - 1);
         }
 
         T const* operator->() const {
-            return ptr;
+            return base - 1;
         }
 
         const_reverse_iterator& operator++() {
-            --ptr;
+            --base;
             return *this;
         }
 
         bool operator==(const_reverse_iterator const& o) const {
-            return ptr == o.ptr;
+            return base == o.base;
         }
 
         bool operator!=(const_reverse_iterator const& o) const {
-            return ptr != o.ptr;
+            return base != o.base;
         }
     };
 
@@ -508,7 +512,7 @@ public:
      * @return reverse iterator to the beginning.
      */
     const_reverse_iterator rbegin() const {
-        return const_reverse_iterator(array_ + size_ - 1);
+        return const_reverse_iterator(array_ + size_);
     }
 
     /**
@@ -516,7 +520,7 @@ public:
      * @return reverse iterator to the end.
      */
     const_reverse_iterator rend() const {
-        return const_reverse_iterator(array_ - 1);
+        return const_reverse_iterator(array_);
     }
 
     /**

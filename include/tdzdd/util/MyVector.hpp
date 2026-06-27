@@ -433,32 +433,36 @@ public:
 
     template<typename U>
     class reverse_iterator_ {
-        U* ptr;
+        // The base pointer addresses the element one past the one this
+        // iterator logically refers to, just like std::reverse_iterator.
+        // This keeps every pointer within [array_, array_ + size_] and never
+        // forms the out-of-bounds pointer array_ - 1.
+        U* base;
 
     public:
-        reverse_iterator_(U* ptr)
-                : ptr(ptr) {
+        reverse_iterator_(U* base)
+                : base(base) {
         }
 
         U& operator*() const {
-            return *ptr;
+            return *(base - 1);
         }
 
         U* operator->() const {
-            return ptr;
+            return base - 1;
         }
 
         reverse_iterator_& operator++() {
-            --ptr;
+            --base;
             return *this;
         }
 
         bool operator==(reverse_iterator_ const& o) const {
-            return ptr == o.ptr;
+            return base == o.base;
         }
 
         bool operator!=(reverse_iterator_ const& o) const {
-            return ptr != o.ptr;
+            return base != o.base;
         }
     };
 
@@ -470,7 +474,7 @@ public:
      * @return reverse iterator to the beginning.
      */
     reverse_iterator rbegin() {
-        return reverse_iterator(array_ + size_ - 1);
+        return reverse_iterator(array_ + size_);
     }
 
     /**
@@ -478,7 +482,7 @@ public:
      * @return reverse iterator to the beginning.
      */
     const_reverse_iterator rbegin() const {
-        return const_reverse_iterator(array_ + size_ - 1);
+        return const_reverse_iterator(array_ + size_);
     }
 
     /**
@@ -486,7 +490,7 @@ public:
      * @return reverse iterator to the end.
      */
     reverse_iterator rend() {
-        return reverse_iterator(array_ - 1);
+        return reverse_iterator(array_);
     }
 
     /**
@@ -494,7 +498,7 @@ public:
      * @return reverse iterator to the end.
      */
     const_reverse_iterator rend() const {
-        return const_reverse_iterator(array_ - 1);
+        return const_reverse_iterator(array_);
     }
 
     /**
