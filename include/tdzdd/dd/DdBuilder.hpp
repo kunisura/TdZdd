@@ -187,13 +187,16 @@ class DdBuilder: DdBuilderBase {
     Spec spec;
     int const specNodeSize;
     NodeTableEntity<AR>& output;
+    // Declared before sweeper: the sweeper constructor captures a reference to
+    // oneSrcPtr, so oneSrcPtr must be constructed first (members are
+    // initialized in declaration order, not initializer-list order).
+    MyVector<NodeBranchId> oneSrcPtr;
     DdSweeper<AR> sweeper;
 
     MyVector<MyList<SpecNode> > snodeTable;
 
     MyVector<char> oneStorage;
     void* const one;
-    MyVector<NodeBranchId> oneSrcPtr;
 
     void init(int n) {
         snodeTable.resize(n + 1);
@@ -699,11 +702,14 @@ class ZddSubsetter: DdBuilderBase {
     NodeTableEntity<AR> const& input;
     NodeTableEntity<AR>& output;
     DataTable<MyListOnPool<SpecNode> > work;
+    // Declared before sweeper: the sweeper constructor captures a reference to
+    // oneSrcPtr, so oneSrcPtr must be constructed first (members are
+    // initialized in declaration order, not initializer-list order).
+    MyVector<NodeBranchId> oneSrcPtr;
     DdSweeper<AR> sweeper;
 
     MyVector<char> oneStorage;
     void* const one;
-    MyVector<NodeBranchId> oneSrcPtr;
 
     MemoryPools pools;
 
