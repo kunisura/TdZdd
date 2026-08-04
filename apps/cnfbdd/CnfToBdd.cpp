@@ -467,11 +467,12 @@ int CnfToBdd::getChild(State& s, int level, int take) {
     return level;
 }
 
-bool CnfToBdd::badState(std::vector<uint16_t>& clauses, int level) const {
+bool CnfToBdd::badState(std::vector<ClauseNumber>& clauses, int level) const {
     DdNode* zero = Cudd(0).ddNode();
     DdNode* g = frontierSet[level].ddNode();
     if (Cudd_IsConstant(g)) return g == zero;
-    std::reverse_iterator<std::vector<uint16_t>::iterator> t = clauses.rbegin();
+    std::reverse_iterator<std::vector<ClauseNumber>::iterator> t =
+            clauses.rbegin();
 
     while (t != clauses.rend()) {
         if (Cudd_NodeReadIndex(g) == int(*t)) { // 1

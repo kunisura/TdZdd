@@ -78,7 +78,7 @@ class CnfToBdd: public tdzdd::DdSpec<CnfToBdd,CnfToBddState,2> {
     //std::vector<DdStructure> frontierZdd; // reachable state set for each level
 
     tdzdd::MemoryPools pools;
-    std::vector<uint16_t> work;
+    std::vector<ClauseNumber> work;
 
 public:
     /**
@@ -250,7 +250,7 @@ public:
     void dumpCnf(std::ostream& os = std::cout, std::string title = "") const;
 
 private:
-    bool badState(std::vector<uint16_t>& clauses, int level) const;
+    bool badState(std::vector<ClauseNumber>& clauses, int level) const;
 
 public:
     int getRoot(State& s);
