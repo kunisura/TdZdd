@@ -45,6 +45,7 @@ public:
                     m(quiz.rows),
                     n(quiz.cols),
                     top_level(m * (n - 1)) {
+        checkMateRange();
         setArraySize(quiz.cols);
     }
 
@@ -74,4 +75,11 @@ public:
      */
     void printState(std::ostream& os, S_State const& blank_count,
             A_State const* mate) const;
+
+private:
+    /**
+     * Checks that every mate value fits in A_State.
+     * @throws std::runtime_error if a number label is too large.
+     */
+    void checkMateRange() const;
 };

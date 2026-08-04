@@ -23,6 +23,9 @@
 #include "NumlinZdd.hpp"
 #include <cassert>
 #include <cstdlib>
+#include <limits>
+#include <sstream>
+#include <stdexcept>
 
 /* mate values (0 <= j < n)
  *  mate[j] = j  degree=0
@@ -30,6 +33,29 @@
  *  mate[j] > n  connected to number (mate[j]-cols)
  *  other        connected to mate[j]
  */
+
+void NumlinZdd::checkMateRange() const {
+    int max_label = 0;
+
+    for (int i = 0; i < m; ++i) {
+        for (int j = 0; j < n; ++j) {
+            if (quiz.number[i][j] > max_label) max_label = quiz.number[i][j];
+        }
+    }
+
+    // The largest mate value is n + max_label, which must be representable
+    // in A_State; otherwise it would silently wrap around and be compared
+    // against the untruncated value computed in int arithmetic.
+    int const limit = std::numeric_limits<A_State>::max();
+
+    if (n + max_label > limit) {
+        std::ostringstream oss;
+        oss << "ERROR: Too large number label " << max_label
+                << "; cols + label must not exceed " << limit << " (cols = "
+                << n << ")";
+        throw std::runtime_error(oss.str());
+    }
+}
 
 int NumlinZdd::getRoot(S_State& blank_count, A_State* mate) const {
     blank_count = 0;
