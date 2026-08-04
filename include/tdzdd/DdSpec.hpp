@@ -666,7 +666,8 @@ public:
                                           a_state(p2));
     }
 
-    void destruct(void* /* p */) {
+    void destruct(void* p) {
+        s_state(p).~S_State();
     }
 
     void destructLevel(int /* level */) {
