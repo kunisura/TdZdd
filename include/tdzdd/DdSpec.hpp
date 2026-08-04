@@ -265,7 +265,7 @@ public:
  * Optionally, the following functions can be overloaded:
  * - void construct(void* p)
  * - void getCopy(void* p, T const& state)
- * - void mergeStates(T& state1, T& state2)
+ * - int mergeStates(T& state1, T& state2)
  * - size_t hashCode(T const& state) const
  * - bool equalTo(T const& state1, T const& state2) const
  * - void printLevel(std::ostream& os, int level) const
@@ -415,7 +415,7 @@ public:
  * - int getChild(T* array, int level, int value)
  *
  * Optionally, the following functions can be overloaded:
- * - void mergeStates(T* array1, T* array2)
+ * - int mergeStates(T* array1, T* array2)
  * - size_t hashCode(T const* state) const
  * - bool equalTo(T const* state1, T const* state2) const
  * - void printLevel(std::ostream& os, int level) const
@@ -574,7 +574,7 @@ public:
  * Optionally, the following functions can be overloaded:
  * - void construct(void* p)
  * - void getCopy(void* p, TS const& state)
- * - void mergeStates(TS& s1, TA* a1, TS& s2, TA* a2)
+ * - int mergeStates(TS& s1, TA* a1, TS& s2, TA* a2)
  * - size_t hashCode(TS const& state) const
  * - bool equalTo(TS const& state1, TS const& state2) const
  * - void printLevel(std::ostream& os, int level) const
