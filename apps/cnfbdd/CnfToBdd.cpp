@@ -91,6 +91,7 @@ void CnfToBdd::sortClauses() {
 }
 
 void CnfToBdd::prepare() {
+    zeroNode = Cudd(0).ddNode(); // cached here to keep badState() CUDD-free
     pools.resize(nv + 1);
 
     clauseVar.resize(nc + 1);
@@ -468,7 +469,8 @@ int CnfToBdd::getChild(State& s, int level, int take) {
 }
 
 bool CnfToBdd::badState(std::vector<ClauseNumber>& clauses, int level) const {
-    DdNode* zero = Cudd(0).ddNode();
+    DdNode* const zero = zeroNode;
+    assert(zero != 0); // prepare() must have been called
     DdNode* g = frontierSet[level].ddNode();
     if (Cudd_IsConstant(g)) return g == zero;
     std::reverse_iterator<std::vector<ClauseNumber>::iterator> t =

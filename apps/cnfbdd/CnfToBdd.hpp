@@ -77,10 +77,30 @@ class CnfToBdd: public tdzdd::DdSpec<CnfToBdd,CnfToBddState,2> {
     std::vector<Cudd> frontierSet; // reachable state set for each level
     //std::vector<DdStructure> frontierZdd; // reachable state set for each level
 
+    /*
+     * The 0-terminal of the CUDD manager, cached by prepare().
+     *
+     * badState() is called from getChild(), which DdBuilderMP runs inside its
+     * parallel region, and CUDD is not thread-safe (see Cudd.hpp).  Building a
+     * Cudd object there would make Cudd_Ref/Cudd_RecursiveDeref update the
+     * reference count of the shared constant node concurrently.  A raw DdNode*
+     * is held instead of a Cudd so that not even a reference count is touched
+     * when DdBuilderMP copies this spec for each thread; the constant node is
+     * owned by the manager and outlives this object, so holding no reference
+     * of our own is safe.  With this cache, badState() only reads nodes and
+     * makes no CUDD call that mutates shared state.
+     */
+    DdNode* zeroNode;
+
     tdzdd::MemoryPools pools;
     std::vector<ClauseNumber> work;
 
 public:
+    CnfToBdd()
+            : nv(0), nc(0), completingLevel(0), useClauseMap_(true),
+              zeroNode(0) {
+    }
+
     /**
      * Enables/disables mapping to canonical clause IDs.
      * @param flag new value.
