@@ -351,6 +351,14 @@ public:
     // operator==.  These are consistent only for types where value equality
     // coincides with byte equality; for std::vector, double (because of +0.0
     // and -0.0), or padded structs, override hashCode to match operator==.
+    //
+    // Overriding only one of hashCode()/equalTo() breaks the hash-table
+    // invariant "equalTo(s1, s2) implies hashCode(s1) == hashCode(s2)".
+    // Violating it does not make the resulting DD wrong, but equivalent states
+    // stop being merged and the DD grows.  Note that switching the default
+    // equalTo to rawEqualTo() is NOT a fix: specs with container states (e.g.
+    // spec/PathZddByStdMap.hpp) rely on operator== together with a
+    // content-based hashCode override.
     size_t hashCode(State const& s) const {
         return this->rawHashCode(s);
     }

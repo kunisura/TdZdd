@@ -177,6 +177,12 @@ In addition, `S` may have to override the following member functions:
       by a member-wise `operator==` but still mixed into the raw-byte hash.
 
 Hash values for any two states must be the same whenever they are equivalent.
+Since `equalTo` and `hashCode` have to satisfy this condition together,
+overriding just one of them is almost always a mistake:
+whenever you override either function, make sure that the other one is
+consistent with it.
+Breaking the condition does not make the resulting DD wrong, but equivalent
+states are no longer merged and the DD grows.
 As shown in [Overview](#overview), we can use the default implementations and
 do not need to override them when `T` is a fundamental data type such as `int`.
 
