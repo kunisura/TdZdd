@@ -246,6 +246,10 @@ private:
             if (!is) break;
             is.unget();
             is >> v2;
+            if (!is) {
+                throw std::runtime_error(
+                        "ERROR: Not a vertex number in an adjacency list");
+            }
 
             edgeNames.push_back(std::make_pair(to_string(v1), to_string(v2)));
         }
@@ -269,6 +273,10 @@ private:
 
             VertexNumber v;
             is >> v;
+            if (!is) {
+                throw std::runtime_error(
+                        "ERROR: Not a vertex number in a vertex group");
+            }
 
             name2color[to_string(v)] = color;
         }
