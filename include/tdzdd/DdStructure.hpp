@@ -561,6 +561,8 @@ public:
 
     /**
      * Iterator on a set of integer vectors represented by a DD.
+     * Supports binary DDs only: next() walks branch[0] and branch[1],
+     * so any instance selecting a value of 2 or greater would be skipped.
      */
     class const_iterator {
         struct Selection {
@@ -586,8 +588,21 @@ public:
         std::set<int> itemset;
 
     public:
+        /**
+         * The check has to stay at run time even under C++11, unlike the
+         * one in dumpSapporo(): generic code such as a test framework's
+         * value printer instantiates begin()/end() on a DD of any arity
+         * just to detect a container, and a static_assert here would
+         * reject that code without any iteration taking place.
+         * @param dd the DD to be iterated on.
+         * @param begin true to point at the first instance.
+         * @exception std::logic_error the DD is not binary.
+         */
         const_iterator(DdStructure const& dd, bool begin) :
                 dd(dd), cursor(begin ? -1 : -2), path(), itemset() {
+            if (ARITY != 2) {
+                throw std::logic_error("DD iteration supports only binary DDs");
+            }
             if (begin) next(dd.root_);
         }
 
@@ -666,6 +681,7 @@ public:
      * which is viewed as a collection of item numbers.
      * Supports binary ZDDs only.
      * @return iterator to the first instance.
+     * @exception std::logic_error the DD is not binary.
      */
     const_iterator begin() const {
         return const_iterator(*this, true);
@@ -675,6 +691,7 @@ public:
      * Returns an iterator to the element following the last instance.
      * Supports binary ZDDs only.
      * @return iterator to the instance following the last instance.
+     * @exception std::logic_error the DD is not binary.
      */
     const_iterator end() const {
         return const_iterator(*this, false);
