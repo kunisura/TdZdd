@@ -68,7 +68,7 @@ namespace tdzdd {
  * Optionally, the following functions can be overloaded:
  * - void printLevel(std::ostream& os, int level) const
  *
- * A return code of get_root(void*) or get_child(void*, int, bool) is:
+ * A return code of get_root(void*) or get_child(void*, int, int) is:
  * 0 when the node is the 0-terminal, -1 when it is the 1-terminal, or
  * the node level when it is a non-terminal.
  * A return code of merge_states(void*, void*) is: 0 when the states are
