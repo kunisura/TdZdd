@@ -36,6 +36,11 @@ struct ZtddToCudd: public tdzdd::DdEval<ZtddToCudd,Cudd> {
         return true;
     }
 
+    /**
+     * The ZTDD represents the set of clauses, so a path reaching its
+     * 1-terminal is an assignment that falsifies a clause and must be excluded
+     * from the resulting BDD.  The polarity is therefore inverted on purpose.
+     */
     void evalTerminal(Cudd& f, int value) const {
         f = Cudd(value ? 0 : 1);
     }
