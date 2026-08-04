@@ -23,8 +23,8 @@
  */
 
 #include <cerrno>
-#include <climits>
 #include <cstdlib>
+#include <iomanip>
 #include <iostream>
 #include <map>
 #include <stdexcept>
@@ -78,8 +78,6 @@ void run() {
     CnfToZtdd cnf;
 
     mh << "\nINPUT: " << infile;
-    if (!opt["limit"]) optNum["limit"] = INT_MAX;
-    if (opt["b"]) optNum["limit"] = 0;
     if (infile == "-") {
         cnf.load(std::cin);
     }
