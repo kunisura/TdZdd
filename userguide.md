@@ -297,9 +297,9 @@ Each DD specification may have to define its own `printState` member
 function that prints text on each DD nodes.
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~{.cpp}
-void tdzdd::DdSpecBase<S,N>::printState(std::ostream& os, T const& state) const; // for DdSpec
-void tdzdd::DdSpecBase<S,N>::printState(std::ostream& os, T const* array) const; // for PodArrayDdSpec
-void tdzdd::DdSpecBase<S,N>::printState(std::ostream& os, TS const& scalar, TA const* array) const; // for HybridDdSpec
+void tdzdd::DdSpec<S,T,N>::printState(std::ostream& os, T const& state) const; // for DdSpec
+void tdzdd::PodArrayDdSpec<S,T,N>::printState(std::ostream& os, T const* array) const; // for PodArrayDdSpec
+void tdzdd::HybridDdSpec<S,TS,TA,N>::printState(std::ostream& os, TS const& scalar, TA const* array) const; // for HybridDdSpec
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Text of each level can also be customized by overriding `printLevel`
@@ -342,7 +342,7 @@ returns a BDD specification for logical OR of two BDD specifications.
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~{.cpp}
 template<typename... SS>
-tdzdd::BddOr<SS...> tdzdd::bddOr(S const&... specs);
+tdzdd::BddOr<SS...> tdzdd::bddOr(SS const&... specs);
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 returns a BDD specification for logical OR of two or more BDD specifications.
 (since C++11)
@@ -495,7 +495,7 @@ class E: public tdzdd::DdEval<E,T> { ... };
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 defines the DD evaluator *E* that computes a value of type *T*.
 
-A `tdzdd::DDStructure<N>` object can be evaluated by *E* as follows.
+A `tdzdd::DdStructure<N>` object can be evaluated by *E* as follows.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~{.cpp}
 tdzdd::DdStructure<N> dd = ... ;
 T value = dd.evaluate(E());
