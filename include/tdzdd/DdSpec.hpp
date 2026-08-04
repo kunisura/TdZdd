@@ -33,6 +33,13 @@
 #include "util/demangle.hpp"
 #include "util/MessageHandler.hpp"
 
+/*
+ * The assertion below must be used inside a member function body, not in a
+ * class body, because a spec class is allowed to use itself as its state type
+ * (see apps/cnfbdd/Cudd.hpp), in which case the state type is still incomplete
+ * while the base class is instantiated.  datasize() is called by every DD
+ * construction path, so putting it there still checks every spec in use.
+ */
 #if defined(__cplusplus) && __cplusplus >= 201103L
 #define TDZDD_STATIC_ASSERT_STATE_ALIGNMENT(T) \
     static_assert(alignof(T) <= alignof(size_t) || alignof(T) <= alignof(void*), \
@@ -287,7 +294,6 @@ template<typename S, typename T, int AR>
 class DdSpec: public DdSpecBase<S,AR> {
 public:
     typedef T State;
-    TDZDD_STATIC_ASSERT_STATE_ALIGNMENT(State);
 
 private:
     static State& state(void* p) {
@@ -300,6 +306,7 @@ private:
 
 public:
     int datasize() const {
+        TDZDD_STATIC_ASSERT_STATE_ALIGNMENT(State);
         return sizeof(State);
     }
 
@@ -414,7 +421,6 @@ template<typename S, typename T, int AR>
 class PodArrayDdSpec: public DdSpecBase<S,AR> {
 public:
     typedef T State;
-    TDZDD_STATIC_ASSERT_STATE_ALIGNMENT(State);
 
 private:
     typedef size_t Word;
@@ -450,6 +456,7 @@ public:
     }
 
     int datasize() const {
+        TDZDD_STATIC_ASSERT_STATE_ALIGNMENT(State);
         if (dataWords < 0)
             throw std::runtime_error(
                     "Array size is unknown; please set it by setArraySize(int) in the constructor of DD spec.");
@@ -575,8 +582,6 @@ class HybridDdSpec: public DdSpecBase<S,AR> {
 public:
     typedef TS S_State;
     typedef TA A_State;
-    TDZDD_STATIC_ASSERT_STATE_ALIGNMENT(S_State);
-    TDZDD_STATIC_ASSERT_STATE_ALIGNMENT(A_State);
 
 private:
     typedef size_t Word;
@@ -621,6 +626,8 @@ public:
     }
 
     int datasize() const {
+        TDZDD_STATIC_ASSERT_STATE_ALIGNMENT(S_State);
+        TDZDD_STATIC_ASSERT_STATE_ALIGNMENT(A_State);
         return dataWords * sizeof(Word);
     }
 
