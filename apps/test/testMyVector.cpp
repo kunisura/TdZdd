@@ -24,6 +24,8 @@
 
 #include <gtest/gtest.h>
 
+#include <string>
+
 #include <tdzdd/dd/DataTable.hpp>
 #include <tdzdd/util/MemoryPool.hpp>
 #include <tdzdd/util/MyVector.hpp>
@@ -40,6 +42,41 @@ TEST(MyVectorTest, SelfAssignmentKeepsElements) {
     ASSERT_EQ(2U, v.size());
     EXPECT_EQ(10, v[0]);
     EXPECT_EQ(20, v[1]);
+}
+
+TEST(MyVectorTest, PushBackOwnElementWhileReallocating) {
+    MyVector<int> v;
+    v.push_back(0);
+    while (v.size() < v.capacity()) {
+        v.push_back(int(v.size()));
+    }
+    size_t const n = v.size();
+    ASSERT_EQ(v.capacity(), n);
+
+    v.push_back(v[0]);  // reallocation happens with a reference into the array
+
+    ASSERT_EQ(n + 1, v.size());
+    for (size_t i = 0; i < n; ++i) {
+        EXPECT_EQ(int(i), v[i]);
+    }
+    EXPECT_EQ(0, v[n]);
+}
+
+TEST(MyVectorTest, PushBackOwnElementOfNonPodType) {
+    MyVector<std::string> v;
+    v.push_back("a long enough string to be allocated on the heap");
+    while (v.size() < v.capacity()) {
+        v.push_back("another long enough string to be allocated on the heap");
+    }
+    size_t const n = v.size();
+    ASSERT_EQ(v.capacity(), n);
+    std::string const expected = v[0];
+
+    v.push_back(v[0]);
+
+    ASSERT_EQ(n + 1, v.size());
+    EXPECT_EQ(expected, v[0]);
+    EXPECT_EQ(expected, v[n]);
 }
 
 TEST(DataTableTest, SelfAssignmentKeepsRows) {

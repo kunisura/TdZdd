@@ -317,8 +317,25 @@ public:
      * @param val value of the new element.
      */
     void push_back(T const& val) {
-        ensureCapacity(size_ + 1);
-        new (array_ + size_) T(val);
+        if (capacity_ < size_ + 1) {
+            // The new element is constructed before the old array is released,
+            // so that `val` can be a reference to an element of this array.
+            Size newCapacity = (size_ + 1) * 2;
+            T* tmp = allocate(newCapacity);
+            new (tmp + size_) T(val);
+            if (array_ != 0) {
+                assert(0 <= size_ && size_ <= capacity_);
+                for (Size i = 0; i < size_; ++i) {
+                    moveElement(array_[i], tmp[i]);
+                }
+                deallocate(array_, capacity_);
+            }
+            array_ = tmp;
+            capacity_ = newCapacity;
+        }
+        else {
+            new (array_ + size_) T(val);
+        }
         ++size_;
     }
 
