@@ -132,9 +132,9 @@ public:
     }
 
     /**
-     * Dumps the node table in Graphviz (dot) format.
+     * Dumps the diagram in Graphviz (DOT) format.
      * @param os the output stream.
-     * @param o the ZDD.
+     * @param o the DD spec.
      * @return os itself.
      */
     friend std::ostream& operator<<(std::ostream& os, DdSpecBase const& o) {

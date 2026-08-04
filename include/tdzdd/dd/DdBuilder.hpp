@@ -1271,7 +1271,7 @@ private:
 
 /**
  * DD dumper.
- * A node table is printed in Graphviz (dot) format.
+ * A DD spec is expanded and printed in Graphviz (DOT) format.
  */
 template<typename S>
 class DdDumper {
@@ -1355,7 +1355,7 @@ public:
     }
 
     /**
-     * Dumps the node table in Graphviz (dot) format.
+     * Dumps the diagram in Graphviz (DOT) format.
      * @param os the output stream.
      * @param title title label.
      */
