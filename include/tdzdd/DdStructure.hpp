@@ -440,7 +440,7 @@ public:
     /**
      * Counts the number of minterms of the function represented by this BDD.
      * @param numVars the number of input variables of the function.
-     * @return the number of itemsets.
+     * @return the number of minterms.
      */
     std::string bddCardinality(int numVars) const {
         return evaluate(BddCardinality<std::string,ARITY>(numVars));
