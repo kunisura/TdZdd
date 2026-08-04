@@ -155,7 +155,7 @@ private:
     }
 
     template<typename T, typename I>
-    static size_t rawEqualTo_(void const* p1, void const* p2) {
+    static bool rawEqualTo_(void const* p1, void const* p2) {
         I const* a1 = static_cast<I const*>(p1);
         I const* a2 = static_cast<I const*>(p2);
         for (size_t i = 0; i < sizeof(T) / sizeof(I); ++i) {
@@ -180,7 +180,7 @@ protected:
     }
 
     template<typename T>
-    static size_t rawEqualTo(T const& o1, T const& o2) {
+    static bool rawEqualTo(T const& o1, T const& o2) {
         if (sizeof(T) % sizeof(size_t) == 0) {
             return rawEqualTo_<T,size_t>(&o1, &o2);
         }
