@@ -50,7 +50,7 @@ endif
 SRCS      = $(wildcard *.cpp)
 OBJS      = $(SRCS:%.cpp=%.o)
 
-.PONY: all debug clean depend
+.PHONY: all debug 11 11-debug clean depend
 
 all: $(GTEST_LIB) $(TARGET)
 debug: $(GTEST_LIB) $(TARGET:%=%-debug)

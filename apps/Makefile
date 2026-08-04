@@ -22,7 +22,7 @@
 
 SUBDIRS	= ddpaths ddqueens numberlink cnfbdd cnf2ztdd2bdd graphillion test 
 
-.PONY: all debug clean depend FORCE
+.PHONY: all debug clean depend FORCE
 
 all debug clean depend: $(SUBDIRS)
 

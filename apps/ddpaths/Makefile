@@ -35,7 +35,7 @@ endif
 SRCS     = $(wildcard *.cpp)
 OBJS     = $(SRCS:%.cpp=%.o)
 
-.PONY: all debug clean depend
+.PHONY: all debug sapporo clean depend
 
 all:	$(TARGET)
 debug:	$(TARGET:%=%-debug)
