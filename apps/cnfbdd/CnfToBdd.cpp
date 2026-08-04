@@ -494,7 +494,7 @@ bool CnfToBdd::badState(std::vector<ClauseNumber>& clauses, int level) const {
     while (!Cudd_IsConstant(g)) {
         g = Cudd_NotCond(Cudd_E(g), Cudd_IsComplement(g));
     }
-    return g == 0;
+    return g == zero;
 }
 
 void CnfToBdd::destructLevel(int i) {
