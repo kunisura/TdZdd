@@ -95,8 +95,11 @@ public:
     }
 
     Cudd_& operator=(Cudd_ const& o) {
-        Cudd_Ref(o.dd);
-        this->~Cudd_();
+        if (this == &o) return *this;
+        // Reference the new node before releasing the old one, so that an
+        // assignment between two objects holding the same node is safe.
+        if (o.dd != 0) Cudd_Ref(o.dd);
+        if (dd != 0) Cudd_RecursiveDeref(manager, dd);
         dd = o.dd;
         return *this;
     }
