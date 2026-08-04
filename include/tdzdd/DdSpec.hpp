@@ -619,6 +619,9 @@ private:
 protected:
     void setArraySize(int n) {
         assert(0 <= n);
+        if (arraySize >= 0)
+            throw std::runtime_error(
+                    "Cannot set array size twice; use setArraySize(int) only once in the constructor of DD spec.");
         arraySize = n;
         dataWords = S_WORDS
                 + (n * sizeof(A_State) + sizeof(Word) - 1) / sizeof(Word);
@@ -636,6 +639,9 @@ public:
     int datasize() const {
         TDZDD_STATIC_ASSERT_STATE_ALIGNMENT(S_State);
         TDZDD_STATIC_ASSERT_STATE_ALIGNMENT(A_State);
+        if (dataWords < 0)
+            throw std::runtime_error(
+                    "Array size is unknown; please set it by setArraySize(int) in the constructor of DD spec.");
         return dataWords * sizeof(Word);
     }
 
