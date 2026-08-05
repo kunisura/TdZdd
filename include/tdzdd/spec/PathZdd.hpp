@@ -24,6 +24,7 @@
 
 #pragma once
 
+#include <stdexcept>
 #include <vector>
 
 #include "../DdSpec.hpp"
@@ -39,6 +40,13 @@ template<typename S, SimpathBasedImplType type, bool hamilton = false>
 class SimpathBasedImpl: public tdzdd::PodArrayDdSpec<S,int16_t,2> {
 public:
     typedef int16_t Mate;
+
+    /**
+     * Maximum number of vertices in an acceptable graph.
+     * A mate value is an @p int16_t that holds a vertex number as a positive
+     * value, while negative values are reserved for color numbers.
+     */
+    static int const MAX_VERTICES = 32767;
 
 private:
     Graph const& graph;
@@ -133,6 +141,9 @@ public:
             : graph(graph), m(graph.vertexSize()), n(graph.edgeSize()),
               mateArraySize_(graph.maxFrontierSize()),
               initialMate(m + mateArraySize_), lookahead(lookahead) {
+        if (m > MAX_VERTICES) throw std::runtime_error(
+                "ERROR: Vertex number > " + to_string(int(MAX_VERTICES)));
+
         this->setArraySize(mateArraySize_);
 
         for (int v = 1; v <= m; ++v) {

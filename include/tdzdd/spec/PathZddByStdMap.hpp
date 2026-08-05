@@ -26,6 +26,7 @@
 
 #include <cassert>
 #include <map>
+#include <stdexcept>
 
 #include "../DdSpec.hpp"
 #include "../util/Graph.hpp"
@@ -35,12 +36,21 @@ namespace tdzdd {
 struct PathZddByStdMap: public tdzdd::DdSpec<PathZddByStdMap,
         std::map<int16_t,int16_t>,2> {
 
+    /**
+     * Maximum number of vertices in an acceptable graph.
+     * A mate table maps an @p int16_t vertex number to an @p int16_t
+     * vertex number.
+     */
+    static int const MAX_VERTICES = 32767;
+
     Graph const& graph;
     int const n;
 
 public:
     PathZddByStdMap(Graph const& graph)
             : graph(graph), n(graph.edgeSize()) {
+        if (graph.vertexSize() > MAX_VERTICES) throw std::runtime_error(
+                "ERROR: Vertex number > " + to_string(int(MAX_VERTICES)));
     }
 
     int getRoot(State& mate) const {
