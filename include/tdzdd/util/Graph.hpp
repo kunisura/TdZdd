@@ -603,6 +603,20 @@ public:
         return n;
     }
 
+    /**
+     * Checks if the graph has a self-loop.
+     * The frontier-based DD specs assume that an edge has two distinct
+     * endpoints and reject a graph for which this function returns true.
+     * @return true if some edge has the same endpoints.
+     */
+    bool hasSelfLoop() const {
+        for (EdgeNumber a = 0; a < edgeSize(); ++a) {
+            EdgeInfo const& e = edgeInfo(a);
+            if (e.v1 == e.v2) return true;
+        }
+        return false;
+    }
+
     void clearColors() {
         name2color.clear();
         virtualMate_.clear();

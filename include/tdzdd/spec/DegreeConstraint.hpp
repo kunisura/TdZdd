@@ -28,6 +28,7 @@
 #include <cstring>
 #include <iostream>
 #include <map>
+#include <stdexcept>
 #include <vector>
 
 #include "../DdSpec.hpp"
@@ -70,6 +71,12 @@ public:
     DegreeConstraint(Graph const& graph, IntSubset const* c = 0, bool lookahead = true)
             : graph(graph), n(graph.edgeSize()),
               mateSize(graph.maxFrontierSize()), lookahead(lookahead) {
+        // A self-loop would add two to the degree of its single endpoint,
+        // while the mate entries of an edge are assumed to be distinct and
+        // incremented by one each.
+        if (graph.hasSelfLoop()) throw std::runtime_error(
+                "ERROR: DegreeConstraint does not support self-loops");
+
         setArraySize(mateSize);
 
         int m = graph.vertexSize();

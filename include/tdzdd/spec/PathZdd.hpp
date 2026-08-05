@@ -143,6 +143,10 @@ public:
               initialMate(m + mateArraySize_), lookahead(lookahead) {
         if (m > MAX_VERTICES) throw std::runtime_error(
                 "ERROR: Vertex number > " + to_string(int(MAX_VERTICES)));
+        // A self-loop would make the two mate entries of an edge alias each
+        // other, which destroys the mate values instead of extending a path.
+        if (graph.hasSelfLoop()) throw std::runtime_error(
+                "ERROR: PathZdd family does not support self-loops");
 
         this->setArraySize(mateArraySize_);
 

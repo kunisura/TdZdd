@@ -419,6 +419,11 @@ public:
             : graph(graph), m(graph.vertexSize()), n(graph.edgeSize()),
               mateSize(graph.maxFrontierSize()), initialMate(1 + m + mateSize),
               numUEC(numUEC), noLoop(noLoop), lookahead(lookahead) {
+        // Taking a self-loop would merge a mate list with itself, which does
+        // not turn the component into an uncolored edge component.
+        if (graph.hasSelfLoop()) throw std::runtime_error(
+                "ERROR: FrontierBasedSearch does not support self-loops");
+
         this->setArraySize(mateSize);
 
         std::vector<int> rootOfColor(graph.numColor() + 1);
