@@ -26,6 +26,7 @@
 
 #include <cassert>
 #include <map>
+#include <stdexcept>
 #include <vector>
 
 #include "../DdSpec.hpp"
@@ -79,15 +80,17 @@ public:
     }
 
     void addConstraint(std::map<int,T> const& expr, T const& lb, T const& ub) {
-        if (isFalse) return;
         T min = 0;
         T max = 0;
         for (typename std::map<int,T>::const_iterator t = expr.begin();
                 t != expr.end(); ++t) {
+            if (t->first < 1 || n < t->first) throw std::runtime_error(
+                    "ERROR: Variable number is out of range");
             T const& w = t->second;
             if (w > 0) max += w;
             else if (w < 0) min += w;
         }
+        if (isFalse) return;
         if (lb <= min && max <= ub) return;
         if (ub < lb || max < lb || ub < min) {
             isFalse = true;
