@@ -20,7 +20,7 @@ Every non-terminal node of an *N*-ary DD has *N* outgoing edges.
 The above picture shows an example of binary DD structure,
 where the ⊥ terminal node and all edges to it are omitted for visibility;
 dashed and solid lines are 0- and 1-edges respectively.
-The DD represents a set of all 3-combinations out of 5 items.
+The DD represents a set of all 2-combinations out of 5 items.
 Note that levels of DD nodes are defined in descending order;
 the root node has the highest level and the terminal nodes have the lowest.
 
@@ -104,7 +104,7 @@ public:
         n = one ? 0 : INT_MIN;
     }
 
-    void evalNode(int& n, int, DdValues<int,2> const& values) const {
+    void evalNode(int& n, int, tdzdd::DdValues<int,2> const& values) const {
         n = std::max(values.get(0), values.get(1) + 1);
     }
 };
@@ -493,7 +493,7 @@ Evaluation
 ---------------------------------------------------------------------------
 
 A DD evaluator can be defined by deriving it from `tdzdd::DdEval<E,T>`
-defined in <[tdzdd/DdSpec.hpp](../include/tdzdd/DdSpec.hpp)>.
+defined in <[tdzdd/DdEval.hpp](../include/tdzdd/DdEval.hpp)>.
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~{.cpp}
 #include <tdzdd/DdEval.hpp>
