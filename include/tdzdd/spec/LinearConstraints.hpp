@@ -68,18 +68,35 @@ class LinearConstraints: public PodArrayDdSpec<LinearConstraints<T>,T,2> {
     int arraySize;
     int constraintId;
     bool isFalse;
+    bool finalized;
 
 public:
+    /**
+     * Constructor.
+     * All constraints must be given by addConstraint() before update() is
+     * called, and update() must be called before a DD is built from this spec.
+     * @param n the number of variables, which are numbered 1 to @p n.
+     */
     LinearConstraints(int n) :
             n(n),
             checklists(n + 1),
             arraySize(0),
             constraintId(0),
-            isFalse(false) {
+            isFalse(false),
+            finalized(false) {
         assert(n >= 1);
     }
 
+    /**
+     * Adds a linear constraint @p lb <= sum of @p expr <= @p ub.
+     * It must not be called after update().
+     * @param expr a map from a variable number to its coefficient.
+     * @param lb the lower bound of the linear expression.
+     * @param ub the upper bound of the linear expression.
+     */
     void addConstraint(std::map<int,T> const& expr, T const& lb, T const& ub) {
+        if (finalized) throw std::runtime_error(
+                "ERROR: addConstraint must be called before update()");
         T min = 0;
         T max = 0;
         for (typename std::map<int,T>::const_iterator t = expr.begin();
@@ -113,7 +130,14 @@ public:
         ++constraintId;
     }
 
+    /**
+     * Allocates the state array for the constraints added so far.
+     * It must be called once after all addConstraint() calls and before
+     * a DD is built from this spec.  Calling it again has no effect.
+     */
     void update() {
+        if (finalized) return;
+
         std::vector<int> indexMap(constraintId);
         for (int id = 0; id < constraintId; ++id) {
             indexMap[id] = -1;
@@ -149,6 +173,7 @@ public:
         }
 
         this->setArraySize(arraySize);
+        finalized = true;
     }
 
     int getRoot(T* value) const {
