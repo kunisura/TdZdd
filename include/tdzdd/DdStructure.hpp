@@ -367,7 +367,17 @@ public:
 
     /**
      * QDD reduction.
-     * No node deletion rule is applied.
+     * Equivalent nodes are shared, but no node deletion rule is applied;
+     * a node is kept even when all of its outgoing edges point to
+     * the 0-terminal.
+     * @note Up to version 1.1, a node all of whose outgoing edges pointed
+     *       to the 0-terminal was deleted when @p ARITY was not 2 or when
+     *       algorithms for multiple processors were used, and therefore
+     *       the number of nodes after this function could vary with
+     *       @p ARITY and that choice.  Such a node is now kept in every
+     *       case, so the result may have more nodes than before.
+     *       Results of bddReduce(), zddReduce(), the cardinality
+     *       functions and dumpDot() are not affected.
      */
     void qddReduce() {
         reduce<false,false>();
@@ -375,7 +385,8 @@ public:
 
     /**
      * BDD reduction.
-     * The node of which two edges points to the identical node is deleted.
+     * A node all of whose outgoing edges point to the identical node
+     * is deleted.
      */
     void bddReduce() {
         reduce<true,false>();
@@ -383,7 +394,8 @@ public:
 
     /**
      * ZDD reduction.
-     * The node of which 1-edge points to the 0-terminal is deleted.
+     * A node all of whose non-zero-labeled outgoing edges point to
+     * the 0-terminal is deleted.
      */
     void zddReduce() {
         reduce<false,true>();

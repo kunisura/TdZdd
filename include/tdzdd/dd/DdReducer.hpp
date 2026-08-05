@@ -354,7 +354,7 @@ private:
                 NodeId& f0 = f.branch[0];
                 f0 = newIdTable[f0.row()][f0.col()];
                 NodeId deletable = BDD ? f0 : 0;
-                bool del = BDD || ZDD || (f0 == 0);
+                bool del = BDD || ZDD; // QDD applies no node deletion rule
                 for (int b = 1; b < ARITY; ++b) {
                     NodeId& ff = f.branch[b];
                     ff = newIdTable[ff.row()][ff.col()];
@@ -431,7 +431,7 @@ private:
                 NodeId& f0 = f.branch[0];
                 f0 = newIdTable[f0.row()][f0.col()];
                 NodeId deletable = BDD ? f0 : 0;
-                bool del = BDD || ZDD || (f0 == 0);
+                bool del = BDD || ZDD; // QDD applies no node deletion rule
                 for (int b = 1; b < ARITY; ++b) {
                     NodeId& ff = f.branch[b];
                     ff = newIdTable[ff.row()][ff.col()];
