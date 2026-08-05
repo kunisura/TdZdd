@@ -161,6 +161,10 @@ public:
     }
 
     int getRoot(Mate* mate) const {
+        // A graph without edges has no vertex either, and therefore
+        // neither a path nor a cycle.
+        if (n == 0) return 0;
+
         int const v0 = graph.edgeInfo(0).v0;
 
         for (int k = 0; k < mateArraySize_; ++k) {

@@ -433,6 +433,10 @@ public:
     }
 
     int getRoot(Count& count, Mate* mate) const {
+        // A graph without edges has only the empty subgraph, which has
+        // no uncolored edge component.
+        if (n == 0) return (numUEC <= 0) ? -1 : 0;
+
         int const v0 = graph.edgeInfo(0).v0;
 
         count = Count(numUEC);
