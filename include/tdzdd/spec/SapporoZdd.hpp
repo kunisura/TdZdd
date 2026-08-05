@@ -63,25 +63,25 @@ public:
     int getRoot(ZBDD& f) const {
         f = root;
 
-        int level = BDD_LevOfVar(f.Top()) - offset;
+        int level = var2level(f.Top());
         if (level >= 1) return level;
 
         while (BDD_LevOfVar(f.Top()) >= 1) {
-            f = f.OffSet(BDD_VarOfLev(f.Top()));
+            f = f.OffSet(f.Top());
         }
         return (f == 1) ? -1 : 0;
     }
 
     int getChild(ZBDD& f, int level, int take) const {
-        int var = BDD_VarOfLev(level + offset);
+        int var = level2var(level);
         f = take ? f.OnSet0(var) : f.OffSet(var);
 
-        int nextLevel = BDD_LevOfVar(f.Top()) - offset;
+        int nextLevel = var2level(f.Top());
         assert(nextLevel < level);
         if (nextLevel >= 1) return nextLevel;
 
         while (BDD_LevOfVar(f.Top()) >= 1) {
-            f = f.OffSet(BDD_VarOfLev(f.Top()));
+            f = f.OffSet(f.Top());
         }
         return (f == 1) ? -1 : 0;
     }

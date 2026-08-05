@@ -65,18 +65,18 @@ public:
 
         if (f.Top() == 0) return (f == 1) ? -1 : 0; // f is constant
 
-        int level = BDD_LevOfVar(f.Top()) - offset;
+        int level = var2level(f.Top());
         if (level >= 1) return level;
         else throw std::runtime_error("ERROR: invalid offset.");
     }
 
     int getChild(BDD& f, int level, int take) const {
-        int var = BDD_VarOfLev(level + offset);
+        int var = level2var(level);
         f = take ? f.At1(var) : f.At0(var);
 
         if (f.Top() == 0) return (f == 1) ? -1 : 0; // f is constant
 
-        int nextLevel = BDD_LevOfVar(f.Top()) - offset;
+        int nextLevel = var2level(f.Top());
         assert(nextLevel < level);
         if (nextLevel >= 1) return nextLevel;
         else throw std::runtime_error("ERROR: invalid offset.");
