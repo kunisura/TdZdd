@@ -24,6 +24,7 @@
 
 #pragma once
 
+#include <cassert>
 #include <cmath>
 #include <stdexcept>
 #include <string>
@@ -133,7 +134,7 @@ public:
     void evalNode(BigNumber& n,
                   int i,
                   DdValues<BigNumber,ARITY> const& values) {
-        assert(0 <= i && size_t(i) <= pools.size());
+        assert(0 <= i && size_t(i) < pools.size());
         if (BDD) {
             size_t w = tmp1.store(0);
             for (int b = 0; b < ARITY; ++b) {
