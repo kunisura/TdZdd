@@ -230,6 +230,10 @@ test.o: test.cpp
 test-debug.o: test.cpp
 test-11.o: test.cpp
 test-11-debug.o: test.cpp
+testBigNumber.o: testBigNumber.cpp ../../include/tdzdd/util/BigNumber.hpp
+testBigNumber-debug.o: testBigNumber.cpp ../../include/tdzdd/util/BigNumber.hpp
+testBigNumber-11.o: testBigNumber.cpp ../../include/tdzdd/util/BigNumber.hpp
+testBigNumber-11-debug.o: testBigNumber.cpp ../../include/tdzdd/util/BigNumber.hpp
 testDumpSapporo.o: testDumpSapporo.cpp \
  ../../include/tdzdd/DdStructure.hpp ../../include/tdzdd/DdEval.hpp \
  ../../include/tdzdd/DdSpec.hpp ../../include/tdzdd/dd/DdBuilder.hpp \

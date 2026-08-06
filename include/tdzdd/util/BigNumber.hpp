@@ -199,11 +199,11 @@ public:
         assert(k >= 0);
         if (k >= 63) {
             int w = k / 63;
-            for (uint64_t* q = array + size() - 1; q >= array; --q) {
-                *(q + w) = *q;
+            for (int j = size() - 1; j >= 0; --j) {
+                array[j + w] = array[j];
             }
-            for (uint64_t* q = array; q < array + w; ++q) {
-                *q = MSB;
+            for (int j = 0; j < w; ++j) {
+                array[j] = MSB;
             }
         }
         k %= 63;
@@ -231,6 +231,7 @@ public:
 
     template<typename T>
     T translate() const {
+        if (array == 0) return T(); // a default-constructed BigNumber is 0
         uint64_t const* p = array;
         while (*p & MSB) {
             ++p;
