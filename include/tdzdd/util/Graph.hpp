@@ -99,6 +99,10 @@ private:
     bool hasColorPairs_;
 
 public:
+    Graph()
+            : vMax(0), numColor_(0), hasColorPairs_(false) {
+    }
+
     void addEdge(std::string vertexName1, std::string vertexName2) {
         edgeNames.push_back(std::make_pair(vertexName1, vertexName2));
     }
@@ -348,7 +352,9 @@ public:
                 std::string const& s = stack.back();
                 name2vertex[s] = vertex2name.size();
                 vertex2name.push_back(s);
-                if (vertex2name.size() > size_t(MAX_VERTICES)) throw std::runtime_error(
+                // vertex2name[0] is a dummy entry, so the vertex count is
+                // vertex2name.size() - 1.
+                if (vertex2name.size() > size_t(MAX_VERTICES) + 1) throw std::runtime_error(
                         "ERROR: Vertex number > " + to_string(MAX_VERTICES));
                 stack.pop_back();
             }
@@ -617,6 +623,11 @@ public:
         return false;
     }
 
+    /**
+     * Removes all vertex colors.
+     * NOTE: call update() again afterwards; EdgeInfo::allColorsSeen computed
+     * by the previous update() is left stale by this function.
+     */
     void clearColors() {
         name2color.clear();
         virtualMate_.clear();
@@ -624,6 +635,7 @@ public:
         colorNumber_.clear();
         colorNumber_.resize(vMax + 1);
         numColor_ = 0;
+        hasColorPairs_ = false;
     }
 
     void setDefaultPathColor() {

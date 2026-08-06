@@ -83,3 +83,39 @@ TEST(GraphTest, ReadEdgesRejectsIncompleteFinalLineWithoutNewline) {
     Graph graph;
     EXPECT_THROW(graph.readEdges(file.filename()), std::runtime_error);
 }
+
+TEST(GraphTest, DefaultConstructorInitializesScalarMembers) {
+    Graph graph;
+    EXPECT_EQ(0, graph.vertexSize());
+    EXPECT_EQ(0, graph.numColor());
+    EXPECT_FALSE(graph.hasColorPairs());
+}
+
+TEST(GraphTest, ClearColorsResetsColorPairFlag) {
+    Graph graph;
+    graph.addEdge("a", "b");
+    graph.addEdge("b", "c");
+    graph.setColor("a", 1);
+    graph.setColor("c", 1);
+    graph.update();
+    ASSERT_EQ(1, graph.numColor());
+    ASSERT_TRUE(graph.hasColorPairs());
+
+    graph.clearColors();
+    EXPECT_EQ(0, graph.numColor());
+    EXPECT_FALSE(graph.hasColorPairs());
+}
+
+TEST(GraphTest, UpdateAcceptsExactlyMaxVertices) {
+    int const n = Graph::MAX_VERTICES;
+
+    Graph graph;
+    for (int v = 1; v < n; ++v) {
+        graph.addEdge(to_string(v), to_string(v + 1));
+    }
+    ASSERT_NO_THROW(graph.update());
+    EXPECT_EQ(n, graph.vertexSize());
+
+    graph.addEdge(to_string(n), to_string(n + 1));
+    EXPECT_THROW(graph.update(), std::runtime_error);
+}
