@@ -63,6 +63,8 @@ public:
     int getRoot(ZBDD& f) const {
         f = root;
 
+        if (f.Top() == 0) return (f == 1) ? -1 : 0; // f is constant
+
         int level = var2level(f.Top());
         if (level >= 1) return level;
 
@@ -75,6 +77,8 @@ public:
     int getChild(ZBDD& f, int level, int take) const {
         int var = level2var(level);
         f = take ? f.OnSet0(var) : f.OffSet(var);
+
+        if (f.Top() == 0) return (f == 1) ? -1 : 0; // f is constant
 
         int nextLevel = var2level(f.Top());
         assert(nextLevel < level);
