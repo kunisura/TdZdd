@@ -479,8 +479,9 @@ public:
      */
     NodeTableEntity<ARITY>& privateEntity() {
         if (pointer->refCount >= 2) {
+            Object* newObject = new Object(pointer->entity); // may throw
             pointer->deref();
-            pointer = new Object(pointer->entity);
+            pointer = newObject;
         }
         return pointer->entity;
     }
@@ -495,8 +496,9 @@ public:
             pointer->entity.init(n);
         }
         else {
+            Object* newObject = new Object(n); // may throw
             pointer->deref();
-            pointer = new Object(n);
+            pointer = newObject;
         }
         return pointer->entity;
     }
