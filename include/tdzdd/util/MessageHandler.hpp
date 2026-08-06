@@ -24,9 +24,11 @@
 
 #pragma once
 
+#include <cctype>
 #include <cstdio>
 #include <ctime>
 #include <iostream>
+#include <sstream>
 #include <streambuf>
 #include <string>
 
@@ -37,7 +39,8 @@ namespace tdzdd {
 inline std::string capitalize(std::string const& s) {
     std::string t = s;
     if (t.size() >= 1) {
-        t[0] = toupper(s[0]);
+        t[0] = static_cast<char>(
+                std::toupper(static_cast<unsigned char>(s[0])));
     }
     return t;
 }
@@ -165,6 +168,10 @@ public:
 
     MessageHandler_& step(char dot = '-') {
         if (!enabled) return *this;
+        // Without this guard, a zero totalSteps (setSteps() not called or
+        // called with 0) divides by zero in the stepping branch and loops
+        // forever in the dot-printing branch.
+        if (totalSteps <= 0) return *this;
 
         if (!stepping && dotTime + 4 < std::time(0)) {
             *this << '\n';
