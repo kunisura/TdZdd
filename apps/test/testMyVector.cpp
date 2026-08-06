@@ -24,6 +24,7 @@
 
 #include <gtest/gtest.h>
 
+#include <stdexcept>
 #include <string>
 
 #include <tdzdd/dd/DataTable.hpp>
@@ -31,6 +32,35 @@
 #include <tdzdd/util/MyVector.hpp>
 
 using namespace tdzdd;
+
+namespace {
+
+struct ThrowOnCopy {
+    static int copiesUntilThrow;  ///< -1 means "never throw".
+    static int liveCount;
+    int value;
+
+    explicit ThrowOnCopy(int v = 0)
+            : value(v) {
+        ++liveCount;
+    }
+
+    ThrowOnCopy(ThrowOnCopy const& o)
+            : value(o.value) {
+        if (copiesUntilThrow == 0) throw std::runtime_error("copy failed");
+        if (copiesUntilThrow > 0) --copiesUntilThrow;
+        ++liveCount;
+    }
+
+    ~ThrowOnCopy() {
+        --liveCount;
+    }
+};
+
+int ThrowOnCopy::copiesUntilThrow = -1;
+int ThrowOnCopy::liveCount = 0;
+
+} // namespace
 
 TEST(MyVectorTest, SelfAssignmentKeepsElements) {
     MyVector<int> v;
@@ -77,6 +107,46 @@ TEST(MyVectorTest, PushBackOwnElementOfNonPodType) {
     ASSERT_EQ(n + 1, v.size());
     EXPECT_EQ(expected, v[0]);
     EXPECT_EQ(expected, v[n]);
+}
+
+TEST(MyVectorTest, CopyAssignmentIsExceptionSafe) {
+    ThrowOnCopy::copiesUntilThrow = -1;
+    ThrowOnCopy::liveCount = 0;
+    {
+        MyVector<ThrowOnCopy> a;
+        for (int i = 0; i < 4; ++i) {
+            a.push_back(ThrowOnCopy(i));
+        }
+
+        MyVector<ThrowOnCopy> b;
+        ThrowOnCopy::copiesUntilThrow = 2;
+        EXPECT_THROW(b = a, std::runtime_error);
+        ThrowOnCopy::copiesUntilThrow = -1;
+
+        // b must only hold the elements that were actually constructed.
+        ASSERT_EQ(2U, b.size());
+        EXPECT_EQ(0, b[0].value);
+        EXPECT_EQ(1, b[1].value);
+    }
+    EXPECT_EQ(0, ThrowOnCopy::liveCount);
+}
+
+TEST(MyVectorTest, CopyConstructorReleasesElementsWhenCopyThrows) {
+    ThrowOnCopy::copiesUntilThrow = -1;
+    ThrowOnCopy::liveCount = 0;
+    {
+        MyVector<ThrowOnCopy> a;
+        for (int i = 0; i < 4; ++i) {
+            a.push_back(ThrowOnCopy(i));
+        }
+
+        int const liveBefore = ThrowOnCopy::liveCount;
+        ThrowOnCopy::copiesUntilThrow = 2;
+        EXPECT_THROW(MyVector<ThrowOnCopy> b(a), std::runtime_error);
+        ThrowOnCopy::copiesUntilThrow = -1;
+        EXPECT_EQ(liveBefore, ThrowOnCopy::liveCount);
+    }
+    EXPECT_EQ(0, ThrowOnCopy::liveCount);
 }
 
 TEST(DataTableTest, SelfAssignmentKeepsRows) {

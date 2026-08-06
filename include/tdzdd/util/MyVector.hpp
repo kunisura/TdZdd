@@ -93,10 +93,19 @@ public:
 //    }
 
     MyVector(MyVector const& o)
-            : capacity_(o.size_), size_(o.size_),
+            : capacity_(o.size_), size_(0),
               array_(capacity_ ? allocate(capacity_) : 0) {
-        for (Size i = 0; i < size_; ++i) {
-            new (array_ + i) T(o[i]);
+        // size_ is incremented only after each successful construction so
+        // that a throwing T never leaves unconstructed elements behind.
+        try {
+            for (Size i = 0; i < o.size_; ++i) {
+                new (array_ + i) T(o[i]);
+                ++size_;
+            }
+        }
+        catch (...) {
+            clear();
+            throw;
         }
     }
 
@@ -104,19 +113,26 @@ public:
         if (this == &o) return *this;
         resize(0);
         reserve(o.size_);
-        size_ = o.size_;
-        for (Size i = 0; i < size_; ++i) {
+        for (Size i = 0; i < o.size_; ++i) {
             new (array_ + i) T(o[i]);
+            ++size_;
         }
         return *this;
     }
 
     template<typename U>
     MyVector(std::vector<U> const& o)
-            : capacity_(o.size()), size_(o.size()),
+            : capacity_(o.size()), size_(0),
               array_(capacity_ ? allocate(capacity_) : 0) {
-        for (Size i = 0; i < size_; ++i) {
-            new (array_ + i) T(o[i]);
+        try {
+            for (Size i = 0; i < capacity_; ++i) {
+                new (array_ + i) T(o[i]);
+                ++size_;
+            }
+        }
+        catch (...) {
+            clear();
+            throw;
         }
     }
 
@@ -124,9 +140,9 @@ public:
     MyVector& operator=(std::vector<U> const& o) {
         resize(0);
         reserve(o.size());
-        size_ = o.size();
-        for (Size i = 0; i < size_; ++i) {
+        for (Size i = 0; i < static_cast<Size>(o.size()); ++i) {
             new (array_ + i) T(o[i]);
+            ++size_;
         }
         return *this;
     }
