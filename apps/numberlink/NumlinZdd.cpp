@@ -48,7 +48,7 @@ void NumlinZdd::checkMateRange() const {
     // against the untruncated value computed in int arithmetic.
     int const limit = std::numeric_limits<A_State>::max();
 
-    if (n + max_label > limit) {
+    if (max_label > limit - n) { // n + max_label > limit, without int overflow
         std::ostringstream oss;
         oss << "ERROR: Too large number label " << max_label
                 << "; cols + label must not exceed " << limit << " (cols = "
