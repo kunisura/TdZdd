@@ -67,7 +67,9 @@ inline std::string demangleTypename(char const* name) {
     size_t j = 0;
 
     while (j + 1 < s.size()) {
-        if (std::isalnum(static_cast<unsigned char>(s[j]))) {
+        // '_' is an identifier character; treating it as a separator would
+        // stop namespace removal in the middle of a name (my_ns::Foo).
+        if (std::isalnum(static_cast<unsigned char>(s[j])) || s[j] == '_') {
             ++j;
         }
         else if (s[j] == ':' && s[j + 1] == ':') {
