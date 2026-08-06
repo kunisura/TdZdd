@@ -309,6 +309,14 @@ class FrontierBasedSearch: public tdzdd::HybridDdSpec<FrontierBasedSearch,
                 if (w1.isColored()) {
                     // don't leave the color unconnected
                     if (!w2.isColoredTail()) return false;
+                    // NOTE: the arguments look swapped compared with the
+                    // isolated-vertex cases, but this call is a harmless
+                    // no-op: it scans downward from mate[0] for an element
+                    // not below w2, which is always at mate[1] or above.
+                    // Swapping the arguments back would find nothing either;
+                    // Graph::update() numbers vertices in leaving order, so
+                    // every vertex below v2 other than v1 has already left
+                    // the frontier.  Kept as in upstream.
                     if (w2.findColorPredecessor(mate[1])) return false;
                 }
                 else {
@@ -366,6 +374,8 @@ class FrontierBasedSearch: public tdzdd::HybridDdSpec<FrontierBasedSearch,
             if (w1.isColored()) {
                 // don't leave the color unconnected
                 if (!w2.isColoredTail()) return false;
+                // NOTE: harmless no-op with swapped-looking arguments;
+                // see the corresponding note in takable().
                 if (w2.findColorPredecessor(mate[1])) return false;
             }
             else {
