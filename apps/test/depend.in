@@ -318,6 +318,18 @@ testGraph-11.o: testGraph.cpp ../../include/tdzdd/util/MessageHandler.hpp \
 testGraph-11-debug.o: testGraph.cpp ../../include/tdzdd/util/MessageHandler.hpp \
  ../../include/tdzdd/util/ResourceUsage.hpp \
  ../../include/tdzdd/util/Graph.hpp
+testMySet.o: testMySet.cpp ../../include/tdzdd/util/MemoryPool.hpp \
+ ../../include/tdzdd/util/MyVector.hpp ../../include/tdzdd/util/MySet.hpp \
+ ../../include/tdzdd/util/MyHashTable.hpp
+testMySet-debug.o: testMySet.cpp ../../include/tdzdd/util/MemoryPool.hpp \
+ ../../include/tdzdd/util/MyVector.hpp ../../include/tdzdd/util/MySet.hpp \
+ ../../include/tdzdd/util/MyHashTable.hpp
+testMySet-11.o: testMySet.cpp ../../include/tdzdd/util/MemoryPool.hpp \
+ ../../include/tdzdd/util/MyVector.hpp ../../include/tdzdd/util/MySet.hpp \
+ ../../include/tdzdd/util/MyHashTable.hpp
+testMySet-11-debug.o: testMySet.cpp ../../include/tdzdd/util/MemoryPool.hpp \
+ ../../include/tdzdd/util/MyVector.hpp ../../include/tdzdd/util/MySet.hpp \
+ ../../include/tdzdd/util/MyHashTable.hpp
 testMyVector.o: testMyVector.cpp ../../include/tdzdd/dd/DataTable.hpp \
  ../../include/tdzdd/dd/../util/MyVector.hpp \
  ../../include/tdzdd/util/MemoryPool.hpp

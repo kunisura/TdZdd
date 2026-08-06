@@ -529,7 +529,7 @@ public:
      * @return the i-th element.
      */
     T const& get(size_t i) const {
-        assert(N == 0 || i < N);
+        assert(i < size_);
         return array_[i];
     }
 
