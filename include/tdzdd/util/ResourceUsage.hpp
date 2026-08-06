@@ -24,6 +24,7 @@
 
 #pragma once
 
+#include <algorithm>
 #include <fstream>
 #include <iomanip>
 #include <iostream>
@@ -155,6 +156,7 @@ struct ResourceUsage {
 
     friend std::ostream& operator<<(std::ostream& os, ResourceUsage const& u) {
         std::ios_base::fmtflags backup = os.flags(std::ios::fixed);
+        std::streamsize precisionBackup = os.precision();
         os.setf(std::ios::fixed);
 
         os << std::setprecision(2) << u.etime << "s elapsed, ";
@@ -162,6 +164,7 @@ struct ResourceUsage {
         os << std::setprecision(0) << u.maxrss / 1024.0 << "MB";
 
         os.flags(backup);
+        os.precision(precisionBackup);
         return os;
     }
 };
@@ -197,9 +200,11 @@ public:
     friend std::ostream& operator<<(std::ostream& os,
                                     ElapsedTimeCounter const& o) {
         std::ios_base::fmtflags backup = os.flags(std::ios::fixed);
+        std::streamsize precisionBackup = os.precision();
         os.setf(std::ios::fixed);
         os << std::setprecision(2) << o.totalTime << "s";
         os.flags(backup);
+        os.precision(precisionBackup);
         return os;
     }
 };
