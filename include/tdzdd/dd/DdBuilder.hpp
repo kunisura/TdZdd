@@ -201,7 +201,6 @@ class DdBuilder: DdBuilderBase {
     void init(int n) {
         snodeTable.resize(n + 1);
         if (n >= output.numRows()) output.setNumRows(n + 1);
-        oneSrcPtr.clear();
     }
 
 public:
@@ -239,6 +238,12 @@ public:
      * @param root result storage.
      */
     int initialize(NodeId& root) {
+        // Destroy the 1-terminal state left by a previous run before this run
+        // starts to overwrite it via get_copy().
+        if (!oneSrcPtr.empty()) {
+            spec.destruct(one);
+            oneSrcPtr.clear();
+        }
         sweeper.setRoot(root);
         MyVector<char> tmp(spec.datasize());
         void* const tmpState = tmp.data();
@@ -254,10 +259,6 @@ public:
         }
 
         spec.destruct(tmpState);
-        if (!oneSrcPtr.empty()) {
-            spec.destruct(one);
-            oneSrcPtr.clear();
-        }
         return n;
     }
 
