@@ -92,7 +92,8 @@ struct ResourceUsage {
 
         PROCESS_MEMORY_COUNTERS pmc;
         if (GetProcessMemoryInfo(h, &pmc, sizeof(pmc))) {
-            maxrss = pmc.WorkingSetSize / 1024;
+            // Match the Linux path, which reports the peak RSS (ru_maxrss).
+            maxrss = pmc.PeakWorkingSetSize / 1024;
         }
 #else
         struct rusage s;
