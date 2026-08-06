@@ -44,7 +44,7 @@ class MemoryPool {
 
     static size_t const UNIT_SIZE = sizeof(Unit);
     static size_t const BLOCK_UNITS = 400000 / UNIT_SIZE;
-    static size_t const MAX_ELEMENT_UNIS = BLOCK_UNITS / 10;
+    static size_t const MAX_ELEMENT_UNITS = BLOCK_UNITS / 10;
 
     Unit* blockList;
     size_t nextUnit;
@@ -122,6 +122,7 @@ public:
     }
 
     void splice(MemoryPool& o) {
+        if (this == &o) return;
         if (blockList != 0) {
             Unit** rear = &o.blockList;
             while (*rear != 0) {
@@ -138,9 +139,11 @@ public:
     }
 
     void* alloc(size_t n) {
-        size_t const elementUnits = (n + UNIT_SIZE - 1) / UNIT_SIZE;
+        size_t elementUnits = (n + UNIT_SIZE - 1) / UNIT_SIZE;
+        // alloc(0) must still return a valid, unique pointer (never null+off).
+        if (elementUnits == 0) elementUnits = 1;
 
-        if (elementUnits > MAX_ELEMENT_UNIS) {
+        if (elementUnits > MAX_ELEMENT_UNITS) {
             size_t m = elementUnits + 1;
             Unit* block = new Unit[m];
             if (blockList == 0) {

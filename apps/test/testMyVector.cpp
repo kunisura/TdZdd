@@ -197,6 +197,36 @@ TEST(MemoryPoolTest, MemoryPoolsResizeMovesPools) {
     EXPECT_EQ(20, *secondValue);
 }
 
+TEST(MemoryPoolTest, SpliceToSelfKeepsBlocks) {
+    MemoryPool p;
+    int* value = p.allocate<int>();
+    *value = 10;
+
+    p.splice(p);
+
+    EXPECT_FALSE(p.empty());
+    EXPECT_EQ(10, *value);
+    int* another = p.allocate<int>();
+    *another = 20;
+    EXPECT_EQ(20, *another);
+}
+
+TEST(MemoryPoolTest, AllocZeroOnEmptyPoolReturnsValidPointer) {
+    MemoryPool p;
+
+    char* q1 = static_cast<char*>(p.alloc(0));
+    char* q2 = static_cast<char*>(p.alloc(0));
+
+    ASSERT_TRUE(q1 != 0);
+    ASSERT_TRUE(q2 != 0);
+    EXPECT_FALSE(p.empty());
+    EXPECT_NE(q1, q2);
+    *q1 = 'a';
+    *q2 = 'b';
+    EXPECT_EQ('a', *q1);
+    EXPECT_EQ('b', *q2);
+}
+
 TEST(MemoryPoolTest, CopyAssignEmptySourceClearsDestination) {
     MemoryPool dst;
     int* oldValue = dst.allocate<int>();
