@@ -396,7 +396,8 @@ public:
                                         (b == 2) ? "red" : "green");
                         }
                     }
-                    if (aa) os << ",arrowtail=dot";
+                    // arrowtail is honored only when dir is both/back.
+                    if (aa) os << ",dir=both,arrowtail=dot";
                     os << "];\n";
                 }
             }
